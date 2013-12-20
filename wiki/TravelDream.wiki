@@ -1,10 +1,1 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-A cosa serve
-
-
-= Details =
-
-Sistema progettato per soddisfare le esigenze del cliente.
+Sistema informatico progettato per soddisfare le esigenze del cliente.
