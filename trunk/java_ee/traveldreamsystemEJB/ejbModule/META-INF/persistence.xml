@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="traveldreamsystemEJB">
-		<class>it.polimi.traveldreamsystem.entity.Escursione</class>
-		<class>it.polimi.traveldreamsystem.entity.Hotel</class>
-		<class>it.polimi.traveldreamsystem.entity.Pacchpred</class>
-		<class>it.polimi.traveldreamsystem.entity.Personalizz</class>
-		<class>it.polimi.traveldreamsystem.entity.PersonalizzPK</class>
-		<class>it.polimi.traveldreamsystem.entity.Prodbase</class>
-		<class>it.polimi.traveldreamsystem.entity.Trasporto</class>
-		<class>it.polimi.traveldreamsystem.entity.Utente</class>
+		<class>it.polimi.traveldreamsystem.Entities.Escursione</class>
+		<class>it.polimi.traveldreamsystem.Entities.Hotel</class>
+		<class>it.polimi.traveldreamsystem.Entities.PacchPer</class>
+		<class>it.polimi.traveldreamsystem.Entities.PacchPred</class>
+		<class>it.polimi.traveldreamsystem.Entities.ProdBase</class>
+		<class>it.polimi.traveldreamsystem.Entities.Trasporto</class>
+		<class>it.polimi.traveldreamsystem.Entities.Utente</class>
+		<properties>
+			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
+		</properties>
 	</persistence-unit>
 </persistence>
