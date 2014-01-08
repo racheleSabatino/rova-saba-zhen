@@ -25,7 +25,7 @@ public class Utente implements Serializable {
 	@Column(name="NOME", nullable=false, length=45)
 	private String nome;
 
-	@Column(name="PASSWORD", nullable=false, length=45)
+	@Column(name="PASSWORD", nullable=false, length=64)
 	private String password;
 
 	@Column(name="TIPOUTENTE", nullable=false, length=45)
