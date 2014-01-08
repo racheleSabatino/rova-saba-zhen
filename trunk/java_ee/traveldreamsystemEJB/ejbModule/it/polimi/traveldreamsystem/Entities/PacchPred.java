@@ -10,7 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="PacchPred")
+@Table(name="pacchpred")
 @NamedQuery(name="PacchPred.findAll", query="SELECT p FROM PacchPred p")
 public class PacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -30,12 +30,12 @@ public class PacchPred implements Serializable {
 	//bi-directional many-to-many association to ProdBase
 	@ManyToMany
 	@JoinTable(
-		name="Composizione"
+		name="composizione"
 		, joinColumns={
-			@JoinColumn(name="idPacchPred", nullable=false)
+			@JoinColumn(name="IDPACCHPRED", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="idProdBase", nullable=false)
+			@JoinColumn(name="IDPRODBASE", nullable=false)
 			}
 		)
 	private List<ProdBase> prodBases1;

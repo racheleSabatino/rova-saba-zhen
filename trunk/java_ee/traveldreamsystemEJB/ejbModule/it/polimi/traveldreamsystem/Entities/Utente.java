@@ -17,7 +17,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="Utente")
+@Table(name="utente")
 @NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
