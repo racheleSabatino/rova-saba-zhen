@@ -1,4 +1,4 @@
-package it.polimi.authentication.web.beans;
+package it.polimi.traveldreamsystem.web.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
