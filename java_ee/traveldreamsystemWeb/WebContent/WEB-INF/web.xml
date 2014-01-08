@@ -8,6 +8,51 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.jsf</url-pattern>
+    <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
+  	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/loginError.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>pagina cliente</web-resource-name>
+			<description />
+			<url-pattern>/cliente/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>CLIENTE</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>pagina impiegato</web-resource-name>
+			<description />
+			<url-pattern>/impiegato/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>IMPIEGATO</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>pagina amministratore</web-resource-name>
+			<description />
+			<url-pattern>/amministratore/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>AMMINISTRATORE</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<!-- <security-constraint> <display-name>SSL transport required</display-name> 
+		<web-resource-collection> <web-resource-name>secure pages</web-resource-name> 
+		<description /> <url-pattern>/login.xhtml</url-pattern> </web-resource-collection> 
+		<user-data-constraint> <description /> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+		</user-data-constraint> </security-constraint> -->
+	<welcome-file-list>
+		<welcome-file>home.xhtml</welcome-file>
+	</welcome-file-list>
 </web-app>
