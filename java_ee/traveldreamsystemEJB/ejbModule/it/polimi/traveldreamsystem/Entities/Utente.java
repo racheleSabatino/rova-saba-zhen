@@ -1,7 +1,14 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.UtenteDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,6 +21,10 @@ import java.util.List;
 @NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public static final String _CLIENTE = "CLIENTE";
+	public static final String _IMPIEGATO = "IMPIEGATO";
+	public static final String _AMMINISTRATORE = "AMMINISTRATORE";
 
 	@Id
 	@Column(name="MAIL", unique=true, nullable=false, length=45)
@@ -30,12 +41,25 @@ public class Utente implements Serializable {
 
 	@Column(name="TIPOUTENTE", nullable=false, length=45)
 	private String tipoutente;
+	
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
+	@Column(name="REGISTEREDON", nullable=false)
+    private Date registeredOn;
 
 	//bi-directional many-to-one association to PacchPer
 	@OneToMany(mappedBy="utente")
 	private List<PacchPer> pacchPers;
 
 	public Utente() {
+	}
+
+	public Utente(UtenteDTO utente) {   
+	    this.mail         = utente.getMail();
+	    this.nome  		  = utente.getNome();
+	    this.cognome      = utente.getCognome();       
+	    this.password     = DigestUtils.sha256Hex(utente.getPassword());
+	    this.tipoutente	  = utente.getTipoutente();
+	    this.registeredOn = new Date();
 	}
 
 	public String getMail() {
@@ -74,7 +98,7 @@ public class Utente implements Serializable {
 		return this.tipoutente;
 	}
 
-	public void setTipoutente(String tipoutente) {
+	public void setTipoUtente(String tipoutente) {
 		this.tipoutente = tipoutente;
 	}
 

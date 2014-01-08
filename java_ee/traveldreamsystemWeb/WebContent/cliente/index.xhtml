@@ -8,6 +8,7 @@
 <h:head>Calculator</h:head>
 <body>
 	<h:form>
+		<h1>#{userBean.name}</h1>
 		<h:inputText id="x" value="#{calculator.x}" />
 		<h:inputText id="y" value="#{calculator.y}" />
 		<h:commandButton action="#{calculator.add()}" value="SUM" />
