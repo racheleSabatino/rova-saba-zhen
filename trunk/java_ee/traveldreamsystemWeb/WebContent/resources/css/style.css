@@ -1,0 +1,54 @@
+/* header */
+#header {
+	margin-top: 10px;
+	height: 230px
+}
+
+#header .logo {
+	margin-top: 65px;
+	height: 100px;
+	float: left
+}
+
+#header .login {
+	margin-top: 10px;
+	margin-right: 10px;
+	height: 100px;
+	float: right
+}
+
+/* content */
+#content {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+/*footer*/
+#footer {
+	max-width: 1024px;
+	margin: auto;
+	padding: 0 10px;
+	clear: both;
+	height: 40px;
+	border-top: 1px solid #262626;
+	text-align: center
+}
+
+/*************************************************/
+
+#wrapper-bg {
+	background: url("wrapper-bg.jpg.xhtml?ln=images") no-repeat scroll
+		center 0px transparent;
+	min-height: 398px;
+}
+
+#wrapper-bg2 {
+	background: url("wrapper-bg2.jpg.xhtml?ln=images") no-repeat scroll
+		center 141px transparent;
+	min-height: 398px;
+}
+
+#wrapper {
+	margin-left: 150px;
+	margin-right: 150px;
+}
