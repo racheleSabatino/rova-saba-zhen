@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13891752908720" configfile="/traveldreamsystemWeb/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13891752908720" configfile="/traveldreamsystemWeb/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="home.xhtml" x="84" y="144" id="pf13893039046240" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13893039046241 pf13893052614313" path="/home.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="impiegato/homeImpiegato.xhtml" x="312" y="144" id="pf13893039046242" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13893039046241" path="/impiegato/homeImpiegato.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="amministratore/homeAmmin.xhtml" x="304" y="240" id="pf13893052614314" inlinks="pf13893052614313" path="/amministratore/homeAmmin.xhtml"/>
+  <links id="pf13893039046241" target="pf13893039046242" source="pf13893039046240" fromaction="#{pageController.processImpiegato}"/>
+  <links id="pf13893052614313" target="pf13893052614314" source="pf13893039046240" fromaction="#{pageController.processAmmin}"/>
+</pageflow:Pageflow>
