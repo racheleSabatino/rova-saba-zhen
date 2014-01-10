@@ -5,13 +5,24 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>Impiegato</h:head>
+<h:head></h:head>
 <body>
 <br/>
-<p:selectOneMenu value="#{ProdBaseBean.tipo}">
-<f:selectItem itemLabel="Escursione" itemValue="Escursione"></f:selectItem>
-<f:selectItem itemLabel="Hotel" itemValue="Hotel"></f:selectItem>
-<f:selectItem itemLabel="Volo" itemValue="Volo"></f:selectItem>
+    <p:panel header="Creazione prodotto base" style="margin-bottom:10px;">  
+        <h:panelGrid columns="2" cellpadding="5">  
+<h:outputText value="Scegli tipo prodotto base:"/>
+<p:selectOneMenu  id="tipo" value="#{ProdBaseBean.tipo}">
+<f:selectItem itemLabel="Escursione" itemValue="Escursione"/>
+<f:selectItem itemLabel="Hotel" itemValue="Hotel"/>
+<f:selectItem itemLabel="Volo" itemValue="Volo"/>
 </p:selectOneMenu>
+</h:panelGrid>
+</p:panel>
+<p:panel header="Hotel" style="margin-bottom:10px;">
+<h:outputText value="Data partenza:"/>
+<p:calendar value="#{ProdBaseBean.dataPartenza}"/>
+
+</p:panel>
+
 </body>
 </html>
