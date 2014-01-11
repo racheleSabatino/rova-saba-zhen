@@ -10,21 +10,21 @@
 <h:body>
 
 	<ui:composition>
-		<p:tabMenu activeIndex="0">
+		<p:tabMenu activeIndex="#{param['tab']}">
 
-			<p:menuitem value="Home" url="/homePage.xhtml" icon="ui-icon-star" />
-			<p:menuitem value="Cliente" url="/cliente/index.xhtml"
+			<p:menuitem value="Home" url="/" icon="ui-icon-star" />
+			<p:menuitem value="Cliente" url="/cliente/index.xhtml?tab=1&amp;cliente=true"
 				icon="ui-icon-person" />
-			<p:menuitem value="Impiegato" url="/impiegato/homeImpiegato.xhtml"
+			<p:menuitem value="Impiegato" url="/impiegato/homeImpiegato.xhtml?tab=2"
 				icon="ui-icon-document" />
 			<p:menuitem value="Amministrazione"
-				url="/amministratore/homeAmmin.xhtml"
+				url="/amministratore/homeAmmin.xhtml?tab=3"
 				icon="ui-icon-wrench" />
 			<p:menuitem value="Support"
-				url="/amministratore/homeAmmin.xhtml"
+				url="/amministratore/homeAmmin.xhtml?tab=4"
 				icon="ui-icon-search" />
 			<p:menuitem value="Social"
-				url="/amministratore/homeAmmin.xhtml"
+				url="/amministratore/homeAmmin.xhtml?tab=5"
 				icon="ui-icon-person" />
 		</p:tabMenu>
 	</ui:composition>

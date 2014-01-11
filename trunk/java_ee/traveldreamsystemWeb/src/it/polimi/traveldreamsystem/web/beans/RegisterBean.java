@@ -29,6 +29,6 @@ public class RegisterBean {
 
 	public String register() {
 		utenteMgrBean.save(utente);
-		return "home?faces-redirect=true";
+		return "/homePage.xhtml?tab=0";
 	}
 }
