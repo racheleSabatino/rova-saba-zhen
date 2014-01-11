@@ -11,6 +11,18 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name="userBean")
 @RequestScoped
 public class ProdBaseBean {
+	private String tipo;
+	private Date dataPartenza;
+	private Date dataRitorno;
+	private String descrizione;
+	private String luogo;
+	private String citta;
+	private String stelle;
+	private String tipoCamera;
+	private String cittaPartenza;
+	private String cittaRitorno;
+
+	
 	public String getDescrizione() {
 		return descrizione;
 	}
@@ -68,16 +80,6 @@ public class ProdBaseBean {
 	}
 
 
-	private String tipo;
-	private Date dataPartenza;
-	private Date dataRitorno;
-	private String descrizione;
-	private String luogo;
-	private String citta;
-	private String stelle;
-	private String tipoCamera;
-	private String cittaPartenza;
-	private String cittaRitorno;
 	
 	
 	public Date getDataRitorno() {

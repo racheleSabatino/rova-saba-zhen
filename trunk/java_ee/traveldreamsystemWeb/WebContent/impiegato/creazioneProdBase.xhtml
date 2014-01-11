@@ -9,25 +9,63 @@
 <body>
 	<br/>
     <p:panel header="Creazione prodotto base" style="margin-bottom:10px;">  
-        <h:panelGrid columns="2" cellpadding="5">  
-			<h:outputText value="Scegli tipo prodotto base:"/>
-				<p:selectOneMenu  id="tipo" value="#{ProdBaseBean.tipo}">
-					<f:selectItem itemLabel="Escursione" itemValue="Escursione"/>
-					<f:selectItem itemLabel="Hotel" itemValue="Hotel"/>
-					<f:selectItem itemLabel="Volo" itemValue="Volo"/>
-					<p:ajax  />
-				</p:selectOneMenu>
-		</h:panelGrid>
-	</p:panel>
+	<p:accordionPanel>
 	
-	
-	<p:panel header="Hotel" style="margin-bottom:10px;">
-		<h:panelGrid columns="2" cellpadding="5">  
-			<h:outputText value="Data partenza:  "/>
-			<p:calendar value="#{ProdBaseBean.dataPartenza}" pattern="MM/dd/yyyy HH:mm"/>
-			<h:outputText value="Data ritorno:  "/>
-			<p:calendar value="#{ProdBaseBean.dataRitorno}" pattern="MM/dd/yyyy HH:mm"/>
-		</h:panelGrid>
+		<p:tab title="Hotel" >
+					<h:form>
+		
+			<h:panelGrid columns="2" cellpadding="5">  
+				<h:outputText value="Data partenza:"/>
+				<p:calendar value="#{ProdBaseBean.dataPartenza}" pattern="MM/dd/yyyy HH:mm"/>
+				<h:outputText value="Data ritorno:"/>
+				<p:calendar value="#{ProdBaseBean.dataRitorno}" pattern="MM/dd/yyyy HH:mm"/>
+				<h:outputText value="Città:" />
+				<p:inputText value="#{ProdBaseBean.citta}"/>
+				<h:outputText value="Stelle"/>
+				<p:rating value="#{ProdBaseBean.stelle}" cancel="false"/>
+				<h:outputText value="Tipo camera"/>
+				<p:inputText value="#{ProdBaseBean.tipoCamera}">
+					<f:validateDoubleRange minimum="1" maximum="10" />  					
+				</p:inputText>
+				
+				            <h:outputLabel for="number" value="Number:" style="font-weight:bold"/>                      
+            <p:inputText id="number" value="" label="Number">  
+                <f:validateDoubleRange minimum="5" maximum="8" />  
+            </p:inputText>  
+            <p:message for="number" />  
+            <h:outputText value="" />  
+				
+				
+				<p:commandButton value="Submit" validateClient="true"/>
+				
+				    <p:commandButton value="Submit" update="display"/>  
+  
+    <h:outputText id="display" value="#{ProdBaseBean.tipoCamera}" />  
+				
+			</h:panelGrid>
+						</h:form>
+			
+		</p:tab>
+		
+				<p:tab title="Hotel" >
+			<h:panelGrid columns="2" cellpadding="5">  
+				<h:outputText value="Data partenza:  "/>
+				<p:calendar value="#{ProdBaseBean.dataPartenza}" pattern="MM/dd/yyyy HH:mm"/>
+				<h:outputText value="Data ritorno:  "/>
+				<p:calendar value="#{ProdBaseBean.dataRitorno}" pattern="MM/dd/yyyy HH:mm"/>
+			</h:panelGrid>
+		</p:tab>
+		
+				<p:tab title="Hotel" >
+			<h:panelGrid columns="2" cellpadding="5">  
+				<h:outputText value="Data partenza:  "/>
+				<p:calendar value="#{ProdBaseBean.dataPartenza}" pattern="MM/dd/yyyy HH:mm"/>
+				<h:outputText value="Data ritorno:  "/>
+				<p:calendar value="#{ProdBaseBean.dataRitorno}" pattern="MM/dd/yyyy HH:mm"/>
+			</h:panelGrid>
+		</p:tab>
+		
+	</p:accordionPanel>
 	</p:panel>
 
 </body>
