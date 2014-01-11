@@ -5,34 +5,29 @@
 
 /* header */
 #header {
-	margin-top: 0px;
 	height: 230px
 }
 
 #header .logo {
-	margin-top: 65px;
+	padding-top: 65px;
 	height: 100px;
-	float: left
-}
-
-#header .login {
-	margin-top: 10px;
-	margin-right: 10px;
-	height: 100px;
-	float: right
 }
 
 /* content */
 #content {
-	background: url("wrapper-bg3.jpg.xhtml?ln=images") repeat-x scroll 0 118px transparent;
-	margin-top: 50px;
-	width: 960px;
+	background: url("wrapper-bg3.jpg.xhtml?ln=images") repeat-x scroll 0 168px transparent;
+	width: 860px;
+	min-height: 300px;
+	padding-top: 150px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 #content .inner {
-	//background: none repeat scroll 0 0 #EEEEFF;
-	width: 700px;
-	min-height: 300px; 
+	background: none repeat scroll 0 0 #70D8FF;
+	width: 760px;
+	padding: 50px;
+	min-height: 300px;
 }
 
 /*footer*/
@@ -57,18 +52,19 @@
 	min-height: 398px;
 }
 
-#wrapper {
-	//margin-left: 152px;
+#wrapper-bg3 {
 	padding-top: 0px;
 	padding-left: 220px;
 }
 
 /*************************************************/
-#menu_ul {
+#menu {
+	padding-top: 100px;
+	height: 20px;
 	list-style: none;
 }
 
-#menu_li {
+#menu .li {
 	font-family: Arial,sans-serif;
 	font-size: 1.3em;
 	font-weight: bold;
@@ -81,12 +77,12 @@
 	//width: 130px;
 }
 
-#menu_link {
+#menu .link {
 	text-decoration: none;
 	color: #ee577c;
 }
 
-#menu_text {
+#menu .text {
 	text-decoration: none;
 	color: #808080;
 }
