@@ -16,15 +16,15 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/login.xhtml</form-login-page>
-			<form-error-page>/loginError.xhtml</form-error-page>
+			<form-login-page>/auth/login.xhtml</form-login-page>
+			<form-error-page>/auth/loginError.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
 	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>pagina cliente</web-resource-name>
+			<web-resource-name>pagina template</web-resource-name>
 			<description />
-			<url-pattern>/home/*</url-pattern>
+			<url-pattern>/template/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint></auth-constraint>
 		<user-data-constraint>
@@ -70,20 +70,20 @@
 			<transport-guarantee>NONE</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	<security-constraint>
+	<!-- <security-constraint>
 		<display-name>SSL transport required</display-name>
 		<web-resource-collection>
 			<web-resource-name>secure pages</web-resource-name>
 			<description />
-			<url-pattern>/login.xhtml</url-pattern>
+			<url-pattern>/auth/*</url-pattern>
 		</web-resource-collection>
 		<user-data-constraint>
 			<description />
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
-	</security-constraint>
+	</security-constraint> -->
 
 	<welcome-file-list>
-		<welcome-file>home.xhtml</welcome-file>
+		<welcome-file>homePage.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>
