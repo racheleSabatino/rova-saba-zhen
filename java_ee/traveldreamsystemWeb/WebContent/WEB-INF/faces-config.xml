@@ -4,31 +4,5 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
-	<managed-bean>
-		<managed-bean-name>userBean1</managed-bean-name>
-		<managed-bean-class>it.polimi.traveldreamsystem.web.beans.UserBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>pageController1</managed-bean-name>
-		<managed-bean-class>it.polimi.traveldreamsystem.web.beans.PageController</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	<navigation-rule>
-		<display-name>home.xhtml</display-name>
-		<from-view-id>/home.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{pageController.processImpiegato}</from-action>
-			<to-view-id>/impiegato/homeImpiegato.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>home.xhtml</display-name>
-		<from-view-id>/home.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{pageController.processAmmin}</from-action>
-			<to-view-id>/amministratore/homeAmmin.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 
 </faces-config>
