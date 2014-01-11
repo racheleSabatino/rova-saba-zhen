@@ -2,13 +2,10 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.Date;
 
-import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
-
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="userBean")
+@ManagedBean(name="prodBaseBean")
 @RequestScoped
 public class ProdBaseBean {
 	private String tipo;
