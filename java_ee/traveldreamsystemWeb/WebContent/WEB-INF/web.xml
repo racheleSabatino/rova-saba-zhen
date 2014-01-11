@@ -84,7 +84,7 @@
 	</security-constraint> -->
 
 	<welcome-file-list>
-		<welcome-file>homePage.xhtml</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>

@@ -1,23 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>Calculator</h:head>
-<body>
-	<h:form>
-		<h1>#{userBean.name}</h1>
-		<h:inputText id="x" value="#{calculator.x}" />
-		<h:inputText id="y" value="#{calculator.y}" />
-		<h:commandButton action="#{calculator.add()}" value="SUM" />
-		<h:inputText value="#{calculator.result}" readonly="true"/>
-	</h:form>
-	<h:message for="x"/>
-	<h:message for="y"/>
-	<h:form>
-		<p:commandButton action="#{logoutBean.logout}" value="Logout" />
-	</h:form>
-</body>
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel>
+				<h:form>
+					<p:outputLabel value="#{userBean.name}" />
+					<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+				</h:form>
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
 </html>

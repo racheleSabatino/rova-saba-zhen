@@ -16,6 +16,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section
 }
 
 body {
+	width: 1400px;
 	line-height: 1;
 }
 
@@ -280,7 +281,7 @@ input[type="submit"]:hover,input[type="submit"]:focus {
 /* content */
 #content {
 	background: url("wrapper-bg3.jpg.xhtml?ln=images") repeat-x scroll 0
-		198px transparent;
+		197px transparent;
 	width: 860px;
 	min-height: 300px;
 	padding-top: 50px;

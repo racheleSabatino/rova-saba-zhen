@@ -12,8 +12,7 @@
 	<ui:composition template="../template/common.xhtml">
 
 		<ui:define name="content">
-
-
+		
 			<p:panel header="Login Form">
 				<h:form id="login"
 					onsubmit="document.getElementById('login').action='j_security_check';"
@@ -32,9 +31,10 @@
 
 					<h:outputLabel rendered="#{param['cliente']}"
 						value="Non sei registrato? " />
-					<h:link rendered="#{param['cliente']}" value="Crea ora un account"
+					<h:link rendered="#{param['cliente']}" value="Registrati"
 						outcome="registrazione" />
 				</h:form>
+				
 			</p:panel>
 
 		</ui:define>
