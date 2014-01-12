@@ -18,8 +18,16 @@ public class ProdBaseBean {
 	private String tipoCamera;
 	private String cittaPartenza;
 	private String cittaRitorno;
-
+	private String costo;
 	
+	public String getCosto() {
+		return costo;
+	}
+
+	public void setCosto(String costo) {
+		this.costo = costo;
+	}
+
 	public String getDescrizione() {
 		return descrizione;
 	}
