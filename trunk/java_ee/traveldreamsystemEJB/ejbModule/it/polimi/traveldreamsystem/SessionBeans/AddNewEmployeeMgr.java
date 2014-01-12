@@ -60,7 +60,7 @@ public class AddNewEmployeeMgr implements AddNewEmployee {
     	try{
     		Query q = em.createNamedQuery("SELECT i FROM Utente i WHERE i.tipoutente = :tipo ");
     		q.setParameter("tipo", "_IMPIEGATO");
-    		List<Utente> impiegati = (List<Utente>) q.getResultList();
+    		List<Utente> impiegati = q.getResultList();
     		return impiegati;
     	}
     	catch (Exception e) {
