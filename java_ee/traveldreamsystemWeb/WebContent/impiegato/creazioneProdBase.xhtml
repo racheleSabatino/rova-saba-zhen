@@ -35,27 +35,19 @@
 									<f:validateDoubleRange minimum="1" maximum="10" />
 								</p:inputText>
 
-								<h:outputLabel for="number" value="Number:"
-									style="font-weight:bold" />
-								<p:inputText id="number" value="" label="Number">
-									<f:validateDoubleRange minimum="5" maximum="8" />
-								</p:inputText>
-								<p:message for="number" />
-								<h:outputText value="" />
-
-
-								<p:commandButton value="Submit" validateClient="true" />
-
-								<p:commandButton value="Submit" update="display" />
-
-								<h:outputText id="display" value="#{ProdBaseBean.tipoCamera}" />
+								<h:outputText value="Costo:" />
+								<p:inputText value="#{ProdBaseBean.costo}"/>
+								<h:outputText value ="Descrizione:"/>
+								<p:inputTextarea value="#{ProdBaseBean.descrizione}"/>
+								<p:commandButton value="Submit"  />
 
 							</h:panelGrid>
 						</h:form>
 
 					</p:tab>
 
-					<p:tab title="Hotel">
+					<p:tab title="Escursione">
+					<h:form>
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="Data partenza:  " />
 							<p:calendar value="#{ProdBaseBean.dataPartenza}"
@@ -63,10 +55,24 @@
 							<h:outputText value="Data ritorno:  " />
 							<p:calendar value="#{ProdBaseBean.dataRitorno}"
 								pattern="MM/dd/yyyy HH:mm" />
+							<h:outputText value="Costo:" />
+							<p:inputText value="#{ProdBaseBean.costo}"/>
+							<h:outputText value="luogo:" />
+							<p:inputText value="#{ProdBaseBean.luogo}"/>
+							<h:outputText value ="Descrizione:"/>
+							<p:inputTextarea value="#{ProdBaseBean.descrizione}"/>
+							<p:commandButton value="Submit"  />
+						
+							
+							
+								
 						</h:panelGrid>
+					</h:form>
+						
 					</p:tab>
 
-					<p:tab title="Hotel">
+					<p:tab title="Trasporto">
+					<h:form>
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="Data partenza:  " />
 							<p:calendar value="#{ProdBaseBean.dataPartenza}"
@@ -74,7 +80,22 @@
 							<h:outputText value="Data ritorno:  " />
 							<p:calendar value="#{ProdBaseBean.dataRitorno}"
 								pattern="MM/dd/yyyy HH:mm" />
+							<h:outputText value="Città partenza:" />
+							<p:inputText value="#{ProdBaseBean.cittaPartenza}" />
+							<h:outputText value="Città ritorno:" />
+							<p:inputText value="#{ProdBaseBean.cittaRitorno}" />
+							
+							<h:outputText value="Costo:" />
+							<p:inputText value="#{ProdBaseBean.costo}"/>
+							
+							<h:outputText value ="Descrizione:"/>
+							
+							<p:inputTextarea value="#{ProdBaseBean.descrizione}"/>
+							
+							<p:commandButton value="Submit"  />
 						</h:panelGrid>
+							
+					</h:form>
 					</p:tab>
 
 				</p:accordionPanel>
