@@ -35,29 +35,21 @@
 				</p:submenu>
 
 				<p:submenu rendered="#{userBean.isRoleImpiegato}" label="Impiegato"
-					icon="ui-icon-document"
-					action="/impiegato/homeImpiegato?faces-redirect=true">
+					icon="ui-icon-document">
 					<p:menuitem value="crea nuovo pacchetto"
-						action="/impiegatocreazionePacchPred?faces-redirect=true" />
+						action="/impiegato/creazionePacchPred?faces-redirect=true" />
 					<p:menuitem value="crea nuovo prodotto base"
-						action="/impiegatocreazioneProdBase?faces-redirect=true" />
+						action="/impiegato/creazioneProdBase?faces-redirect=true" />
 					<p:menuitem value="modifica pacchetto"
-						action="/impiegatomodificaPacchPred?faces-redirect=true" />
+						action="/impiegato/modificaPacchPred?faces-redirect=true" />
 					<p:menuitem value="crea nuovo pacchetto"
-						action="/impiegatocreazionePacchPred?faces-redirect=true" />
+						action="/impiegato/creazionePacchPred?faces-redirect=true" />
 				</p:submenu>
 
 				<p:submenu rendered="#{userBean.isRoleAmministratore}"
-					label="Amministrazione" icon="ui-icon-wrench"
-					action="/amministratore/homeAmmin?faces-redirect=true">
-					<p:menuitem value="crea nuovo pacchetto"
-						action="/impiegatocreazionePacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo prodotto base"
-						action="/impiegatocreazioneProdBase?faces-redirect=true" />
-					<p:menuitem value="modifica pacchetto"
-						action="/impiegatomodificaPacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo pacchetto"
-						action="/impiegatocreazionePacchPred?faces-redirect=true" />
+					label="Amministrazione" icon="ui-icon-wrench">
+					<p:menuitem value="Aggiungi nuovo impiegato"
+						action="/amministratore/addEmployee?faces-redirect=true" />
 				</p:submenu>
 
 				<p:menuitem rendered="#{not empty request.remoteUser}" type="button"
