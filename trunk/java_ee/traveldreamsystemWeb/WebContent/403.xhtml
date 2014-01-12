@@ -9,13 +9,13 @@
 
 <h:body>
 
-	<ui:composition template="../template/common.xhtml">
+	<ui:composition template="template/common.xhtml">
 
 		<ui:define name="content">
 
 			<p:panel header="Login Error">
-            Sorry, you made an Error. Please try again: <h:link
-					outcome="/homePage.xhtml?tab=0" value="Login" />
+            403 - Non sei autorizzato ad accedere a questa pagina. Please try again: <h:link
+					outcome="/homePage.xhtml?faces-redirect=true&amp;tab=0" value="Home" />
 			</p:panel>
 
 		</ui:define>

@@ -9,15 +9,13 @@
 
 <h:body>
 
-	<ui:composition template="../template/common.xhtml">
+	<ui:composition template="template/common.xhtml">
 
 		<ui:define name="content">
 
-			<p:panel>
-				<h:form>
-					<p:outputLabel value="#{userBean.name}" />
-					<p:commandButton action="#{logoutBean.logout}" value="Logout" />
-				</h:form>
+			<p:panel header="Login Error">
+            404 - Pagina inesistente. Please try again: <h:link
+					outcome="/homePage.xhtml?faces-redirect=true&amp;tab=0" value="Home" />
 			</p:panel>
 
 		</ui:define>

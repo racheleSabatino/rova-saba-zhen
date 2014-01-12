@@ -12,19 +12,22 @@
 	<ui:composition>
 		<p:tabMenu activeIndex="#{param['tab']}">
 
-			<p:menuitem value="Home" url="/" icon="ui-icon-star" />
-			<p:menuitem value="Cliente" url="/cliente/index.xhtml?tab=1&amp;cliente=true"
+			<p:menuitem value="Home"
+				url="/homePage.xhtml?faces-redirect=true&amp;tab=0" icon="ui-icon-star" />
+			<p:menuitem value="Cliente"
+				url="/cliente/homeCliente.xhtml?faces-redirect=true&amp;tab=1&amp;cliente=true"
 				icon="ui-icon-person" />
-			<p:menuitem value="Impiegato" url="/impiegato/homeImpiegato.xhtml?tab=2"
+			<p:menuitem value="Impiegato"
+				url="/impiegato/homeImpiegato.xhtml?faces-redirect=true&amp;tab=2"
 				icon="ui-icon-document" />
 			<p:menuitem value="Amministrazione"
-				url="/amministratore/homeAmmin.xhtml?tab=3"
+				url="/amministratore/homeAmmin.xhtml?faces-redirect=true&amp;tab=3"
 				icon="ui-icon-wrench" />
 			<p:menuitem value="Support"
-				url="/amministratore/homeAmmin.xhtml?tab=4"
+				url="/amministratore/homeAmmin.xhtml?faces-redirect=true&amp;tab=4"
 				icon="ui-icon-search" />
 			<p:menuitem value="Social"
-				url="/amministratore/homeAmmin.xhtml?tab=5"
+				url="/amministratore/homeAmmin.xhtml?faces-redirect=true&amp;tab=5"
 				icon="ui-icon-person" />
 		</p:tabMenu>
 	</ui:composition>
