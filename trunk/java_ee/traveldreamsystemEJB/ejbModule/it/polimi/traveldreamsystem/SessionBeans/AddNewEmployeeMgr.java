@@ -33,7 +33,7 @@ public class AddNewEmployeeMgr implements AddNewEmployee {
 	
 	@Override
 //	@RolesAllowed({Utente._IMPIEGATO})
-	public void save(UtenteDTO utente) {
+	public void addNewEmployee (UtenteDTO utente) {
 		Utente newUtente = new Utente(utente);
 		newUtente.setTipoUtente(Utente._IMPIEGATO);
 		em.persist(newUtente);
@@ -60,7 +60,7 @@ public class AddNewEmployeeMgr implements AddNewEmployee {
     	try{
     		Query q = em.createNamedQuery("SELECT i FROM Utente i WHERE i.tipoutente = :tipo ");
     		q.setParameter("tipo", "_IMPIEGATO");
-    		List<Utente> impiegati = q.getResultList();
+    		List<Utente> impiegati = (List<Utente>) q.getResultList();
     		return impiegati;
     	}
     	catch (Exception e) {
