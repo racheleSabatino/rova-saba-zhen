@@ -13,9 +13,14 @@
 
 		<ui:define name="content">
 
-			<p:panel header="Login Error">
-            Sorry, you made an Error. Please try again: <h:link
-					outcome="/homePage.xhtml?tab=0" value="Login" />
+			<p:panel>
+				<h:form>
+					<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+					
+					
+					
+					<p:outputLabel value="document.getElementById('login').action='j_security_check';"></p:outputLabel>
+				</h:form>
 			</p:panel>
 
 		</ui:define>
