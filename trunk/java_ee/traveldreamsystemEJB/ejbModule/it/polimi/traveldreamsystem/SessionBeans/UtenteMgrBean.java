@@ -18,77 +18,78 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class UtenteMgrBean implements UtenteMgrBeanLocal {
 
-    /**
-     * Default constructor. 
-     */
-    public UtenteMgrBean() {
-    }
-    
+	/**
+	 * Default constructor.
+	 */
+	public UtenteMgrBean() {
+	}
+
 	@PersistenceContext
-    private EntityManager em;
-	
+	private EntityManager em;
+
 	@Resource
 	private EJBContext context;
-	
+
 	@Override
-//	@RolesAllowed({Utente._UTENTE, Utente._AMMINISTRATORE})
+	// @RolesAllowed({Utente._UTENTE, Utente._AMMINISTRATORE})
 	public void save(UtenteDTO utente) {
 		Utente newUtente = new Utente(utente);
 		newUtente.setTipoUtente(Utente._CLIENTE);
 		em.persist(newUtente);
 	}
 
-
 	@Override
 	public void update(UtenteDTO utente) {
 		em.merge(new Utente(utente));
 	}
 
-
 	@Override
 	public UtenteDTO getUtenteDTO() {
-		return convertToDTO(getPrincipalUser());
+		if (getPrincipalUser() != null) {
+			return convertToDTO(getPrincipalUser());
+		} else {
+			return null;
+		}
 	}
-
 
 	@Override
 	public void unregister() {
 		remove(getPrincipalUser());
 	}
 
-
 	public Utente find(String mail) {
-    	return em.find(Utente.class, mail);
-    }
-    
-    public List<Utente> getAllUsers() {
-    	return em.createNamedQuery("Utente.findALL", Utente.class).getResultList();
-    }
+		return em.find(Utente.class, mail);
+	}
 
-    public void remove(String mail) {
+	public List<Utente> getAllUsers() {
+		return em.createNamedQuery("Utente.findALL", Utente.class)
+				.getResultList();
+	}
+
+	public void remove(String mail) {
 		Utente utente = find(mail);
-        em.remove(utente);
+		em.remove(utente);
 	}
-    
-    public void remove(Utente utente) {
-    	em.remove(utente);
-	}
-    
-    
-    public Utente getPrincipalUser() {
-    	return find(getPrincipalEmail());
-    }
-	
-    
-    public String getPrincipalEmail() {
-    	return context.getCallerPrincipal().getName();
-    }
 
-    private UtenteDTO convertToDTO(Utente utente) {
-    	UtenteDTO utenteDTO = new UtenteDTO();
-    	utenteDTO.setMail(utente.getMail());
-    	utenteDTO.setNome(utente.getNome());
-    	utenteDTO.setCognome(utente.getCognome());
+	public void remove(Utente utente) {
+		em.remove(utente);
+	}
+
+	public Utente getPrincipalUser() {
+		return find(getPrincipalEmail());
+	}
+
+	public String getPrincipalEmail() {
+		return context.getCallerPrincipal().getName();
+	}
+
+	private UtenteDTO convertToDTO(Utente utente) {
+		UtenteDTO utenteDTO = new UtenteDTO();
+		utenteDTO.setMail(utente.getMail());
+		utenteDTO.setNome(utente.getNome());
+		utenteDTO.setCognome(utente.getCognome());
+		utenteDTO.setPassword(utente.getPassword());
+		utenteDTO.setTipoutente(utente.getTipoutente());
 		return utenteDTO;
 	}
 
