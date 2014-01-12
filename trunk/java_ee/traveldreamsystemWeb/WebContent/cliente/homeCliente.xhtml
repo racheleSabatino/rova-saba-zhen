@@ -14,13 +14,9 @@
 		<ui:define name="content">
 
 			<p:panel>
-				<h:form>
-					<p:commandButton action="#{logoutBean.logout}" value="Logout" />
-					
-					
-					
-					<p:outputLabel value="document.getElementById('login').action='j_security_check';"></p:outputLabel>
-				</h:form>
+
+				<p:outputLabel value="#{userBean.name}" />
+
 			</p:panel>
 
 		</ui:define>
