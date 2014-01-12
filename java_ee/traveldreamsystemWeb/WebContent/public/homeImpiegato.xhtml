@@ -9,16 +9,18 @@
 
 <h:body>
 
-	<ui:composition template="template/common.xhtml">
+	<ui:composition template="../template/common.xhtml">
 
-<p:panel>
-	<h:form>
-	
-<h:commandButton value="cljasd" onclick="PF('loginDlg').show()" >
-</h:commandButton>
+		<ui:define name="content">
 
-</h:form>
-</p:panel>
+			<p:panel>
+
+				<p:gmap center="45.478727,9.232655" zoom="15" type="HYBRID"
+					style="width:600px;height:400px" />
+			</p:panel>
+
+		</ui:define>
+
 	</ui:composition>
 
 </h:body>
