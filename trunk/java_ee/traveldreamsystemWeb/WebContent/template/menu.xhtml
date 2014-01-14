@@ -14,12 +14,10 @@
 			<p:menubar>
 				<p:menuitem value="Home" icon="ui-icon-star"
 					action="/homePage?faces-redirect=true" />
-				<p:menuitem value="cerca pacchetto vacanza" icon="ui-icon-person"
-					action="/public/a?faces-redirect=true" />
 				<p:menuitem value="chi siamo" icon="ui-icon-person"
-					action="/public/c?faces-redirect=true" />
+					action="/public/chiSiamo?faces-redirect=true" />
 				<p:menuitem value="dove siamo" icon="ui-icon-person"
-					action="/public/b?faces-redirect=true" />
+					action="/public/doveSiamo?faces-redirect=true" />
 
 				<p:submenu rendered="#{userBean.isRoleCliente}" label="Cliente"
 					icon="ui-icon-person"
