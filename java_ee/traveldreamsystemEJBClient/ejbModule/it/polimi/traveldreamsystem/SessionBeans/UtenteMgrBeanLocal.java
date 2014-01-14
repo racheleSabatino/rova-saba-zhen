@@ -14,5 +14,7 @@ public interface UtenteMgrBeanLocal {
 	public void unregister();
 	
 	public UtenteDTO getUtenteDTO();
+	
+	public UtenteDTO findUtenteDTO(String mail);
 
 }
