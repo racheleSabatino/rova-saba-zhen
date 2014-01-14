@@ -45,13 +45,6 @@ public class AddNewEmployeeMgr implements AddNewEmployee {
 		return convertToDTO(getPrincipalUser());
 	}
 
-
-	@Override
-	public void unregister() {
-		remove(getPrincipalUser());
-	}
-
-
 	public Utente find(String mail) {
     	return em.find(Utente.class, mail);
     }
@@ -68,17 +61,8 @@ public class AddNewEmployeeMgr implements AddNewEmployee {
     	}
     	return null;
     }
-
-    public void remove(String mail) {
-		Utente utente = find(mail);
-        em.remove(utente);
-	}
     
-    public void remove(Utente utente) {
-    	em.remove(utente);
-	}
-    
-    
+   
     public Utente getPrincipalUser() {
     	return find(getPrincipalEmail());
     }
