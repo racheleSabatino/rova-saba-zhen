@@ -51,6 +51,12 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 			return null;
 		}
 	}
+	
+	@Override
+	public UtenteDTO findUtenteDTO(String mail) {
+		Utente searchedUtente = find(mail);
+		return this.convertToDTO(searchedUtente);
+	}
 
 	@Override
 	public void unregister() {
@@ -59,7 +65,9 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 
 	public Utente find(String mail) {
 		return em.find(Utente.class, mail);
+		
 	}
+	
 
 	public List<Utente> getAllUsers() {
 		return em.createNamedQuery("Utente.findALL", Utente.class)
@@ -83,7 +91,7 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 		return context.getCallerPrincipal().getName();
 	}
 
-	private UtenteDTO convertToDTO(Utente utente) {
+	public UtenteDTO convertToDTO(Utente utente) {
 		UtenteDTO utenteDTO = new UtenteDTO();
 		utenteDTO.setMail(utente.getMail());
 		utenteDTO.setNome(utente.getNome());
