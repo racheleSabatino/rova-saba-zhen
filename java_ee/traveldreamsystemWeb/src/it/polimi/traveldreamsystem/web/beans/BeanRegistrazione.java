@@ -6,16 +6,16 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="registerBean")
+@ManagedBean(name="beanRegistrazione")
 @RequestScoped
-public class RegisterBean {
+public class BeanRegistrazione {
 	
 	@EJB
 	private UtenteMgrBeanLocal utenteMgrBean;
 
 	private UtenteDTO utente;
 	
-	public RegisterBean() {
+	public BeanRegistrazione() {
 		utente = new UtenteDTO();
 	}
 
@@ -27,8 +27,8 @@ public class RegisterBean {
 		this.utente = utente;
 	}
 
-	public String register() {
+	public String registrati() {
 		utenteMgrBean.save(utente);
-		return "/homePage.xhtml?tab=0";
+		return "/homePage?faces-redirect=true";
 	}
 }
