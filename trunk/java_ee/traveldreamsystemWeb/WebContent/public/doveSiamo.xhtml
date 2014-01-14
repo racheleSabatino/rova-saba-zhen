@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel>
+
+				<f:view>
+					<p:gmap center="45.478777, 9.232550" zoom="19" type="HYBRID"
+						style="width:600px;height:300px" model="#{mapBean.simpleModel}" />
+				</f:view>
+				<p:inputTextarea  readonly="true"
+					value="
+Raffaela Mirandola, Ph.D.
+Dipartimento di Elettronica, Informazione e Bioingegneria
+Politecnico di Milano
+Ufficio: 307
+Piano: 3
+Via Golgi 42, 20133 Milano, Italy
+Phone: +39 02 2399 3523
+Fax: +39 02 2399 3574
+e-mail: raffaela DOT mirandola AT polimi DOT it
+"/>
+
+
+			</p:panel>
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
