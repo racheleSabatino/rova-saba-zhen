@@ -8,9 +8,7 @@ import javax.ejb.Local;
 public interface AddNewEmployee {
 
 	void addNewEmployee(UtenteDTO impiegato);
-	
-	public void unregister();
-	
+
 	public UtenteDTO getUtenteDTO();
 
 }
