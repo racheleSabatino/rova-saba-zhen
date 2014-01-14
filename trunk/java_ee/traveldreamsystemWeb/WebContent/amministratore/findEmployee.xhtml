@@ -19,11 +19,14 @@
 				<p:panel header="Ricerca impiegato">
 					<h:panelGrid columns="3" id="regGrid">
 						<h:outputLabel for="mail">Email:</h:outputLabel>
-							<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
+						
+						<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
 							<p:message for="mail" />
 							<p:commandButton value="Cerca" update="regGrid"
 							action="#{findEmployeeBean.find()}" />
-						<h:inputText value="#{findEmployeeBean.searchedEmployee}" readonly="true"/>
+						<h:inputText value = "#{findEmployeeBean.prova}" readonly = "true"/>
+						<h:outputLabel for="cognome">Cognome impiegato: </h:outputLabel>
+						<h:inputText value="#{findEmployeeBean.searchedEmployee.cognome}" readonly="true"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
