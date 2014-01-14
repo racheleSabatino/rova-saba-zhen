@@ -51,6 +51,8 @@
 					<p:menuitem value="Aggiungi nuovo impiegato"
 						action="/amministratore/addEmployee?faces-redirect=true" />
 				</p:submenu>
+				<p:menuitem value="Cerca impiegato"
+						action="/amministratore/findEmployee?faces-redirect=true" />
 
 				<p:menuitem rendered="#{not empty request.remoteUser}" type="button"
 					value="Logout" icon="ui-icon-extlink" action="#{logoutBean.logout}" />
