@@ -87,6 +87,14 @@
 		<welcome-file>homePage.xhtml</welcome-file>
 	</welcome-file-list>
 	<context-param>
+		<param-name>primefaces.PUBLIC_CAPTCHA_KEY</param-name>
+		<param-value>6LeDC-0SAAAAAK6F4z0nNxW7StKWM1ooPJhuBusS</param-value>
+	</context-param>
+	<context-param>
+		<param-name>primefaces.PRIVATE_CAPTCHA_KEY</param-name>
+		<param-value>6LeDC-0SAAAAAB4o4nuQYgx37aNYmklBXkl24wk1</param-value>
+	</context-param>
+	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bluesky</param-value>
 	</context-param>
