@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.validation.constraints.Pattern;
 
-@ManagedBean(name="findEmployeeBean")
+@ManagedBean(name="a")
 @RequestScoped
 public class FindEmployeeBean {
 	
@@ -20,10 +20,12 @@ public class FindEmployeeBean {
 	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
             message="invalid email")
 	private String searchedMail;
+	private String prova;
 	
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
+		prova = new String();
 	}
 	
 	public String getMail() {
@@ -35,7 +37,13 @@ public class FindEmployeeBean {
 	}
 	
 	public void find(String mail) {
-		setEmployee(utenteMgrBean.findUtenteDTO(mail));
+		searchedEmployee = utenteMgrBean.findUtenteDTO(mail);
+		if(searchedEmployee.getCognome()!=null) {
+			prova = "trovato";
+		} else {
+			prova = "non trovato";
+		}
+		
 	}
 
 	public UtenteDTO getEmployee() {
