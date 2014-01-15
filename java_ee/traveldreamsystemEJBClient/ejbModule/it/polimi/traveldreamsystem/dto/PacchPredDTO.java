@@ -13,24 +13,23 @@ public class PacchPredDTO {
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty
-	private int idpacchpred;
+	private int idPacchPred;
 
 	@NotEmpty
 	private String descrizione;
 
-	//contiene la lista degli id dei pacchetti personalizzati a cui è associato
-	private List<Integer> idPacchPers;
+	private List<PacchPerDTO> pacchPers;
 	
 	@NotEmpty
-	private List<Integer> idProdBases1;
-	private List<Integer> idProdBases2;
+	private List<ProdBaseDTO> prodBases1;
+	private List<ProdBaseDTO> prodBases2;
 	
-	public int getIdpacchpred() {
-		return this.idpacchpred;
+	public int getIdPacchPred() {
+		return this.idPacchPred;
 	}
 
-	public void setIdpacchpred(int idpacchpred) {
-		this.idpacchpred = idpacchpred;
+	public void setIdPacchpred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
 	}
 
 	public String getDescrizione() {
@@ -41,28 +40,28 @@ public class PacchPredDTO {
 		this.descrizione = descrizione;
 	}
 
-	public List<Integer> getIdPacchPers() {
-		return this.idPacchPers;
+	public List<PacchPerDTO> getPacchPers() {
+		return this.pacchPers;
 	}
 
-	public void setPacchPers(List<Integer> idPacchPers) {
-		this.idPacchPers = idPacchPers;
+	public void setPacchPers(List<PacchPerDTO> pacchPers) {
+		this.pacchPers = pacchPers;
 	}
 
-	public List<Integer> getIdProdBases1() {
-		return this.idProdBases1;
+	public List<ProdBaseDTO> getProdBases1() {
+		return this.prodBases1;
 	}
 
-	public void setProdBases1(List<Integer> idProdBases1) {
-		this.idProdBases1 = idProdBases1;
+	public void setProdBases1(List<ProdBaseDTO> prodBases1) {
+		this.prodBases1 = prodBases1;
 	}
 
-	public List<Integer> getIdProdBases2() {
-		return this.idProdBases2;
+	public List<ProdBaseDTO> getprodBases2() {
+		return this.prodBases2;
 	}
 
-	public void setProdBases2(List<Integer> idProdBases2) {
-		this.idProdBases2 = idProdBases2;
+	public void setProdBases2(List<ProdBaseDTO> prodBases2) {
+		this.prodBases2 = prodBases2;
 	}
 
 	
