@@ -51,7 +51,7 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 
 	@Override
 	public void unregister() {
-		remove(getPrincipalUser());
+		removeUtente(getPrincipalUser());
 	}
 
 	public Utente findUtente(String mail) {
@@ -65,12 +65,12 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 				.getResultList();
 	}
 
-	public void remove(String mail) {
+	public void removeUtente(String mail) {
 		Utente utente = findUtente(mail);
 		em.remove(utente);
 	}
 
-	public void remove(Utente utente) {
+	public void removeUtente(Utente utente) {
 		em.remove(utente);
 	}
 

@@ -18,21 +18,14 @@ public class FindEmployeeBean {
 	
 	private String searchedMail;
 
-	private String prova;
 	
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
-		setProva(new String());
 	}
 	
 	public void find() {
 		searchedEmployee = utenteMgrBean.findUtenteDTO(searchedMail);
-		if(searchedEmployee.getCognome()!=null) {
-			setProva("trovato");
-		} else {
-			setProva("non trovato");
-		}
 	}
 	
 	public UtenteDTO getSearchedEmployee() {
@@ -51,12 +44,9 @@ public class FindEmployeeBean {
 		this.searchedMail = searchedMail;
 	}
 
-	public String getProva() {
-		return prova;
-	}
-
-	public void setProva(String prova) {
-		this.prova = prova;
+	public void remove(String mail) {
+		utenteMgrBean.removeUtente(searchedMail);
+	
 	}
 	
 	
