@@ -20,7 +20,7 @@ public class UtenteDTO {
     private String password;
 	
 	@NotEmpty
-    private String tipoutente;
+    private String tipoUtente;
 
 	public String getMail() {
 		return mail;
@@ -54,12 +54,12 @@ public class UtenteDTO {
 		this.password = password;
 	}
 
-	public String getTipoutente() {
-		return tipoutente;
+	public String getTipoUtente() {
+		return tipoUtente;
 	}
 
-	public void setTipoutente(String tipoutente) {
-		this.tipoutente = tipoutente;
+	public void setTipoUtente(String tipoUtente) {
+		this.tipoUtente = tipoUtente;
 	}
      
 

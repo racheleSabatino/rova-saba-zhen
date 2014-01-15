@@ -6,9 +6,8 @@ import it.polimi.traveldreamsystem.SessionBeans.*;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.validation.constraints.Pattern;
 
-@ManagedBean(name="a")
+@ManagedBean
 @RequestScoped
 public class FindEmployeeBean {
 	
@@ -17,41 +16,47 @@ public class FindEmployeeBean {
 	
 	private UtenteDTO searchedEmployee;
 	
-	@Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-            message="invalid email")
 	private String searchedMail;
+
 	private String prova;
 	
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
-		prova = new String();
+		setProva(new String());
 	}
 	
-	public String getMail() {
-		return searchedMail;
-	}
-	
-	public void setMail(String mail) {
-		searchedMail = mail;
-	}
-	
-	public void find(String mail) {
-		searchedEmployee = utenteMgrBean.findUtenteDTO(mail);
+	public void find() {
+		searchedEmployee = utenteMgrBean.findUtenteDTO(searchedMail);
 		if(searchedEmployee.getCognome()!=null) {
-			prova = "trovato";
+			setProva("trovato");
 		} else {
-			prova = "non trovato";
+			setProva("non trovato");
 		}
-		
 	}
-
-	public UtenteDTO getEmployee() {
+	
+	public UtenteDTO getSearchedEmployee() {
 		return searchedEmployee;
 	}
 
-	public void setEmployee(UtenteDTO searchedEmployee) {
+	public void setSearchedEmployee(UtenteDTO searchedEmployee) {
 		this.searchedEmployee = searchedEmployee;
+	}
+	
+	public String getSearchedMail() {
+		return searchedMail;
+	}
+
+	public void setSearchedMail(String searchedMail) {
+		this.searchedMail = searchedMail;
+	}
+
+	public String getProva() {
+		return prova;
+	}
+
+	public void setProva(String prova) {
+		this.prova = prova;
 	}
 	
 	
