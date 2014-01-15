@@ -13,4 +13,5 @@ public interface UtenteMgrBeanLocal {
 	
 	public UtenteDTO findUtenteDTO(String mail);
 
+	public void removeUtente(String mail);
 }
