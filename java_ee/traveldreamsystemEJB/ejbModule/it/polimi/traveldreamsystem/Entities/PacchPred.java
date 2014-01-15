@@ -28,21 +28,8 @@ public class PacchPred implements Serializable {
 	private List<PacchPer> pacchPers;
 
 	//bi-directional many-to-many association to ProdBase
-	@ManyToMany
-	@JoinTable(
-		name="composizione"
-		, joinColumns={
-			@JoinColumn(name="IDPACCHPRED", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="IDPRODBASE", nullable=false)
-			}
-		)
-	private List<ProdBase> prodBases1;
-
-	//bi-directional many-to-many association to ProdBase
-	@ManyToMany(mappedBy="pacchPreds2")
-	private List<ProdBase> prodBases2;
+	@ManyToMany(mappedBy="pacchPred")
+	private List<ProdBase> prodBases;
 
 	public PacchPred() {
 	}
@@ -85,20 +72,12 @@ public class PacchPred implements Serializable {
 		return pacchPer;
 	}
 
-	public List<ProdBase> getProdBases1() {
-		return this.prodBases1;
+	public List<ProdBase> getProdBases() {
+		return this.prodBases;
 	}
 
-	public void setProdBases1(List<ProdBase> prodBases1) {
-		this.prodBases1 = prodBases1;
-	}
-
-	public List<ProdBase> getProdBases2() {
-		return this.prodBases2;
-	}
-
-	public void setProdBases2(List<ProdBase> prodBases2) {
-		this.prodBases2 = prodBases2;
+	public void setProdBases(List<ProdBase> prodBases) {
+		this.prodBases = prodBases;
 	}
 
 }
