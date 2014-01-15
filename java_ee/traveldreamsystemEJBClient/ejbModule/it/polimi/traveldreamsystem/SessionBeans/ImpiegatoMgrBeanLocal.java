@@ -5,10 +5,8 @@ import it.polimi.traveldreamsystem.dto.UtenteDTO;
 import javax.ejb.Local;
 
 @Local
-public interface AddNewEmployee {
+public interface ImpiegatoMgrBeanLocal extends UtenteMgrBeanLocal {
 
-	void addNewEmployee(UtenteDTO impiegato);
-
-	public UtenteDTO getUtenteDTO();
+	void addImpiegato(UtenteDTO utente);
 
 }

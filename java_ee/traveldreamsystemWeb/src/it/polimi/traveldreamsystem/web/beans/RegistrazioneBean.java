@@ -2,20 +2,21 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name="beanRegistrazione")
+@ManagedBean
 @RequestScoped
-public class BeanRegistrazione {
+public class RegistrazioneBean {
 	
 	@EJB
-	private UtenteMgrBeanLocal utenteMgrBean;
+	private ClienteMgrBeanLocal clienteMgrBean;
 
 	private UtenteDTO utente;
 	
-	public BeanRegistrazione() {
+	public RegistrazioneBean() {
 		utente = new UtenteDTO();
 	}
 
@@ -28,7 +29,7 @@ public class BeanRegistrazione {
 	}
 
 	public String registrati() {
-		utenteMgrBean.save(utente);
+		clienteMgrBean.addCliente(utente);
 		return "/homePage?faces-redirect=true";
 	}
 }

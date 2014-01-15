@@ -17,34 +17,34 @@
 				<p:panel header="Registration Form">
 					<h:panelGrid columns="3" id="regGrid">
 						<h:outputLabel for="mail">Email:</h:outputLabel>
-						<p:inputText id="mail" value="#{beanRegistrazione.utente.mail}" />
+						<p:inputText id="mail" value="#{registrazioneBean.utente.mail}" />
 						<p:message for="mail" />
 
 						<h:outputLabel for="Nome">Nome:</h:outputLabel>
-						<p:inputText id="Nome" value="#{beanRegistrazione.utente.nome}" />
+						<p:inputText id="Nome" value="#{registrazioneBean.utente.nome}" />
 						<p:message for="Nome" />
 
 						<h:outputLabel for="Cognome">Cognome:</h:outputLabel>
 						<p:inputText id="Cognome"
-							value="#{beanRegistrazione.utente.cognome}" />
+							value="#{registrazioneBean.utente.cognome}" />
 						<p:message for="Cognome" />
 
 						<h:outputLabel for="password">Password:</h:outputLabel>
 						<p:password id="password"
-							value="#{beanRegistrazione.utente.password}" feedback="true"
+							value="#{registrazioneBean.utente.password}" feedback="true"
 							match="pwd2" label="Password" />
 						<p:message for="password" />
 
 						<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
 						<p:password id="pwd2" label="Confirm Password"
-							value="#{beanRegistrazione.utente.password}" />
+							value="#{registrazioneBean.utente.password}" />
 						<p:message for="pwd2" />
 
 					</h:panelGrid>
 					<p:messages showDetail="true" />
 					<p:captcha label="Captcha" language="it" theme="white" />
 					<p:commandButton ajax="false" value="Registrati" update="regGrid"
-						action="#{beanRegistrazione.registrati}"
+						action="#{registrazioneBean.registrati}"
 						actionListener="#{captchaBean.submit}" />
 
 				</p:panel>

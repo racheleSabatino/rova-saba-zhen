@@ -7,7 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-@ManagedBean(name = "userBean")
+@ManagedBean
 @RequestScoped
 public class UserBean {
 
@@ -15,16 +15,14 @@ public class UserBean {
 	private UtenteMgrBeanLocal utenteMgrBean;
 
 	public String getName() {
-		return "Ciao " + utenteMgrBean.getUtenteDTO().getNome();
+		return utenteMgrBean.getUtenteDTO().getNome();
 	}
-	
 
-
-	public String IsRoleImpiegato(String role) {
+	private String IsRoleImpiegato(String role) {
 		UtenteDTO utenteDTO = utenteMgrBean.getUtenteDTO();
 
 		if (utenteDTO != null
-				&& utenteDTO.getTipoutente().equals(role)) {
+				&& utenteDTO.getTipoUtente().equals(role)) {
 			return "true";
 		}
 		return "false";

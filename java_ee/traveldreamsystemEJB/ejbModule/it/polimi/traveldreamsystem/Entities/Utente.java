@@ -58,7 +58,7 @@ public class Utente implements Serializable {
 	    this.nome  		  = utente.getNome();
 	    this.cognome      = utente.getCognome();       
 	    this.password     = DigestUtils.sha256Hex(utente.getPassword());
-	    this.tipoutente	  = utente.getTipoutente();
+	    this.tipoutente	  = utente.getTipoUtente();
 	    this.registeredOn = new Date();
 	}
 

@@ -14,23 +14,22 @@
 		<ui:define name="content">
 
 			<p:panel>
-			
-			<h:form>
-				<p:panel header="Ricerca impiegato">
-					<h:panelGrid columns="3" id="regGrid">
-						<h:outputLabel for="mail">Email:</h:outputLabel>
-						
-						<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
+
+				<h:form>
+					<p:panel header="Ricerca impiegato">
+						<h:panelGrid columns="3" id="regGrid">
+							<h:outputLabel for="mail">Email:</h:outputLabel>
+
+							<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
 							<p:message for="mail" />
 							<p:commandButton value="Cerca" update="regGrid"
-							action="#{findEmployeeBean.find()}" />
-						<h:inputText value = "#{findEmployeeBean.prova}" readonly = "true"/>
-						<h:outputLabel for="cognome">Cognome impiegato: </h:outputLabel>
-						<h:inputText value="#{findEmployeeBean.searchedEmployee.cognome}" readonly="true"/>
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
-	
+								actionListener="#{findEmployeeBean.find}" />
+							<h:inputText value="#{findEmployeeBean.prova}" readonly="true" />
+							<h:outputLabel value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.cognome}" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+
 			</p:panel>
 
 		</ui:define>
