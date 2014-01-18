@@ -1,7 +1,11 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -17,7 +21,7 @@ public class PacchPred implements Serializable {
 
 	@Id
 	@Column(name="IDPACCHPRED", unique=true, nullable=false)
-	private int idpacchpred;
+	private int idPacchPred;
 
 	@Lob
 	@Column(name="DESCRIZIONE")
@@ -31,15 +35,18 @@ public class PacchPred implements Serializable {
 	@ManyToMany(mappedBy="pacchPred")
 	private List<ProdBase> prodBases;
 
-	public PacchPred() {
+	public PacchPred(PacchPredDTO pacchetto) {
+		this.descrizione = pacchetto.getDescrizione();
+		this.idPacchPred = pacchetto.getIdPacchPred();
+		
 	}
 
-	public int getIdpacchpred() {
-		return this.idpacchpred;
+	public int getIdPacchPred() {
+		return this.idPacchPred;
 	}
 
-	public void setIdpacchpred(int idpacchpred) {
-		this.idpacchpred = idpacchpred;
+	public void setIdpacchpred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
 	}
 
 	public String getDescrizione() {
