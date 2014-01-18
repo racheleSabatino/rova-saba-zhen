@@ -25,11 +25,12 @@
 							<p:commandButton value="Cerca" update="regGrid"
 								actionListener="#{findEmployeeBean.find}" />
 							<h:outputLabel value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.cognome}" />
-							<h:outputLabel value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.nome}" />
-							<h:outputLabel value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.mail}" />
-							<h:outputLabel value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.cognome}" />
+							<h:outputLabel value="Nome impiegato: #{findEmployeeBean.searchedEmployee.nome}" />
+							<h:outputLabel value="Mail impiegato: #{findEmployeeBean.searchedEmployee.mail}" />
+						
 							<p:commandButton value="Elimina Impiegato" update="regGrid"
 								actionListener="#{findEmployeeBean.remove}" />
+							<p:inputText id="RemoveOK" value="#{findEmployeeBean.removeOK}" readonly = "true" />
 						</h:panelGrid>
 					</p:panel>
 				</h:form>

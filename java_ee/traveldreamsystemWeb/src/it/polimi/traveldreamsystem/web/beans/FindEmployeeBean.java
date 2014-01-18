@@ -17,11 +17,14 @@ public class FindEmployeeBean {
 	private UtenteDTO searchedEmployee;
 	
 	private String searchedMail;
+	
+	private String removeOK;
 
 	
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
+		setRemoveOK(new String());
 	}
 	
 	public void find() {
@@ -44,9 +47,18 @@ public class FindEmployeeBean {
 		this.searchedMail = searchedMail;
 	}
 
-	public void remove(String mail) {
+	public void remove() {
 		utenteMgrBean.removeUtente(searchedMail);
+		setRemoveOK("Eliminazione impiegato terminata con successo");
 	
+	}
+
+	public String getRemoveOK() {
+		return removeOK;
+	}
+
+	public void setRemoveOK(String removeOK) {
+		this.removeOK = removeOK;
 	}
 	
 	
