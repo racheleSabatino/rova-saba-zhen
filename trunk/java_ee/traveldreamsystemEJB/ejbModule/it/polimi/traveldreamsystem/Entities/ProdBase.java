@@ -1,7 +1,11 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.ProdBaseDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -55,7 +59,10 @@ public class ProdBase implements Serializable {
 	@OneToOne(mappedBy="prodBase")
 	private Trasporto trasporto;
 
-	public ProdBase() {
+	public ProdBase(ProdBaseDTO prodBase) {
+		this.idprodbase = prodBase.getIdProdBase();
+		this.descrizione = prodBase.getDescrizione();
+		this.costo = prodBase.getCosto();
 	}
 
 	public int getIdprodbase() {
