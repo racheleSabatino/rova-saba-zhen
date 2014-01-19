@@ -1,7 +1,9 @@
 package it.polimi.traveldreamsystem.dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 
@@ -21,8 +23,15 @@ public class PacchPredDTO {
 	private List<PacchPerDTO> pacchPers;
 	
 	@NotEmpty
-	private List<ProdBaseDTO> prodBases1;
-	private List<ProdBaseDTO> prodBases2;
+	private List<ProdBaseDTO> prodBases;
+	
+	//aggiunto da Rachele
+	private List<Integer> idProdBase;
+	
+	
+	public PacchPredDTO () {
+		idProdBase = new ArrayList<Integer>();
+	}
 	
 	public int getIdPacchPred() {
 		return this.idPacchPred;
@@ -48,20 +57,22 @@ public class PacchPredDTO {
 		this.pacchPers = pacchPers;
 	}
 
-	public List<ProdBaseDTO> getProdBases1() {
-		return this.prodBases1;
+	public List<ProdBaseDTO> getProdBases() {
+		return this.prodBases;
 	}
 
-	public void setProdBases1(List<ProdBaseDTO> prodBases1) {
-		this.prodBases1 = prodBases1;
+	public void setProdBases(List<ProdBaseDTO> prodBases) {
+		this.prodBases = prodBases;
 	}
 
-	public List<ProdBaseDTO> getprodBases2() {
-		return this.prodBases2;
+	
+	//aggiunto da rachele
+	public List<Integer> getIdProdBase(){
+		return this.idProdBase;
 	}
-
-	public void setProdBases2(List<ProdBaseDTO> prodBases2) {
-		this.prodBases2 = prodBases2;
+	
+	public void addIdProdBase(int idProdBase){
+		this.idProdBase.add(idProdBase);
 	}
 
 	
