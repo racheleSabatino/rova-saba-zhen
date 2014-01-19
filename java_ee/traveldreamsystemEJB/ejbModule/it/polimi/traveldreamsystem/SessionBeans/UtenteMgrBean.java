@@ -61,8 +61,7 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 	
 
 	public List<Utente> getAllUsers() {
-		return em.createNamedQuery("Utente.findALL", Utente.class)
-				.getResultList();
+		return em.createNamedQuery("Utente.findALL", Utente.class).getResultList();
 	}
 
 	public void removeUtente(String mail) {

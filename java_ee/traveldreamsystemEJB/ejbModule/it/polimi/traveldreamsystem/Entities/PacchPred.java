@@ -1,11 +1,13 @@
 package it.polimi.traveldreamsystem.Entities;
 
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
+import it.polimi.traveldreamsystem.dto.ProdBaseDTO;
 
 import java.io.Serializable;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,16 +38,23 @@ public class PacchPred implements Serializable {
 	private List<ProdBase> prodBases;
 
 	public PacchPred(PacchPredDTO pacchetto) {
-		this.descrizione = pacchetto.getDescrizione();
-		this.idPacchPred = pacchetto.getIdPacchPred();
-		
+		descrizione = pacchetto.getDescrizione();
+		idPacchPred = pacchetto.getIdPacchPred();
+		prodBases = new ArrayList<ProdBase>();
+		//da rivedere
+		for(int i=0; i<pacchetto.getProdBases().size(); i++) {
+			ProdBaseDTO prodDTO = pacchetto.getProdBases().get(i);
+			ProdBase prodotto = new ProdBase(prodDTO);
+			prodBases.add(prodotto);
+			
+		}
 	}
 
 	public int getIdPacchPred() {
 		return this.idPacchPred;
 	}
 
-	public void setIdpacchpred(int idPacchPred) {
+	public void setIdPacchPred(int idPacchPred) {
 		this.idPacchPred = idPacchPred;
 	}
 
@@ -87,4 +96,12 @@ public class PacchPred implements Serializable {
 		this.prodBases = prodBases;
 	}
 
+	public void removeProdBase(ProdBase prodotto) {
+		for(ProdBase prod: prodBases){
+			if(prod.getIdprodbase() == prodotto.getIdprodbase()){
+				prodBases.remove(prod);
+			}
+		}
+	}
+    
 }
