@@ -33,9 +33,21 @@ public class PacchPred implements Serializable {
 	@OneToMany(mappedBy="pacchPred")
 	private List<PacchPer> pacchPers;
 
-	//bi-directional many-to-many association to ProdBase
-	@ManyToMany(mappedBy="pacchPred")
+	//uni-directional many-to-many association to ProdBase
+	@ManyToMany
+	@JoinTable(
+		name="composizione"		
+		, joinColumns={		
+			@JoinColumn(name="IDPACCHPRED", nullable=false)		
+			}		
+		, inverseJoinColumns={		
+			@JoinColumn(name="IDPRODBASE", nullable=false)		
+			}		
+		)		
 	private List<ProdBase> prodBases;
+
+	public PacchPred() {
+	}
 
 	public PacchPred(PacchPredDTO pacchetto) {
 		descrizione = pacchetto.getDescrizione();
