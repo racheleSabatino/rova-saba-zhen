@@ -42,22 +42,12 @@ public class ProdBase implements Serializable {
 	@OneToOne(mappedBy="prodBase")
 	private PacchPer pacchPer;
 
-	//bi-directional many-to-many association to PacchPred
-	@ManyToMany
-	@JoinTable(
-		name="composizione"
-		, joinColumns={
-			@JoinColumn(name="IDPRODBASE", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="IDPACCHPRED", nullable=false)
-			}
-		)
-	private List<PacchPred> pacchPreds;
-
 	//bi-directional one-to-one association to Trasporto
 	@OneToOne(mappedBy="prodBase")
 	private Trasporto trasporto;
+
+	public ProdBase() {
+	}
 
 	public ProdBase(ProdBaseDTO prodBase) {
 		this.idprodbase = prodBase.getIdProdBase();
@@ -111,14 +101,6 @@ public class ProdBase implements Serializable {
 
 	public void setPacchPer(PacchPer pacchPer) {
 		this.pacchPer = pacchPer;
-	}
-
-	public List<PacchPred> getPacchPreds1() {
-		return this.pacchPreds;
-	}
-
-	public void setPacchPreds(List<PacchPred> pacchPreds1) {
-		this.pacchPreds = pacchPreds1;
 	}
 
 	public Trasporto getTrasporto() {
