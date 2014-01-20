@@ -11,6 +11,12 @@ public class EscursioneDTO {
 	
 	@NotEmpty
 	private int idprodbase;
+	
+	@NotEmpty
+	private int costo;
+	
+	@NotEmpty
+	private String descrizione;
 
 	@NotEmpty
 	private Date datapartenza;
@@ -33,6 +39,22 @@ public class EscursioneDTO {
 
 	public void setIdprodbase(int idprodbase) {
 		this.idprodbase = idprodbase;
+	}
+	
+	public int getCosto() {
+		return this.idprodbase;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+	
+	public String getDescrizione() {
+		return this.descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public Date getDatapartenza() {
