@@ -1,8 +1,8 @@
 package it.polimi.traveldreamsystem.Entities;
 
-import it.polimi.traveldreamsystem.dto.HotelDTO;
+
+
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
-import it.polimi.traveldreamsystem.dto.ProdBaseDTO;
 
 import java.io.Serializable;
 

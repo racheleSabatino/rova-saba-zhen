@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.PacchPred;
-import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
-import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
@@ -15,7 +13,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  * Session Bean implementation class AddPacchPredMgr
@@ -72,21 +69,20 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		return pacchettiDTO;
 	}
 
-
-
-/*per il momento nel pacchetto predefinito DTO, al posto di inserire la lista dei prodotti base DTO, inserisco solo 
- * una lista degli id dei prodotti base che lo contengono. Questo perchè altrimenti bisognerebbe convertire in DTO 
- * anche i prodotti base, il che comporterebbe aggiungere all'interno di questo oggetto, l'oggetto
- * ProdBaseMgr che contiene il metodo converti prodotto base. 
-*/
 	public PacchPredDTO convertToDTO(PacchPred pacchetto) {
 		if (pacchetto == null) {
 			return null;
 		}
 		PacchPredDTO pacchettoDTO = new PacchPredDTO();
 		pacchettoDTO.setDescrizione(pacchetto.getDescrizione());
-		
+		pacchettoDTO.setIdPacchpred(pacchetto.getIdPacchPred());
 		return pacchettoDTO;
+	}
+
+	@Override
+	public void modificaPacchPred(PacchPredDTO pacchetto) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
