@@ -25,12 +25,10 @@ public class PacchPredDTO {
 	@NotEmpty
 	private List<ProdBaseDTO> prodBases;
 	
-	//aggiunto da Rachele
-	private List<Integer> idProdBase;
 	
 	
 	public PacchPredDTO () {
-		idProdBase = new ArrayList<Integer>();
+		
 	}
 	
 	public int getIdPacchPred() {
@@ -66,14 +64,6 @@ public class PacchPredDTO {
 	}
 
 	
-	//aggiunto da rachele
-	public List<Integer> getIdProdBase(){
-		return this.idProdBase;
-	}
 	
-	public void addIdProdBase(int idProdBase){
-		this.idProdBase.add(idProdBase);
-	}
-
 	
 }
