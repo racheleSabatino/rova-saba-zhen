@@ -1,7 +1,9 @@
 package it.polimi.traveldreamsystem.Entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -19,6 +21,13 @@ public class Escursione implements Serializable {
 	@Column(name="IDPRODBASE", unique=true, nullable=false)
 	private int idprodbase;
 
+	@Column(name="COSTO")
+	private int costo;
+
+	@Lob
+	@Column(name="DESCRIZIONE")
+	private String descrizione;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="DATAPARTENZA", nullable=false)
 	private Date datapartenza;
@@ -29,11 +38,6 @@ public class Escursione implements Serializable {
 
 	@Column(name="LUOGO", nullable=false, length=45)
 	private String luogo;
-
-	//bi-directional one-to-one association to ProdBase
-	@OneToOne
-	@JoinColumn(name="IDPRODBASE", nullable=false, insertable=false, updatable=false)
-	private ProdBase prodBase;
 
 	public Escursione() {
 	}
@@ -68,14 +72,6 @@ public class Escursione implements Serializable {
 
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
-	}
-
-	public ProdBase getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBase prodBase) {
-		this.prodBase = prodBase;
 	}
 
 }

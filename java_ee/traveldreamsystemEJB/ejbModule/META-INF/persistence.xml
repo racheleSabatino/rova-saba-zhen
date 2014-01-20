@@ -6,7 +6,6 @@
 		<class>it.polimi.traveldreamsystem.Entities.Hotel</class>
 		<class>it.polimi.traveldreamsystem.Entities.PacchPer</class>
 		<class>it.polimi.traveldreamsystem.Entities.PacchPred</class>
-		<class>it.polimi.traveldreamsystem.Entities.ProdBase</class>
 		<class>it.polimi.traveldreamsystem.Entities.Trasporto</class>
 		<class>it.polimi.traveldreamsystem.Entities.Utente</class>
 		<properties>

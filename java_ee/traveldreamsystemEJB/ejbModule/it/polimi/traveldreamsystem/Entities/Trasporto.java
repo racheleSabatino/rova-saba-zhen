@@ -33,11 +33,6 @@ public class Trasporto implements Serializable {
 	@Column(name="DATARITORNO", nullable=false)
 	private Date dataritorno;
 
-	//bi-directional one-to-one association to ProdBase
-	@OneToOne
-	@JoinColumn(name="IDPRODBASE", nullable=false, insertable=false, updatable=false)
-	private ProdBase prodBase;
-
 	public Trasporto() {
 	}
 
@@ -79,14 +74,6 @@ public class Trasporto implements Serializable {
 
 	public void setDataritorno(Date dataritorno) {
 		this.dataritorno = dataritorno;
-	}
-
-	public ProdBase getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBase prodBase) {
-		this.prodBase = prodBase;
 	}
 
 }

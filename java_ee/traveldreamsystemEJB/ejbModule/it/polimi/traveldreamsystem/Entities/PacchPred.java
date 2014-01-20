@@ -1,5 +1,6 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.ProdBaseDTO;
 
@@ -44,7 +45,7 @@ public class PacchPred implements Serializable {
 			@JoinColumn(name="IDPRODBASE", nullable=false)		
 			}		
 		)		
-	private List<ProdBase> prodBases;
+	private List<Hotel> hotel;
 
 	public PacchPred() {
 	}
@@ -52,12 +53,12 @@ public class PacchPred implements Serializable {
 	public PacchPred(PacchPredDTO pacchetto) {
 		descrizione = pacchetto.getDescrizione();
 		idPacchPred = pacchetto.getIdPacchPred();
-		prodBases = new ArrayList<ProdBase>();
+		hotel = new ArrayList<Hotel>();
 		//da rivedere
 		for(int i=0; i<pacchetto.getProdBases().size(); i++) {
-			ProdBaseDTO prodDTO = pacchetto.getProdBases().get(i);
-			ProdBase prodotto = new ProdBase(prodDTO);
-			prodBases.add(prodotto);
+			HotelDTO hotelDTO = pacchetto.getProdBases().get(i);
+			Hotel prodotto = new Hotel(hotelDTO);
+			hotel.add(prodotto);
 			
 		}
 	}
@@ -98,22 +99,6 @@ public class PacchPred implements Serializable {
 		pacchPer.setPacchPred(null);
 
 		return pacchPer;
-	}
-
-	public List<ProdBase> getProdBases() {
-		return this.prodBases;
-	}
-
-	public void setProdBases(List<ProdBase> prodBases) {
-		this.prodBases = prodBases;
-	}
-
-	public void removeProdBase(ProdBase prodotto) {
-		for(ProdBase prod: prodBases){
-			if(prod.getIdprodbase() == prodotto.getIdprodbase()){
-				prodBases.remove(prod);
-			}
-		}
 	}
     
 }
