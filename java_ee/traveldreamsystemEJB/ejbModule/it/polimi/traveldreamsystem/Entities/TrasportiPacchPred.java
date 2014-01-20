@@ -7,36 +7,30 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-/*
- * Classe che rappresenta la composizione di un pacchetto predefinito. Un oggetto della seguente classe rappresenta 
- * un pacchetto predefinito e la lista degli hotel che lo compongono
- */
-
 @Entity
-@Table(name="HotelsPacchPred")
-public class HotelsPacchPred implements Serializable {
+@Table(name="TrasportiPacchPred")
+public class TrasportiPacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name="IDHOTEL", unique=true, nullable=false)
-	private int idHotel;
+	@Column(name="IDTRASPORTO", unique=true, nullable=false)
+	int idTrasporto;
 	
 	@Id
 	@Column(name="IDPACCHPRED", unique=true, nullable=false)
-	private int idPacchPred;
+	int idPacchPred;
 	
-	public HotelsPacchPred(int idPacchPred, int idHotel) {
+	public TrasportiPacchPred(int idPacchPred, int idTrasporto) {
 		this.idPacchPred = idPacchPred;
-		this.idHotel = idHotel;
+		this.idTrasporto = idTrasporto;
 	}
 	
-	public void setIdHotel(int idHotel) {
-		this.idHotel = idHotel;
+	public void setIdTrasporto(int idTrasporto) {
+		this.idTrasporto = idTrasporto;
 	}
 	
 	public int getIdHotel(){
-		return idHotel;
+		return idTrasporto;
 	}
 	
 	public void setIdPacchPred(int idPacchPred) {
@@ -46,8 +40,5 @@ public class HotelsPacchPred implements Serializable {
 	public int getIdPacchPred(){
 		return idPacchPred;
 	}
-	
-	
-	
 
 }
