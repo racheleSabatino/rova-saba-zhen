@@ -34,8 +34,8 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 		em.persist(newUtente);
 	}
 
-
-	private void update(UtenteDTO utente) {
+	@Override
+	public void update(UtenteDTO utente) {
 		em.merge(new Utente(utente));
 	}
 
