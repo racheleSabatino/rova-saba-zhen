@@ -1,5 +1,7 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -38,8 +40,11 @@ public class Escursione implements Serializable {
 
 	@Column(name="LUOGO", nullable=false, length=45)
 	private String luogo;
-
-	public Escursione() {
+	
+	
+	public Escursione(EscursioneDTO escursione) {
+		idprodbase = escursione.getIdprodbase();
+		
 	}
 
 	public int getIdprodbase() {

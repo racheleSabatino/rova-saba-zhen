@@ -41,18 +41,8 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		em.persist(newPacchPred);
 	}
 
-	@Override
-	public void modificaPacchPred(PacchPredDTO pacchetto) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
-	public void update(PacchPredDTO pacchetto) {
-		em.merge(new PacchPred(pacchetto));
-	}
-
-	
+	//bisogna aggiungere il controllo che nn sia associato ad un pacchetto personalizzato
 	@Override
 	public void removePacchPred(int idPacchPred) {
 		PacchPred pacchetto = findPacchPred(idPacchPred);
@@ -65,6 +55,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		
 	}
 	
+	@Override
 	public PacchPredDTO findPacchPredDTO(int idPacchPred) {
 		PacchPred pacchetto = findPacchPred(idPacchPred);
 		return this.convertToDTO(pacchetto);
@@ -94,12 +85,11 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		}
 		PacchPredDTO pacchettoDTO = new PacchPredDTO();
 		pacchettoDTO.setDescrizione(pacchetto.getDescrizione());
-		for(int i=0; i<pacchetto.getProdBases().size(); i++) {
-			ProdBase prodCorrente = pacchetto.getProdBases().get(i);
-			pacchettoDTO.addIdProdBase(prodCorrente.getIdprodbase());
-		}
+		
 		return pacchettoDTO;
 	}
+	
+	
 
 	
 	

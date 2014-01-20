@@ -54,14 +54,10 @@ public class PacchPred implements Serializable {
 		descrizione = pacchetto.getDescrizione();
 		idPacchPred = pacchetto.getIdPacchPred();
 		hotel = new ArrayList<Hotel>();
-		//da rivedere
-		for(int i=0; i<pacchetto.getProdBases().size(); i++) {
-			HotelDTO hotelDTO = pacchetto.getProdBases().get(i);
-			Hotel prodotto = new Hotel(hotelDTO);
-			hotel.add(prodotto);
+		
 			
 		}
-	}
+	
 
 	public int getIdPacchPred() {
 		return this.idPacchPred;
