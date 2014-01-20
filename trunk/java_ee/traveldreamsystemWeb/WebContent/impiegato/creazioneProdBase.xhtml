@@ -19,7 +19,7 @@
 					<p:tab title="Hotel">
 						<h:form>
 
-							<h:panelGrid columns="2" cellpadding="5">
+							<h:panelGrid columns="3" cellpadding="5" id="grid">
 								<h:outputLabel for="dataPartenza" value="Data partenza:" />
 								<p:calendar id="dataPartenza" value="#{ProdBaseBean.dataPartenza}"
 									pattern="MM/dd/yyyy HH:mm" />
@@ -61,7 +61,7 @@
 
 					<p:tab title="Escursione">
 					<h:form>
-						<h:panelGrid columns="2" cellpadding="5">
+						<h:panelGrid columns="3" cellpadding="5" id="grid">
 							<h:outputText for="dataPartenza" value="Data partenza:  " />
 							<p:calendar id="dataPartenza" value="#{ProdBaseBean.dataPartenza}"
 								pattern="MM/dd/yyyy HH:mm" />
@@ -84,7 +84,7 @@
 							<p:inputTextarea id="descrizione" value="#{ProdBaseBean.descrizione}"/>
 							<p:message for="descrizione" />
 								
-							<p:commandButton value="Submit"  />
+							<p:commandButton value="Submit" update="grid" action="#{addProdBaseBean.addEscursioneBean()}" />
 						
 							
 							
@@ -96,7 +96,7 @@
 
 					<p:tab title="Trasporto">
 					<h:form>
-						<h:panelGrid columns="2" cellpadding="5">
+						<h:panelGrid columns="3" cellpadding="5" id="grid">
 							<h:outputText for="dataPartenza" value="Data partenza:  " />
 							<p:calendar id="dataPartenza" value="#{ProdBaseBean.dataPartenza}"
 								pattern="MM/dd/yyyy HH:mm" />
