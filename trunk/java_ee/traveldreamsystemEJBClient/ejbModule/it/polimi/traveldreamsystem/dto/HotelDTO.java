@@ -1,11 +1,20 @@
 package it.polimi.traveldreamsystem.dto;
 
 
+import javax.persistence.Column;
+import javax.persistence.Lob;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class HotelDTO {
 
 	private int idprodbase;
+	
+	@NotEmpty
+	private int costo;
+
+	@NotEmpty
+	private String descrizione;
 
 	@NotEmpty
 	private String citta;
@@ -30,6 +39,23 @@ public class HotelDTO {
 		this.idprodbase = idprodbase;
 	}
 
+	public int getCosto() {
+		return this.costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+	
+	public String getDescrizione() {
+		return this.descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
+	
 	public String getCitta() {
 		return this.citta;
 	}
