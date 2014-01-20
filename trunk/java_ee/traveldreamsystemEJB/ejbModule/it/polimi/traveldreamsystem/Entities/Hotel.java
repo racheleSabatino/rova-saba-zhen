@@ -41,7 +41,12 @@ public class Hotel implements Serializable {
 	}
 
 	public Hotel(HotelDTO hotelDTO) {
-		// TODO Auto-generated constructor stub
+		idprodbase = hotelDTO.getIdprodbase();
+		costo = hotelDTO.getCosto();
+		descrizione = hotelDTO.getDescrizione();
+		citta = hotelDTO.getCitta();
+		stelle = hotelDTO.getStelle();
+		tipocamera = hotelDTO.getTipocamera();
 	}
 
 	public int getIdprodbase() {
@@ -58,6 +63,22 @@ public class Hotel implements Serializable {
 
 	public void setCitta(String citta) {
 		this.citta = citta;
+	}
+	
+	public int getCosto() {
+		return this.costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+	
+	public String getDescrizione() {
+		return this.descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public int getStelle() {
