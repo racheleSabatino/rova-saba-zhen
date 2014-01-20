@@ -82,33 +82,8 @@ public class HotelMgrBean implements HotelMgrLocal {
 	}
 
 	@Override
-	public void changeHotelCosto(int cost) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void changeDescrizione(String descrizione) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void changeCitta(String citta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void changeStelle(int stelle) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void changeTipoCamera(String tipoCamera) {
-		// TODO Auto-generated method stub
-		
+	public void update(HotelDTO hotel) {
+		em.merge(new Hotel(hotel));
 	}
 
 }
