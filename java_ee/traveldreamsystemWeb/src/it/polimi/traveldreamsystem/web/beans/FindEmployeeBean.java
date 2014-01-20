@@ -19,8 +19,18 @@ public class FindEmployeeBean {
 	private String searchedMail;
 	
 	private String removeOK;
-
 	
+	private boolean resultPanelVisible = false;
+	
+	
+	public boolean isResultPanelVisible() {
+		return resultPanelVisible;
+	}
+
+	public void setResultPanelVisible(boolean resultPanelVisible) {
+		this.resultPanelVisible = resultPanelVisible;
+	}
+
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
@@ -28,6 +38,7 @@ public class FindEmployeeBean {
 	}
 	
 	public void find() {
+		resultPanelVisible = true;
 		searchedEmployee = utenteMgrBean.findUtenteDTO(searchedMail);
 	}
 	
