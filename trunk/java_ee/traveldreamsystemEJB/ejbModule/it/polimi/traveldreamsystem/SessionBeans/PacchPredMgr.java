@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.PacchPred;
-import it.polimi.traveldreamsystem.Entities.ProdBase;
 import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;

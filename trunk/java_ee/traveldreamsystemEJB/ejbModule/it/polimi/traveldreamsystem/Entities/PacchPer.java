@@ -34,11 +34,6 @@ public class PacchPer implements Serializable {
 	@JoinColumn(name="idPacchPred", nullable=false)
 	private PacchPred pacchPred;
 
-	//bi-directional one-to-one association to ProdBase
-	@OneToOne
-	@JoinColumn(name="IDPACCHPER", nullable=false, insertable=false, updatable=false)
-	private ProdBase prodBase;
-
 	//bi-directional many-to-one association to Utente
 	@ManyToOne
 	@JoinColumn(name="Clienti", nullable=false)
@@ -85,14 +80,6 @@ public class PacchPer implements Serializable {
 
 	public void setPacchPred(PacchPred pacchPred) {
 		this.pacchPred = pacchPred;
-	}
-
-	public ProdBase getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBase prodBase) {
-		this.prodBase = prodBase;
 	}
 
 	public Utente getUtente() {

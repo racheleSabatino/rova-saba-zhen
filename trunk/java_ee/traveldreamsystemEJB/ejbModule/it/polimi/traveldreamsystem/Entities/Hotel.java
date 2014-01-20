@@ -1,6 +1,9 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.HotelDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -18,6 +21,13 @@ public class Hotel implements Serializable {
 	@Column(name="IDPRODBASE", unique=true, nullable=false)
 	private int idprodbase;
 
+	@Column(name="COSTO")
+	private int costo;
+
+	@Lob
+	@Column(name="DESCRIZIONE")
+	private String descrizione;
+
 	@Column(name="CITTA", nullable=false, length=45)
 	private String citta;
 
@@ -27,12 +37,11 @@ public class Hotel implements Serializable {
 	@Column(name="TIPOCAMERA", nullable=false, length=45)
 	private String tipocamera;
 
-	//bi-directional one-to-one association to ProdBase
-	@OneToOne
-	@JoinColumn(name="IDPRODBASE", nullable=false, insertable=false, updatable=false)
-	private ProdBase prodBase;
-
 	public Hotel() {
+	}
+
+	public Hotel(HotelDTO hotelDTO) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdprodbase() {
@@ -65,14 +74,6 @@ public class Hotel implements Serializable {
 
 	public void setTipocamera(String tipocamera) {
 		this.tipocamera = tipocamera;
-	}
-
-	public ProdBase getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBase prodBase) {
-		this.prodBase = prodBase;
 	}
 
 }
