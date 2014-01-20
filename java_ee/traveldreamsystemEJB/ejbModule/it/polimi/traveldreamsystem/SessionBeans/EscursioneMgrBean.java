@@ -1,9 +1,7 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
-import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
-import it.polimi.traveldreamsystem.dto.HotelDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,57 +35,54 @@ public class EscursioneMgrBean implements EscursioneBeanLocal {
 
     @Override
 	public List<EscursioneDTO> getAllEscursione() {
-		List<Escursione> hotels = em.createNamedQuery("Escursione.findALL", Hotel.class).getResultList();	
-		List<EscursioneDTO> escursioniDTO = new ArrayList<Escursione>();
-		for(int i=0; i<hotels.size(); i++) {
-			Hotel current = hotels.get(i);
-			hotelsDTO.add(convertToDTO(current));
+		List<Escursione> escursioni = em.createNamedQuery("Escursione.findALL", Escursione.class).getResultList();	
+		List<EscursioneDTO> escursioniDTO = new ArrayList<EscursioneDTO>();
+		for(int i=0; i<escursioni.size(); i++) {
+			Escursione current = escursioni.get(i);
+			escursioniDTO.add(convertToDTO(current));
 		}
-		return EscursioneDTO;
+		return escursioniDTO;
 	}
 		
-	public HotelDTO convertToDTO(Hotel hotel) {
-		if (hotel == null) {
+	public EscursioneDTO convertToDTO(Escursione escursione) {
+		if (escursione == null) {
 			return null;
 		}
-		HotelDTO hotelDTO = new HotelDTO();
-		hotelDTO.setCosto(hotel.getCosto());
-		hotelDTO.setDescrizione(hotel.getDescrizione());
-		hotelDTO.setIdprodbase(hotel.getIdprodbase());
-		hotelDTO.setCitta(hotel.getCitta());
-		hotelDTO.setStelle(hotel.getStelle());
-		hotelDTO.setTipocamera(hotel.getTipocamera());
-		return hotelDTO;
+		EscursioneDTO EscursioneDTO = new EscursioneDTO();
+		EscursioneDTO.setCosto(escursione.getCosto());
+		EscursioneDTO.setDescrizione(escursione.getDescrizione());
+		EscursioneDTO.setIdprodbase(escursione.getIdprodbase());
+		return EscursioneDTO;
 	}
 
 	@Override
-	public void addNewHotel(HotelDTO newHotel) {
-		Hotel hotel = new Hotel(newHotel);
-		em.persist(hotel);
+	public void addNewEscursione(EscursioneDTO newEscursione) {
+		Escursione escursione = new Escursione(newEscursione);
+		em.persist(escursione);
 	}
 
 	//bisogna aggiungere che se appartiene ad un pacchetto, nn può essere elimnato
 	@Override
-	public void removeHotel(int idHotel) {
-		Hotel hotel = findHotel(idHotel);
-		em.remove(hotel);
+	public void removeEscursione(int idEscursione) {
+		Escursione escursione = findEscursione(idEscursione);
+		em.remove(escursione);
 		
 	}
 	
-	private Hotel findHotel(int idHotel) {
-		return em.find(Hotel.class, idHotel);
+	private Escursione findEscursione(int idEscursione) {
+		return em.find(Escursione.class, idEscursione);
 		
 	}
 
 	@Override
-	public HotelDTO findHotelDTO(int idHotel) {
-		Hotel hotel = findHotel(idHotel);
-		return this.convertToDTO(hotel);
+	public EscursioneDTO findEscursioneDTO(int idEscursione) {
+		Escursione escursione = findEscursione(idEscursione);
+		return this.convertToDTO(escursione);
 	}
 
 	@Override
-	public void update(HotelDTO hotel) {
-		em.merge(new Hotel(hotel));
+	public void update(EscursioneDTO Escursione) {
+		em.merge(new Escursione(Escursione));
 	}
 
 
