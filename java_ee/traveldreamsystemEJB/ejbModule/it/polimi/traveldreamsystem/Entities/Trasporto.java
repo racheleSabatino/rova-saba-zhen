@@ -1,7 +1,12 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.TrasportoDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -18,6 +23,30 @@ public class Trasporto implements Serializable {
 	@Id
 	@Column(name="IDPRODBASE", unique=true, nullable=false)
 	private int idprodbase;
+	
+	@Column(name="COSTO")
+	private int costo;
+
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	@Lob
+	@Column(name="DESCRIZIONE")
+	private String descrizione;
+
 
 	@Column(name="CITTAPARTENZA", nullable=false, length=45)
 	private String cittapartenza;
@@ -35,6 +64,12 @@ public class Trasporto implements Serializable {
 
 	public Trasporto() {
 	}
+	
+	public Trasporto(TrasportoDTO trasporto) {
+		idprodbase = trasporto.getIdprodbase();
+		
+	}
+
 
 	public int getIdprodbase() {
 		return this.idprodbase;
