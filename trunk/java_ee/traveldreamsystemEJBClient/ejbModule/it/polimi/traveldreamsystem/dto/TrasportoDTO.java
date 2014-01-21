@@ -11,6 +11,29 @@ public class TrasportoDTO {
 
 	@NotEmpty
 	private int idprodbase;
+	
+	@NotEmpty
+	private int costo;
+	
+	@NotEmpty
+	private String descrizione;
+
+
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
 
 	@NotEmpty
 	private String cittapartenza;
