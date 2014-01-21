@@ -1,7 +1,11 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.dto.PacchPerDTO;
+
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -27,7 +31,7 @@ public class PacchPer implements Serializable {
 	private int idprodbase;
 
 	@Column(name="ListaRegali", nullable=false, length=45)
-	private String listaRegali;
+	private boolean listaRegali;
 
 	//bi-directional many-to-one association to PacchPred
 	@ManyToOne
@@ -40,6 +44,13 @@ public class PacchPer implements Serializable {
 	private Utente utente;
 
 	public PacchPer() {
+	}
+	
+	public PacchPer(PacchPerDTO pacchettoDTO) {
+		this.dataAcquisto = pacchettoDTO.getDataAcquisto();
+		this.idpacchper = pacchettoDTO.getIdpacchper();
+		this.idprodbase = pacchettoDTO.getIdprodbase();
+		this.listaRegali = pacchettoDTO.getListaRegali();
 	}
 
 	public int getIdpacchper() {
@@ -66,11 +77,11 @@ public class PacchPer implements Serializable {
 		this.idprodbase = idprodbase;
 	}
 
-	public String getListaRegali() {
+	public boolean getListaRegali() {
 		return this.listaRegali;
 	}
 
-	public void setListaRegali(String listaRegali) {
+	public void setListaRegali(boolean listaRegali) {
 		this.listaRegali = listaRegali;
 	}
 
