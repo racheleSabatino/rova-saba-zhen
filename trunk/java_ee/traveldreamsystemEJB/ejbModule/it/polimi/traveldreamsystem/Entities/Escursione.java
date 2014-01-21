@@ -17,22 +17,7 @@ import java.util.Date;
 @Table(name="escursione")
 @NamedQuery(name="Escursione.findAll", query="SELECT e FROM Escursione e")
 public class Escursione implements Serializable {
-	public int getCosto() {
-		return costo;
-	}
-
-	public void setCosto(int costo) {
-		this.costo = costo;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -70,6 +55,22 @@ public class Escursione implements Serializable {
 		this.idprodbase = idprodbase;
 	}
 
+	public int getCosto() {
+		return costo;
+	}
+
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	public Date getDatapartenza() {
 		return this.datapartenza;
 	}
