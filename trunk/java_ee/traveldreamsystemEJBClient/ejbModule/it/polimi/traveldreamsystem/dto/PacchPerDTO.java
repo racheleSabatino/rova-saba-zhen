@@ -19,17 +19,12 @@ public class PacchPerDTO {
 	private int idprodbase;
 
 	@NotEmpty
-	private String listaRegali;
+	private boolean listaRegali;
 
 	@NotEmpty
 	private PacchPredDTO pacchPred;
 
-	@NotEmpty
-	private ProdBaseDTO prodBase;
-
-	@NotEmpty
-	private UtenteDTO utente;
-
+	
 	public PacchPerDTO() {
 	}
 
@@ -57,11 +52,11 @@ public class PacchPerDTO {
 		this.idprodbase = idprodbase;
 	}
 
-	public String getListaRegali() {
+	public boolean getListaRegali() {
 		return this.listaRegali;
 	}
 
-	public void setListaRegali(String listaRegali) {
+	public void setListaRegali(boolean listaRegali) {
 		this.listaRegali = listaRegali;
 	}
 
@@ -71,22 +66,6 @@ public class PacchPerDTO {
 
 	public void setPacchPred(PacchPredDTO pacchPred) {
 		this.pacchPred = pacchPred;
-	}
-
-	public ProdBaseDTO getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBaseDTO prodBase) {
-		this.prodBase = prodBase;
-	}
-
-	public UtenteDTO getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(UtenteDTO utente) {
-		this.utente = utente;
 	}
 
 }
