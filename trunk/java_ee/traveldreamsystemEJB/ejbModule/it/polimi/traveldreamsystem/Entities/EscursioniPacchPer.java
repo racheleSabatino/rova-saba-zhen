@@ -1,12 +1,16 @@
 package it.polimi.traveldreamsystem.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "EscursioniPacchPer")
@@ -19,25 +23,17 @@ public class EscursioniPacchPer implements Serializable {
 	private Escursione escursioni;
 
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "IDPACCHPER", referencedColumnName = "IDPACCHPER")
-	private PacchPer pacchPer;
+	@Column(name="IDPACCHPER", unique=true, nullable=false)
+	private int idPacchPer;
 
-	public EscursioniPacchPer() {}
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="DATAACQUISTO", nullable=false)
+	private Date dataAcquisto;
 
-	public Escursione getEscursioni() {
-		return escursioni;
-	}
+	@Column(name="LISTAREGALI", nullable=false, length=45)
+	private boolean listaRegali;
 
-	public void setEscursioni(Escursione escursioni) {
-		this.escursioni = escursioni;
-	}
-
-	public PacchPer getPacchPer() {
-		return pacchPer;
-	}
-
-	public void setPacchPer(PacchPer pacchPer) {
-		this.pacchPer = pacchPer;
+	public EscursioniPacchPer() {
+		
 	}
 }

@@ -9,33 +9,37 @@
 
 <h:body>
 
-	<ui:composition template="../template/common.xhtml">
+	<ui:composition template="/template/common.xhtml">
 
 		<ui:define name="content">
 
 			<p:panel>
-
 				<h:form>
-					<p:panel header="Ricerca impiegato">
+					<p:panel header="Ricerca Hotel">
 						<h:panelGrid columns="3" id="regGrid">
-							<h:outputLabel for="mail">Email:</h:outputLabel>
-							<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
-							<p:message for="mail" />
+							<h:outputLabel for="id">id:</h:outputLabel>
+							<p:inputText id="id" value="#{findHotelBean.searchedId}" />
+							<p:message for="id" />
 							<h:outputText />
 							<p:commandButton value="Cerca" update="resultGrid"
-								actionListener="#{findEmployeeBean.find}" />
+								actionListener="#{findHotelBean.find}" />
 						</h:panelGrid>
 
 						<p:outputPanel id="resultGrid">
-							<p:outputPanel rendered="#{findEmployeeBean.resultPanelVisible}">
+							<p:outputPanel
+								rendered="#{findHotelBean.resultPanelVisible}">
 								<h:panelGrid columns="1">
 
 									<p:outputLabel
-										value="Cognome impiegato: #{findEmployeeBean.searchedEmployee.cognome}" />
+										value="Citta: #{findHotelBean.searchedHotel.citta}" />
 									<p:outputLabel
-										value="Nome impiegato: #{findEmployeeBean.searchedEmployee.nome}" />
+										value="Stelle: #{findHotelBean.searchedHotel.stelle}" />
 									<p:outputLabel
-										value="Mail impiegato: #{findEmployeeBean.searchedEmployee.mail}" />
+										value="Costo: #{findHotelBean.searchedHotel.costo}" />
+									<p:outputLabel
+										value="tipoCamera: #{findHotelBean.searchedHotel.tipoCamera}" />
+									<p:outputLabel
+										value="Descrizione: #{findHotelBean.searchedHotel.descrizione}" />
 
 								</h:panelGrid>
 
@@ -44,18 +48,15 @@
 
 
 					</p:panel>
-					<p:commandButton value="Elimina Impiegato"
-						actionListener="#{findEmployeeBean.remove}" />
+					<p:commandButton value="Elimina Hotel"
+						actionListener="#{findHotelBean.remove}" />
 
 				</h:form>
 			</p:panel>
-
-
 
 		</ui:define>
 
 	</ui:composition>
 
 </h:body>
-
 </html>

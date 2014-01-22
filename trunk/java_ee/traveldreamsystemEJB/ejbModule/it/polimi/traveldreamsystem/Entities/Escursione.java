@@ -22,7 +22,7 @@ public class Escursione implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "IDPRODBASE", unique = true, nullable = false)
-	private int idprodbase;
+	private int idProdBase;
 	
 	@Lob
 	@Column(name = "DESCRIZIONE")
@@ -34,7 +34,7 @@ public class Escursione implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATARITORNO", nullable = false)
-	private Date dataritorno;
+	private Date dataRitorno;
 
 	@Column(name = "COSTO")
 	private int costo;
@@ -49,17 +49,17 @@ public class Escursione implements Serializable {
 		this.descrizione = escursione.getDescrizione();
 		this.costo = escursione.getCosto();
 		this.dataPartenza = escursione.getDataPartenza();
-		this.dataritorno = escursione.getDataRitorno();
+		this.dataRitorno = escursione.getDataRitorno();
 		this.costo = escursione.getCosto();
 		this.luogo = escursione.getLuogo();
 	}
 
-	public int getIdprodbase() {
-		return this.idprodbase;
+	public int getIdProdBase() {
+		return this.idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
 	public int getCosto() {
@@ -86,12 +86,12 @@ public class Escursione implements Serializable {
 		this.dataPartenza = dataPartenza;
 	}
 
-	public Date getDataritorno() {
-		return this.dataritorno;
+	public Date getDataRitorno() {
+		return this.dataRitorno;
 	}
 
-	public void setDataritorno(Date dataritorno) {
-		this.dataritorno = dataritorno;
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
 	}
 
 	public String getLuogo() {
