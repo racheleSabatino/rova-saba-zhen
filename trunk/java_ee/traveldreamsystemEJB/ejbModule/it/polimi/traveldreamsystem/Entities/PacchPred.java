@@ -26,11 +26,6 @@ public class PacchPred implements Serializable {
 	@Column(name="DESCRIZIONE")
 	private String descrizione;
 
-	//bi-directional many-to-one association to PacchPer
-	@OneToMany(mappedBy="pacchPred")
-	private List<PacchPer> pacchPers;
-
-
 	public PacchPred() {
 	}
 	
