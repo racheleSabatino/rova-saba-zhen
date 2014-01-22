@@ -35,7 +35,7 @@ public class PacchPer implements Serializable {
 	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
 	private PacchPred pacchPred;
 
-	@ManyToOne
+	@OneToMany
 	@JoinColumn(name = "IDHOTEL", referencedColumnName = "IDPRODBASE")
 	private List<Hotel> hotelsPacchPer;
 	
