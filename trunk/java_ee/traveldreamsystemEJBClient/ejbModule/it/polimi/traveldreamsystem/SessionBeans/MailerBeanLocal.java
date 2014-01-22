@@ -6,5 +6,7 @@ import javax.ejb.Local;
 public interface MailerBeanLocal {
 
 	void sendMessage(String receiverEmailID, String emailSubject, String emailBody, int i);
+	
+	boolean successInvio();
 
 }
