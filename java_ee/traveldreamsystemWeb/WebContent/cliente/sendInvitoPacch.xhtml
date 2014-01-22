@@ -16,15 +16,15 @@
 			<h:form>
 				<p:panel header="Invito ad un amico ad unirsi al tuo pacchetto">
 					<h:panelGrid columns="3" id="regGrid">
-					<p:inputText value="Inserisci la e-mail di un amico che secondo te è interessato ad unirsi al tuo pacchetto"/> 
+					<p:outputLabel value="Inserisci la e-mail di un amico che secondo te è interessato ad unirsi al tuo pacchetto"/> 
 						<h:outputLabel for="mail">Email:</h:outputLabel>
-						<p:inputText id="mail" value="#{mailerManagedBean.mail}" />
+						<p:inputText id="mail" value="#{mailerManagedBean.receiverEmailID}" />
 						<p:message for="mail" />
 				
 					</h:panelGrid>
-					<p:commandButton ajax="false" value="InviaMail" update="regGrid"
+					<p:commandButton value="InviaMail" update="regGrid"
 						action="#{mailerManagedBean.sendMessage}" />
-
+					<p:inputText value= "#{mailerManagedBean.success}" readonly="true" />
 				</p:panel>
 			</h:form>
 

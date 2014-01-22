@@ -79,6 +79,8 @@ public class MailerBean implements MailerBeanLocal {
     			mex.printStackTrace();
     			success = false;
     	}	
+    	
+
  	}
     	
     public boolean successInvio() {
