@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -34,6 +35,10 @@ public class PacchPer implements Serializable {
 	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
 	private PacchPred pacchPred;
 
+	@ManyToOne
+	@JoinColumn(name = "IDHOTEL", referencedColumnName = "IDPRODBASE")
+	private List<Hotel> hotelsPacchPer;
+	
 	public PacchPer() {}
 
 	public PacchPer(PacchPerDTO newPacchetto) {
