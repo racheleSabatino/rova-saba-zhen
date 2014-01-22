@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -23,10 +22,6 @@ public class PacchPer implements Serializable {
 	@Id
 	@Column(name="IDPACCHPER", unique=true, nullable=false)
 	private int idPacchPer;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATAACQUISTO", nullable=false)
-	private Date dataAcquisto;
 
 	@Column(name="LISTAREGALI", nullable=false, length=45)
 	private boolean listaRegali;
@@ -51,7 +46,10 @@ public class PacchPer implements Serializable {
 	public PacchPer() {}
 
 	public PacchPer(PacchPerDTO newPacchetto) {
-		// TODO Auto-generated constructor stub
+		this.idPacchPer = newPacchetto.getIdpacchper();
+		this.listaRegali = newPacchetto.getListaRegali();
+		this.pacchPred.setIdPacchPred(newPacchetto.getIdpacchper());
+		this.cliente.setMail(newPacchetto.getMailCliente());
 	}
 
 	public int getIdPacchPer() {
@@ -60,14 +58,6 @@ public class PacchPer implements Serializable {
 
 	public void setIdPacchPer(int idPacchPer) {
 		this.idPacchPer = idPacchPer;
-	}
-
-	public Date getDataAcquisto() {
-		return dataAcquisto;
-	}
-
-	public void setDataAcquisto(Date dataAcquisto) {
-		this.dataAcquisto = dataAcquisto;
 	}
 
 	public boolean isListaRegali() {
@@ -94,7 +84,7 @@ public class PacchPer implements Serializable {
 		this.hotelsPacchPer = hotelsPacchPer;
 	}
 
-	public List<EscursioniPacchPer> getEscursionePacchPer() {
+	public List<EscursioniPacchPer> getEscursioniPacchPer() {
 		return escursionePacchPer;
 	}
 
