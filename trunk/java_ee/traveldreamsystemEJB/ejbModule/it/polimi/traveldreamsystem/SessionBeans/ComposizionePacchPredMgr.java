@@ -7,7 +7,6 @@ import it.polimi.traveldreamsystem.Entities.HotelsPacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -17,7 +16,6 @@ import javax.persistence.PersistenceContext;
  * Session Bean implementation class ComposizionePacchPredMgr
  */
 @Stateless
-@LocalBean
 public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	
 	@PersistenceContext
@@ -33,8 +31,8 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		em.persist(composizione);
     }
 
-   //Metodo che permette di eliminare un hotel da un pacchetto predefinito. Si elimina cioè una tupla dalla relativa 
-   //tabella HotelsPacchPred. Bisogna però aggiungere il controllo che quell'hotel non sia presente
+   //Metodo che permette di eliminare un hotel da un pacchetto predefinito. Si elimina cioe' una tupla dalla relativa 
+   //tabella HotelsPacchPred. Bisogna pero' aggiungere il controllo che quell'hotel non sia presente
     //in un pacchetto personalizzato associato a quel pacchetto predefinito
 	@Override
 	public int removeHotelToPacch(int idPacchPred, int idHotel) {

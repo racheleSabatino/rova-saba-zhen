@@ -7,7 +7,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 @Local
-public interface TrasportoBeanLocal {
+public interface TrasportoMgrBeanLocal {
 
 	void addNewTrasporto(TrasportoDTO newTrasporto);
 

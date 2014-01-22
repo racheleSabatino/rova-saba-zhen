@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 
-public class TrasportoMgrBean implements TrasportoBeanLocal{
+public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
     /**
      * Default constructor. 
      */
@@ -48,7 +48,7 @@ public class TrasportoMgrBean implements TrasportoBeanLocal{
 		TrasportoDTO TrasportoDTO = new TrasportoDTO();
 		TrasportoDTO.setCosto(trasporto.getCosto());
 		TrasportoDTO.setDescrizione(trasporto.getDescrizione());
-		TrasportoDTO.setIdprodbase(trasporto.getIdprodbase());
+		TrasportoDTO.setIdProdBase(trasporto.getIdProdBase());
 		return TrasportoDTO;
 	}
 
@@ -58,7 +58,7 @@ public class TrasportoMgrBean implements TrasportoBeanLocal{
 		em.persist(trasporto);
 	}
 
-	//bisogna aggiungere che se appartiene ad un pacchetto, nn può essere elimnato
+	//bisogna aggiungere che se appartiene ad un pacchetto, nn puo' essere elimnato
 	@Override
 	public void removeTrasporto(int idTrasporto) {
 		Trasporto trasporto = findTrasporto(idTrasporto);

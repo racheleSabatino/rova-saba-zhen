@@ -1,6 +1,5 @@
 package it.polimi.traveldreamsystem.Entities;
 
-import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import java.io.Serializable;
@@ -9,22 +8,22 @@ import javax.persistence.*;
 
 import java.util.Date;
 
-
 /**
  * The persistent class for the Trasporto database table.
  * 
  */
 @Entity
-@Table(name="trasporto")
-@NamedQuery(name="Trasporto.findAll", query="SELECT t FROM Trasporto t")
+@Table(name = "trasporto")
+@NamedQuery(name = "Trasporto.findAll", query = "SELECT t FROM Trasporto t")
 public class Trasporto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="IDPRODBASE", unique=true, nullable=false)
-	private int idprodbase;
-	
-	@Column(name="COSTO")
+	@GeneratedValue
+	@Column(name = "IDPRODBASE", unique = true, nullable = false)
+	private int idProdBase;
+
+	@Column(name = "COSTO")
 	private int costo;
 
 	public int getCosto() {
@@ -44,71 +43,72 @@ public class Trasporto implements Serializable {
 	}
 
 	@Lob
-	@Column(name="DESCRIZIONE")
+	@Column(name = "DESCRIZIONE")
 	private String descrizione;
 
+	@Column(name = "CITTAPARTENZA", nullable = false, length = 45)
+	private String cittaPartenza;
 
-	@Column(name="CITTAPARTENZA", nullable=false, length=45)
-	private String cittapartenza;
-
-	@Column(name="CITTARITORNO", nullable=false, length=45)
-	private String cittaritorno;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATAPARTENZA", nullable=false)
-	private Date datapartenza;
+	@Column(name = "CITTARITORNO", nullable = false, length = 45)
+	private String cittaRitorno;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATARITORNO", nullable=false)
-	private Date dataritorno;
+	@Column(name = "DATAPARTENZA", nullable = false)
+	private Date dataPartenza;
 
-	public Trasporto() {
-	}
-	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATARITORNO", nullable = false)
+	private Date dataRitorno;
+
+	public Trasporto() {}
+
 	public Trasporto(TrasportoDTO trasporto) {
-		idprodbase = trasporto.getIdprodbase();
-		
+		this.dataPartenza = trasporto.getDataPartenza();
+		this.dataRitorno = trasporto.getDataRitorno();
+		this.cittaPartenza = trasporto.getCittaPartenza();
+		this.cittaRitorno = trasporto.getCittaRitorno();
+		this.costo = trasporto.getCosto();
+		this.descrizione = trasporto.getDescrizione();
 	}
 
-
-	public int getIdprodbase() {
-		return this.idprodbase;
+	public int getIdProdBase() {
+		return this.idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
-	public String getCittapartenza() {
-		return this.cittapartenza;
+	public String getCittaPartenza() {
+		return this.cittaPartenza;
 	}
 
-	public void setCittapartenza(String cittapartenza) {
-		this.cittapartenza = cittapartenza;
+	public void setCittaPartenza(String cittaPartenza) {
+		this.cittaPartenza = cittaPartenza;
 	}
 
-	public String getCittaritorno() {
-		return this.cittaritorno;
+	public String getCittaRitorno() {
+		return this.cittaRitorno;
 	}
 
-	public void setCittaritorno(String cittaritorno) {
-		this.cittaritorno = cittaritorno;
+	public void setCittaRitorno(String cittaRitorno) {
+		this.cittaRitorno = cittaRitorno;
 	}
 
-	public Date getDatapartenza() {
-		return this.datapartenza;
+	public Date getDataPartenza() {
+		return this.dataPartenza;
 	}
 
-	public void setDatapartenza(Date datapartenza) {
-		this.datapartenza = datapartenza;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 
-	public Date getDataritorno() {
-		return this.dataritorno;
+	public Date getDataRitorno() {
+		return this.dataRitorno;
 	}
 
-	public void setDataritorno(Date dataritorno) {
-		this.dataritorno = dataritorno;
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
 	}
 
 }

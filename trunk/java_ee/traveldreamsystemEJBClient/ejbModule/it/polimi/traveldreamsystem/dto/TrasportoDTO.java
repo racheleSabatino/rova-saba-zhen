@@ -10,9 +10,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class TrasportoDTO {
 
 	@NotEmpty
-	private int idprodbase;
+	private int idProdBase;
 	
-	@NotEmpty
 	private int costo;
 	
 	@NotEmpty
@@ -36,18 +35,16 @@ public class TrasportoDTO {
 	}
 
 	@NotEmpty
-	private String cittapartenza;
+	private String cittaPartenza;
 
 	@NotEmpty
-	private String cittaritorno;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@NotEmpty
-	private Date datapartenza;
+	private String cittaRitorno;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotEmpty
-	private Date dataritorno;
+	private Date dataPartenza;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataRitorno;
 
 	@NotEmpty
 	private ProdBaseDTO prodBase;
@@ -55,44 +52,44 @@ public class TrasportoDTO {
 	public TrasportoDTO() {
 	}
 
-	public int getIdprodbase() {
-		return this.idprodbase;
+	public int getIdProdBase() {
+		return this.idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
-	public String getCittapartenza() {
-		return this.cittapartenza;
+	public String getCittaPartenza() {
+		return this.cittaPartenza;
 	}
 
-	public void setCittapartenza(String cittapartenza) {
-		this.cittapartenza = cittapartenza;
+	public void setCittaPartenza(String cittaPartenza) {
+		this.cittaPartenza = cittaPartenza;
 	}
 
-	public String getCittaritorno() {
-		return this.cittaritorno;
+	public String getCittaRitorno() {
+		return this.cittaRitorno;
 	}
 
-	public void setCittaritorno(String cittaritorno) {
-		this.cittaritorno = cittaritorno;
+	public void setCittaRitorno(String cittaRitorno) {
+		this.cittaRitorno = cittaRitorno;
 	}
 
-	public Date getDatapartenza() {
-		return this.datapartenza;
+	public Date getDataPartenza() {
+		return this.dataPartenza;
 	}
 
-	public void setDatapartenza(Date datapartenza) {
-		this.datapartenza = datapartenza;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 
-	public Date getDataritorno() {
-		return this.dataritorno;
+	public Date getDataRitorno() {
+		return this.dataRitorno;
 	}
 
-	public void setDataritorno(Date dataritorno) {
-		this.dataritorno = dataritorno;
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
 	}
 
 	public ProdBaseDTO getProdBase() {

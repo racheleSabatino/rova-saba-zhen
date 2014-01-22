@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Escursione">
+				<h:form>
+					<h:panelGrid columns="3" cellpadding="5" id="grid">
+						<h:outputText for="dataPartenza" value="Data partenza:  " />
+						<p:calendar id="dataPartenza"
+							value="#{escursioneBean.escursione.dataPartenza}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataPartenza" />
+
+						<h:outputText for="dataRitorno" value="Data ritorno:  " />
+						<p:calendar id="dataRitorno"
+							value="#{escursioneBean.escursione.dataRitorno}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataRitorno" />
+
+						<h:outputText for="costo" value="Costo:" />
+						<p:inputText id="costo" value="#{escursioneBean.escursione.costo}" />
+						<p:message for="costo" />
+
+						<h:outputText for="luogo" value="Luogo:" />
+						<p:inputText id="luogo" value="#{escursioneBean.escursione.luogo}" />
+						<p:message for="luogo" />
+
+						<h:outputText for="descrizione" value="Descrizione:" />
+						<p:inputTextarea id="descrizione"
+							value="#{escursioneBean.escursione.descrizione}" />
+						<p:message for="descrizione" />
+
+						<p:commandButton value="Submit" update="grid"
+							action="#{escursioneBean.addEscursione}" />
+
+					</h:panelGrid>
+				</h:form>
+
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

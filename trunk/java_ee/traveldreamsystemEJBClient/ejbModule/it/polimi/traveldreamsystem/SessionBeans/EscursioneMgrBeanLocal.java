@@ -7,7 +7,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 @Local
-public interface EscursioneBeanLocal {
+public interface EscursioneMgrBeanLocal {
 
 	void addNewEscursione(EscursioneDTO newEscursione);
 

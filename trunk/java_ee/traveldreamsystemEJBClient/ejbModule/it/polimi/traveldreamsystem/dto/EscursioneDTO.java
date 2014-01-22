@@ -11,82 +11,67 @@ public class EscursioneDTO {
 	
 	@NotEmpty
 	private int idprodbase;
-	
-	@NotEmpty
-	private int costo;
-	
-	@NotEmpty
-	private String descrizione;
 
-	@NotEmpty
-	private Date datapartenza;
+	private int costo;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotEmpty
-	private Date dataritorno;
+	private Date dataPartenza;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataRitorno;
+
+	@NotEmpty
 	private String luogo;
-
-	@NotEmpty
-	private ProdBaseDTO prodBase;
-
-	public EscursioneDTO() {
-	}
+	
+	private String descrizione;
 
 	public int getIdprodbase() {
-		return this.idprodbase;
+		return idprodbase;
 	}
 
 	public void setIdprodbase(int idprodbase) {
 		this.idprodbase = idprodbase;
 	}
-	
+
 	public int getCosto() {
-		return this.idprodbase;
+		return costo;
 	}
 
 	public void setCosto(int costo) {
 		this.costo = costo;
 	}
-	
-	public String getDescrizione() {
-		return this.descrizione;
+
+	public Date getDataPartenza() {
+		return dataPartenza;
 	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 
-	public Date getDatapartenza() {
-		return this.datapartenza;
+	public Date getDataRitorno() {
+		return dataRitorno;
 	}
 
-	public void setDatapartenza(Date datapartenza) {
-		this.datapartenza = datapartenza;
-	}
-
-	public Date getDataritorno() {
-		return this.dataritorno;
-	}
-
-	public void setDataritorno(Date dataritorno) {
-		this.dataritorno = dataritorno;
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
 	}
 
 	public String getLuogo() {
-		return this.luogo;
+		return luogo;
 	}
 
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
 	}
 
-	public ProdBaseDTO getProdBase() {
-		return this.prodBase;
+	public String getDescrizione() {
+		return descrizione;
 	}
 
-	public void setProdBase(ProdBaseDTO prodBase) {
-		this.prodBase = prodBase;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
+
 
 }
