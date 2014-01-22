@@ -21,64 +21,43 @@ public class PacchPer implements Serializable {
 
 	@Id
 	@Column(name="IDPACCHPER", unique=true, nullable=false)
-	private int idpacchper;
+	private int idPacchPer;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DataAcquisto", nullable=false)
+	@Column(name="DATAACQUISTO", nullable=false)
 	private Date dataAcquisto;
 
-	@Column(name="IDPRODBASE", nullable=false)
-	private int idprodbase;
-
-	@Column(name="ListaRegali", nullable=false, length=45)
+	@Column(name="LISTAREGALI", nullable=false, length=45)
 	private boolean listaRegali;
-
-	//bi-directional many-to-one association to PacchPred
+	
 	@ManyToOne
-	@JoinColumn(name="idPacchPred", nullable=false)
+	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
 	private PacchPred pacchPred;
 
-	//bi-directional many-to-one association to Utente
-	@ManyToOne
-	@JoinColumn(name="Clienti", nullable=false)
-	private Utente utente;
+	public PacchPer() {}
 
-	public PacchPer() {
-	}
-	
-	public PacchPer(PacchPerDTO pacchettoDTO) {
-		this.dataAcquisto = pacchettoDTO.getDataAcquisto();
-		this.idpacchper = pacchettoDTO.getIdpacchper();
-		this.idprodbase = pacchettoDTO.getIdprodbase();
-		this.listaRegali = pacchettoDTO.getListaRegali();
+	public PacchPer(PacchPerDTO newPacchetto) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public int getIdpacchper() {
-		return this.idpacchper;
+	public int getIdPacchPer() {
+		return idPacchPer;
 	}
 
-	public void setIdpacchper(int idpacchper) {
-		this.idpacchper = idpacchper;
+	public void setIdPacchPer(int idPacchPer) {
+		this.idPacchPer = idPacchPer;
 	}
 
 	public Date getDataAcquisto() {
-		return this.dataAcquisto;
+		return dataAcquisto;
 	}
 
 	public void setDataAcquisto(Date dataAcquisto) {
 		this.dataAcquisto = dataAcquisto;
 	}
 
-	public int getIdprodbase() {
-		return this.idprodbase;
-	}
-
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
-	}
-
-	public boolean getListaRegali() {
-		return this.listaRegali;
+	public boolean isListaRegali() {
+		return listaRegali;
 	}
 
 	public void setListaRegali(boolean listaRegali) {
@@ -86,19 +65,11 @@ public class PacchPer implements Serializable {
 	}
 
 	public PacchPred getPacchPred() {
-		return this.pacchPred;
+		return pacchPred;
 	}
 
 	public void setPacchPred(PacchPred pacchPred) {
 		this.pacchPred = pacchPred;
 	}
-
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
+	
 }

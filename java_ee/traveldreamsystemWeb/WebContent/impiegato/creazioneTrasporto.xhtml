@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Trasporto">
+				<h:form>
+					<h:panelGrid columns="3" cellpadding="5" id="grid">
+							<h:outputText for="dataPartenza" value="Data partenza:  " />
+							<p:calendar id="dataPartenza" value="#{trasportoBean.trasporto.dataPartenza}"
+								pattern="MM/dd/yyyy HH:mm" />
+							<p:message for="dataPartenza" />
+								
+							<h:outputText for="dataRitorno" value="Data ritorno:  " />
+							<p:calendar id="dataRitorno" value="#{trasportoBean.trasporto.dataRitorno}"
+								pattern="MM/dd/yyyy HH:mm" />
+							<p:message for="dataPartenza" />
+								
+							<h:outputText for="cittaPartenza" value="Città partenza:" />
+							<p:inputText id="cittaPartenza" value="#{trasportoBean.trasporto.cittaPartenza}" />
+							<p:message for="cittaPartenza" />
+								
+							<h:outputText for="cittaRitorno" value="Città ritorno:" />
+							<p:inputText id="cittaRitorno" value="#{trasportoBean.trasporto.cittaRitorno}" />
+							<p:message for="cittaRitorno" />
+								
+							
+							<h:outputText for="costo" value="Costo:" />
+							<p:inputText id="costo" value="#{trasportoBean.trasporto.costo}"/>
+							<p:message for="costo" />
+								
+							
+							<h:outputText for="descrizione" value ="Descrizione:"/>							
+							<p:inputTextarea id="descrizione" value="#{trasportoBean.trasporto.descrizione}"/>
+							<p:message for="descrizione" />
+								
+							
+						<p:commandButton value="Submit" update="grid"
+							action="#{trasportoBean.addTrasporto}" />
+						</h:panelGrid>
+				</h:form>
+
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

@@ -7,7 +7,7 @@ import it.polimi.traveldreamsystem.dto.HotelDTO;
 import javax.ejb.Local;
 
 @Local
-public interface HotelMgrLocal {
+public interface HotelMgrBeanLocal {
 
 	void addNewHotel(HotelDTO newHotel);
 

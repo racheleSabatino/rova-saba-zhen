@@ -3,9 +3,15 @@
 	<persistence-unit name="traveldreamsystemEJB">
 		<jta-data-source>jdbc/traveldreamsystem_db</jta-data-source>
 		<class>it.polimi.traveldreamsystem.Entities.Escursione</class>
+		<class>it.polimi.traveldreamsystem.Entities.EscursioniPacchPer</class>
+		<class>it.polimi.traveldreamsystem.Entities.EscursioniPacchPred</class>
 		<class>it.polimi.traveldreamsystem.Entities.Hotel</class>
+		<class>it.polimi.traveldreamsystem.Entities.HotelsPacchPer</class>
+		<class>it.polimi.traveldreamsystem.Entities.HotelsPacchPred</class>
 		<class>it.polimi.traveldreamsystem.Entities.PacchPer</class>
 		<class>it.polimi.traveldreamsystem.Entities.PacchPred</class>
+		<class>it.polimi.traveldreamsystem.Entities.TrasportiPacchPer</class>
+		<class>it.polimi.traveldreamsystem.Entities.TrasportiPacchPred</class>
 		<class>it.polimi.traveldreamsystem.Entities.Trasporto</class>
 		<class>it.polimi.traveldreamsystem.Entities.Utente</class>
 		<properties>

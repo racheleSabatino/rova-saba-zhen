@@ -1,9 +1,7 @@
 package it.polimi.traveldreamsystem.Entities;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,63 +9,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TrasportiPacchPred")
+@Table(name = "TrasportiPacchPred")
 public class TrasportiPacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@Column(name="IDTRASPORTO", unique=true, nullable=false)
-	int idTrasporto;
-	
-	@Id
-	@Column(name="IDPACCHPRED", unique=true, nullable=false)
-	int idPacchPred;
-	
-	//bi-directional many-to-one association to PacchPred
-	@ManyToOne
-	@JoinColumn(name="idPacchPred", nullable=false)
-	private List<PacchPred> pacchPreds;
 
-//bi-directional many-to-one association to Trasporto
+	@Id
 	@ManyToOne
-	@JoinColumn(name="idprodbase", nullable=false)
-	private List<Trasporto> trasporti;
-	
+	@JoinColumn(name = "IDTRASPORTO", referencedColumnName = "IDPRODBASE")
+	private Trasporto trasporto;
+
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
+	private PacchPred pacchPred;
+
+	public TrasportiPacchPred() {
+	}
+
 	public TrasportiPacchPred(int idPacchPred, int idTrasporto) {
-		this.idPacchPred = idPacchPred;
-		this.idTrasporto = idTrasporto;
-	}
-	
-	public void setIdTrasporto(int idTrasporto) {
-		this.idTrasporto = idTrasporto;
-	}
-	
-	public int getIdTrasporto(){
-		return idTrasporto;
-	}
-	
-	public void setIdPacchPred(int idPacchPred) {
-		this.idPacchPred = idPacchPred;
-	}
-	
-	public int getIdPacchPred(){
-		return idPacchPred;
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setPacchPreds(List<PacchPred> pacchPreds) {
-		this.pacchPreds = pacchPreds;
+	public Trasporto getTrasporto() {
+		return trasporto;
 	}
-	
-	public List<PacchPred> getPacchPred(){
-		return pacchPreds;
+
+	public void setTrasporto(Trasporto trasporto) {
+		this.trasporto = trasporto;
 	}
-	
-	public void setTrasporti(List<Trasporto> trasporti) {
-		this.trasporti = trasporti;
+
+	public PacchPred getPacchPred() {
+		return pacchPred;
 	}
-	
-	public List<Trasporto> getTrasporti(){
-		return trasporti;
+
+	public void setPacchPred(PacchPred pacchPred) {
+		this.pacchPred = pacchPred;
 	}
-	
+
 }

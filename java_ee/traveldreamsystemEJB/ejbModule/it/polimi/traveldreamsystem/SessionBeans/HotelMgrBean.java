@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class HotelMgrBean implements HotelMgrLocal {
+public class HotelMgrBean implements HotelMgrBeanLocal {
 
 	@PersistenceContext
 	protected EntityManager em;
@@ -52,7 +52,7 @@ public class HotelMgrBean implements HotelMgrLocal {
 		hotelDTO.setIdprodbase(hotel.getIdprodbase());
 		hotelDTO.setCitta(hotel.getCitta());
 		hotelDTO.setStelle(hotel.getStelle());
-		hotelDTO.setTipocamera(hotel.getTipocamera());
+		hotelDTO.setTipoCamera(hotel.getTipoCamera());
 		return hotelDTO;
 	}
 
@@ -62,7 +62,7 @@ public class HotelMgrBean implements HotelMgrLocal {
 		em.persist(hotel);
 	}
 
-	//bisogna aggiungere che se appartiene ad un pacchetto, nn può essere elimnato
+	//bisogna aggiungere che se appartiene ad un pacchetto, nn puo' essere elimnato
 	@Override
 	public void removeHotel(int idHotel) {
 		Hotel hotel = findHotel(idHotel);

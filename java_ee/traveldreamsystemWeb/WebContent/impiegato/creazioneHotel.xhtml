@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Hotel">
+				<h:form>
+					<h:panelGrid columns="3" cellpadding="5" id="grid">
+					<!-- 
+								<h:outputLabel for="dataPartenza" value="Data partenza:" />
+								<p:calendar id="dataPartenza" value="#{hotelBean.hotel.dataPartenza}"
+									pattern="MM/dd/yyyy HH:mm" />
+								<p:message for="dataPartenza" />
+									
+								<h:outputText for="dataRitorno" value="Data ritorno:" />
+								<p:calendar id="dataRitorno" value="#{prodBaseBean.escursione.dataRitorno}"
+									pattern="MM/dd/yyyy HH:mm" />
+								<p:message for="dataRitorno" />
+								 -->
+								<h:outputText for="citta" value="Città:" />
+								<p:inputText id="citta" value="#{hotelBean.hotel.citta}" />
+								<p:message for="citta" />
+								
+								<h:outputText for="stelle" value="Stelle" />
+								<p:rating id="stelle" value="#{hotelBean.hotel.stelle}" cancel="false" />
+								<p:message for="stelle" />
+								
+								<h:outputText for="tipoCamera" value="Tipo camera" />
+								<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}">
+									<f:validateDoubleRange minimum="1" maximum="10" />
+								</p:inputText>
+								<p:message for="tipoCamera" />
+								
+								<h:outputText for="costo" value="Costo:" />
+								<p:inputText id="costo" value="#{hotelBean.hotel.costo}"/>
+								<p:message for="costo" />
+								
+								<h:outputText for="descrizione" value ="Descrizione:"/>
+								<p:inputTextarea id="descrizione" value="#{hotelBean.hotel.descrizione}"/>
+								<p:message for="descrizione" />
+								
+						<p:commandButton value="Submit" update="grid"
+							action="#{hotelBean.addHotel}" />
+
+							</h:panelGrid>
+				</h:form>
+
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

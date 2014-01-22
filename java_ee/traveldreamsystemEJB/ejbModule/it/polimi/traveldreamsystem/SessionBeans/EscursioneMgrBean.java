@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class EscursioneMgrBean implements EscursioneBeanLocal {
+public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
 
     /**
      * Default constructor. 
@@ -61,7 +61,7 @@ public class EscursioneMgrBean implements EscursioneBeanLocal {
 		em.persist(escursione);
 	}
 
-	//bisogna aggiungere che se appartiene ad un pacchetto, nn può essere elimnato
+	//bisogna aggiungere che se appartiene ad un pacchetto, nn puo' essere eliminato
 	@Override
 	public void removeEscursione(int idEscursione) {
 		Escursione escursione = findEscursione(idEscursione);

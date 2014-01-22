@@ -9,57 +9,50 @@ import javax.persistence.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Date;
-import java.util.List;
-
 
 /**
  * The persistent class for the Utente database table.
  * 
  */
 @Entity
-@Table(name="utente")
-@NamedQuery(name="Utente.findAll", query="SELECT u FROM Utente u")
+@Table(name = "utente")
+@NamedQuery(name = "Utente.findAll", query = "SELECT u FROM Utente u")
 public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String _CLIENTE = "CLIENTE";
 	public static final String _IMPIEGATO = "IMPIEGATO";
 	public static final String _AMMINISTRATORE = "AMMINISTRATORE";
 
 	@Id
-	@Column(name="MAIL", unique=true, nullable=false, length=45)
+	@Column(name = "MAIL", unique = true, nullable = false, length = 45)
 	private String mail;
 
-	@Column(name="COGNOME", nullable=false, length=45)
+	@Column(name = "COGNOME", nullable = false, length = 45)
 	private String cognome;
 
-	@Column(name="NOME", nullable=false, length=45)
+	@Column(name = "NOME", nullable = false, length = 45)
 	private String nome;
 
-	@Column(name="PASSWORD", nullable=false, length=64)
+	@Column(name = "PASSWORD", nullable = false, length = 64)
 	private String password;
 
-	@Column(name="TIPOUTENTE", nullable=false, length=45)
+	@Column(name = "TIPOUTENTE", nullable = false, length = 45)
 	private String tipoutente;
-	
+
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
-	@Column(name="REGISTEREDON", nullable=false)
-    private Date registeredOn;
+	@Column(name = "REGISTEREDON", nullable = false)
+	private Date registeredOn;
 
-	//bi-directional many-to-one association to PacchPer
-	@OneToMany(mappedBy="utente")
-	private List<PacchPer> pacchPers;
+	public Utente() {}
 
-	public Utente() {
-	}
-
-	public Utente(UtenteDTO utente) {   
-	    this.mail         = utente.getMail();
-	    this.nome  		  = utente.getNome();
-	    this.cognome      = utente.getCognome();       
-	    this.password     = DigestUtils.sha256Hex(utente.getPassword());
-	    this.tipoutente	  = utente.getTipoUtente();
-	    this.registeredOn = new Date();
+	public Utente(UtenteDTO utente) {
+		this.mail = utente.getMail();
+		this.nome = utente.getNome();
+		this.cognome = utente.getCognome();
+		this.password = DigestUtils.sha256Hex(utente.getPassword());
+		this.tipoutente = utente.getTipoUtente();
+		this.registeredOn = new Date();
 	}
 
 	public String getMail() {
@@ -100,28 +93,6 @@ public class Utente implements Serializable {
 
 	public void setTipoUtente(String tipoutente) {
 		this.tipoutente = tipoutente;
-	}
-
-	public List<PacchPer> getPacchPers() {
-		return this.pacchPers;
-	}
-
-	public void setPacchPers(List<PacchPer> pacchPers) {
-		this.pacchPers = pacchPers;
-	}
-
-	public PacchPer addPacchPer(PacchPer pacchPer) {
-		getPacchPers().add(pacchPer);
-		pacchPer.setUtente(this);
-
-		return pacchPer;
-	}
-
-	public PacchPer removePacchPer(PacchPer pacchPer) {
-		getPacchPers().remove(pacchPer);
-		pacchPer.setUtente(null);
-
-		return pacchPer;
 	}
 
 }

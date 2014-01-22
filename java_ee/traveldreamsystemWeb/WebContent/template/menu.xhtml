@@ -22,36 +22,44 @@
 				<p:submenu rendered="#{userBean.isRoleCliente}" label="Cliente"
 					icon="ui-icon-person"
 					action="/cliente/homeCliente?faces-redirect=true&amp;cliente=true">
-					<p:menuitem value="crea nuovo pacchetto"
+					<p:menuitem value="crea pacchetto"
 						action="/impiegatocreazionePacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo prodotto base"
+					<p:menuitem value="crea prodotto base"
 						action="/impiegatocreazioneProdBase?faces-redirect=true" />
 					<p:menuitem value="modifica pacchetto"
 						action="/impiegatomodificaPacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo pacchetto"
+					<p:menuitem value="crea pacchetto"
 						action="/impiegatocreazionePacchPred?faces-redirect=true" />
 				</p:submenu>
 
 				<p:submenu rendered="#{userBean.isRoleImpiegato}" label="Impiegato"
 					icon="ui-icon-document">
-					<p:menuitem value="crea nuovo pacchetto"
+					<p:menuitem value="crea pacchetto"
 						action="/impiegato/creazionePacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo prodotto base"
-						action="/impiegato/creazioneProdBase?faces-redirect=true" />
+
+					<p:submenu label="crea prodotto base">
+						<p:menuitem value="crea hotel"
+							action="/impiegato/creazioneHotel?faces-redirect=true" />
+						<p:menuitem value="crea escursione"
+							action="/impiegato/creazioneEscursione?faces-redirect=true" />
+						<p:menuitem value="crea trasporto"
+							action="/impiegato/creazioneTrasporto?faces-redirect=true" />
+					</p:submenu>
+					
 					<p:menuitem value="modifica pacchetto"
 						action="/impiegato/modificaPacchPred?faces-redirect=true" />
-					<p:menuitem value="crea nuovo pacchetto"
+					<p:menuitem value="crea pacchetto"
 						action="/impiegato/creazionePacchPred?faces-redirect=true" />
 				</p:submenu>
 
 				<p:submenu rendered="#{userBean.isRoleAmministratore}"
 					label="Amministrazione" icon="ui-icon-wrench">
-					<p:menuitem value="Aggiungi nuovo impiegato"
+					<p:menuitem value="Aggiungi impiegato"
 						action="/amministratore/addEmployee?faces-redirect=true" />
-			
-				<p:menuitem value="Cerca impiegato"
+
+					<p:menuitem value="Cerca impiegato"
 						action="/amministratore/findEmployee?faces-redirect=true" />
-			</p:submenu>
+				</p:submenu>
 				<p:menuitem rendered="#{not empty request.remoteUser}" type="button"
 					value="Logout" icon="ui-icon-extlink" action="#{logoutBean.logout}" />
 				<p:menuitem rendered="#{empty request.remoteUser}" type="button"

@@ -8,43 +8,49 @@ import javax.persistence.*;
 
 import java.util.Date;
 
-
 /**
  * The persistent class for the Escursione database table.
  * 
  */
 @Entity
-@Table(name="escursione")
-@NamedQuery(name="Escursione.findAll", query="SELECT e FROM Escursione e")
+@Table(name = "escursione")
+@NamedQuery(name = "Escursione.findAll", query = "SELECT e FROM Escursione e")
 public class Escursione implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="IDPRODBASE", unique=true, nullable=false)
+	@GeneratedValue
+	@Column(name = "IDPRODBASE", unique = true, nullable = false)
 	private int idprodbase;
-
-	@Column(name="COSTO")
-	private int costo;
-
+	
 	@Lob
-	@Column(name="DESCRIZIONE")
+	@Column(name = "DESCRIZIONE")
 	private String descrizione;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATAPARTENZA", nullable=false)
-	private Date datapartenza;
+	@Column(name = "DATAPARTENZA", nullable = false)
+	private Date dataPartenza;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATARITORNO", nullable=false)
+	@Column(name = "DATARITORNO", nullable = false)
 	private Date dataritorno;
 
-	@Column(name="LUOGO", nullable=false, length=45)
+	@Column(name = "COSTO")
+	private int costo;
+
+	@Column(name = "LUOGO", nullable = false, length = 45)
 	private String luogo;
-		
+
+	public Escursione() {}
+
 	public Escursione(EscursioneDTO escursione) {
-		idprodbase = escursione.getIdprodbase();
-		
+		this.descrizione = escursione.getDescrizione();
+		this.costo = escursione.getCosto();
+		this.dataPartenza = escursione.getDataPartenza();
+		this.dataritorno = escursione.getDataRitorno();
+		this.costo = escursione.getCosto();
+		this.luogo = escursione.getLuogo();
 	}
 
 	public int getIdprodbase() {
@@ -70,13 +76,13 @@ public class Escursione implements Serializable {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-	
-	public Date getDatapartenza() {
-		return this.datapartenza;
+
+	public Date getDataPartenza() {
+		return this.dataPartenza;
 	}
 
-	public void setDatapartenza(Date datapartenza) {
-		this.datapartenza = datapartenza;
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
 	}
 
 	public Date getDataritorno() {
