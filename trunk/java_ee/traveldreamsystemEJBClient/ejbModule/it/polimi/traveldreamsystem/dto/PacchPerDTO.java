@@ -1,55 +1,26 @@
 package it.polimi.traveldreamsystem.dto;
 
-import java.util.Date;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 public class PacchPerDTO {
 
-	private int idpacchper;
+	
+	private int idPacchPer;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@NotEmpty
-	private Date dataAcquisto;
-
-	@NotEmpty
-	private int idprodbase;
-
-	@NotEmpty
 	private boolean listaRegali;
-
-	@NotEmpty
-	private PacchPredDTO pacchPred;
-
+	
+	private int idPacchPred;
+	
+	private String mailCliente;
 	
 	public PacchPerDTO() {
 	}
 
 	public int getIdpacchper() {
-		return this.idpacchper;
+		return this.idPacchPer;
 	}
 
 	public void setIdpacchper(int idpacchper) {
-		this.idpacchper = idpacchper;
-	}
-
-	public Date getDataAcquisto() {
-		return this.dataAcquisto;
-	}
-
-	public void setDataAcquisto(Date dataAcquisto) {
-		this.dataAcquisto = dataAcquisto;
-	}
-
-	public int getIdprodbase() {
-		return this.idprodbase;
-	}
-
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+		this.idPacchPer = idpacchper;
 	}
 
 	public boolean getListaRegali() {
@@ -60,12 +31,22 @@ public class PacchPerDTO {
 		this.listaRegali = listaRegali;
 	}
 
-	public PacchPredDTO getPacchPred() {
-		return this.pacchPred;
+	public int getIdPacchPred() {
+		return idPacchPred;
 	}
 
-	public void setPacchPred(PacchPredDTO pacchPred) {
-		this.pacchPred = pacchPred;
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
 	}
+
+	public String getMailCliente() {
+		return mailCliente;
+	}
+
+	public void setMailCliente(String mailCliente) {
+		this.mailCliente = mailCliente;
+	}
+
+	
 
 }
