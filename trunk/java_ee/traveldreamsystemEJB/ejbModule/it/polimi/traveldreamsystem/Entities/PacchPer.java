@@ -15,7 +15,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="pacchper")
+@Table(name="pacchPer")
 @NamedQuery(name="PacchPer.findAll", query="SELECT p FROM PacchPer p")
 public class PacchPer implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -35,9 +35,18 @@ public class PacchPer implements Serializable {
 	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
 	private PacchPred pacchPred;
 
-	@OneToMany
-	@JoinColumn(name = "IDHOTEL", referencedColumnName = "IDPRODBASE")
-	private List<Hotel> hotelsPacchPer;
+    @OneToMany(mappedBy="pacchPer")
+    private List<HotelsPacchPer> hotelsPacchPer;
+
+    @OneToMany(mappedBy="pacchPer")
+    private List<EscursioniPacchPer> escursionePacchPer;
+
+    @OneToMany(mappedBy="pacchPer")
+    private List<TrasportiPacchPer> trasportiPacchPer;
+    
+	@ManyToOne
+	@JoinColumn(name = "IDCliente", referencedColumnName = "MAIL")
+    private Utente cliente;
 	
 	public PacchPer() {}
 
@@ -75,6 +84,42 @@ public class PacchPer implements Serializable {
 
 	public void setPacchPred(PacchPred pacchPred) {
 		this.pacchPred = pacchPred;
+	}
+
+	public List<HotelsPacchPer> getHotelsPacchPer() {
+		return hotelsPacchPer;
+	}
+
+	public void setHotelsPacchPer(List<HotelsPacchPer> hotelsPacchPer) {
+		this.hotelsPacchPer = hotelsPacchPer;
+	}
+
+	public List<EscursioniPacchPer> getEscursionePacchPer() {
+		return escursionePacchPer;
+	}
+
+	public void setEscursionePacchPer(List<EscursioniPacchPer> escursionePacchPer) {
+		this.escursionePacchPer = escursionePacchPer;
+	}
+
+	public List<TrasportiPacchPer> getTrasportiPacchPer() {
+		return trasportiPacchPer;
+	}
+
+	public void setTrasportiPacchPer(List<TrasportiPacchPer> trasportiPacchPer) {
+		this.trasportiPacchPer = trasportiPacchPer;
+	}
+
+	public Utente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Utente cliente) {
+		this.cliente = cliente;
+	}
+	
+	public void getEsempio() {
+		getHotelsPacchPer().get(1).getHotel().getCitta();
 	}
 	
 }
