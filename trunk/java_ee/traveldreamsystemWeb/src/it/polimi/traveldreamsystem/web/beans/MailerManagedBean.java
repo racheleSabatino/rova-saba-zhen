@@ -24,8 +24,9 @@ public class MailerManagedBean {
 		success = false;
 	}
 	
+	//cambiare
 	public void sendMessage() {
-		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody);
+		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody, 10);
 	}
 
 	public void setReceiverMail(String receiverMail){
