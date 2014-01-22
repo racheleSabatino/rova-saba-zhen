@@ -42,6 +42,7 @@ public class Escursione implements Serializable {
 	@Column(name = "LUOGO", nullable = false, length = 45)
 	private String luogo;
 
+
 	public Escursione() {}
 
 	public Escursione(EscursioneDTO escursione) {

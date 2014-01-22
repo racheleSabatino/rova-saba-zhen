@@ -4,7 +4,10 @@ package it.polimi.traveldreamsystem.SessionBeans;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldreamsystem.Entities.EscursioniPacchPred;
+import it.polimi.traveldreamsystem.Entities.HotelsPacchPred;
 import it.polimi.traveldreamsystem.Entities.PacchPred;
+import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.annotation.Resource;
@@ -13,6 +16,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Session Bean implementation class AddPacchPredMgr
@@ -38,12 +42,33 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		em.persist(newPacchPred);
 	}
 
-
-	//bisogna aggiungere il controllo che nn sia associato ad un pacchetto personalizzato
+//bisogna aggiungere il controllo che non deve essere associato ad un pacchetto personalizzato che non 
+//è ancora stato comprato
 	@Override
 	public void removePacchPred(int idPacchPred) {
 		PacchPred pacchetto = findPacchPred(idPacchPred);
 		em.remove(pacchetto);
+		List<HotelsPacchPred> hotels;
+		Query q1 = em.createQuery("SELECT h FROM HotelsPacchPred WHERE h.idPacchPred= :idPacchPred");
+		q1.setParameter("idPacchPred", idPacchPred);
+		hotels = (List<HotelsPacchPred>) q1.getResultList();
+		for(int i=0; i< hotels.size(); i++) {
+			em.remove(hotels.get(i));
+		}
+		List<TrasportiPacchPred> trasporti;
+		Query q2 = em.createQuery("SELECT h FROM TrasportiPacchPred WHERE h.idPacchPred= :idPacchPred");
+		q2.setParameter("idPacchPred", idPacchPred);
+		trasporti = (List<TrasportiPacchPred>) q2.getResultList();
+		for(int i=0; i< trasporti.size(); i++) {
+			em.remove(trasporti.get(i));
+		}
+		List<EscursioniPacchPred> escursioni;
+		Query q3 = em.createQuery("SELECT h FROM EscursioniPacchPred WHERE h.idPacchPred= :idPacchPred");
+		q3.setParameter("idPacchPred", idPacchPred);
+		escursioni = (List<EscursioniPacchPred>) q3.getResultList();
+		for(int i=0; i< escursioni.size(); i++) {
+			em.remove(escursioni.get(i));
+		}
 	}
 
 	

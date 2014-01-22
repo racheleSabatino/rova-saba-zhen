@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.Entities;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,12 +26,20 @@ public class PacchPred implements Serializable {
 	@Column(name="DESCRIZIONE")
 	private String descrizione;
 
-	public PacchPred() {}
+	//bi-directional many-to-one association to PacchPer
+	@OneToMany(mappedBy="pacchPred")
+	private List<PacchPer> pacchPers;
 
+
+	public PacchPred() {
+	}
+	
 	public PacchPred(PacchPredDTO pacchetto) {
 		descrizione = pacchetto.getDescrizione();
 		idPacchPred = pacchetto.getIdPacchPred();
-	}
+
+		}
+	
 
 	public int getIdPacchPred() {
 		return idPacchPred;
