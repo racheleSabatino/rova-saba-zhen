@@ -3,38 +3,35 @@ package it.polimi.traveldreamsystem.Entities;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.*;
-
 
 /**
  * The persistent class for the PacchPred database table.
  * 
  */
 @Entity
-@Table(name="PacchPred")
-@NamedQuery(name="PacchPred.findAll", query="SELECT p FROM PacchPred p")
+@Table(name = "PacchPred")
+@NamedQuery(name = "PacchPred.findAll", query = "SELECT p FROM PacchPred p")
 public class PacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="IDPACCHPRED", unique=true, nullable=false)
+	@Column(name = "IDPACCHPRED", unique = true, nullable = false)
 	private int idPacchPred;
 
 	@Lob
-	@Column(name="DESCRIZIONE")
+	@Column(name = "DESCRIZIONE")
 	private String descrizione;
 
 	public PacchPred() {
 	}
-	
+
 	public PacchPred(PacchPredDTO pacchetto) {
 		descrizione = pacchetto.getDescrizione();
 		idPacchPred = pacchetto.getIdPacchPred();
 
-		}
-	
+	}
 
 	public int getIdPacchPred() {
 		return idPacchPred;
@@ -51,5 +48,5 @@ public class PacchPred implements Serializable {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-    
+
 }
