@@ -3,17 +3,11 @@ package it.polimi.traveldreamsystem.SessionBeans;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.mail.Authenticator;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -36,6 +30,8 @@ public class MailerBean implements MailerBeanLocal {
     String emailSubject = null;
     String emailBody = null;
     
+    boolean success;
+    
  public class STMPAuthenticator  extends javax.mail.Authenticator {
     	
     	public PasswordAuthentication getPasswordAuthentication() {
@@ -43,10 +39,12 @@ public class MailerBean implements MailerBeanLocal {
     	}
     }
     
- 	public MailerBean() {}
+ 	public MailerBean() {
+ 			success = false; 
+ 	}
  
  	@Asynchronous
-    public void sendMessage(String receiverEmailID, String emailSubject, String emailBody) {
+    public void sendMessage(String receiverEmailID, String emailSubject, String emailBody, int idPacchPer) {
     	this.receiverEmailID=receiverEmailID;
     	this.emailSubject=emailSubject;
     	this.emailBody=emailBody;
@@ -61,23 +59,31 @@ public class MailerBean implements MailerBeanLocal {
     	props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
     	props.put("mail.smtp.socketFactory.fallback", "false");
 
-    	SecurityManager security = System.getSecurityManager();
     	Authenticator auth = new STMPAuthenticator();
     	try
     	{
     		Session session = Session.getInstance(props, auth);
     		MimeMessage msg = new MimeMessage(session);
-    		msg.setText(emailBody);
+    		DateFormat dateFormatter = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
+    		Date timeStamp = new Date();
+    		String body = "Messaggio inviato il " + dateFormatter + "\n" + emailBody ;
+    		msg.setSentDate(timeStamp);
+    		msg.setText(body);
     		msg.setSubject(emailSubject);
     		msg.setFrom(new InternetAddress(senderEmailID));
     		msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmailID));
     		Transport.send(msg);
+    		success = true;
     	}
     	catch (Exception mex) {
     			mex.printStackTrace();
+    			success = false;
     	}	
+ 	}
+    	
+    public boolean successInvio() {
+    	return success;
     }
-
-    
+   
    
 }
