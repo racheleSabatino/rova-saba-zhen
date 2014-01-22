@@ -49,9 +49,12 @@ public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
 			return null;
 		}
 		EscursioneDTO EscursioneDTO = new EscursioneDTO();
+		EscursioneDTO.setDataPartenza(escursione.getDataPartenza());
+		EscursioneDTO.setDataRitorno(escursione.getDataRitorno());
 		EscursioneDTO.setCosto(escursione.getCosto());
 		EscursioneDTO.setDescrizione(escursione.getDescrizione());
-		EscursioneDTO.setIdprodbase(escursione.getIdprodbase());
+		EscursioneDTO.setIdprodbase(escursione.getIdProdBase());
+		EscursioneDTO.setLuogo(escursione.getLuogo());
 		return EscursioneDTO;
 	}
 

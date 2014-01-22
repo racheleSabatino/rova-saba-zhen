@@ -49,6 +49,10 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
 		TrasportoDTO.setCosto(trasporto.getCosto());
 		TrasportoDTO.setDescrizione(trasporto.getDescrizione());
 		TrasportoDTO.setIdProdBase(trasporto.getIdProdBase());
+		TrasportoDTO.setCittaPartenza(trasporto.getCittaPartenza());
+		TrasportoDTO.setCittaRitorno(trasporto.getCittaRitorno());
+		TrasportoDTO.setDataPartenza(trasporto.getDataPartenza());
+		TrasportoDTO.setDataRitorno(trasporto.getDataRitorno());
 		return TrasportoDTO;
 	}
 

@@ -16,8 +16,8 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/homePage</form-login-page>
-			<form-error-page>/403LoginError</form-error-page>
+			<form-login-page>/homePage.xhtml</form-login-page>
+			<form-error-page>/403LoginError.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
 	<security-constraint>
