@@ -1,6 +1,7 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
@@ -125,6 +126,18 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	return null;
     }
     
+    private boolean isPacchAcquistato(PacchPer pacchetto){
+    	boolean isAcquistato = false;
+    	Query q = em.createQuery("SELECT p.dataAcquisto FROM HOTELSPACCHPER h WHERE h.pacchPer.idPacchPer =: id");
+    	q.setParameter("", pacchetto.getIdPacchPer());
+    	List<Date> dateAcquisto = (List<Date>) q.getResultList();
+    	for(int i=0; i < dateAcquisto.size(); i++) {
+    		if(dateAcquisto.get(i) != null) {
+    			
+    		}
+    	}
+    	return false;
+    }
     
     
     //ritorna il costo totale del pacchetto personalizzato
