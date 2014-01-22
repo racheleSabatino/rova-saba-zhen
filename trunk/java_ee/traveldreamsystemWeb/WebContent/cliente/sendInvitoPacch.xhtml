@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<h:form>
+				<p:panel header="Invito ad un amico ad unirsi al tuo pacchetto">
+					<h:panelGrid columns="3" id="regGrid">
+					<p:inputText value="Inserisci la e-mail di un amico che secondo te è interessato ad unirsi al tuo pacchetto"/> 
+						<h:outputLabel for="mail">Email:</h:outputLabel>
+						<p:inputText id="mail" value="#{mailerManagedBean.mail}" />
+						<p:message for="mail" />
+				
+					</h:panelGrid>
+					<p:commandButton ajax="false" value="InviaMail" update="regGrid"
+						action="#{registrazioneBean.sendMessage}" />
+
+				</p:panel>
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
