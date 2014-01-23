@@ -161,6 +161,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     
     
     //ritorna il costo totale del pacchetto personalizzato
+    @Override
     public int viewCostoTotale(int idPacchPer){
     	Query q = em.createQuery("SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo)"
     			+ "FROM PACCHPER p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t"
@@ -202,7 +203,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
      * 			-4 se non esiste l'id dell'hotel
      * 		    0 se l'acquisto si conclude con successo
      */
-    
+    @Override
     public int acquistaHotelListaRegali(int idHotel, int idPacchPer, String mailAcquirente){
     	if(!existIdPacchPer(idPacchPer)) {
     		return -1;
@@ -229,7 +230,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     }
     
     //controlla che un utente non acquista un prodotto di una propria lista regali
-    public boolean check(String mailAcquirente, int idPacchPer){
+    private boolean check(String mailAcquirente, int idPacchPer){
     	Query q = em.createQuery("SELECT p FROM PACCHPER p JOIN p.utente u "
     			+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
     	q.setParameter("idPacchPer", idPacchPer);
@@ -282,7 +283,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     }
     
     
-   
+   @Override
     public int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente){
     	if(!existIdPacchPer(idPacchPer)) {
     		return -1;
@@ -308,6 +309,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	return 0;
     }
     
+   @Override
     public int acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente){
     	if(!existIdPacchPer(idPacchPer)) {
     		return -1;

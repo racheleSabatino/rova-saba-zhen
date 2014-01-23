@@ -19,4 +19,13 @@ public interface PacchPerMgrLocal {
 
 	List<PacchPerDTO> getClientePacchPerDTOACquistati(String mail);
 
+	int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente);
+
+	int acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente);
+
+	int acquistaHotelListaRegali(int idHotel, int idPacchPer,
+			String mailAcquirente);
+
+	int viewCostoTotale(int idPacchPer);
+
 }
