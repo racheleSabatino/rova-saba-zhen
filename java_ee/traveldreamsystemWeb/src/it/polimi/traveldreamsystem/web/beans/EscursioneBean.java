@@ -8,9 +8,12 @@ import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
+import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
@@ -29,7 +32,16 @@ public class EscursioneBean {
 	public EscursioneBean() {
 	}
 
-    public void onEdit(RowEditEvent event) {/*
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+        
+        if(newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    	
+    	/*
         FacesMessage msg = new FacesMessage("Car Edited", ((Car) event.getObject()).getModel());
 
         FacesContext.getCurrentInstance().addMessage(null, msg);*/
