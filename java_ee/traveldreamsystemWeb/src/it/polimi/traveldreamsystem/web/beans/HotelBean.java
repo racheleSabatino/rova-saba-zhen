@@ -24,6 +24,7 @@ public class HotelBean {
 
 	public void addHotel(){
 		hotelMgrBean.addNewHotel(hotel);
+		
 	}
 
 	public HotelDTO getHotel() {
