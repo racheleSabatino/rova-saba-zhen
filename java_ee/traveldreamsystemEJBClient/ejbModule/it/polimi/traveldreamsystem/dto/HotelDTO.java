@@ -1,5 +1,7 @@
 package it.polimi.traveldreamsystem.dto;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class HotelDTO {
@@ -21,6 +23,28 @@ public class HotelDTO {
 
 	@NotEmpty
 	private ProdBaseDTO prodBase;
+	
+	@NotEmpty
+	private Date dataPartenza;
+	
+	@NotEmpty
+	private Date dataRitorno;
+
+	public Date getDataPartenza() {
+		return dataPartenza;
+	}
+
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
+	}
+
+	public Date getDataRitorno() {
+		return dataRitorno;
+	}
+
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
+	}
 
 	public HotelDTO() {
 	}

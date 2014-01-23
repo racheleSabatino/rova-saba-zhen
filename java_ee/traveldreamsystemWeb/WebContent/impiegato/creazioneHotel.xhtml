@@ -13,10 +13,9 @@
 
 		<ui:define name="content">
 
-			<p:panel header="Hotel">
+			<p:panel header="Inserisci i dati per creare un nuovo prodotto base hotel">
 				<h:form>
 					<h:panelGrid columns="3" cellpadding="5" id="grid">
-					<!-- 
 								<h:outputLabel for="dataPartenza" value="Data partenza:" />
 								<p:calendar id="dataPartenza" value="#{hotelBean.hotel.dataPartenza}"
 									pattern="MM/dd/yyyy HH:mm" />
@@ -26,10 +25,13 @@
 								<p:calendar id="dataRitorno" value="#{prodBaseBean.escursione.dataRitorno}"
 									pattern="MM/dd/yyyy HH:mm" />
 								<p:message for="dataRitorno" />
-								 -->
 								<h:outputText for="citta" value="Città:" />
 								<p:inputText id="citta" value="#{hotelBean.hotel.citta}" />
 								<p:message for="citta" />
+							</h:panelGrid>
+							<br/>
+							
+							<h:panelGrid columns="3" cellpadding="5" id="grid2">
 								
 								<h:outputText for="stelle" value="Stelle" />
 								<p:rating id="stelle" value="#{hotelBean.hotel.stelle}" cancel="false" />
@@ -39,14 +41,17 @@
 								<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}">
 									<f:validateDoubleRange minimum="1" maximum="10" />
 								</p:inputText>
-								<p:message for="tipoCamera" />
-								
+								<p:message for="tipoCamera" />								
 								<h:outputText for="costo" value="Costo:" />
 								<p:inputText id="costo" value="#{hotelBean.hotel.costo}"/>
 								<p:message for="costo" />
+							</h:panelGrid>
+							<br/>
+							
+							<h:panelGrid columns="3" cellpadding="5" id="grid3">
 								
-								<h:outputText for="descrizione" value ="Descrizione:"/>
-								<p:inputTextarea id="descrizione" value="#{hotelBean.hotel.descrizione}"/>
+								<h:outputText for="descrizione" value ="Descrizione:       "/>
+								<p:inputTextarea  id="descrizione" value="#{hotelBean.hotel.descrizione}"/>
 								<p:message for="descrizione" />
 								
 						<p:commandButton value="Submit" update="grid"

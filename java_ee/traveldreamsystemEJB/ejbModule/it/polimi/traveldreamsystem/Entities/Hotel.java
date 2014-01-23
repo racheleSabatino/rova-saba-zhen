@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.Entities;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -36,6 +37,32 @@ public class Hotel implements Serializable {
 
 	@Column(name = "TIpoCamERA", nullable = false, length = 45)
 	private String tipoCamera;
+	
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATAPARTENZA", nullable = false)
+	private Date dataPartenza;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DATARITORNO", nullable = false)
+	private Date dataRitorno;
+
+
+	public Date getDataPartenza() {
+		return dataPartenza;
+	}
+
+	public void setDataPartenza(Date dataPartenza) {
+		this.dataPartenza = dataPartenza;
+	}
+
+	public Date getDataRitorno() {
+		return dataRitorno;
+	}
+
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
+	}
 
 	public Hotel() {}
 
@@ -45,6 +72,8 @@ public class Hotel implements Serializable {
 		citta = hotelDTO.getCitta();
 		stelle = hotelDTO.getStelle();
 		tipoCamera = hotelDTO.getTipoCamera();
+		dataPartenza = hotelDTO.getDataPartenza();
+		dataRitorno = hotelDTO.getDataRitorno();
 	}
 
 	public int getIdprodbase() {
