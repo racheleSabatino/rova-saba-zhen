@@ -199,6 +199,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
      * 		   -2 se la mail dell'acquirente non corrisponde alla mail di un cliente in database
      * 		   -3 se la mail dell'acquirente corrisponde al cliente proprietario della lista regali, cioè
      * 			un cliente non può acquistare un prodotto dalla sua lista regali
+     * 			-4 se non esiste l'id dell'hotel
      * 		    0 se l'acquisto si conclude con successo
      */
     
@@ -212,11 +213,18 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	if(!check(mailAcquirente, idPacchPer)) {
     		return -3;
     	}
-    	Query q = em.createQuery("SELECT H FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c"
+    	if(!existIdHotel(idHotel)){
+    		return -4;
+    	}
+    	Query q = em.createQuery("SELECT h FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.hotel o"
     			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
-    			+ "AND p.listaRegali = TRUE");
+    			+ "AND p.listaRegali = TRUE AND o.idprodbase = :idHotel");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);
+    	q.setParameter("idHotel", idHotel);
+    	HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
+    	Calendar calendar = Calendar.getInstance();
+    	h.setDataAcquisto(calendar.getTime());
     	return 0;
     }
     
@@ -247,6 +255,33 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	}
     	return true;	
     }
+    
+    
+    private boolean existIdHotel(int idHotel) {
+    	Hotel hotel = em.find(Hotel.class, idHotel);
+    	if(hotel == null) {
+    		return false;
+    	}
+    	return true;	
+    }
+    
+    private boolean existIdEscursione(int idEscursione) {
+    	Escursione escursione = em.find(Escursione.class, idEscursione);
+    	if(escursione == null) {
+    		return false;
+    	}
+    	return true;	
+    }
+    
+    private boolean existIdTrasporto(int idTrasporto) {
+    	Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
+    	if(trasporto == null) {
+    		return false;
+    	}
+    	return true;	
+    }
+    
+    
    
     public int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente){
     	if(!existIdPacchPer(idPacchPer)) {
@@ -258,11 +293,43 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	if(!check(mailAcquirente, idPacchPer)) {
     		return -3;
     	}
-    	Query q = em.createQuery("SELECT H FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c"
+    	if(!existIdEscursione(idEscursione)){
+    		return -4;
+    	}
+    	Query q = em.createQuery("SELECT h FROM ESCURSIONIPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e"
     			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
-    			+ "AND p.listaRegali = TRUE");
+    			+ "AND p.listaRegali = TRUE AND e.idprodbase = :idEscursione");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);
+    	q.setParameter("idEscursione", idEscursione);
+    	HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
+    	Calendar calendar = Calendar.getInstance();
+    	h.setDataAcquisto(calendar.getTime());
+    	return 0;
+    }
+    
+    public int acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente){
+    	if(!existIdPacchPer(idPacchPer)) {
+    		return -1;
+    	}
+    	if(!existMailUtente(mailAcquirente)){
+    		return -2;
+    	}
+    	if(!check(mailAcquirente, idPacchPer)) {
+    		return -3;
+    	}
+    	if(!existIdTrasporto(idTrasporto)){
+    		return -4;
+    	}
+    	Query q = em.createQuery("SELECT h FROM TRASPORTIPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o"
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    			+ "AND p.listaRegali = TRUE AND o.idprodbase =: idTrasporto");
+    	q.setParameter("idPacchPer", idPacchPer);
+    	q.setParameter("mailAcquirente", mailAcquirente);
+    	q.setParameter("idTrasporto", idTrasporto);
+    	TrasportiPacchPer h = (TrasportiPacchPer) q.getSingleResult();
+    	Calendar calendar = Calendar.getInstance();
+    	h.setDataAcquisto(calendar.getTime());
     	return 0;
     }
 }
