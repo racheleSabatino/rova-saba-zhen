@@ -41,7 +41,7 @@ public class Utente implements Serializable {
 	@Column(name = "TIPOUTENTE", nullable = false, length = 45)
 	private String tipoutente;
 
-    @OneToMany(mappedBy="Utente")
+    @OneToMany(mappedBy = "cliente")
     private List<PacchPer> pacchPer;
 
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -97,14 +97,6 @@ public class Utente implements Serializable {
 
 	public void setTipoUtente(String tipoutente) {
 		this.tipoutente = tipoutente;
-	}
-
-	public List<PacchPer> getPacchPer() {
-		return pacchPer;
-	}
-
-	public void setPacchPer(List<PacchPer> pacchPer) {
-		this.pacchPer = pacchPer;
 	}
 
 }

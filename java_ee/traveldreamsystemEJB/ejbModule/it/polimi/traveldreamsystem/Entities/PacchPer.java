@@ -40,7 +40,7 @@ public class PacchPer implements Serializable {
     private List<TrasportiPacchPer> trasportiPacchPer;
     
 	@ManyToOne
-	@JoinColumn(name = "IDCliente", referencedColumnName = "MAIL")
+	@JoinColumn(name = "IDCLIENTE", referencedColumnName = "MAIL")
     private Utente cliente;
 	
 	public PacchPer() {}
