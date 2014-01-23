@@ -43,7 +43,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 	}
 
 //bisogna aggiungere il controllo che non deve essere associato ad un pacchetto personalizzato che non 
-//è ancora stato comprato
+//ancora stato comprato
 	@Override
 	public void removePacchPred(int idPacchPred) {
 		PacchPred pacchetto = findPacchPred(idPacchPred);
@@ -85,7 +85,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 
 	public List<PacchPredDTO> getAllPacchPred() {
 		List<PacchPred> pacchetti = new ArrayList<PacchPred>();
-		pacchetti = em.createNamedQuery("PacchPred.findALL", PacchPred.class).getResultList();
+		pacchetti = em.createNamedQuery("PacchPred.findAll", PacchPred.class).getResultList();
 		List<PacchPredDTO> pacchettiDTO = new ArrayList<PacchPredDTO>();
 		for(int i=0; i<pacchetti.size(); i++) {
 			PacchPredDTO pacchettoDTO = convertToDTO(pacchetti.get(i));
@@ -100,7 +100,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		}
 		PacchPredDTO pacchettoDTO = new PacchPredDTO();
 		pacchettoDTO.setDescrizione(pacchetto.getDescrizione());
-		pacchettoDTO.setIdPacchpred(pacchetto.getIdPacchPred());
+		pacchettoDTO.setIdPacchPred(pacchetto.getIdPacchPred());
 		return pacchettoDTO;
 	}
 

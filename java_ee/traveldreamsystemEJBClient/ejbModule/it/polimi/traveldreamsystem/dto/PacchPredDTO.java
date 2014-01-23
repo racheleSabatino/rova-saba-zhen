@@ -1,11 +1,7 @@
 package it.polimi.traveldreamsystem.dto;
 
-
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,50 +16,53 @@ public class PacchPredDTO {
 	@NotEmpty
 	private String descrizione;
 
-	private List<PacchPerDTO> pacchPers;
-	
-	@NotEmpty
-	private List<ProdBaseDTO> prodBases;
-	
-	
+	private List<HotelDTO> hotel;
+	private List<EscursioneDTO> escursione;
+	private List<TrasportoDTO> trasporto;
 	
 	public PacchPredDTO () {
-		
-	}
-	
-	public int getIdPacchPred() {
-		return this.idPacchPred;
+		hotel = new ArrayList<HotelDTO>();
+		escursione = new ArrayList<EscursioneDTO>();
+		trasporto = new ArrayList<TrasportoDTO>();
 	}
 
-	public void setIdPacchpred(int idPacchPred) {
+	public int getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(int idPacchPred) {
 		this.idPacchPred = idPacchPred;
 	}
 
 	public String getDescrizione() {
-		return this.descrizione;
+		return descrizione;
 	}
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 
-	public List<PacchPerDTO> getPacchPers() {
-		return this.pacchPers;
+	public List<HotelDTO> getHotel() {
+		return hotel;
 	}
 
-	public void setPacchPers(List<PacchPerDTO> pacchPers) {
-		this.pacchPers = pacchPers;
+	public void setHotel(List<HotelDTO> hotel) {
+		this.hotel = hotel;
 	}
 
-	public List<ProdBaseDTO> getProdBases() {
-		return this.prodBases;
+	public List<EscursioneDTO> getEscursione() {
+		return escursione;
 	}
 
-	public void setProdBases(List<ProdBaseDTO> prodBases) {
-		this.prodBases = prodBases;
+	public void setEscursione(List<EscursioneDTO> escursione) {
+		this.escursione = escursione;
 	}
 
-	
-	
-	
+	public List<TrasportoDTO> getTrasporto() {
+		return trasporto;
+	}
+
+	public void setTrasporto(List<TrasportoDTO> trasporto) {
+		this.trasporto = trasporto;
+	}
 }
