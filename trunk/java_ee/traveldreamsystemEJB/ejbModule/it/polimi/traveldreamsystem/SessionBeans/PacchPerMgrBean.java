@@ -15,8 +15,6 @@ import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
-import javax.annotation.Resource;
-import javax.ejb.EJBContext;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,9 +30,6 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	@PersistenceContext
 	protected EntityManager em;
-
-	@Resource
-	private EJBContext context;
    
     public PacchPerMgrBean() {
         
@@ -101,19 +96,6 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	}
     	return null;
     }
-    		
-    //restituisce i pacchetti personalizzati di un cliente, è una lista perchè il cliente
-    //potrebbe avere più pacchetti personalizzati
-    public List<PacchPer> getClientePacchPer(String mail) {
-    	List<PacchPer> pacchettiDiCliente; 
-    	Query q = em.createQuery("SELECT p FROM PACCHPER WHERE p.cliente = :mail");
-    	q.setParameter("mail", mail);
-    	pacchettiDiCliente = (List<PacchPer>) q.getResultList();
-    	if(pacchettiDiCliente != null) {
-    		return pacchettiDiCliente;
-    	}
-    	return null;
-    }
     
     
     /*
@@ -135,10 +117,22 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	return null;
     }
     
+    
+    @Override
+    public List<PacchPerDTO> getClientePacchPerDTONonACquistati(String mail) {
+    	List<PacchPer> pacchettiNonAcquistati = this.getClientePacchPerNonAcquistati(mail);
+    	List<PacchPerDTO> pacchettiDTO = new ArrayList<PacchPerDTO>();
+    	for (int i=0; i < pacchettiNonAcquistati.size(); i++){
+    		PacchPerDTO pacchDTO = convertToDTO(pacchettiNonAcquistati.get(i));
+    		pacchettiDTO.add(pacchDTO);
+    	}
+    	return pacchettiDTO;
+    }
+    
     /*
      * restituisce i pacchetti personalizzati acquistati di un cliente. 
      */
-    public List<PacchPer> getClientePacchPerAcquistati(String mail) {
+   public List<PacchPer> getClientePacchPerAcquistati(String mail) {
     	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
     			+ "(NOT EXIST { SELECT h FROM HOTELSPACCHPER h" + 
     	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto IS NULL }"
@@ -152,6 +146,17 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	}
     	//il cliente non ha pacchetti personalizzati ancora acquistati 
     	return null;
+    }
+    
+    @Override
+    public List<PacchPerDTO> getClientePacchPerDTOACquistati(String mail) {
+    	List<PacchPer> pacchettiAcquistati = this.getClientePacchPerAcquistati(mail);
+    	List<PacchPerDTO> pacchettiDTO = new ArrayList<PacchPerDTO>();
+    	for (int i=0; i < pacchettiAcquistati.size(); i++){
+    		PacchPerDTO pacchDTO = convertToDTO(pacchettiAcquistati.get(i));
+    		pacchettiDTO.add(pacchDTO);
+    	}
+    	return pacchettiDTO;
     }
     
     

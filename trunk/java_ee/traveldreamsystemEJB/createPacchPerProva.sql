@@ -1,0 +1,3 @@
+INSERT INTO `traveldreamsystem_db`.`pacchPer` (`IDPACCHPER`, `LISTAREGALI`, `IDPACCHPRED`, `IDCLIENTE`) VALUES ('pp0', 'false', 'pd02', 'rachele_1991@libero.it');
+INSERT INTO `traveldreamsystem_db`.`pacchPer` (`IDPACCHPER`, `LISTAREGALI`, `IDPACCHPRED`, `IDCLIENTE`) VALUES ('pp1', 'false', 'pd02', 'rachele@gmail.com');
+INSERT INTO `traveldreamsystem_db`.`pacchPer` (`IDPACCHPER`, `LISTAREGALI`, `IDPACCHPRED`, `IDCLIENTE`) VALUES ('pp2', 'true', 'pd03', 'gabriele@libero.it');
