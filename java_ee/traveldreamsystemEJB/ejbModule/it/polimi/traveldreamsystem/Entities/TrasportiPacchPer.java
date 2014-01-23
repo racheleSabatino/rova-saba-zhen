@@ -35,6 +35,11 @@ public class TrasportiPacchPer implements Serializable {
 	public TrasportiPacchPer() {
 	}
 	
+	public TrasportiPacchPer(Trasporto trasporto, PacchPer pacchPer) {
+		this.trasporto = trasporto;
+		this.pacchPer = pacchPer;
+	}
+
 	public Date getDataAcquisto() {
 		return dataAcquisto;
 	}

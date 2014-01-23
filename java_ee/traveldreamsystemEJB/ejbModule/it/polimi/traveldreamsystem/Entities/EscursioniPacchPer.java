@@ -34,6 +34,11 @@ public class EscursioniPacchPer implements Serializable {
 	public EscursioniPacchPer() {
 	}
 
+	public EscursioniPacchPer(Escursione escursione, PacchPer pacchPer) {
+		this.escursioni = escursione;
+		this.pacchPer = pacchPer;
+	}
+
 	public Date getDataAcquisto() {
 		return dataAcquisto;
 	}

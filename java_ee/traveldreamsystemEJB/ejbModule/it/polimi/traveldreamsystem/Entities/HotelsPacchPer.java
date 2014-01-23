@@ -32,6 +32,12 @@ public class HotelsPacchPer implements Serializable {
 	private Date dataAcquisto;
 	
 	public HotelsPacchPer() {
+		
+	}
+	
+	public HotelsPacchPer(Hotel hotel, PacchPer pacchPer) {
+		this.hotel = hotel;
+		this.pacchPer = pacchPer;
 	}
 
 	public Date getDataAcquisto() {
