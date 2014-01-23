@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class EscursioneDTO {
 	
 	@NotEmpty
-	private int idprodbase;
+	private int idProdBase;
 
 	private int costo;
 
@@ -25,12 +25,12 @@ public class EscursioneDTO {
 	
 	private String descrizione;
 
-	public int getIdprodbase() {
-		return idprodbase;
+	public int getIdProdBase() {
+		return idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
 	public int getCosto() {

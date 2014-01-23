@@ -36,8 +36,6 @@
 
 				<p:submenu rendered="#{userBean.isRoleImpiegato}" label="Impiegato"
 					icon="ui-icon-document">
-					<p:menuitem value="crea pacchetto"
-						action="/impiegato/creazionePacchPred?faces-redirect=true" />
 
 					<p:submenu label="crea prodotto base">
 						<p:menuitem value="crea hotel"
@@ -55,11 +53,11 @@
 						<p:menuitem value="cerca trasporto"
 							action="/impiegato/ricercaTrasporto?faces-redirect=true" />
 					</p:submenu>
-					
-					<p:menuitem value="modifica pacchetto"
-						action="/impiegato/modificaPacchPred?faces-redirect=true" />
 					<p:menuitem value="crea pacchetto"
 						action="/impiegato/creazionePacchPred?faces-redirect=true" />
+					
+					<p:menuitem value="cerca pacchetto"
+						action="/impiegato/cercaPacchPred?faces-redirect=true" />
 				</p:submenu>
 
 				<p:submenu rendered="#{userBean.isRoleAmministratore}"

@@ -410,3 +410,10 @@ input[type="text"],input[type="password"] {
 	font-size: 16px;
 	color: #2d2d2d;
 }
+
+.ui-datatable tbody td, .ui-datatable tfoot td {
+padding: 0px 0px!important;
+overflow: hidden;
+border-width: 0px;
+border-style: solid;
+}

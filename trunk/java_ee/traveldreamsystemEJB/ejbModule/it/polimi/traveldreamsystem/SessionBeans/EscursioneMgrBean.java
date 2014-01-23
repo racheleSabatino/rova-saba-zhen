@@ -12,6 +12,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Session Bean implementation class EscursioneMgrBean
@@ -35,7 +36,7 @@ public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
 
     @Override
 	public List<EscursioneDTO> getAllEscursione() {
-		List<Escursione> escursioni = em.createNamedQuery("Escursione.findALL", Escursione.class).getResultList();	
+		List<Escursione> escursioni = em.createNamedQuery("Escursione.findAll", Escursione.class).getResultList();	
 		List<EscursioneDTO> escursioniDTO = new ArrayList<EscursioneDTO>();
 		for(int i=0; i<escursioni.size(); i++) {
 			Escursione current = escursioni.get(i);
@@ -53,7 +54,7 @@ public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
 		EscursioneDTO.setDataRitorno(escursione.getDataRitorno());
 		EscursioneDTO.setCosto(escursione.getCosto());
 		EscursioneDTO.setDescrizione(escursione.getDescrizione());
-		EscursioneDTO.setIdprodbase(escursione.getIdProdBase());
+		EscursioneDTO.setIdProdBase(escursione.getIdProdBase());
 		EscursioneDTO.setLuogo(escursione.getLuogo());
 		return EscursioneDTO;
 	}
