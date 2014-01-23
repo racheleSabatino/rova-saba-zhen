@@ -9,6 +9,7 @@ import javax.persistence.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * The persistent class for the Utente database table.
@@ -39,6 +40,9 @@ public class Utente implements Serializable {
 
 	@Column(name = "TIPOUTENTE", nullable = false, length = 45)
 	private String tipoutente;
+
+    @OneToMany(mappedBy="Utente")
+    private List<PacchPer> pacchPer;
 
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	@Column(name = "REGISTEREDON", nullable = false)
@@ -93,6 +97,14 @@ public class Utente implements Serializable {
 
 	public void setTipoUtente(String tipoutente) {
 		this.tipoutente = tipoutente;
+	}
+
+	public List<PacchPer> getPacchPer() {
+		return pacchPer;
+	}
+
+	public void setPacchPer(List<PacchPer> pacchPer) {
+		this.pacchPer = pacchPer;
 	}
 
 }
