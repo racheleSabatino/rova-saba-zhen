@@ -1,6 +1,7 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
+import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
 import javax.annotation.Resource;
@@ -139,11 +141,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     public List<PacchPer> getClientePacchPerAcquistati(String mail) {
     	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
     			+ "(NOT EXIST { SELECT h FROM HOTELSPACCHPER h" + 
-    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto = null }"
+    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto IS NULL }"
     	 + " AND NOT EXIST { SELECT e FROM ESCUSIONIPACCHPER e" + 
-    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto = null }"
+    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto IS NULL }"
     	 + "AND NOT EXIST { SELECT t FROM HOTELSPACCHPER t" + 
-    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
+    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto IS NULL })");
     	q1.setParameter("mail", mail);
     	if(q1.getResultList() != null) {
     		return (List<PacchPer>) q1.getResultList();
@@ -160,39 +162,102 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     			+ "WHERE p.idPacchPer = :mail");
     	q.setParameter("idPacchPer", idPacchPer);
     	Integer costoTotale = (Integer) q.getSingleResult();
-    			
-    			
     	return (Integer) q.getSingleResult();
-    	
-    	/*
-SELECT SUM(l.price)
-FROM Order o JOIN o.lineItems l JOIN o.customer c
-WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'
 
-SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo)
-FROM PACCHPER p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t
-WHERE p.utente.mail = :mail 
-
-    	*/
-    	
-    		 
     }
     
     //acquista il pacchetto personalizzato, si inserisce la data di acquisto in ogni prodotto base del pacchetto
+    @Override
     public void acquistaPacchPer(int idPacchPer) {	
-    	Query q = em.createQuery("SELECT p from PACCHPER p WHERE p.idPacchPer =: idPacchPer");
-    	q.setParameter("idPacchPer", idPacchPer);
-    	List<PacchPer> pacchetto = (List<PacchPer>) q.getResultList();
+    	Calendar calendar = Calendar.getInstance();
+    	Date data = calendar.getTime();
+    	Query q = em.createQuery("UPDATE HOTELSPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	q.setParameter("data", data);
+    	Query q1 = em.createQuery("UPDATE ESCURSIONIPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	q1.setParameter("data", data);
+    	Query q2 = em.createQuery("UPDATE TRASPORTIPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	q2.setParameter("data", data);
     }
+   
     
     //crea la lista regali associata al pacchetto, si porta a true il valore boolean listaRegali;
+    @Override
     public void creaListaRegali(int idPacchPer){
+    	Query q = em.createQuery("UPDATE PACCHPER p SET p.listaRegali =: lista WHERE idPacchPer = :idPacchPer");
+    	q.setParameter("idPacchPer", idPacchPer);
     }
     
-    //acquista un prodotto base di un pacchetto. Controllare che il cliente non acquisti un prodotto di una 
-    //sua lista regali, che il pacchetto non sia già completamente acquistato
-    public void acquistaProdListaRegali(int idProdBase, int idPacchPer, String mailAcquirente){
+    /*
+     * acquista un prodotto base di un pacchetto. Controllare che il cliente non acquisti un prodotto di una 
+     * sua lista regali, che il pacchetto non sia già completamente acquistato
+     * @return -1 se l'id del pacchetto personalizzato non esiste in database
+     * 		   -2 se la mail dell'acquirente non corrisponde alla mail di un cliente in database
+     * 		   -3 se la mail dell'acquirente corrisponde al cliente proprietario della lista regali, cioè
+     * 			un cliente non può acquistare un prodotto dalla sua lista regali
+     * 		    0 se l'acquisto si conclude con successo
+     */
+    
+    public int acquistaHotelListaRegali(int idHotel, int idPacchPer, String mailAcquirente){
+    	if(!existIdPacchPer(idPacchPer)) {
+    		return -1;
+    	}
+    	if(!existMailUtente(mailAcquirente)){
+    		return -2;
+    	}
+    	if(!check(mailAcquirente, idPacchPer)) {
+    		return -3;
+    	}
+    	Query q = em.createQuery("SELECT H FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c"
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    			+ "AND p.listaRegali = TRUE");
+    	q.setParameter("idPacchPer", idPacchPer);
+    	q.setParameter("mailAcquirente", mailAcquirente);
+    	return 0;
     }
     
+    //controlla che un utente non acquista un prodotto di una propria lista regali
+    public boolean check(String mailAcquirente, int idPacchPer){
+    	Query q = em.createQuery("SELECT p FROM PACCHPER p JOIN p.utente u "
+    			+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
+    	q.setParameter("idPacchPer", idPacchPer);
+    	q.setParameter("mailAcquirente", mailAcquirente);
+    	if(q.getResultList() != null) {
+    		return false;
+    	}
+    	return true;
+    }
     
+    private boolean existIdPacchPer(int idPacchPer) {
+    	PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
+    	if(pacchetto == null) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    private boolean existMailUtente(String mail) {
+    	Utente utente = em.find(Utente.class, mail);
+    	if(utente == null) {
+    		return false;
+    	}
+    	return true;	
+    }
+   
+    public int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente){
+    	if(!existIdPacchPer(idPacchPer)) {
+    		return -1;
+    	}
+    	if(!existMailUtente(mailAcquirente)){
+    		return -2;
+    	}
+    	if(!check(mailAcquirente, idPacchPer)) {
+    		return -3;
+    	}
+    	Query q = em.createQuery("SELECT H FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c"
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    			+ "AND p.listaRegali = TRUE");
+    	q.setParameter("idPacchPer", idPacchPer);
+    	q.setParameter("mailAcquirente", mailAcquirente);
+    	return 0;
+    }
 }

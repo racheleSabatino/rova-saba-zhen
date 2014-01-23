@@ -9,4 +9,8 @@ public interface PacchPerMgrLocal {
 
 	void addNewPacchPer(PacchPerDTO newPacchetto);
 
+	void acquistaPacchPer(int idPacchPer);
+
+	void creaListaRegali(int idPacchPer);
+
 }
