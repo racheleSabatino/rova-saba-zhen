@@ -12,7 +12,8 @@
 	<ui:composition template="/template/common.xhtml">
 
 		<ui:define name="content">
-			<h:form id="form1">
+			<h:form id="form">
+<p:growl id="messages" showDetail="true"/> 
 
 				<p:panel header="Crea Pacchetto Predefinito">
 
@@ -30,35 +31,101 @@
 					<br />
 					<br />
 					<br />
+
+					<p:fieldset legend="Hotel" collapsed="true" toggleable="true"
+						toggleSpeed="500">
+						<h:form id="form2">
+							<p:dataTable id="Hotel" var="escursione"
+								value="#{escursioneBean.escursioneDataModel}" paginator="true"
+								rows="5" selection="#{escursioneBean.escursioni}"
+								editable="true" editMode="cell">
+
+								<p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}"
+									update="" />
+
+
+								<p:column selectionMode="multiple" style="width:2%" />
+
+								<p:column headerText="Data Partenza" style="width:20%">
+
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{escursione.dataPartenza}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{escursione.dataPartenza}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Data Ritorno" style="width:20%">
+
+
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{escursione.dataRitorno}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{escursione.dataRitorno}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Costo" style="width:20%">
+
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{escursione.costo}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{escursione.costo}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column headerText="Luogo" style="width:20%">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{escursione.luogo}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{escursione.luogo}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+							</p:dataTable>
+
+						</h:form>
+					</p:fieldset>
+
+
 					<p:fieldset legend="Escursione" collapsed="true" toggleable="true"
 						toggleSpeed="500">
 						<p:dataTable id="Escursione" var="escursione"
 							value="#{escursioneBean.escursioneDataModel}" paginator="true"
-							rows="10" selection="#{escursioneBean.escursioni}"
-							editable="true">
+							rows="5" selection="#{escursioneBean.escursioni}" editable="true"
+							editMode="cell">
 
-
-
-							<p:ajax event="rowEdit" listener="#{escursioneBean.onEdit}" />
-							<p:ajax event="rowEditCancel"
-								listener="#{escursioneBean.onCancel}" />
-
+    <p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}" update=":form:messages" /> 
+							<!-- <p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}"
+								update="" />
+ -->
 
 							<p:column selectionMode="multiple" style="width:2%" />
 
-							<p:column headerText="Data Partenza" style="width:20%">
+							<p:column headerText="Data Partenza" style="width:39%">
 
 								<p:cellEditor>
 									<f:facet name="output">
 										<h:outputText value="#{escursione.dataPartenza}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.dataPartenza}" />
+										<p:inputText value="#{escursione.dataPartenza}" style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Data Ritorno" style="width:20%">
+							<p:column headerText="Data Ritorno" style="width:39%">
 
 
 								<p:cellEditor>
@@ -66,12 +133,23 @@
 										<h:outputText value="#{escursione.dataRitorno}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.dataRitorno}" />
+										<p:inputText value="#{escursione.dataRitorno}" style="width:100%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Costo" style="width:20%">
+							<p:column headerText="Luogo" style="width:15%">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.luogo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.luogo}" style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Costo" style="width:5%">
 
 								<p:cellEditor>
 									<f:facet name="output">
@@ -82,96 +160,8 @@
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
-
-							<p:column headerText="Luogo" style="width:20%">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.luogo}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.luogo}" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column style="width:5%">
-								<p:rowEditor />
-							</p:column>
 						</p:dataTable>
 
-					</p:fieldset>
-
-					<p:fieldset legend="Hotel" collapsed="true" toggleable="true"
-						toggleSpeed="500">
-						<h:form id="form2">
-							<p:dataTable id="Hotel" var="escursione"
-								value="#{escursioneBean.escursioneDataModel}" paginator="true"
-								rows="10" selection="#{escursioneBean.escursioni}"
-								editable="true">
-
-
-
-								<p:ajax event="rowEdit" listener="#{escursioneBean.onEdit}" />
-								<p:ajax event="rowEditCancel"
-									listener="#{escursioneBean.onCancel}" />
-
-
-								<p:column selectionMode="multiple" style="width:2%" />
-
-								<p:column headerText="Data Partenza" style="width:20%">
-
-									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{escursione.dataPartenza}" />
-										</f:facet>
-										<f:facet name="input">
-											<p:inputText value="#{escursione.dataPartenza}" />
-										</f:facet>
-									</p:cellEditor>
-								</p:column>
-
-								<p:column headerText="Data Ritorno" style="width:20%">
-
-
-									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{escursione.dataRitorno}" />
-										</f:facet>
-										<f:facet name="input">
-											<p:inputText value="#{escursione.dataRitorno}" />
-										</f:facet>
-									</p:cellEditor>
-								</p:column>
-
-								<p:column headerText="Costo" style="width:20%">
-
-									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{escursione.costo}" />
-										</f:facet>
-										<f:facet name="input">
-											<p:inputText value="#{escursione.costo}" />
-										</f:facet>
-									</p:cellEditor>
-								</p:column>
-
-								<p:column headerText="Luogo" style="width:20%">
-									<p:cellEditor>
-										<f:facet name="output">
-											<h:outputText value="#{escursione.luogo}" />
-										</f:facet>
-										<f:facet name="input">
-											<p:inputText value="#{escursione.luogo}" />
-										</f:facet>
-									</p:cellEditor>
-								</p:column>
-
-								<p:column style="width:5%">
-									<p:rowEditor />
-								</p:column>
-							</p:dataTable>
-
-						</h:form>
 					</p:fieldset>
 
 					<p:fieldset legend="Trasporto" collapsed="true" toggleable="true"
@@ -179,14 +169,11 @@
 						<h:form id="form3">
 							<p:dataTable id="Trasporto" var="escursione"
 								value="#{escursioneBean.escursioneDataModel}" paginator="true"
-								rows="10" selection="#{escursioneBean.escursioni}"
-								editable="true">
+								rows="5" selection="#{escursioneBean.escursioni}"
+								editable="true" editMode="cell">
 
-
-
-								<p:ajax event="rowEdit" listener="#{escursioneBean.onEdit}" />
-								<p:ajax event="rowEditCancel"
-									listener="#{escursioneBean.onCancel}" />
+								<p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}"
+									update="" />
 
 
 								<p:column selectionMode="multiple" style="width:2%" />
@@ -238,19 +225,15 @@
 										</f:facet>
 									</p:cellEditor>
 								</p:column>
-
-								<p:column style="width:5%">
-									<p:rowEditor />
-								</p:column>
 							</p:dataTable>
 
 						</h:form>
 					</p:fieldset>
-					
+
 
 					<p:panelGrid columns="1">
-									<p:commandButton id="Salva" value="Salva" icon="ui-icon-disk"
-										update="" oncomplete="PF('multiCarDialog').show()" />
+						<p:commandButton id="Salva" value="Salva" icon="ui-icon-disk"
+							update="" oncomplete="PF('multiCarDialog').show()" />
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
