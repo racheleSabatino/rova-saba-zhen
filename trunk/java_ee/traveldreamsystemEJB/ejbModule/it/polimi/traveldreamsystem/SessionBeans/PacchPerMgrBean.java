@@ -114,37 +114,68 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     }
     
     
-    //restituisce i pacchetti personalizzati non ancora acquistati di un cliente
+    /*
+     * restituisce i pacchetti personalizzati non ancora acquistati di un cliente. 
+     */
     public List<PacchPer> getClientePacchPerNonAcquistati(String mail) {
-    	List<PacchPer> pacchettiDiCliente; 
-    	Query q = em.createQuery("SELECT p FROM PACCHPER WHERE p.cliente = :mail");
-    	q.setParameter("mail", mail);
-    	pacchettiDiCliente = (List<PacchPer>) q.getResultList();
-    	if(pacchettiDiCliente != null) {
-    		return pacchettiDiCliente;
+    	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
+    			+ "(EXIST { SELECT h FROM HOTELSPACCHPER h" + 
+    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto = null }"
+    	 + "OR EXIST { SELECT e FROM ESCUSIONIPACCHPER e" + 
+    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto = null }"
+    	 + "OR EXIST { SELECT t FROM HOTELSPACCHPER t" + 
+    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
+    	q1.setParameter("mail", mail);
+    	if(q1.getResultList() != null) {
+    		return (List<PacchPer>) q1.getResultList();
     	}
+    	//il cliente non ha pacchetti personalizzati non ancora acquistati 
     	return null;
     }
     
-    private boolean isPacchAcquistato(PacchPer pacchetto){
-    	boolean isAcquistato = false;
-    	Query q = em.createQuery("SELECT p.dataAcquisto FROM HOTELSPACCHPER h WHERE h.pacchPer.idPacchPer =: id");
-    	q.setParameter("", pacchetto.getIdPacchPer());
-    	List<Date> dateAcquisto = (List<Date>) q.getResultList();
-    	for(int i=0; i < dateAcquisto.size(); i++) {
-    		if(dateAcquisto.get(i) != null) {
-    			
-    		}
+    /*
+     * restituisce i pacchetti personalizzati acquistati di un cliente. 
+     */
+    public List<PacchPer> getClientePacchPerAcquistati(String mail) {
+    	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
+    			+ "(NOT EXIST { SELECT h FROM HOTELSPACCHPER h" + 
+    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto = null }"
+    	 + " AND NOT EXIST { SELECT e FROM ESCUSIONIPACCHPER e" + 
+    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto = null }"
+    	 + "AND NOT EXIST { SELECT t FROM HOTELSPACCHPER t" + 
+    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
+    	q1.setParameter("mail", mail);
+    	if(q1.getResultList() != null) {
+    		return (List<PacchPer>) q1.getResultList();
     	}
-    	return false;
+    	//il cliente non ha pacchetti personalizzati ancora acquistati 
+    	return null;
     }
     
     
     //ritorna il costo totale del pacchetto personalizzato
     public int viewCostoTotale(int idPacchPer){
-    	Query q = em.createQuery("SELECT SUM(p.) from PACCHPER p WHERE p.idPacchPer =: idPacchPer");
+    	Query q = em.createQuery("SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo)"
+    			+ "FROM PACCHPER p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t"
+    			+ "WHERE p.idPacchPer = :mail");
     	q.setParameter("idPacchPer", idPacchPer);
+    	Integer costoTotale = (Integer) q.getSingleResult();
+    			
+    			
     	return (Integer) q.getSingleResult();
+    	
+    	/*
+SELECT SUM(l.price)
+FROM Order o JOIN o.lineItems l JOIN o.customer c
+WHERE c.lastname = 'Coss' AND c.firstname = 'Roxane'
+
+SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo)
+FROM PACCHPER p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t
+WHERE p.utente.mail = :mail 
+
+    	*/
+    	
+    		 
     }
     
     //acquista il pacchetto personalizzato, si inserisce la data di acquisto in ogni prodotto base del pacchetto
