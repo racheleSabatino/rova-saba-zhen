@@ -4,8 +4,10 @@ import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
@@ -20,9 +22,11 @@ public class HotelBean {
 		hotel = new HotelDTO();
 	}
 
-	public String addHotel(){
+	public void addHotel(){
 		hotelMgrBean.addNewHotel(hotel);
-		return "/homePage?faces-redirect=true";
+        FacesContext context = FacesContext.getCurrentInstance();  
+        
+        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 	}
 
 	public HotelDTO getHotel() {

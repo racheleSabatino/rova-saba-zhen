@@ -94,6 +94,11 @@ public class EscursioneBean {
 	
 	public void addEscursione(){
 		escursioneMgrBean.addNewEscursione(escursione);
+        FacesContext context = FacesContext.getCurrentInstance();  
+        
+        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+
+		
 	}
 
 	public List<EscursioneDTO> getFilteredEscursioni() {

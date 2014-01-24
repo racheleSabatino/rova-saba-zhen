@@ -14,35 +14,68 @@
 		<ui:define name="content">
 
 			<p:panel header="Escursione">
-				<h:form>
-					<h:panelGrid columns="3" cellpadding="5" id="grid">
-						<h:outputText for="dataPartenza" value="Data partenza:  " />
+				<h:form id="Escursione">
+					<h:panelGrid columns="3" id="grid">
+						<h:outputText for="dataPartenza" value="Data partenza:" />
 						<p:calendar id="dataPartenza"
 							value="#{escursioneBean.escursione.dataPartenza}"
-							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataPartenza" />
+							pattern="MM/dd/yyyy HH:mm"  required="true"/>
+						<p:message for="dataPartenza" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="dataRitorno" value="Data ritorno:  " />
 						<p:calendar id="dataRitorno"
 							value="#{escursioneBean.escursione.dataRitorno}"
-							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataRitorno" />
+							pattern="MM/dd/yyyy HH:mm" required="true"/>
+						<p:message for="dataRitorno" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						
 
 						<h:outputText for="costo" value="Costo:" />
-						<p:inputText id="costo" value="#{escursioneBean.escursione.costo}" />
-						<p:message for="costo" />
+						<p:inputText id="costo" value="#{escursioneBean.escursione.costo}" required="true"/>
+						<p:message for="costo" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						
 
 						<h:outputText for="luogo" value="Luogo:" />
-						<p:inputText id="luogo" value="#{escursioneBean.escursione.luogo}" />
-						<p:message for="luogo" />
+						<p:inputText id="luogo" value="#{escursioneBean.escursione.luogo}" required="true"/>
+						<p:message for="luogo" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						
 
 						<h:outputText for="descrizione" value="Descrizione:" />
-						<p:inputTextarea id="descrizione"
+						<p:inputTextarea id="descrizione" autoResize="false" required="true"
 							value="#{escursioneBean.escursione.descrizione}" />
-						<p:message for="descrizione" />
+						<p:message for="descrizione" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						
 
 						<p:commandButton value="Submit" update="grid"
 							action="#{escursioneBean.addEscursione}" />
+
+
+    					<p:messages id="msg" showDetail="true" sticky="true" display="icon"/>  
+      
 
 					</h:panelGrid>
 				</h:form>
