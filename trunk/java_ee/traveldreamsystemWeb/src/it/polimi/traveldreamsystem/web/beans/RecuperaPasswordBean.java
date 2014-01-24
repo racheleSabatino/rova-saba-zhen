@@ -23,8 +23,7 @@ public class RecuperaPasswordBean {
 	private final String emailSubject = "Recupera password ";
 	
 	private String emailBody;
-	
-	private final int CONSTANT = 0;
+
 
 	
 	public RecuperaPasswordBean() {
@@ -47,7 +46,7 @@ public class RecuperaPasswordBean {
 				"Se la richiesta non è stata inviata da te, ignora questa mail.\n\n" +
 				"\n\n\nGrazie e a presto, \nServizio Clienti Travel Dream" 
 				+ "Questa mail viene inviata automaticamente, le risposte a questo indirizzo non verranno lette";
-			mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody, CONSTANT);
+			mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody);
 			return "/homePage?faces-redirect=true";
 		}
 		catch (Exception e) {
