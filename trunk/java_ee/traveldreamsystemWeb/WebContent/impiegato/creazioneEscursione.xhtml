@@ -15,7 +15,7 @@
 
 			<p:panel header="Escursione">
 				<h:form id="Escursione">
-					<h:panelGrid columns="3" id="grid">
+					<h:panelGrid columns="3" id="grid" >
 						<h:outputText for="dataPartenza" value="Data partenza:" />
 						<p:calendar id="dataPartenza"
 							value="#{escursioneBean.escursione.dataPartenza}"
@@ -59,7 +59,7 @@
 						
 
 						<h:outputText for="descrizione" value="Descrizione:" />
-						<p:inputTextarea id="descrizione" autoResize="false" required="true"
+						<p:inputTextarea id="descrizione" required="true" rows="5" cols="50"
 							value="#{escursioneBean.escursione.descrizione}" />
 						<p:message for="descrizione" display="icon"/>
 						
