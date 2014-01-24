@@ -46,9 +46,6 @@ public class TrasportoDTO {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataRitorno;
 
-	@NotEmpty
-	private ProdBaseDTO prodBase;
-
 	public TrasportoDTO() {
 	}
 
@@ -90,14 +87,6 @@ public class TrasportoDTO {
 
 	public void setDataRitorno(Date dataRitorno) {
 		this.dataRitorno = dataRitorno;
-	}
-
-	public ProdBaseDTO getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBaseDTO prodBase) {
-		this.prodBase = prodBase;
 	}
 
 }

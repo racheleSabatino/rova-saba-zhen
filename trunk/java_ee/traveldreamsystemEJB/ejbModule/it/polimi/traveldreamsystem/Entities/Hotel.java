@@ -35,7 +35,7 @@ public class Hotel implements Serializable {
 	@Column(name = "STELLE", nullable = false)
 	private int stelle;
 
-	@Column(name = "TIpoCamERA", nullable = false, length = 45)
+	@Column(name = "TIPOCAMERA", nullable = false, length = 45)
 	private String tipoCamera;
 	
 
