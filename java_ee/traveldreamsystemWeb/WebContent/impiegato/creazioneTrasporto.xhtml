@@ -16,38 +16,43 @@
 			<p:panel header="Trasporto">
 				<h:form>
 					<h:panelGrid columns="3" cellpadding="5" id="grid">
-							<h:outputText for="dataPartenza" value="Data partenza:  " />
-							<p:calendar id="dataPartenza" value="#{trasportoBean.trasporto.dataPartenza}"
-								pattern="MM/dd/yyyy HH:mm" />
-							<p:message for="dataPartenza" />
-								
-							<h:outputText for="dataRitorno" value="Data ritorno:  " />
-							<p:calendar id="dataRitorno" value="#{trasportoBean.trasporto.dataRitorno}"
-								pattern="MM/dd/yyyy HH:mm" />
-							<p:message for="dataPartenza" />
-								
-							<h:outputText for="cittaPartenza" value="Città partenza:" />
-							<p:inputText id="cittaPartenza" value="#{trasportoBean.trasporto.cittaPartenza}" />
-							<p:message for="cittaPartenza" />
-								
-							<h:outputText for="cittaRitorno" value="Città ritorno:" />
-							<p:inputText id="cittaRitorno" value="#{trasportoBean.trasporto.cittaRitorno}" />
-							<p:message for="cittaRitorno" />
-								
-							
-							<h:outputText for="costo" value="Costo:" />
-							<p:inputText id="costo" value="#{trasportoBean.trasporto.costo}"/>
-							<p:message for="costo" />
-								
-							
-							<h:outputText for="descrizione" value ="Descrizione:"/>							
-							<p:inputTextarea id="descrizione" value="#{trasportoBean.trasporto.descrizione}"/>
-							<p:message for="descrizione" />
-								
-							
+						<h:outputText for="dataPartenza" value="Data partenza:  " />
+						<p:calendar id="dataPartenza"
+							value="#{trasportoBean.trasporto.dataPartenza}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataPartenza" />
+
+						<h:outputText for="dataRitorno" value="Data ritorno:  " />
+						<p:calendar id="dataRitorno"
+							value="#{trasportoBean.trasporto.dataRitorno}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataPartenza" />
+
+						<h:outputText for="cittaPartenza" value="Città partenza:" />
+						<p:inputText id="cittaPartenza"
+							value="#{trasportoBean.trasporto.cittaPartenza}" />
+						<p:message for="cittaPartenza" />
+
+						<h:outputText for="cittaRitorno" value="Città ritorno:" />
+						<p:inputText id="cittaRitorno"
+							value="#{trasportoBean.trasporto.cittaRitorno}" />
+						<p:message for="cittaRitorno" />
+
+
+						<h:outputText for="costo" value="Costo:" />
+						<p:inputText id="costo" value="#{trasportoBean.trasporto.costo}" />
+						<p:message for="costo" />
+
+
+						<h:outputText for="descrizione" value="Descrizione:" />
+						<p:inputTextarea id="descrizione"
+							value="#{trasportoBean.trasporto.descrizione}" />
+						<p:message for="descrizione" />
+
+
 						<p:commandButton value="Submit" update="grid"
 							action="#{trasportoBean.addTrasporto}" />
-						</h:panelGrid>
+					</h:panelGrid>
 				</h:form>
 
 			</p:panel>

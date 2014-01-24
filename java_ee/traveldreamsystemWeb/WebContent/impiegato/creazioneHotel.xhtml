@@ -13,42 +13,47 @@
 
 		<ui:define name="content">
 
-			<p:panel   header="Inserisci i dati per creare un nuovo prodotto base hotel">
+			<p:panel
+				header="Inserisci i dati per creare un nuovo prodotto base hotel">
 				<h:form>
-				<h:panelGrid id="grid" columns="3" cellpadding="5" >
-								<h:outputLabel for="dataPartenza" value="Data partenza:" />
-								<p:calendar id="dataPartenza" value="#{hotelBean.hotel.dataPartenza}"
-									pattern="MM/dd/yyyy HH:mm" />
-								<p:message for="dataPartenza" />
-									
-								<h:outputText for="dataRitorno" value="Data ritorno:" />
-								<p:calendar id="dataRitorno" value="#{prodBaseBean.escursione.dataRitorno}"
-									pattern="MM/dd/yyyy HH:mm" />
-								<p:message for="dataRitorno" />
-								
-								<h:outputText for="citta" value="Città:" />
-								<p:inputText id="citta" value="#{hotelBean.hotel.citta}" />
-								<p:message for="citta" />
-								
-								<h:outputText for="stelle" value="Stelle" />
-								<p:rating id="stelle" value="#{hotelBean.hotel.stelle}" cancel="false" />
-								<p:message for="stelle" />
-								
-								<h:outputText for="tipoCamera" value="Tipo camera" />
-								<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}"/>
-								<p:message for="tipoCamera" />								
-								<h:outputText for="costo" value="Costo:" />
-								<p:inputText id="costo" value="#{hotelBean.hotel.costo}"/>
-								<p:message for="costo" />
-								
-								<h:outputText for="descrizione" value ="Descrizione:       "/>
-								<p:inputTextarea  id="descrizione" value="#{hotelBean.hotel.descrizione}"/>
-								<p:message for="descrizione" />
-								
+					<h:panelGrid id="grid" columns="3" cellpadding="5">
+						<h:outputLabel for="dataPartenza" value="Data partenza:" />
+						<p:calendar id="dataPartenza"
+							value="#{hotelBean.hotel.dataPartenza}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataPartenza" />
+
+						<h:outputText for="dataRitorno" value="Data ritorno:" />
+						<p:calendar id="dataRitorno"
+							value="#{prodBaseBean.hotel.dataRitorno}"
+							pattern="MM/dd/yyyy HH:mm" />
+						<p:message for="dataRitorno" />
+
+						<h:outputText for="citta" value="Città:" />
+						<p:inputText id="citta" value="#{hotelBean.hotel.citta}" />
+						<p:message for="citta" />
+
+						<h:outputText for="stelle" value="Stelle" />
+						<p:rating id="stelle" value="#{hotelBean.hotel.stelle}"
+							cancel="false" />
+						<p:message for="stelle" />
+
+						<h:outputText for="tipoCamera" value="Tipo camera" />
+						<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}" />
+						<p:message for="tipoCamera" />
+						<h:outputText for="costo" value="Costo:" />
+						<p:inputText id="costo" value="#{hotelBean.hotel.costo}" />
+						<p:message for="costo" />
+
+						<h:outputText for="descrizione" value="Descrizione:       " />
+						<p:inputTextarea id="descrizione"
+							value="#{hotelBean.hotel.descrizione}" />
+						<p:message for="descrizione" />
+
 						<p:commandButton value="Submit" update="grid"
 							action="#{hotelBean.addHotel}" />
 
-							</h:panelGrid>
+					</h:panelGrid>
 				</h:form>
 
 			</p:panel>

@@ -1,8 +1,6 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
-import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
 import javax.ejb.EJB;
@@ -22,9 +20,9 @@ public class HotelBean {
 		hotel = new HotelDTO();
 	}
 
-	public void addHotel(){
+	public String addHotel(){
 		hotelMgrBean.addNewHotel(hotel);
-		
+		return "/homePage?faces-redirect=true";
 	}
 
 	public HotelDTO getHotel() {

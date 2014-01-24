@@ -20,14 +20,9 @@ public class HotelDTO {
 
 	@NotEmpty
 	private String tipoCamera;
-
-	@NotEmpty
-	private ProdBaseDTO prodBase;
 	
-	@NotEmpty
 	private Date dataPartenza;
 	
-	@NotEmpty
 	private Date dataRitorno;
 
 	public Date getDataPartenza() {
@@ -96,14 +91,6 @@ public class HotelDTO {
 
 	public void setTipoCamera(String tipoCamera) {
 		this.tipoCamera = tipoCamera;
-	}
-
-	public ProdBaseDTO getProdBase() {
-		return this.prodBase;
-	}
-
-	public void setProdBase(ProdBaseDTO prodBase) {
-		this.prodBase = prodBase;
 	}
 
 }
