@@ -54,9 +54,6 @@ public class MailerManagedBean {
 		return "/homePage?faces-redirect=true";
 	}
 
-	public void setReceiverMail(String receiverMail){
-		this.receiverEmailID = receiverMail;
-	}
 	
 	public String getReceiverEmailID(){
 		return receiverEmailID;
