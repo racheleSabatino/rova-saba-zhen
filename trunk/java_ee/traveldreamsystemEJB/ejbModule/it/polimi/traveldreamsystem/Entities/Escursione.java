@@ -46,6 +46,7 @@ public class Escursione implements Serializable {
 	public Escursione() {}
 
 	public Escursione(EscursioneDTO escursione) {
+		this.idProdBase = escursione.getIdProdBase();
 		this.descrizione = escursione.getDescrizione();
 		this.costo = escursione.getCosto();
 		this.dataPartenza = escursione.getDataPartenza();

@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
@@ -25,6 +26,8 @@ public class EscursioneBean {
 
 	private List<EscursioneDTO> escursioni;
 	
+	private List<EscursioneDTO> filteredEscursioni;
+	
 	private EscursioneDTO escursione;
 	
 	private EscursioneDataModel escursioneDataModel;
@@ -33,21 +36,20 @@ public class EscursioneBean {
 	}
 
     public void onCellEdit(CellEditEvent event) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-        
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
     	
+
+        System.out.println("cell edit");
+    	
+        DataTable o = (DataTable) event.getSource();
+        EscursioneDTO dto = (EscursioneDTO)o.getRowData();
+        escursioneMgrBean.update(dto);
     	/*
         FacesMessage msg = new FacesMessage("Car Edited", ((Car) event.getObject()).getModel());
 
         FacesContext.getCurrentInstance().addMessage(null, msg);*/
     }
     
-    public void onCancel(RowEditEvent event) {/*
+    public void remove() {/*
         FacesMessage msg = new FacesMessage("Car Cancelled", ((Car) event.getObject()).getModel());
 
         FacesContext.getCurrentInstance().addMessage(null, msg);*/
@@ -92,6 +94,14 @@ public class EscursioneBean {
 	
 	public void addEscursione(){
 		escursioneMgrBean.addNewEscursione(escursione);
+	}
+
+	public List<EscursioneDTO> getFilteredEscursioni() {
+		return filteredEscursioni;
+	}
+
+	public void setFilteredEscursioni(List<EscursioneDTO> filteredEscursioni) {
+		this.filteredEscursioni = filteredEscursioni;
 	}
 	
 }
