@@ -1,6 +1,7 @@
 package it.polimi.traveldreamsystem.web.beans;
 
 import it.polimi.traveldreamsystem.SessionBeans.MailerBeanLocal;
+import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -13,20 +14,19 @@ public class MailerManagedBean {
 	@EJB
 	private MailerBeanLocal mailerBean;
 	
+	@EJB
+	private UtenteMgrBeanLocal utenteMgr;
+	
 	private String receiverEmailID;
 	
 	private String senderMailID;
 	
 	private final String emailSubject = "Invito ad unirti ad un pacchetto vacanza ";
 	
-	private final String emailBody = "Ciao, \n Il tuo amico ti invita ad unirti a lui in un magnifico pacchetto"
-			+ "vacanza, clicca sul link per visionarne tutti i dettagli";
-	
-	private boolean success;
-	
+	private String emailBody;
+
 	
 	public MailerManagedBean() {
-		success = false;
 		receiverEmailID = new String();
 	}
 	
@@ -44,8 +44,13 @@ public class MailerManagedBean {
 	
 	//cambiare
 	public String sendMessage() {
-		mailerBean.sendMessage(senderMailID, receiverEmailID, emailSubject, emailBody, 10);
-		success = getSuccess();
+		senderMailID = utenteMgr.getPrincipalEmail();
+		
+		String link = "http://localhost:8080/traveldreamsystemWeb/homePage.xhtml";
+		this.emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
+				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
+				+ "\n" + link;
+		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody, 10);
 		return "/homePage?faces-redirect=true";
 	}
 
