@@ -7,7 +7,7 @@ public interface MailerBeanLocal {
 	
 	boolean successInvio();
 
-	void sendMessage(String senderMailID, String receiverEmailID,
-			String emailSubject, String emailBody, int i);
+	void sendMessage(String receiverEmailID,
+			String emailSubject, String emailBody);
 
 }

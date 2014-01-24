@@ -50,7 +50,7 @@ public class MailerManagedBean {
 		this.emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
 				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
 				+ "\n" + link;
-		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody, 10);
+		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody);
 		return "/homePage?faces-redirect=true";
 	}
 

@@ -16,4 +16,9 @@ public interface UtenteMgrBeanLocal {
 	public void removeUtente(String mail);
 
 	void update(UtenteDTO utente);
+
+	String getPrincipalEmail();
+	
+ 
+	
 }
