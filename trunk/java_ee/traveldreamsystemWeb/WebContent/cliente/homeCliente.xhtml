@@ -13,9 +13,19 @@
 
 		<ui:define name="content">
 
-			<p:panel>
-
-				<p:outputLabel value="#{userBean.name}" />
+			<p:panel header=" Ciao #{userBean.name}">
+			
+				<p:panelGrid columns="2">
+				<p:outputLabel value="Email:"/>
+				<p:inputText value="#{userBean.mail}" readonly="true"/>
+				
+				<p:outputLabel value="Nome:"/>
+				<p:inputText value="#{userBean.name}" readonly="true"/>
+				
+				<p:outputLabel value="Cognome:"/>
+				<p:inputText value="#{userBean.cognome}" readonly="true"/>
+				
+				</p:panelGrid>
 
 			</p:panel>
 

@@ -18,6 +18,15 @@ public class UserBean {
 		return utenteMgrBean.getUtenteDTO().getNome();
 	}
 
+	public String getMail() {
+		return utenteMgrBean.getUtenteDTO().getMail();
+	}
+
+
+	public String getCognome() {
+		return utenteMgrBean.getUtenteDTO().getCognome();
+	}
+
 	private String IsRoleImpiegato(String role) {
 		UtenteDTO utenteDTO = utenteMgrBean.getUtenteDTO();
 
