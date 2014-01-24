@@ -22,14 +22,14 @@
 				<p:submenu rendered="#{userBean.isRoleCliente}" label="Cliente"
 					icon="ui-icon-person"
 					action="/cliente/homeCliente?faces-redirect=true&amp;cliente=true">
-					<p:menuitem value="Visualizza pacchetti vacanza"
+					<p:menuitem value="Account Personale"
+					action="/accountCliente?faces-redirect=true" />
+					<p:menuitem value="Offerte Pacchetti Vacanza"
 						action="/viewPacchPred?faces-redirect=true" />
 					<p:menuitem value="Pacchetti Personalizzati"
 						action="/viewPacchPer?faces-redirect=true" />
-					<p:menuitem value="modifica pacchetto"
-						action="/impiegatomodificaPacchPred?faces-redirect=true" />
-					<p:menuitem value="crea pacchetto"
-						action="/impiegatocreazionePacchPred?faces-redirect=true" />
+					<p:menuitem value="Liste regalo"
+						action="/viewListeRegalo?faces-redirect=true" />
 					<p:menuitem value="invia Invito"
 						action="/cliente/sendInvitoPacch?faces-redirect=true" />
 				</p:submenu>
