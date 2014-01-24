@@ -38,11 +38,9 @@ public class MailerBean implements MailerBeanLocal {
     }
 
 	@Override
-	public void sendMessage(String receiverEmailID, String emailSubject, String emailBody, int i) {
+	public void sendMessage(String receiverEmailID, String emailSubject, String emailBody) {
 		try{
-			
 		
-
 		// Create the message object
 	     Message message = new MimeMessage(mailSession);
 

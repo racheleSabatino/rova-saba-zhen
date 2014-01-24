@@ -95,4 +95,6 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 		return utenteDTO;
 	}
 
+	
+
 }
