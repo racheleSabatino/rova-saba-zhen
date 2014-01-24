@@ -77,6 +77,7 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 		return findUtente(getPrincipalEmail());
 	}
 
+	@Override
 	public String getPrincipalEmail() {
 		return context.getCallerPrincipal().getName();
 	}
