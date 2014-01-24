@@ -60,19 +60,26 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 
 	@Override
 	public void removeHotelToPacchPer(int idPacchPer, int idHotel) {
-		em.createQuery("DELETE ");
-		
+		Query q = em.createQuery("DELETE FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN h.hotel o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idHotel");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idHotel", idHotel);
 	}
 
 	@Override
 	public void removeEscursioneToPacchPer(int idPacchPer, int idEscursione) {
-		// TODO Auto-generated method stub
-		
+		Query q = em.createQuery("DELETE FROM ESCURSIONIPACCHPER h JOIN h.PacchPer p JOIN h.escursioni o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idEscursione");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idEscursione", idEscursione);
 	}
 
 	@Override
 	public void removeTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
-		// TODO Auto-generated method stub
+		Query q = em.createQuery("DELETE FROM TRASPORTIPACCHPER h JOIN h.PacchPer p JOIN h.trasporto o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idTrasporto");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idEscursione", idTrasporto);
 		
 	}
 		

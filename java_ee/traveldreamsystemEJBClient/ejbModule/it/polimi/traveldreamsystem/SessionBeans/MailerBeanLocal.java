@@ -4,9 +4,10 @@ import javax.ejb.Local;
 
 @Local
 public interface MailerBeanLocal {
-
-	void sendMessage(String receiverEmailID, String emailSubject, String emailBody, int i);
 	
 	boolean successInvio();
+
+	void sendMessage(String senderMailID, String receiverEmailID,
+			String emailSubject, String emailBody, int i);
 
 }
