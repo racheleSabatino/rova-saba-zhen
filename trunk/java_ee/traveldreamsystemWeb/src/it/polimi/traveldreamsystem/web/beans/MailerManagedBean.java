@@ -15,21 +15,38 @@ public class MailerManagedBean {
 	
 	private String receiverEmailID;
 	
+	private String senderMailID;
+	
 	private final String emailSubject = "Invito ad unirti ad un pacchetto vacanza ";
+	
 	private final String emailBody = "Ciao, \n Il tuo amico ti invita ad unirti a lui in un magnifico pacchetto"
 			+ "vacanza, clicca sul link per visionarne tutti i dettagli";
 	
 	private boolean success;
+	
 	
 	public MailerManagedBean() {
 		success = false;
 		receiverEmailID = new String();
 	}
 	
+	public String getSenderMailID() {
+		return senderMailID;
+	}
+
+	public void setSenderMailID(String senderMailID) {
+		this.senderMailID = senderMailID;
+	}
+
+	public void setReceiverEmailID(String receiverEmailID) {
+		this.receiverEmailID = receiverEmailID;
+	}
+	
 	//cambiare
-	public void sendMessage() {
-		mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody, 10);
+	public String sendMessage() {
+		mailerBean.sendMessage(senderMailID, receiverEmailID, emailSubject, emailBody, 10);
 		success = getSuccess();
+		return "/homePage?faces-redirect=true";
 	}
 
 	public void setReceiverMail(String receiverMail){
