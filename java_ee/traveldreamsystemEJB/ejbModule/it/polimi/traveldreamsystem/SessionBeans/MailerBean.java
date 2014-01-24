@@ -2,9 +2,13 @@ package it.polimi.traveldreamsystem.SessionBeans;
 
 
 
+import it.polimi.traveldreamsystem.Entities.Utente;
+
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.ejb.EJBContext;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.mail.Message;
@@ -34,18 +38,17 @@ public class MailerBean implements MailerBeanLocal {
     }
 
 	@Override
-	public void sendMessage(String senderMailID, String receiverEmailID, String emailSubject, String emailBody, int i) {
+	public void sendMessage(String receiverEmailID, String emailSubject, String emailBody, int i) {
 		try{
+			
 		
+
 		// Create the message object
 	     Message message = new MimeMessage(mailSession);
 
 	     // Adjust the recipients. Here we have only one
 	     // recipient. The recipient's address must be
 	     // an object of the InternetAddress class.
-	     
-	     message.setFrom(new InternetAddress(senderMailID));
-	     
 	     message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmailID, true));
 
 	     // Set the message's subject
@@ -70,8 +73,9 @@ public class MailerBean implements MailerBeanLocal {
 		catch(Exception mex) {
 			mex.printStackTrace();
 		}
-		
 	}
+	
+	
    
    
 }
