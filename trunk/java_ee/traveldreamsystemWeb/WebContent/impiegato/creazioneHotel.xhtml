@@ -15,45 +15,76 @@
 
 			<p:panel
 				header="Inserisci i dati per creare un nuovo prodotto base hotel">
-				<h:form>
+				<h:form id="Hotel">
 					<h:panelGrid id="grid" columns="3" cellpadding="5">
 						<h:outputLabel for="dataPartenza" value="Data partenza:" />
-						<p:calendar id="dataPartenza"
+						<p:calendar id="dataPartenza"  required="true"
 							value="#{hotelBean.hotel.dataPartenza}"
 							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataPartenza" />
+						<p:message for="dataPartenza" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="dataRitorno" value="Data ritorno:" />
-						<p:calendar id="dataRitorno"
+						<p:calendar id="dataRitorno" required="true"
 							value="#{hotelBean.hotel.dataRitorno}"
 							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataRitorno" />
+						<p:message for="dataRitorno" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="citta" value="Città:" />
-						<p:inputText id="citta" value="#{hotelBean.hotel.citta}" />
-						<p:message for="citta" />
+						<p:inputText id="citta" value="#{hotelBean.hotel.citta}" required="true" />
+						<p:message for="citta" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="stelle" value="Stelle" />
-						<p:rating id="stelle" value="#{hotelBean.hotel.stelle}"
+						<p:rating id="stelle" value="#{hotelBean.hotel.stelle}"  required="true"
 							cancel="false" />
-						<p:message for="stelle" />
+						<p:message for="stelle" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="tipoCamera" value="Tipo camera" />
-						<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}" />
-						<p:message for="tipoCamera" />
+						<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}"  required="true"/>
+						<p:message for="tipoCamera" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						
 						<h:outputText for="costo" value="Costo:" />
-						<p:inputText id="costo" value="#{hotelBean.hotel.costo}" />
-						<p:message for="costo" />
+						<p:inputText id="costo" value="#{hotelBean.hotel.costo}"  required="true"/>
+						<p:message for="costo" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="descrizione" value="Descrizione:       " />
-						<p:inputTextarea id="descrizione"
+						<p:inputTextarea id="descrizione" required="true"
 							value="#{hotelBean.hotel.descrizione}" />
-						<p:message for="descrizione" />
+						<p:message for="descrizione" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<p:commandButton value="Submit" update="grid"
 							action="#{hotelBean.addHotel}" />
-						<p:commandButton value="Submit" update="grid"
-							action="/homePage?faces-redirect=true" />
+							
+						<p:messages id="msg"  sticky="true" />  
+							
 
 					</h:panelGrid>
 				</h:form>

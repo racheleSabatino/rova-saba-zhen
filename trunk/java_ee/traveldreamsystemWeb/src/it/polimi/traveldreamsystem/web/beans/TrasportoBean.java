@@ -8,8 +8,10 @@ import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
@@ -26,6 +28,10 @@ public class TrasportoBean {
 
 	public void addTrasporto(){
 		trasportoMgrBean.addNewTrasporto(trasporto);
+        FacesContext context = FacesContext.getCurrentInstance();  
+        
+        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+
 	}
 
 	public TrasportoDTO getTrasporto() {

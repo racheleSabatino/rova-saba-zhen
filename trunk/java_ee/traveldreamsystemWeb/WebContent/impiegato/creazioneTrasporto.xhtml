@@ -14,44 +14,72 @@
 		<ui:define name="content">
 
 			<p:panel header="Trasporto">
-				<h:form>
+				<h:form id="Trasporto">
 					<h:panelGrid columns="3" cellpadding="5" id="grid">
 						<h:outputText for="dataPartenza" value="Data partenza:  " />
-						<p:calendar id="dataPartenza"
+						<p:calendar id="dataPartenza" required="true"
 							value="#{trasportoBean.trasporto.dataPartenza}"
 							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataPartenza" />
+						<p:message for="dataPartenza" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="dataRitorno" value="Data ritorno:  " />
-						<p:calendar id="dataRitorno"
+						<p:calendar id="dataRitorno" required="true"
 							value="#{trasportoBean.trasporto.dataRitorno}"
 							pattern="MM/dd/yyyy HH:mm" />
-						<p:message for="dataPartenza" />
+						<p:message for="dataPartenza" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="cittaPartenza" value="Città partenza:" />
-						<p:inputText id="cittaPartenza"
+						<p:inputText id="cittaPartenza" required="true"
 							value="#{trasportoBean.trasporto.cittaPartenza}" />
-						<p:message for="cittaPartenza" />
+						<p:message for="cittaPartenza" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 						<h:outputText for="cittaRitorno" value="Città ritorno:" />
-						<p:inputText id="cittaRitorno"
+						<p:inputText id="cittaRitorno" required="true"
 							value="#{trasportoBean.trasporto.cittaRitorno}" />
-						<p:message for="cittaRitorno" />
+						<p:message for="cittaRitorno" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 
 						<h:outputText for="costo" value="Costo:" />
-						<p:inputText id="costo" value="#{trasportoBean.trasporto.costo}" />
-						<p:message for="costo" />
+						<p:inputText id="costo" value="#{trasportoBean.trasporto.costo}"  required="true"/>
+						<p:message for="costo" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 
 						<h:outputText for="descrizione" value="Descrizione:" />
-						<p:inputTextarea id="descrizione"
+						<p:inputTextarea id="descrizione" required="true"
 							value="#{trasportoBean.trasporto.descrizione}" />
-						<p:message for="descrizione" />
+						<p:message for="descrizione" display="icon"/>
+						
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
 
 
 						<p:commandButton value="Submit" update="grid"
 							action="#{trasportoBean.addTrasporto}" />
+							
+    					<p:messages id="msg"  sticky="true" />  
+							
 					</h:panelGrid>
 				</h:form>
 
