@@ -17,7 +17,8 @@ public class EscursioneDataModel extends ListDataModel<EscursioneDTO> implements
         super(data);
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public EscursioneDTO getRowData(String rowKey) {
         
         List<EscursioneDTO> cars = (List<EscursioneDTO>) getWrappedData();

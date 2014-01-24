@@ -9,7 +9,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class EscursioneDTO {
 	
-	@NotEmpty
 	private int idProdBase;
 
 	private int costo;
