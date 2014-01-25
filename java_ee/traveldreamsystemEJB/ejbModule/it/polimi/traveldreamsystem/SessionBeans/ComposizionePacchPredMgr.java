@@ -59,6 +59,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 				+ "WHERE e.pacchPred = :pacchPred AND e.hotel = :hotel");
 		q.setParameter("pacchPred", pacchPred);
 		q.setParameter("hotel", hotel);
+		q.executeUpdate();
 	}
 		
 
@@ -80,6 +81,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 				+ "WHERE e.pacchPred = :pacchPred AND e.trasporto = :trasporto");
 		q.setParameter("pacchPred", pacchPred);
 		q.setParameter("trasporto", trasporto);
+		q.executeUpdate();
 	}
 		
 
