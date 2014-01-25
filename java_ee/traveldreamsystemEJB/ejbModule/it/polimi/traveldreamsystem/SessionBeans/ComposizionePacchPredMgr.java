@@ -119,7 +119,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public List<EscursioneDTO> getEscursioniPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.escursioni FROM ESCURSIONIPACCHPRED h JOIN h.pacchPred p JOIN h.escursioni e "
+		Query q = em.createQuery("SELECT e FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Escursione> escursioni = (List<Escursione>) q.getResultList();
