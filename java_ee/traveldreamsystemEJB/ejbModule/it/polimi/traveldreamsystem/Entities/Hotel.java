@@ -20,7 +20,7 @@ public class Hotel implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "IDPRODBASE", unique = true, nullable = false)
-	private int idprodbase;
+	private int idProdBase;
 
 	@Column(name = "COSTO")
 	private int costo;
@@ -67,7 +67,7 @@ public class Hotel implements Serializable {
 	public Hotel() {}
 
 	public Hotel(HotelDTO hotelDTO) {
-		idprodbase = hotelDTO.getIdprodbase();
+		idProdBase = hotelDTO.getIdProdBase();
 		costo = hotelDTO.getCosto();
 		descrizione = hotelDTO.getDescrizione();
 		citta = hotelDTO.getCitta();
@@ -77,12 +77,12 @@ public class Hotel implements Serializable {
 		dataRitorno = hotelDTO.getDataRitorno();
 	}
 
-	public int getIdprodbase() {
-		return this.idprodbase;
+	public int getIdProdBase() {
+		return this.idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
 	public String getCitta() {
