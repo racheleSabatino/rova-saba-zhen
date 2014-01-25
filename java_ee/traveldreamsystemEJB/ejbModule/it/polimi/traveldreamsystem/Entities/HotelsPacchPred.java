@@ -30,8 +30,9 @@ public class HotelsPacchPred implements Serializable {
 	
 	public HotelsPacchPred() {}
 
-	public HotelsPacchPred(int idPacchPred, int idHotel) {
-		// TODO Auto-generated constructor stub
+	public HotelsPacchPred(PacchPred pacchPred, Hotel hotel) {
+		this.hotel = hotel;
+		this.pacchPred = pacchPred;
 	}
 
 	public Hotel getHotel() {

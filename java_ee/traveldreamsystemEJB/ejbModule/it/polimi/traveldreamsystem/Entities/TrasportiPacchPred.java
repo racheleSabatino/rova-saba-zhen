@@ -26,8 +26,10 @@ public class TrasportiPacchPred implements Serializable {
 	public TrasportiPacchPred() {
 	}
 
-	public TrasportiPacchPred(int idPacchPred, int idTrasporto) {
-		// TODO Auto-generated constructor stub
+
+	public TrasportiPacchPred(PacchPred pacchPred, Trasporto trasporto) {
+		this.pacchPred = pacchPred;
+		this.trasporto = trasporto;
 	}
 
 	public Trasporto getTrasporto() {
