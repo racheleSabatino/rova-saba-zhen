@@ -42,11 +42,13 @@ public class TestBean {
 
 	public String a2() {
 		escursioni = compPacchMgr.getEscursioniPacchPred(1);
-		return "a";
+		return "/test";
 
 	}
 	
 	public String a3() {
+		compPacchMgr.findEscursione(1,1);
+		
 		return "/test";
 		
 	}
