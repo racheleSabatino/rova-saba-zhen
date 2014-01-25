@@ -55,7 +55,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
     //in un pacchetto personalizzato associato a quel pacchetto predefinito
 	@Override
 	public void removeHotelToPacch(int idPacchPred, int idHotel) {
-		Query q = em.createQuery("DELETE FROM HotelsPacchPred h JOIN h.PacchPred p JOIN h.hotel o "
+		Query q = em.createQuery("DELETE FROM HotelsPacchPred h JOIN h.pacchPred p JOIN h.hotel o "
 				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idHotel");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idHotel", idHotel);
@@ -74,7 +74,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public void removeTrasportoToPacch(int idPacchPred, int idTrasporto) {
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.PacchPer p JOIN h.trasporto o "
+		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.pacchPer p JOIN h.trasporto o "
 				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idEscursione", idTrasporto);
@@ -92,7 +92,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public void removeEscursioneToPacch(int idPacchPred, int idEscursione) {
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.idPacchPred p JOIN h.escursioni o "
+		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni o "
 				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idEscursione", idEscursione);
