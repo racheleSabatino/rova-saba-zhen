@@ -15,13 +15,6 @@ public class PacchPredBean {
 	private PacchPredMgrLocal pacchPredMgrBean;
 
 	private PacchPredDTO pacchPred;
-	
-	private EscursioneDataModel escursioneDataModel;
-
-	public PacchPredBean() {
-		pacchPred = new PacchPredDTO();
-		escursioneDataModel = new EscursioneDataModel();
-	}
 
 	public void addPacchPred(){
 		pacchPredMgrBean.addNewPacchPred(pacchPred);
@@ -33,14 +26,6 @@ public class PacchPredBean {
 
 	public void setPacchPred(PacchPredDTO pacchPred) {
 		this.pacchPred = pacchPred;
-	}
-
-	public EscursioneDataModel getEscursioneDataModel() {
-		return escursioneDataModel;
-	}
-
-	public void setEscursioneDataModel(EscursioneDataModel escursioneDataModel) {
-		this.escursioneDataModel = escursioneDataModel;
 	}
 	
 	public PacchPredDTO getTestPacch() {
