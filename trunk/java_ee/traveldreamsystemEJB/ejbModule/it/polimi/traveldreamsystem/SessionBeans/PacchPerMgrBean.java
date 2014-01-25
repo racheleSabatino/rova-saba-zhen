@@ -143,6 +143,9 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	q1.setParameter("data", data);
     	Query q2 = em.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
     	q2.setParameter("data", data);
+		q.executeUpdate();
+		q1.executeUpdate();
+		q2.executeUpdate();
     }
    
     
@@ -151,6 +154,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     public void creaListaRegali(int idPacchPer){
     	Query q = em.createQuery("UPDATE PacchPer p SET p.listaRegali =: lista WHERE idPacchPer = :idPacchPer");
     	q.setParameter("idPacchPer", idPacchPer);
+		q.executeUpdate();
     }
     
     /*

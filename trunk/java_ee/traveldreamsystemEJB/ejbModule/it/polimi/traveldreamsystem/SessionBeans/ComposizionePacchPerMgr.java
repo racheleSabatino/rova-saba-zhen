@@ -81,6 +81,7 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 				+ "WHERE e.pacchPer = :pacchPred AND e.hotel = :hotel");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("hotel", hotel);
+		q.executeUpdate();
 	}
 
 	@Override
@@ -91,6 +92,7 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 				+ "WHERE e.pacchPer = :pacchPred AND e.escursioni = :escursione");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("escursione", escursione);
+		q.executeUpdate();
 	}
 
 	@Override
@@ -99,7 +101,7 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idTrasporto");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idEscursione", idTrasporto);
-		
+		q.executeUpdate();
 	}
 	
 	@Override
