@@ -18,4 +18,6 @@ public interface PacchPredMgrLocal {
 	void modificaPacchPred(PacchPredDTO pacchetto);
 	
 	PacchPredDTO findPacchPredDTO(int idPacchPred);
+
+	void update(PacchPredDTO pacchetto);
 }

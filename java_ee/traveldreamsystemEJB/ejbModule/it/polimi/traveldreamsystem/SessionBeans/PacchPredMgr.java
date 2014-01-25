@@ -4,10 +4,12 @@ package it.polimi.traveldreamsystem.SessionBeans;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPred;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPred;
 import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.annotation.Resource;
@@ -110,6 +112,10 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		
 	}
 	
+	@Override
+	public void update(PacchPredDTO pacchetto) {
+		em.merge(new PacchPred(pacchetto));
+	}
 	
 
 	
