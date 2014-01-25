@@ -53,62 +53,21 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	pacchDTO.setMailCliente(pacchetto.getCliente().getMail());
 		return pacchDTO;
     		
-    	}
-
-    //restitusce gli hotel di un pacchetto personalizzato
-    public List<Hotel> getHotelsPacchPer(int idPacchPer) {
-    	PacchPer pacchPer = (PacchPer) em.find(PacchPer.class, idPacchPer);
-    	if(pacchPer != null) {
-    		List<Hotel> hotels = new ArrayList<Hotel>();
-    		List<HotelsPacchPer> h = pacchPer.getHotelsPacchPer();
-    		for(int i=0; i< h.size(); i++) {
-    			hotels.add(h.get(i).getHotel());
-    		}
-    		return hotels;
-    	}
-    	return null;
     }
-    
-  //restitusce le escursioni di un pacchetto personalizzato
-    public List<Escursione> getEscursioniPacchPer(int idPacchPer) {
-    	PacchPer pacchPer = (PacchPer) em.find(PacchPer.class, idPacchPer);
-    	if(pacchPer != null) {
-    		List<Escursione> escursioni = new ArrayList<Escursione>();
-    		List<EscursioniPacchPer> h = pacchPer.getEscursioniPacchPer();
-    		for(int i=0; i< h.size(); i++) {
-    			escursioni.add(h.get(i).getEscursioni());
-    		}
-    		return escursioni;
-    	}
-    	return null;
-    }
-    
-  //restitusce i trasporti di un pacchetto personalizzato
-    public List<Trasporto> getTrasportoPacchPer(int idPacchPer) {
-    	PacchPer pacchPer = (PacchPer) em.find(PacchPer.class, idPacchPer);
-    	if(pacchPer != null) {
-    		List<Trasporto> trasporti = new ArrayList<Trasporto>();
-    		List<TrasportiPacchPer> h = pacchPer.getTrasportiPacchPer();
-    		for(int i=0; i< h.size(); i++) {
-    			trasporti.add(h.get(i).getTrasporto());
-    		}
-    		return trasporti;
-    	}
-    	return null;
-    }
-    
+ 
     
     /*
      * restituisce i pacchetti personalizzati non ancora acquistati di un cliente. 
      */
     public List<PacchPer> getClientePacchPerNonAcquistati(String mail) {
-    	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
-    			+ "(EXIST { SELECT h FROM HOTELSPACCHPER h" + 
-    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto = null }"
-    	 + "OR EXIST { SELECT e FROM ESCUSIONIPACCHPER e" + 
-    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto = null }"
-    	 + "OR EXIST { SELECT t FROM HOTELSPACCHPER t" + 
-    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
+    	Query q1 = em.createQuery(" SELECT distinct p FROM PacchPer p JOIN p.cliente c "
+    			+ "WHERE c.mail =: mail AND "
+    			+ "(EXIST { SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p1 " + 
+    	 "WHERE p1.idPacchPer = p.idPacchPer AND h.dataAcquisto = null } "
+    	 + "OR EXIST { SELECT e FROM EscursioniPacchPer e JOIN e.pacchPer p2 " + 
+    	 "WHERE p2.idPacchPer = p.idPacchPer AND e.dataAcquisto = null } "
+    	 + "OR EXIST { SELECT t FROM TrasportiPacchPer t " + 
+    	 "WHERE p3.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
     	q1.setParameter("mail", mail);
     	if(q1.getResultList() != null) {
     		return (List<PacchPer>) q1.getResultList();
@@ -133,13 +92,14 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
      * restituisce i pacchetti personalizzati acquistati di un cliente. 
      */
    public List<PacchPer> getClientePacchPerAcquistati(String mail) {
-    	Query q1 = em.createQuery(" SELECT distinct p FROM PACCHPER p WHERE p.cliente.mail =: mail AND"
-    			+ "(NOT EXIST { SELECT h FROM HOTELSPACCHPER h" + 
-    	 "WHERE h.PacchPer.idPacchPer = p.idPacchPer AND h.dataAcquisto IS NULL }"
-    	 + " AND NOT EXIST { SELECT e FROM ESCUSIONIPACCHPER e" + 
-    	 "WHERE e.PacchPer.idPacchPer = p.idPacchPer AND e.dataAcquisto IS NULL }"
-    	 + "AND NOT EXIST { SELECT t FROM HOTELSPACCHPER t" + 
-    	 "WHERE t.PacchPer.idPacchPer = p.idPacchPer AND t.dataAcquisto IS NULL })");
+    	Query q1 = em.createQuery(" SELECT distinct p FROM PacchPer p JOIN p.cliente c "
+    			+ "WHERE c.mail =: mail AND "
+    			+ "(NOT EXIST { SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p1 " + 
+    	 "WHERE p1.idPacchPer = p.idPacchPer AND h.dataAcquisto IS NULL } "
+    	 + " AND NOT EXIST { SELECT e FROM EscursioniPacchPer e JOIN e.pacchPer p2 " + 
+    	 "WHERE p2.idPacchPer = p.idPacchPer AND e.dataAcquisto IS NULL } "
+    	 + "AND NOT EXIST { SELECT t FROM TrasportiPacchPer t JOIN t.pacchPer p3 " + 
+    	 "WHERE p3.idPacchPer = p.idPacchPer AND t.dataAcquisto IS NULL })");
     	q1.setParameter("mail", mail);
     	if(q1.getResultList() != null) {
     		return (List<PacchPer>) q1.getResultList();
@@ -163,9 +123,9 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     //ritorna il costo totale del pacchetto personalizzato
     @Override
     public int viewCostoTotale(int idPacchPer){
-    	Query q = em.createQuery("SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo)"
-    			+ "FROM PACCHPER p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t"
-    			+ "WHERE p.idPacchPer = :mail");
+    	Query q = em.createQuery("SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo) "
+    			+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t "
+    			+ "WHERE p.idPacchPer = :idPacchPer");
     	q.setParameter("idPacchPer", idPacchPer);
     	Integer costoTotale = (Integer) q.getSingleResult();
     	return (Integer) q.getSingleResult();
@@ -177,11 +137,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     public void acquistaPacchPer(int idPacchPer) {	
     	Calendar calendar = Calendar.getInstance();
     	Date data = calendar.getTime();
-    	Query q = em.createQuery("UPDATE HOTELSPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	Query q = em.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
     	q.setParameter("data", data);
-    	Query q1 = em.createQuery("UPDATE ESCURSIONIPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	Query q1 = em.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
     	q1.setParameter("data", data);
-    	Query q2 = em.createQuery("UPDATE TRASPORTIPACCHPER h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+    	Query q2 = em.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
     	q2.setParameter("data", data);
     }
    
@@ -189,7 +149,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     //crea la lista regali associata al pacchetto, si porta a true il valore boolean listaRegali;
     @Override
     public void creaListaRegali(int idPacchPer){
-    	Query q = em.createQuery("UPDATE PACCHPER p SET p.listaRegali =: lista WHERE idPacchPer = :idPacchPer");
+    	Query q = em.createQuery("UPDATE PacchPer p SET p.listaRegali =: lista WHERE idPacchPer = :idPacchPer");
     	q.setParameter("idPacchPer", idPacchPer);
     }
     
@@ -217,8 +177,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	if(!existIdHotel(idHotel)){
     		return -4;
     	}
-    	Query q = em.createQuery("SELECT h FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.hotel o"
-    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    	Query q = em.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
     			+ "AND p.listaRegali = TRUE AND o.idprodbase = :idHotel");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);
@@ -231,7 +191,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     
     //controlla che un utente non acquista un prodotto di una propria lista regali
     private boolean check(String mailAcquirente, int idPacchPer){
-    	Query q = em.createQuery("SELECT p FROM PACCHPER p JOIN p.utente u "
+    	Query q = em.createQuery("SELECT p FROM PacchPer p JOIN p.utente u "
     			+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);
@@ -297,8 +257,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	if(!existIdEscursione(idEscursione)){
     		return -4;
     	}
-    	Query q = em.createQuery("SELECT h FROM ESCURSIONIPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e"
-    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    	Query q = em.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
     			+ "AND p.listaRegali = TRUE AND e.idprodbase = :idEscursione");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);
@@ -323,8 +283,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	if(!existIdTrasporto(idTrasporto)){
     		return -4;
     	}
-    	Query q = em.createQuery("SELECT h FROM TRASPORTIPACCHPER h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o"
-    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente"
+    	Query q = em.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "
+    			+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
     			+ "AND p.listaRegali = TRUE AND o.idprodbase =: idTrasporto");
     	q.setParameter("idPacchPer", idPacchPer);
     	q.setParameter("mailAcquirente", mailAcquirente);

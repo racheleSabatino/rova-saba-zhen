@@ -1,5 +1,8 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPred;
@@ -10,7 +13,9 @@ import it.polimi.traveldreamsystem.Entities.PacchPer;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -28,9 +33,16 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 	@PersistenceContext
 	protected EntityManager em;
 
+	HotelMgrBean hotelMgrBean;
+	
+	EscursioneMgrBean escursioneMgrBean;
+	
+	TrasportoMgrBean trasportoMgrBean;
 	
 	public ComposizionePacchPerMgr () {
-		
+		hotelMgrBean = new HotelMgrBean();
+		escursioneMgrBean = new EscursioneMgrBean();
+		trasportoMgrBean = new TrasportoMgrBean();
 	}
 	
 	@Override
@@ -82,6 +94,53 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 		q.setParameter("idEscursione", idTrasporto);
 		
 	}
+	
+	@Override
+	public List<HotelDTO> getHotelsPacchPer(int idPacchPer) {
+		Query q = em.createQuery("SELECT e FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel e "
+				+ "WHERE p.idPacchPer = :idPacchPer");
+		q.setParameter("idPacchPer", idPacchPer);
+		List<Hotel> hotels = (List<Hotel>) q.getResultList();
+		List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();
+		for(int i=0; i < hotels.size(); i++) {
+			HotelDTO hotelDTO= hotelMgrBean.convertToDTO(hotels.get(i));
+			hotelsDTO.add(hotelDTO);
+		}
+		return hotelsDTO;
+	}
+
+
+
+	@Override
+	public List<EscursioneDTO> getEscursioniPacchPer(int idPacchPer) {
+		Query q = em.createQuery("SELECT e FROM EscursioniPacchPer h JOIN h.pacchPred p JOIN h.escursioni e "
+				+ "WHERE p.idPacchPer = :idPacchPer");
+		q.setParameter("idPacchPer", idPacchPer);
+		List<Escursione> escursioni = (List<Escursione>) q.getResultList();
+		List<EscursioneDTO> escursioniDTO = new ArrayList<EscursioneDTO>();
+		for(int i=0; i < escursioni.size(); i++) {
+			EscursioneDTO escursioneDTO = escursioneMgrBean.convertToDTO(escursioni.get(i));
+			escursioniDTO.add(escursioneDTO);
+		}
+		return escursioniDTO;
+	}
+
+
+
+	@Override
+	public List<TrasportoDTO> getTrasportiPacchPred(int idPacchPer) {
+		Query q = em.createQuery("SELECT h.trasporto FROM TrasportiPacchPer h JOIN h.pacchPred p JOIN h.trasporto e "
+				+ "WHERE p.idPacchPer = :idPacchPer");
+		q.setParameter("idPacchPer", idPacchPer);
+		List<Trasporto> trasporti = (List<Trasporto>) q.getResultList();
+		List<TrasportoDTO> trasportiDTO = new ArrayList<TrasportoDTO>();
+		for(int i=0; i < trasporti.size(); i++) {
+			TrasportoDTO hotelDTO= trasportoMgrBean.convertToDTO(trasporti.get(i));
+			trasportiDTO.add(hotelDTO);
+		}
+		return trasportiDTO;
+	}
+
 		
 	}
     

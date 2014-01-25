@@ -22,7 +22,7 @@ public class Escursione implements Serializable {
 	@Id
 	@GeneratedValue
 	@Column(name = "IDPRODBASE", unique = true, nullable = false)
-	private int idProdBase;
+	private int idprodbase;
 	
 	@Lob
 	@Column(name = "DESCRIZIONE")

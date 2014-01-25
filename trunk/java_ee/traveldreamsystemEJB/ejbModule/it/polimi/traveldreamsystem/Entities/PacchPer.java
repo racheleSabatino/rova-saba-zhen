@@ -14,7 +14,7 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="pacchPer")
+@Table(name="PacchPer")
 @NamedQuery(name="PacchPer.findAll", query="SELECT p FROM PacchPer p")
 public class PacchPer implements Serializable {
 	private static final long serialVersionUID = 1L;
