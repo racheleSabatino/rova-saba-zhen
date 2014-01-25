@@ -15,15 +15,8 @@ public class PacchPredDTO {
 
 	@NotEmpty
 	private String descrizione;
-
-	private List<HotelDTO> hotel;
-	private List<EscursioneDTO> escursione;
-	private List<TrasportoDTO> trasporto;
 	
 	public PacchPredDTO () {
-		hotel = new ArrayList<HotelDTO>();
-		escursione = new ArrayList<EscursioneDTO>();
-		trasporto = new ArrayList<TrasportoDTO>();
 	}
 
 	public int getIdPacchPred() {
@@ -40,29 +33,5 @@ public class PacchPredDTO {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-
-	public List<HotelDTO> getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(List<HotelDTO> hotel) {
-		this.hotel = hotel;
-	}
-
-	public List<EscursioneDTO> getEscursione() {
-		return escursione;
-	}
-
-	public void setEscursione(List<EscursioneDTO> escursione) {
-		this.escursione = escursione;
-	}
-
-	public List<TrasportoDTO> getTrasporto() {
-		return trasporto;
-	}
-
-	public void setTrasporto(List<TrasportoDTO> trasporto) {
-		this.trasporto = trasporto;
 	}
 }
