@@ -150,7 +150,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	@Override
 	public boolean findEscursione(int idPacchPred, int idEscursione){ 
 		Query q = em.createQuery("SELECT e FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni e "
-				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idEscursione");
+				+ "WHERE p.idPacchPred = :idPacchPred AND e.idprodbase =:idEscursione");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idEscursione", idEscursione);
 		List list = q.getResultList();
