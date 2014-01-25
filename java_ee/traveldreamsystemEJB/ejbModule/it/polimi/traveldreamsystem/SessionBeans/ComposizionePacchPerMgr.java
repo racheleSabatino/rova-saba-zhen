@@ -60,24 +60,24 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 
 	@Override
 	public void removeHotelToPacchPer(int idPacchPer, int idHotel) {
-		Query q = em.createQuery("DELETE FROM HOTELSPACCHPER h JOIN h.PacchPer p JOIN h.hotel o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idHotel");
+		Query q = em.createQuery("DELETE FROM HotelsPacchPer h JOIN h.PacchPer p JOIN h.hotel o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idHotel");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idHotel", idHotel);
 	}
 
 	@Override
 	public void removeEscursioneToPacchPer(int idPacchPer, int idEscursione) {
-		Query q = em.createQuery("DELETE FROM ESCURSIONIPACCHPER h JOIN h.PacchPer p JOIN h.escursioni o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idEscursione");
+		Query q = em.createQuery("DELETE FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN h.escursioni o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idEscursione");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idEscursione", idEscursione);
 	}
 
 	@Override
 	public void removeTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
-		Query q = em.createQuery("DELETE FROM TRASPORTIPACCHPER h JOIN h.PacchPer p JOIN h.trasporto o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodobase = :idTrasporto");
+		Query q = em.createQuery("DELETE FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN h.trasporto o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idTrasporto");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idEscursione", idTrasporto);
 		
