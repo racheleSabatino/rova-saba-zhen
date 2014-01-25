@@ -13,39 +13,47 @@
 
 		<ui:define name="content">
 
-			<h:form>
+			<h:form id="Registrazione">
 				<p:panel header="Registration Form">
 					<h:panelGrid columns="3" id="regGrid">
 						<h:outputLabel for="mail">Email:</h:outputLabel>
-						<p:inputText id="mail" value="#{registrazioneBean.utente.mail}" />
-						<p:message for="mail" />
+						<p:inputText id="mail" value="#{registrazioneBean.utente.mail}" required="true"/>
+						<p:message for="mail" display="icon"/>
 				
 						<h:outputLabel for="Nome">Nome:</h:outputLabel>
-						<p:inputText id="Nome" value="#{registrazioneBean.utente.nome}" />
-						<p:message for="Nome" />
+						<p:inputText id="Nome" value="#{registrazioneBean.utente.nome}" required="true"/>
+						<p:message for="Nome" display="icon"/>
 
 						<h:outputLabel for="Cognome">Cognome:</h:outputLabel>
-						<p:inputText id="Cognome"
+						<p:inputText id="Cognome" required="true"
 							value="#{registrazioneBean.utente.cognome}" />
-						<p:message for="Cognome" />
+						<p:message for="Cognome" display="icon"/>
 
 						<h:outputLabel for="password">Password:</h:outputLabel>
-						<p:password id="password"
+						<p:password id="password" required="true"
 							value="#{registrazioneBean.utente.password}" feedback="true"
 							match="pwd2" label="Password" />
 						<p:message for="password" />
 
 						<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
-						<p:password id="pwd2" label="Confirm Password"
+						<p:password id="pwd2" label="Confirm Password" required="true"
 							value="#{registrazioneBean.utente.password}" />
 						<p:message for="pwd2" />
-
-					</h:panelGrid>
-					<p:messages showDetail="true" />
-					<p:captcha label="Captcha" language="it" theme="white" />
+						
+						<h:outputText value="&#160;" />
+	
+						<p:captcha id="Captcha" label="Captcha" language="it" theme="white" required="true"/>
+						<p:message for="Captcha"/>
+					
+						<h:outputText value="&#160;" />
+					
 					<p:commandButton ajax="false" value="Registrati" update="regGrid"
 						action="#{registrazioneBean.registrati}"
 						actionListener="#{captchaBean.submit}" />
+						
+					<p:messages id="msg" sticky="true" display="icon"/>  
+						
+					</h:panelGrid>
 
 				</p:panel>
 			</h:form>
