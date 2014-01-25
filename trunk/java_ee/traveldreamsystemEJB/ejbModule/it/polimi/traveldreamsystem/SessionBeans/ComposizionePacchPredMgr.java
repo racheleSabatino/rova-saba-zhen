@@ -54,25 +54,13 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
    //tabella HotelsPacchPred. Bisogna pero' aggiungere il controllo che quell'hotel non sia presente
     //in un pacchetto personalizzato associato a quel pacchetto predefinito
 	@Override
-	public int removeHotelToPacch(int idPacchPred, int idHotel) {
-		Hotel hotelDaRimuovere;
-		int risultato = -1;
-		try {
-			Query q = (Query) em.createQuery("SELECT i FROM HotelsPacchPred i WHERE i.idPacchPred = :idPacch AND i.idHotel = :idHotel");
-    		q.setParameter("idPacch", idPacchPred);
-    		q.setParameter("idHotel", idHotel);
-    		hotelDaRimuovere = (Hotel) q.getSingleResult();
-    		if(hotelDaRimuovere != null){
-    			risultato = 0;
-    			em.remove(hotelDaRimuovere);
-    		}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			risultato = -1;
-		}
-		return risultato;
+	public void removeHotelToPacch(int idPacchPred, int idHotel) {
+		Query q = em.createQuery("DELETE FROM HOTELSPACCHPRED h JOIN h.PacchPred p JOIN h.hotel o "
+				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idHotel");
+		q.setParameter("idPacchPred", idPacchPred);
+		q.setParameter("idHotel", idHotel);
 	}
+		
 
 
 	@Override
@@ -85,24 +73,11 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	}
 
 	@Override
-	public int removeTrasportoToPacch(int idPacchPred, int idTrasporto) {
-		Trasporto trasportoDaRimuovere;
-		int risultato = -1;
-		try {
-			Query q = (Query) em.createQuery("SELECT i FROM TrasportiPacchPred i WHERE i.idPacchPred = :idPacch AND i.idHotel = :idTrasporto");
-    		q.setParameter("idPacch", idPacchPred);
-    		q.setParameter("idHotel", idTrasporto);
-    		trasportoDaRimuovere = (Trasporto) q.getSingleResult();
-    		if(trasportoDaRimuovere != null){
-    			risultato = 0;
-    			em.remove(trasportoDaRimuovere);
-    		}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			risultato = -1;
-		}
-		return risultato;
+	public void removeTrasportoToPacch(int idPacchPred, int idTrasporto) {
+		Query q = em.createQuery("DELETE FROM TRASPORTIPACCHPER h JOIN h.PacchPer p JOIN h.trasporto o "
+				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
+		q.setParameter("idPacchPred", idPacchPred);
+		q.setParameter("idEscursione", idTrasporto);
 	}
 		
 
@@ -116,31 +91,19 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	}
 
 	@Override
-	public int removeEscursioneToPacch(int idPacchPred, int idEscursione) {
-		Escursione escursioneDaRimuovere;
-		int risultato = -1;
-		try {
-			Query q = (Query) em.createQuery("SELECT i FROM TrasportiPacchPred i WHERE i.idPacchPred = :idPacch AND i.idHotel = :idEscursione");
-    		q.setParameter("idPacch", idPacchPred);
-    		q.setParameter("idHotel", idEscursione);
-    		escursioneDaRimuovere = (Escursione) q.getSingleResult();
-    		if(escursioneDaRimuovere != null){
-    			risultato = 0;
-    			em.remove(escursioneDaRimuovere);
-    		}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			risultato = -1;
-		}
-		return risultato;
+	public void removeEscursioneToPacch(int idPacchPred, int idEscursione) {
+		Query q = em.createQuery("DELETE FROM ESCURSIONIPACCHPRED h JOIN h.idPacchPred p JOIN h.escursioni o "
+				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
+		q.setParameter("idPacchPred", idPacchPred);
+		q.setParameter("idEscursione", idEscursione);
+	
 	}
     
 
 
 	@Override
 	public List<HotelDTO> getHotelsPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.hotel FROM HOTELSPACCHPRED h JOIN h.pacchPred p JOIN h.hotel e"
+		Query q = em.createQuery("SELECT h.hotel FROM HOTELSPACCHPRED h JOIN h.pacchPred p JOIN h.hotel e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Hotel> hotels = (List<Hotel>) q.getResultList();
@@ -156,7 +119,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public List<EscursioneDTO> getEscursioniPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.escursioni FROM ESCURSIONIPACCHPRED h JOIN h.pacchPred p JOIN h.escursioni e"
+		Query q = em.createQuery("SELECT h.escursioni FROM ESCURSIONIPACCHPRED h JOIN h.pacchPred p JOIN h.escursioni e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Escursione> escursioni = (List<Escursione>) q.getResultList();
@@ -172,7 +135,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public List<TrasportoDTO> getTrasportiPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.trasporto FROM HOTELSPACCHPRED h JOIN h.pacchPred p JOIN h.trasporto e"
+		Query q = em.createQuery("SELECT h.trasporto FROM HOTELSPACCHPRED h JOIN h.pacchPred p JOIN h.trasporto e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Trasporto> trasporti = (List<Trasporto>) q.getResultList();

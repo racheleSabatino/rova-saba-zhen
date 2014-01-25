@@ -33,7 +33,7 @@ public class PacchPred implements Serializable {
 
 	    @OneToMany(mappedBy="pacchPred")
 	    private List<TrasportiPacchPer> trasportiPacchPred;
-
+	
 	public PacchPred() {
 	}
 
