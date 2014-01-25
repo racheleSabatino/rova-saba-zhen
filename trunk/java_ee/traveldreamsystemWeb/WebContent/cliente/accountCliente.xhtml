@@ -15,7 +15,7 @@
 
 			<p:panel header=" Ciao #{userBean.name}, bentornato!">
 			
-				<p:panelGrid columns="2">
+				<h:panelGrid columns="2">
 				<p:outputLabel value="Email:"/>
 				<p:inputText value="#{userBean.mail}" readonly="true"/>
 				
@@ -25,34 +25,19 @@
 				<p:outputLabel value="Cognome:"/>
 				<p:inputText value="#{userBean.cognome}" readonly="true"/>
 				
-				<h:form>
-				<p:button value="Cambia password" actionListener="#{userBean.showPasswordPanel}" update="changePsw"/>
-				
-				
-				<p:outputPanel id="changePsw">
-					<p:outputPanel  rendered="#{userBean.pswPanelVisible}">
-						<h:panelGrid columns="3">
-							<h:outputText for="psw1" value="digita la tua vecchia password"/>
-							<p:inputText id="psw1" value="#{userBean.psw1}" required="true"/>
-							<p:message for="psw1" display="icon"/>
-				
-							<h:outputText for="psw2" value="ridigita la tua vecchia password"/>
-							<p:inputText id="psw2" value="#{userBean.psw2}" required="true"/>
-							<p:message for="psw2" display="icon"/>
-				
-							<h:outputText for="newPsw" value="digita la tua vecchia password"/>
-							<p:inputText id="newPsw" value="#{userBean.newPsw}" required="true"/>
-							<p:message for="newPsw" display="icon"/>
 							
-							<p:button value="Conferma" update="changePsw" action="#{userBean.changePassword}"/>
-
-						</h:panelGrid>
-					</p:outputPanel>
-				</p:outputPanel>				
-				</h:form>
-				<p:button value="Visualizza i tuoi pacchetti vacanza" action=""/>
+				<p:button value="Offerte Pacchetti Vacanza"
+					action="/viewPacchPred?faces-redirect=true" />
+				<p:button value="Pacchetti Personalizzati"
+					action="/viewPacchPer?faces-redirect=true" />
+				<p:button value="Liste regalo"
+					action="/viewListeRegalo?faces-redirect=true" />
+				<p:button value="invia Invito"
+					action="/cliente/sendInvitoPacch?faces-redirect=true" />
+				<p:button value="Cambia password"
+				 action="/cliente/cambioPassword?faces-redirect=true"/>
 								
-				</p:panelGrid>
+				</h:panelGrid>
 
 			</p:panel>
 
