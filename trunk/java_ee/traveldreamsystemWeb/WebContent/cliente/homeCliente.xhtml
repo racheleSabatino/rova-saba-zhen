@@ -13,19 +13,32 @@
 
 		<ui:define name="content">
 
-			<p:panel header=" Ciao #{userBean.name}">
+			<p:panel header=" Ciao #{userBean.name}, bentornato!">
 			
-				<p:panelGrid columns="2">
-				<p:outputLabel value="Email:"/>
-				<p:inputText value="#{userBean.mail}" readonly="true"/>
+				<h:form>
+					<p:panel header="Trova il pacchetto vacanza che fa per te">
+						<h:panelGrid columns="3" id="searchGrid">
+						</h:panelGrid>
+
+						<p:outputPanel id="resultGrid">
+							<p:outputPanel
+								rendered="">
+								<h:panelGrid columns="1">
+								
+								<!-- TODO -->
+								
+								</h:panelGrid>
+
+							</p:outputPanel>
+						</p:outputPanel>
+
+
+					</p:panel>
+
+				</h:form>
 				
-				<p:outputLabel value="Nome:"/>
-				<p:inputText value="#{userBean.name}" readonly="true"/>
 				
-				<p:outputLabel value="Cognome:"/>
-				<p:inputText value="#{userBean.cognome}" readonly="true"/>
-				
-				</p:panelGrid>
+								
 
 			</p:panel>
 
