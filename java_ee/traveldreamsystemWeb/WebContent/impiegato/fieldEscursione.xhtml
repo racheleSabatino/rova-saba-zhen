@@ -19,10 +19,6 @@
 							filteredValue="#{escursioneBean.filteredEscursioni}" rows="5"
 							editable="true" editMode="cell">
 
-
-
-							<p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}" />
-
 							<p:column headerText=" " style="width:4%">
 									<p:commandButton update="Escursione"
 										rendered="#{escursione.selected}" icon="ui-icon-check"

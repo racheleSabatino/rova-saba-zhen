@@ -3,18 +3,23 @@ package it.polimi.traveldreamsystem.web.beans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
+import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class PacchPredBean {
+	
+	@EJB
+	protected PacchPredMgrLocal pacchPredMgrBean;
 
 	@EJB
-	private PacchPredMgrLocal pacchPredMgrBean;
+	protected ComposizPacchPredMgrLocal compPacchMgr;
 
-	private PacchPredDTO pacchPred;
+	protected PacchPredDTO pacchPred;
 
 	public void addPacchPred(){
 		pacchPredMgrBean.addNewPacchPred(pacchPred);

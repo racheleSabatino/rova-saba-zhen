@@ -13,7 +13,7 @@
 
 		<ui:define name="content">
 			<h:form>
-
+<p:remoteCommand autoRun="true" update="Escursione" actionListener="#{escursioneBean.init}"/>
 				<p:growl id="messages" showDetail="true" />
 
 				<p:panel header="Crea Pacchetto Predefinito">
