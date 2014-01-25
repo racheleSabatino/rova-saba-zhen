@@ -2,6 +2,7 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
+import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
@@ -18,10 +19,16 @@ import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
 @SessionScoped
-public class EscursioneBean {
+public class EscursioneBean {/*
+
+        <p:remoteCommand name="onload" action="#{bean.onload}" autoRun="true" />
+        */
 
 	@EJB
 	private PacchPredMgrLocal pacchPredMgrBean;
+	
+	@EJB
+	private ComposizPacchPredMgrLocal compPacchMgr;
 
 	@EJB
 	private EscursioneMgrBeanLocal escursioneMgrBean;
@@ -43,7 +50,7 @@ public class EscursioneBean {
 		escursioni = escursioneMgrBean.getAllEscursione();
 		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
 		for(EscursioneDTO esc: escursioni) {
-			if(pacchPred.getEscursione().contains(esc)) {
+			if(compPacchMgr.getEscursioniPacchPred(pacchPred.getIdPacchPred()).contains(esc)) {
 				esc.setSelected(true);
 			} else {
 				esc.setSelected(false);
@@ -111,8 +118,8 @@ public class EscursioneBean {
 
 		for(EscursioneDTO esc: escursioni) {
 			escursioneMgrBean.update(esc);
-			if(esc.getSelected() && !pacchPred.getEscursione().contains(esc)) {
-				pacchPred.getEscursione().add(esc);
+			if(esc.getSelected() && !compPacchMgr.getEscursioniPacchPred(pacchPred.getIdPacchPred()).contains(esc)) {
+				compPacchMgr.addEscursioneToPacch(pacchPred.getIdPacchPred(), esc.getIdProdBase());
 			}
 		}
 		pacchPredMgrBean.update(pacchPred);
