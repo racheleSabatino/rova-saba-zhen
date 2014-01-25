@@ -2,45 +2,32 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
-import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
-import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.CellEditEvent;
-import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
 @SessionScoped
-public class EscursioneBean {/*
-
-        <p:remoteCommand name="onload" action="#{bean.onload}" autoRun="true" />
-        */
-
-	@EJB
-	private PacchPredMgrLocal pacchPredMgrBean;
+public class EscursioneBean extends PacchPredBean{
 	
-	@EJB
-	private ComposizPacchPredMgrLocal compPacchMgr;
-
 	@EJB
 	private EscursioneMgrBeanLocal escursioneMgrBean;
-	
-	private PacchPredDTO pacchPred;
 
 	private List<EscursioneDTO> escursioni;
 
 	private List<EscursioneDTO> filteredEscursioni;
 
 	private EscursioneDTO escursione;
-	
+
 	public EscursioneBean() {
 	}
 
@@ -49,39 +36,19 @@ public class EscursioneBean {/*
 		escursione = new EscursioneDTO();
 		escursioni = escursioneMgrBean.getAllEscursione();
 		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
-		for(EscursioneDTO esc: escursioni) {
-			if(compPacchMgr.getEscursioniPacchPred(pacchPred.getIdPacchPred()).contains(esc)) {
-				esc.setSelected(true);
+		for (EscursioneDTO aDTO : escursioni) {
+			if (compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
+				aDTO.setSelected(true);
 			} else {
-				esc.setSelected(false);
+				aDTO.setSelected(false);
 			}
 		}
 	}
-	
 
-
-	public void onCellEdit(CellEditEvent event) {
-
-		System.out.println("cell edit");
-	}
-
-	public void onEdit(RowEditEvent event) {
-
-		System.out.println("row edit");
-	}
-
-
-	public void setEscursioni(List<EscursioneDTO> escursioni) {
-		this.escursioni = escursioni;
-	}
-
-	public void onCancel(RowEditEvent event) {
-
-		System.out.println("cell rem");
-	}
-
-	public List<EscursioneDTO> getEscursioni() {
-		return escursioni;
+	public void addEscursione() {
+		escursioneMgrBean.addNewEscursione(escursione);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 	}
 
 	public EscursioneDTO getEscursione() {
@@ -92,8 +59,12 @@ public class EscursioneBean {/*
 		this.escursione = escursione;
 	}
 
-	public void addEscursione() {
-		escursioneMgrBean.addNewEscursione(escursione);
+	public List<EscursioneDTO> getEscursioni() {
+		return escursioni;
+	}
+
+	public void setEscursioni(List<EscursioneDTO> escursioni) {
+		this.escursioni = escursioni;
 	}
 
 	public List<EscursioneDTO> getFilteredEscursioni() {
@@ -106,7 +77,7 @@ public class EscursioneBean {/*
 
 	public void selected() {
 		System.out.println("select");
-		if(escursione.getSelected()) {
+		if (escursione.getSelected()) {
 			escursione.setSelected(false);
 		} else {
 			escursione.setSelected(true);
@@ -116,10 +87,17 @@ public class EscursioneBean {/*
 	public String save() {
 		System.out.println("cell save");
 
-		for(EscursioneDTO esc: escursioni) {
-			escursioneMgrBean.update(esc);
-			if(esc.getSelected() && !compPacchMgr.getEscursioniPacchPred(pacchPred.getIdPacchPred()).contains(esc)) {
-				compPacchMgr.addEscursioneToPacch(pacchPred.getIdPacchPred(), esc.getIdProdBase());
+		for (EscursioneDTO aDTO : escursioni) {
+			escursioneMgrBean.update(aDTO);
+			if (aDTO.getSelected()
+					&& !compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchMgr.addEscursioneToPacch(pacchPred.getIdPacchPred(),
+						aDTO.getIdProdBase());
+			}
+			if (!aDTO.getSelected()
+					&& compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchMgr.removeEscursioneToPacch(pacchPred.getIdPacchPred(),
+						aDTO.getIdProdBase());
 			}
 		}
 		pacchPredMgrBean.update(pacchPred);
