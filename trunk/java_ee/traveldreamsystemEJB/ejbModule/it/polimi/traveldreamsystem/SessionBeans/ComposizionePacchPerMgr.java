@@ -10,6 +10,7 @@ import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPred;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
+import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
@@ -63,27 +64,33 @@ public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
 
 	@Override
 	public void addTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
-		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
-		TrasportiPacchPer e = new TrasportiPacchPer(trasporto, pacchPer);
-		em.persist(e);
+		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
+		Query q = em.createQuery("DELETE FROM TrasportiPacchPred e "
+				+ "WHERE e.pacchPred = :pacchPred AND e.trasporto = :trasporto");
+		q.setParameter("pacchPer", pacchPer);
+		q.setParameter("trasporto", trasporto);
 		
 	}
 
 	@Override
 	public void removeHotelToPacchPer(int idPacchPer, int idHotel) {
-		Query q = em.createQuery("DELETE FROM HotelsPacchPer h JOIN h.PacchPer p JOIN h.hotel o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idHotel");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("idHotel", idHotel);
+		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
+		Hotel hotel = em.find(Hotel.class, idHotel);
+		Query q = em.createQuery("DELETE FROM HotelsPacchPer e "
+				+ "WHERE e.pacchPer = :pacchPred AND e.hotel = :hotel");
+		q.setParameter("pacchPer", pacchPer);
+		q.setParameter("hotel", hotel);
 	}
 
 	@Override
 	public void removeEscursioneToPacchPer(int idPacchPer, int idEscursione) {
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN h.escursioni o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idprodbase = :idEscursione");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("idEscursione", idEscursione);
+		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
+		Escursione escursione = em.find(Escursione.class, idEscursione);
+		Query q = em.createQuery("DELETE FROM EscursioniPacchPer e "
+				+ "WHERE e.pacchPer = :pacchPred AND e.escursioni = :escursione");
+		q.setParameter("pacchPer", pacchPer);
+		q.setParameter("escursione", escursione);
 	}
 
 	@Override
