@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.Entities;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,6 +24,15 @@ public class PacchPred implements Serializable {
 	@Lob
 	@Column(name = "DESCRIZIONE")
 	private String descrizione;
+	
+	 @OneToMany(mappedBy="pacchPred")
+	    private List<HotelsPacchPred> hotelsPacchPred;
+
+	    @OneToMany(mappedBy="pacchPred")
+	    private List<EscursioniPacchPred> escursionePacchPred;
+
+	    @OneToMany(mappedBy="pacchPred")
+	    private List<TrasportiPacchPer> trasportiPacchPred;
 
 	public PacchPred() {
 	}
