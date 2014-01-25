@@ -49,7 +49,7 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 		HotelDTO hotelDTO = new HotelDTO();
 		hotelDTO.setCosto(hotel.getCosto());
 		hotelDTO.setDescrizione(hotel.getDescrizione());
-		hotelDTO.setIdprodbase(hotel.getIdprodbase());
+		hotelDTO.setIdProdBase(hotel.getIdProdBase());
 		hotelDTO.setCitta(hotel.getCitta());
 		hotelDTO.setStelle(hotel.getStelle());
 		hotelDTO.setTipoCamera(hotel.getTipoCamera());

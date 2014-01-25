@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class HotelDTO {
 
-	private int idprodbase;
+	private int idProdBase;
 	
 	private int costo;
 
@@ -29,13 +29,15 @@ public class HotelDTO {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataRitorno;
+	
+	private Boolean selected = false;
 
-	public int getIdprodbase() {
-		return idprodbase;
+	public int getIdProdBase() {
+		return idProdBase;
 	}
 
-	public void setIdprodbase(int idprodbase) {
-		this.idprodbase = idprodbase;
+	public void setIdProdBase(int idProdBase) {
+		this.idProdBase = idProdBase;
 	}
 
 	public int getCosto() {
@@ -92,6 +94,14 @@ public class HotelDTO {
 
 	public void setDataRitorno(Date dataRitorno) {
 		this.dataRitorno = dataRitorno;
+	}
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 	
 }
