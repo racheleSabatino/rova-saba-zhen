@@ -28,4 +28,6 @@ public interface ComposizPacchPredMgrLocal {
 	List<EscursioneDTO> getEscursioniPacchPred(int idPacchPred);
 	
 	List<TrasportoDTO> getTrasportiPacchPred(int idPacchPred);
+
+	boolean findEscursione(int idPacchPred, int idEscursione);
 }
