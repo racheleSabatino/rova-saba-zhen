@@ -48,7 +48,12 @@ public class TestBean {
 	
 	public String a3() {
 		compPacchMgr.findEscursione(1,1);
+		return "/test";
 		
+	}
+	
+	public String a4() {
+		compPacchMgr.removeEscursioneToPacch(1,1);
 		return "/test";
 		
 	}
