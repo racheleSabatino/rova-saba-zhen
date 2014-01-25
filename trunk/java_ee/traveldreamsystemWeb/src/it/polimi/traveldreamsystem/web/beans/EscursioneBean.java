@@ -1,69 +1,66 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
+import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
 
-import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class EscursioneBean {
 
 	@EJB
+	private PacchPredMgrLocal pacchPredMgrBean;
+
+	@EJB
 	private EscursioneMgrBeanLocal escursioneMgrBean;
+	
+	private PacchPredDTO pacchPred;
 
 	private List<EscursioneDTO> escursioni;
-	
+
 	private List<EscursioneDTO> filteredEscursioni;
-	
+
 	private EscursioneDTO escursione;
-	
-	private EscursioneDataModel escursioneDataModel;
 	
 	public EscursioneBean() {
 	}
 
-    public void onCellEdit(CellEditEvent event) {
-    	
-
-        System.out.println("cell edit");
-    	
-        DataTable o = (DataTable) event.getSource();
-        EscursioneDTO dto = (EscursioneDTO)o.getRowData();
-        escursioneMgrBean.update(dto);
-    	/*
-        FacesMessage msg = new FacesMessage("Car Edited", ((Car) event.getObject()).getModel());
-
-        FacesContext.getCurrentInstance().addMessage(null, msg);*/
-    }
-    
-    public void remove() {/*
-        FacesMessage msg = new FacesMessage("Car Cancelled", ((Car) event.getObject()).getModel());
-
-        FacesContext.getCurrentInstance().addMessage(null, msg);*/
-    }
-	
 	@PostConstruct
-	public void init(){
+	public void init() {
 		escursione = new EscursioneDTO();
-		escursioni = new ArrayList<EscursioneDTO>();
-		escursioneDataModel = new EscursioneDataModel(getAllEscursione());
+		escursioni = escursioneMgrBean.getAllEscursione();
+		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
+		for(EscursioneDTO esc: escursioni) {
+			if(pacchPred.getEscursione().contains(esc)) {
+				esc.setSelected(true);
+			} else {
+				esc.setSelected(false);
+			}
+		}
 	}
 	
-	public List<EscursioneDTO> getEscursioni() {
-		return escursioni;
+
+
+	public void onCellEdit(CellEditEvent event) {
+
+		System.out.println("cell edit");
+	}
+
+	public void onEdit(RowEditEvent event) {
+
+		System.out.println("row edit");
 	}
 
 
@@ -71,17 +68,13 @@ public class EscursioneBean {
 		this.escursioni = escursioni;
 	}
 
+	public void onCancel(RowEditEvent event) {
 
-	public List<EscursioneDTO> getAllEscursione() {
-		return escursioneMgrBean.getAllEscursione();
+		System.out.println("cell rem");
 	}
 
-	public EscursioneDataModel getEscursioneDataModel() {
-		return escursioneDataModel;
-	}
-
-	public void setEscursioneDataModel(EscursioneDataModel escursioneDataModel) {
-		this.escursioneDataModel = escursioneDataModel;
+	public List<EscursioneDTO> getEscursioni() {
+		return escursioni;
 	}
 
 	public EscursioneDTO getEscursione() {
@@ -91,14 +84,9 @@ public class EscursioneBean {
 	public void setEscursione(EscursioneDTO escursione) {
 		this.escursione = escursione;
 	}
-	
-	public void addEscursione(){
-		escursioneMgrBean.addNewEscursione(escursione);
-        FacesContext context = FacesContext.getCurrentInstance();  
-        
-        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 
-		
+	public void addEscursione() {
+		escursioneMgrBean.addNewEscursione(escursione);
 	}
 
 	public List<EscursioneDTO> getFilteredEscursioni() {
@@ -108,5 +96,27 @@ public class EscursioneBean {
 	public void setFilteredEscursioni(List<EscursioneDTO> filteredEscursioni) {
 		this.filteredEscursioni = filteredEscursioni;
 	}
-	
+
+	public void selected() {
+		System.out.println("select");
+		if(escursione.getSelected()) {
+			escursione.setSelected(false);
+		} else {
+			escursione.setSelected(true);
+		}
+	}
+
+	public String save() {
+		System.out.println("cell save");
+
+		for(EscursioneDTO esc: escursioni) {
+			escursioneMgrBean.update(esc);
+			if(esc.getSelected() && !pacchPred.getEscursione().contains(esc)) {
+				pacchPred.getEscursione().add(esc);
+			}
+		}
+		pacchPredMgrBean.update(pacchPred);
+		return "/homePage?faces-redirect=true";
+	}
+
 }

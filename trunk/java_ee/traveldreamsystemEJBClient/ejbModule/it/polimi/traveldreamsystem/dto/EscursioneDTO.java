@@ -21,8 +21,10 @@ public class EscursioneDTO {
 
 	@NotEmpty
 	private String luogo;
-	
+
 	private String descrizione;
+	
+	private Boolean selected = false;
 
 	public int getIdProdBase() {
 		return idProdBase;
@@ -70,6 +72,14 @@ public class EscursioneDTO {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public Boolean getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Boolean selected) {
+		this.selected = selected;
 	}
 
 

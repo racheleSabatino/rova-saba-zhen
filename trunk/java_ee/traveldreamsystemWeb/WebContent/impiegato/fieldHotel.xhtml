@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+					<p:fieldset legend="Hotel" collapsed="false" toggleable="true"
+						toggleSpeed="500">
+
+						<p:dataTable id="Hotel" var="escursione"
+							value="#{escursioneBean.escursioni}" paginator="true"
+							filteredValue="#{escursioneBean.filteredEscursioni}" rows="5"
+							editable="true" editMode="cell">
+
+
+
+							<p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}" />
+
+							<p:column headerText=" " style="width:4%">
+									<p:commandButton update="Hotel"
+										rendered="#{escursione.selected}" icon="ui-icon-check"
+										action="#{escursioneBean.selected}">
+										<f:setPropertyActionListener value="#{escursione}"
+											target="#{escursioneBean.escursione}" />
+									</p:commandButton>
+
+									<p:commandButton update="Hotel"
+										rendered="#{not escursione.selected}" icon="ui-icon-radio-on"
+										action="#{escursioneBean.selected}">
+										<f:setPropertyActionListener value="#{escursione}"
+											target="#{escursioneBean.escursione}" />
+									</p:commandButton>
+							</p:column>
+
+							<p:column headerText="Id Escursione" filterBy="idProdBase"
+								style="width:4%">
+								<h:outputText value="#{escursione.idProdBase}" />
+							</p:column>
+
+
+							<p:column headerText="Data Partenza" style="width:25%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.dataPartenza}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.dataPartenza}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Data Ritorno" style="width:25%">
+
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.dataRitorno}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.dataRitorno}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Descrizione" style="width:25%">
+
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.dataRitorno}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.dataRitorno}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Luogo" style="width:15%">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.luogo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.luogo}" style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Costo" style="width:5%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{escursione.costo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{escursione.costo}" style="width:90%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+						</p:dataTable>
+
+					</p:fieldset>
+
+	</ui:composition>
+	
+</h:body>
+</html>
