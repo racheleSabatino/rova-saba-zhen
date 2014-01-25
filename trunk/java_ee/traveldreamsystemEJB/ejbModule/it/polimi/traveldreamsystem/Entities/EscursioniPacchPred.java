@@ -23,11 +23,11 @@ public class EscursioniPacchPred implements Serializable {
 	@JoinColumn(name = "IDPACCHPRED", referencedColumnName = "IDPACCHPRED")
 	private PacchPred pacchPred;
 
-	public EscursioniPacchPred() {}
-
-	public EscursioniPacchPred(int idPacchPred, int idEscursione) {
-		// TODO Auto-generated constructor stub
+	public EscursioniPacchPred(PacchPred pacchPred, Escursione escursioni) {
+		this.escursioni = escursioni;
+		this.pacchPred = pacchPred;
 	}
+
 
 	public Escursione getEscursioni() {
 		return escursioni;
