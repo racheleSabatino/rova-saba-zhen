@@ -67,6 +67,7 @@ public class Hotel implements Serializable {
 	public Hotel() {}
 
 	public Hotel(HotelDTO hotelDTO) {
+		idprodbase = hotelDTO.getIdprodbase();
 		costo = hotelDTO.getCosto();
 		descrizione = hotelDTO.getDescrizione();
 		citta = hotelDTO.getCitta();

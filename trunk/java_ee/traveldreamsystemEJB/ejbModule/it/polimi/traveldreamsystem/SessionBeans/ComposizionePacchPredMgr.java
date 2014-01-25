@@ -164,10 +164,10 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	
 	@Override
 	public boolean findHotel(int idPacchPred, int idHotel){ 
-		Query q = em.createQuery("SELECT e FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni e "
-				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idEscursione");
+		Query q = em.createQuery("SELECT e FROM HotelsPacchPred h JOIN h.pacchPred p JOIN h.hotel e "
+				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idHotel");
 		q.setParameter("idPacchPred", idPacchPred);
-	//	q.setParameter("idEscursione", idEscursione);
+		q.setParameter("idHotel", idHotel);
 		List list = q.getResultList();
 		if(list.isEmpty()) {
 			return false;
@@ -179,10 +179,10 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	
 	@Override
 	public boolean findTrasporto(int idPacchPred, int idTrasporto){ 
-		Query q = em.createQuery("SELECT e FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni e "
-				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idEscursione");
+		Query q = em.createQuery("SELECT e FROM TrasportiPacchPred h JOIN h.pacchPred p JOIN h.trasporto e "
+				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idTrasporto");
 		q.setParameter("idPacchPred", idPacchPred);
-//		q.setParameter("idEscursione", idEscursione);
+		q.setParameter("idTrasporto", idTrasporto);
 		List list = q.getResultList();
 		if(list.isEmpty()) {
 			return false;
