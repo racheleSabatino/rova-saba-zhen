@@ -50,15 +50,15 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		em.persist(h);
     }
 
-   //Metodo che permette di eliminare un hotel da un pacchetto predefinito. Si elimina cioe' una tupla dalla relativa 
-   //tabella HotelsPacchPred. Bisogna pero' aggiungere il controllo che quell'hotel non sia presente
-    //in un pacchetto personalizzato associato a quel pacchetto predefinito
+   
 	@Override
 	public void removeHotelToPacch(int idPacchPred, int idHotel) {
-		Query q = em.createQuery("DELETE FROM HotelsPacchPred h JOIN h.pacchPred p JOIN h.hotel o "
-				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idHotel");
-		q.setParameter("idPacchPred", idPacchPred);
-		q.setParameter("idHotel", idHotel);
+		PacchPred pacchPred = em.find(PacchPred.class, idPacchPred);
+		Hotel hotel = em.find(Hotel.class, idHotel);
+		Query q = em.createQuery("DELETE FROM HotelsPacchPred e "
+				+ "WHERE e.pacchPred = :pacchPred AND e.hotel = :hotel");
+		q.setParameter("pacchPred", pacchPred);
+		q.setParameter("hotel", hotel);
 	}
 		
 
@@ -74,10 +74,12 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public void removeTrasportoToPacch(int idPacchPred, int idTrasporto) {
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.pacchPer p JOIN h.trasporto o "
-				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
-		q.setParameter("idPacchPred", idPacchPred);
-		q.setParameter("idEscursione", idTrasporto);
+		PacchPred pacchPred = em.find(PacchPred.class, idPacchPred);
+		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
+		Query q = em.createQuery("DELETE FROM TrasportiPacchPred e "
+				+ "WHERE e.pacchPred = :pacchPred AND e.trasporto = :trasporto");
+		q.setParameter("pacchPred", pacchPred);
+		q.setParameter("trasporto", trasporto);
 	}
 		
 
@@ -92,11 +94,12 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public void removeEscursioneToPacch(int idPacchPred, int idEscursione) {
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni o "
-				+ "WHERE p.idPacchPred = :idPacchPred AND o.idprodobase = :idEscursione");
-		q.setParameter("idPacchPred", idPacchPred);
-		q.setParameter("idEscursione", idEscursione);
-	
+		PacchPred pacchPred = em.find(PacchPred.class, idPacchPred);
+		Escursione escursione = em.find(Escursione.class, idEscursione);
+		Query q = em.createQuery("DELETE FROM EscursioniPacchPred e "
+				+ "WHERE e.pacchPred = :pacchPred AND e.escursioni = :escursione");
+		q.setParameter("pacchPred", pacchPred);
+		q.setParameter("escursione", escursione);
 	}
     
 
