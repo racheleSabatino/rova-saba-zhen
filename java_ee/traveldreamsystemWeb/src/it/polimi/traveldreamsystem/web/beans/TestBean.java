@@ -25,6 +25,8 @@ public class TestBean {
 	private PacchPredMgrLocal pacchPredMgrBean;
 	@EJB
 	private ComposizPacchPredMgrLocal compPacchMgr;
+	
+	private List<EscursioneDTO> escursioni;
 
 	@EJB
 	private EscursioneMgrBeanLocal escursioneMgrBean;
@@ -34,12 +36,19 @@ public class TestBean {
 		pp.setIdPacchPred(1);
 		pp.setDescrizione("asd");
 		pacchPredMgrBean.addNewPacchPred(pp);
+		
 		return "/test";
 	}
 
 	public String a2() {
-		compPacchMgr.getEscursioniPacchPred(1);
+		escursioni = compPacchMgr.getEscursioniPacchPred(1);
+		return "a";
+
+	}
+	
+	public String a3() {
 		return "/test";
+		
 	}
 
 }
