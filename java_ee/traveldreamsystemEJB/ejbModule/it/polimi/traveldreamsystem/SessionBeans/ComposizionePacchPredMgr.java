@@ -100,6 +100,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 				+ "WHERE e.pacchPred = :pacchPred AND e.escursioni = :escursione");
 		q.setParameter("pacchPred", pacchPred);
 		q.setParameter("escursione", escursione);
+		q.executeUpdate();
 	}
     
 
