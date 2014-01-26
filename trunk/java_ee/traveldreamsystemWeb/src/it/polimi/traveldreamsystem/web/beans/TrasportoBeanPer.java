@@ -15,10 +15,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean
 @SessionScoped
-public class TrasportoBeanPer extends PacchPredBean {
-
-	@EJB
-	private TrasportoMgrBeanLocal trasportoMgrBean;
+public class TrasportoBeanPer extends PacchPerBean {
 
 	private List<TrasportoDTO> trasporti;
 
@@ -42,10 +39,10 @@ public class TrasportoBeanPer extends PacchPredBean {
 	}
 
 	public void init(int id) {
-		trasporti = trasportoMgrBean.getAllTrasporto();
-		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
+		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
+		trasporti = compPacchPredMgr.getTrasportiPacchPred(pacchPer.getIdPacchPred());
 		for (TrasportoDTO aDTO : trasporti) {
-			if (compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
+			if (compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
 			} else {
 				aDTO.setSelected(false);
@@ -62,7 +59,7 @@ public class TrasportoBeanPer extends PacchPredBean {
 	}
 
 	public void addTrasporto(){
-		trasportoMgrBean.addNewTrasporto(trasporto);
+		compPacchPerMgr.addTrasportoToPacchPer(pacchId, trasporto.getIdProdBase());
         FacesContext context = FacesContext.getCurrentInstance();  
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 
@@ -105,19 +102,18 @@ public class TrasportoBeanPer extends PacchPredBean {
 		System.out.println("cell save");
 
 		for (TrasportoDTO aDTO : trasporti) {
-			trasportoMgrBean.update(aDTO);
 			if (aDTO.getSelected()
-					&& !compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchMgr.addTrasportoToPacch(pacchPred.getIdPacchPred(),
+					&& !compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.addTrasportoToPacchPer(pacchPer.getIdPacchPred(),
 						aDTO.getIdProdBase());
 			}
 			if (!aDTO.getSelected()
-					&& compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchMgr.removeTrasportoToPacch(pacchPred.getIdPacchPred(),
+					&& compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.removeTrasportoToPacchPer(pacchPer.getIdPacchPred(),
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPredMgrBean.update(pacchPred);
+		pacchPerMgrBean.update(pacchPer);
 	}
 	
 }

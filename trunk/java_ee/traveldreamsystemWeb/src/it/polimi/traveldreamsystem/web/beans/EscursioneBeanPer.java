@@ -14,10 +14,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean
 @SessionScoped
-public class EscursioneBeanPer extends PacchPredBean{
-	
-	@EJB
-	private EscursioneMgrBeanLocal escursioneMgrBean;
+public class EscursioneBeanPer extends PacchPerBean{
 
 	private List<EscursioneDTO> escursioni;
 
@@ -41,10 +38,10 @@ public class EscursioneBeanPer extends PacchPredBean{
 	}
 
 	public void init(int id) {
-		escursioni = escursioneMgrBean.getAllEscursione();
-		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
+		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
+		escursioni = compPacchPredMgr.getEscursioniPacchPred(pacchPer.getIdPacchPred());
 		for (EscursioneDTO aDTO : escursioni) {
-			if (compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
+			if (compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
 			} else {
 				aDTO.setSelected(false);
@@ -61,7 +58,7 @@ public class EscursioneBeanPer extends PacchPredBean{
 	}
 
 	public void addEscursione() {
-		escursioneMgrBean.addNewEscursione(escursione);
+		compPacchPerMgr.addEscursioneToPacchPer(pacchId, escursione.getIdProdBase());
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 	}
@@ -103,19 +100,18 @@ public class EscursioneBeanPer extends PacchPredBean{
 		System.out.println("cell save");
 
 		for (EscursioneDTO aDTO : escursioni) {
-			escursioneMgrBean.update(aDTO);
 			if (aDTO.getSelected()
-					&& !compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchMgr.addEscursioneToPacch(pacchPred.getIdPacchPred(),
+					&& !compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.addEscursioneToPacchPer(pacchPer.getIdPacchPred(),
 						aDTO.getIdProdBase());
 			}
 			if (!aDTO.getSelected()
-					&& compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchMgr.removeEscursioneToPacch(pacchPred.getIdPacchPred(),
+					&& compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.removeEscursioneToPacchPer(pacchPer.getIdPacchPred(),
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPredMgrBean.update(pacchPred);
+		pacchPerMgrBean.update(pacchPer);
 	}
 
 }
