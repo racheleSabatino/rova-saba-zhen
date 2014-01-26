@@ -14,9 +14,9 @@
 		<ui:define name="content">
 			<h:form>
 				<f:metadata>
-					<f:viewParam name="id" value="#{hotelBean.pacchId}" />
-					<f:viewParam name="id" value="#{escursioneBean.pacchId}" />
-					<f:viewParam name="id" value="#{trasportoBean.pacchId}" />
+					<f:viewParam name="id" value="#{hotelBeanPer.pacchId}" />
+					<f:viewParam name="id" value="#{escursioneBeanPer.pacchId}" />
+					<f:viewParam name="id" value="#{trasportoBeanPer.pacchId}" />
 				</f:metadata>
 
 				<p:remoteCommand autoRun="true" update="Hotel" />
@@ -25,20 +25,16 @@
 
 				<p:growl id="messages" showDetail="true" />
 
-				<p:panel header="Crea Pacchetto Predefinito">
+				<p:panel header="Crea Pacchetto Personalizzato">
 
 
 					<p:panelGrid columns="4">
 						<h:messages />
 					</p:panelGrid>
 					<p:panelGrid id="pacchGrid" columns="4">
-						<h:outputLabel for="idPacchPred" value="idPacchPred: " />
+						<h:outputLabel for="idPacchPer" value="idPacchPer: " />
 						<p:inputText id="idPacchPred"
-							value="#{hotelBean.pacchPred.idPacchPred}" readonly="true" />
-
-						<h:outputLabel for="descrizione" value="Descrizione: " />
-						<p:inputText id="descrizione"
-							value="#{hotelBean.pacchPred.descrizione}" />
+							value="#{hotelBeanPer.pacchPer.idPacchPer}" readonly="true" />
 					</p:panelGrid>
 
 					<ui:insert name="hotel">
@@ -56,17 +52,17 @@
 					<p:panelGrid columns="2">
 						<p:commandButton immediate="true" value="Salva"
 							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid">
-							<f:ajax listener="#{hotelBean.save}" />
-							<f:ajax listener="#{escursioneBean.save}" />
-							<f:ajax listener="#{trasportoBean.save}" />
+							<f:ajax listener="#{hotelBeanPer.save}" />
+							<f:ajax listener="#{escursioneBeanPer.save}" />
+							<f:ajax listener="#{trasportoBeanPer.save}" />
 						</p:commandButton>
 
 						<p:commandButton immediate="true" value="Reset"
 							icon="ui-icon-refresh"
 							update="Hotel,Escursione,Trasporto,pacchGrid">
-							<f:ajax listener="#{escursioneBean.initajax}" />
-							<f:ajax listener="#{hotelBean.initajax}" />
-							<f:ajax listener="#{trasportoBean.initajax}" />
+							<f:ajax listener="#{escursioneBeanPer.initajax}" />
+							<f:ajax listener="#{hotelBeanPer.initajax}" />
+							<f:ajax listener="#{trasportoBeanPer.initajax}" />
 						</p:commandButton>
 					</p:panelGrid>
 				</p:panel>
