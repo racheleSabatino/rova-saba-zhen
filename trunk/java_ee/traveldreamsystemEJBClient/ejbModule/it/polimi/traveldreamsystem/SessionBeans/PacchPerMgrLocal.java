@@ -33,5 +33,7 @@ public interface PacchPerMgrLocal {
 
 	PacchPerDTO findPacchPerDTO(int idPacchPer);
 
+	void update(PacchPerDTO pacchetto);
+
 
 }
