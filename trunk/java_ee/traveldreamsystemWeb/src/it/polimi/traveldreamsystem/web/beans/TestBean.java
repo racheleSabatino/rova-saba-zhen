@@ -101,6 +101,10 @@ public class TestBean {
 		setIdPacchPred(ids);
 		return null;
 	}
+	
+	public String a8(){
+		return "/creazionePacchPer?faces-redirect=true&amp;id=1";
+	}
 
 	public String getDate() {
 		return date;

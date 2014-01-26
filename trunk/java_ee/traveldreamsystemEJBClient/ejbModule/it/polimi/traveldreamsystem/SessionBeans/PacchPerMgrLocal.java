@@ -29,7 +29,7 @@ public interface PacchPerMgrLocal {
 
 	int viewCostoTotale(int idPacchPer);
 
-	List<PacchPerDTO> getAllPacchPred();
+	List<PacchPerDTO> getAllPacchPer();
 
 
 }
