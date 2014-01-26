@@ -49,7 +49,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     		return null;
     	}
     	PacchPerDTO pacchDTO = new PacchPerDTO();
-    	pacchDTO.setIdpacchper(pacchetto.getIdPacchPer());
+    	pacchDTO.setIdPacchPer(pacchetto.getIdPacchPer());
     	pacchDTO.setListaRegali(pacchetto.isListaRegali());
     	pacchDTO.setIdPacchPred(pacchetto.getPacchPred().getIdPacchPred());
     	pacchDTO.setMailCliente(pacchetto.getCliente().getMail());
@@ -58,7 +58,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     }
  
     @Override
-    public List<PacchPerDTO> getAllPacchPred() {
+    public List<PacchPerDTO> getAllPacchPer() {
 		List<PacchPer> pacchetti = new ArrayList<PacchPer>();
 		Query q = em.createQuery("SELECT p FROM PacchPer p");
 		pacchetti = (List<PacchPer>) q.getResultList();
@@ -169,11 +169,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     
     /*
      * acquista un prodotto base di un pacchetto. Controllare che il cliente non acquisti un prodotto di una 
-     * sua lista regali, che il pacchetto non sia già completamente acquistato
+     * sua lista regali, che il pacchetto non sia gia completamente acquistato
      * @return -1 se l'id del pacchetto personalizzato non esiste in database
      * 		   -2 se la mail dell'acquirente non corrisponde alla mail di un cliente in database
-     * 		   -3 se la mail dell'acquirente corrisponde al cliente proprietario della lista regali, cioè
-     * 			un cliente non può acquistare un prodotto dalla sua lista regali
+     * 		   -3 se la mail dell'acquirente corrisponde al cliente proprietario della lista regali, cioe
+     * 			un cliente non puo acquistare un prodotto dalla sua lista regali
      * 			-4 se non esiste l'id dell'hotel
      * 		    0 se l'acquisto si conclude con successo
      */

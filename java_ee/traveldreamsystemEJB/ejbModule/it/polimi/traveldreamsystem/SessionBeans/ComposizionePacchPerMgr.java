@@ -29,7 +29,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 @LocalBean
-public class ComposizionePacchPerMgr implements ComposizPaccPerMgrLocal {
+public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	
 	@PersistenceContext
 	protected EntityManager em;

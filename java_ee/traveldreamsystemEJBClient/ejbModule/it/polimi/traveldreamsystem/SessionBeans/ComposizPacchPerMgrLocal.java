@@ -6,7 +6,10 @@ import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import java.util.List;
 
-interface ComposizPaccPerMgrLocal {
+import javax.ejb.Local;
+
+@Local
+public interface ComposizPacchPerMgrLocal {
 
 	void addHotelToPacchPer(int idPacchPer, int idHotel);
 
@@ -19,7 +22,6 @@ interface ComposizPaccPerMgrLocal {
 	void removeEscursioneToPacchPer(int idPacchPer, int idEscursione);
 
 	void removeTrasportoToPacchPer(int idPacchPer, int idTrasporto);
-
 
 	List<EscursioneDTO> getEscursioniPacchPer(int idPacchPred);
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="/template/common.xhtml">
+
+		<ui:define name="content">
+			<h:form>
+				<f:metadata>
+					<f:viewParam name="id" value="#{hotelBean.pacchId}" />
+					<f:viewParam name="id" value="#{escursioneBean.pacchId}" />
+					<f:viewParam name="id" value="#{trasportoBean.pacchId}" />
+				</f:metadata>
+
+				<p:remoteCommand autoRun="true" update="Hotel" />
+				<p:remoteCommand autoRun="true" update="Escursione" />
+				<p:remoteCommand autoRun="true" update="Trasporto" />
+
+				<p:growl id="messages" showDetail="true" />
+
+				<p:panel header="Crea Pacchetto Predefinito">
+
+
+					<p:panelGrid columns="4">
+						<h:messages />
+					</p:panelGrid>
+					<p:panelGrid id="pacchGrid" columns="4">
+						<h:outputLabel for="idPacchPred" value="idPacchPred: " />
+						<p:inputText id="idPacchPred"
+							value="#{hotelBean.pacchPred.idPacchPred}" readonly="true" />
+
+						<h:outputLabel for="descrizione" value="Descrizione: " />
+						<p:inputText id="descrizione"
+							value="#{hotelBean.pacchPred.descrizione}" />
+					</p:panelGrid>
+
+					<ui:insert name="hotel">
+						<ui:include src="fieldHotel.xhtml" />
+					</ui:insert>
+
+					<ui:insert name="escursione">
+						<ui:include src="fieldEscursione.xhtml" />
+
+					</ui:insert>
+					<ui:insert name="trasporto">
+						<ui:include src="fieldTrasporto.xhtml" />
+					</ui:insert>
+
+					<p:panelGrid columns="2">
+						<p:commandButton immediate="true" value="Salva"
+							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid">
+							<f:ajax listener="#{hotelBean.save}" />
+							<f:ajax listener="#{escursioneBean.save}" />
+							<f:ajax listener="#{trasportoBean.save}" />
+						</p:commandButton>
+
+						<p:commandButton immediate="true" value="Reset"
+							icon="ui-icon-refresh"
+							update="Hotel,Escursione,Trasporto,pacchGrid">
+							<f:ajax listener="#{escursioneBean.initajax}" />
+							<f:ajax listener="#{hotelBean.initajax}" />
+							<f:ajax listener="#{trasportoBean.initajax}" />
+						</p:commandButton>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

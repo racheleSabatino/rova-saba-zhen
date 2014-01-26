@@ -15,12 +15,12 @@ public class PacchPerDTO {
 	public PacchPerDTO() {
 	}
 
-	public int getIdpacchper() {
+	public int getIdPacchPer() {
 		return this.idPacchPer;
 	}
 
-	public void setIdpacchper(int idpacchper) {
-		this.idPacchPer = idpacchper;
+	public void setIdPacchPer(int idPacchPer) {
+		this.idPacchPer = idPacchPer;
 	}
 
 	public boolean getListaRegali() {

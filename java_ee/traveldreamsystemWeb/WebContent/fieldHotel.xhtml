@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition>
+
+					<p:fieldset legend="Hotel" collapsed="false" toggleable="true"
+						toggleSpeed="500">
+
+						<p:dataTable id="Hotel" var="hotel"
+							value="#{hotelBean.hotels}" paginator="true"
+							filteredValue="#{hotelBean.filteredHotels}" rows="5"
+							editable="true" editMode="cell">
+
+							<p:column headerText=" " style="width:4%">
+									<p:commandButton update="Hotel"
+										rendered="#{hotel.selected}" icon="ui-icon-check"
+										action="#{hotelBean.selected}">
+										<f:setPropertyActionListener value="#{hotel}"
+											target="#{hotelBean.hotel}" />
+									</p:commandButton>
+
+									<p:commandButton update="Hotel"
+										rendered="#{not hotel.selected}" icon="ui-icon-radio-on"
+										action="#{hotelBean.selected}">
+										<f:setPropertyActionListener value="#{hotel}"
+											target="#{hotelBean.hotel}" />
+									</p:commandButton>
+							</p:column>
+
+							<p:column headerText="Id Hotel" filterBy="idProdBase" filterMatchMode="contains"
+								style="width:4%">
+								<h:outputText value="#{hotel.idProdBase}" />
+							</p:column>
+
+							<p:column headerText="Citta" filterBy="citta" filterMatchMode="contains" style="width:25%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.citta}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.citta}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+
+							<p:column headerText="Data Arrivo" style="width:25%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.dataPartenza}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.dataPartenza}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Data Ritorno" style="width:25%">
+
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.dataRitorno}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.dataRitorno}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Descrizione" filterBy="descrizione" filterMatchMode="contains" style="width:25%">
+
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.descrizione}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.descrizione}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+							
+							<p:column headerText="Stelle" filterBy="stelle" filterMatchMode="contains" style="width:25%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.stelle}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.stelle}"
+											style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Costo" filterBy="costo" filterMatchMode="contains" style="width:5%">
+
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{hotel.costo}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{hotel.costo}" style="width:90%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+						</p:dataTable>
+
+					</p:fieldset>
+
+	</ui:composition>
+	
+</h:body>
+</html>

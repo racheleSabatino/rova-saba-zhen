@@ -47,9 +47,9 @@ public class PacchPer implements Serializable {
 	public PacchPer() {}
 
 	public PacchPer(PacchPerDTO newPacchetto) {
-		this.idPacchPer = newPacchetto.getIdpacchper();
+		this.idPacchPer = newPacchetto.getIdPacchPer();
 		this.listaRegali = newPacchetto.getListaRegali();
-		this.pacchPred.setIdPacchPred(newPacchetto.getIdpacchper());
+		this.pacchPred.setIdPacchPred(newPacchetto.getIdPacchPer());
 		this.cliente.setMail(newPacchetto.getMailCliente());
 	}
 
