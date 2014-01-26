@@ -25,16 +25,25 @@ public class TrasportoBean extends PacchPredBean {
 	private List<TrasportoDTO> filteredTrasporti;
 
 	private TrasportoDTO trasporto;
+
+	private int pacchId;
+
+	public int getPacchId() {
+		return pacchId;
+	}
+
+	public void setPacchId(int pacchId) {
+		this.pacchId = pacchId;
+		init(pacchId);
+	}
 	
 	public TrasportoBean() {
 		trasporto = new TrasportoDTO();
 	}
 
-	@PostConstruct
-	public void init() {
-		trasporto = new TrasportoDTO();
+	public void init(int id) {
 		trasporti = trasportoMgrBean.getAllTrasporto();
-		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
+		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
 		for (TrasportoDTO aDTO : trasporti) {
 			if (compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -43,8 +52,12 @@ public class TrasportoBean extends PacchPredBean {
 			}
 		}
 	}
+	
+	public void init() {
+		init(pacchId);
+	}
 
-	public void init(AjaxBehaviorEvent e) {
+	public void initajax(AjaxBehaviorEvent e) {
 		init();
 	}
 

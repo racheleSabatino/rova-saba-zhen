@@ -1,5 +1,7 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,6 +36,16 @@ public class PacchPredBean {
 	
 	public PacchPredDTO getTestPacch() {
 		return pacchPredMgrBean.getAllPacchPred().get(0);
+	}
+
+	public String creazionePacchPred(){
+		PacchPredDTO pacchPred = new PacchPredDTO();
+		pacchPredMgrBean.addNewPacchPred(pacchPred);
+		List<PacchPredDTO> listDTO = pacchPredMgrBean.getAllPacchPred();
+		int id = listDTO.get(listDTO.size() -1).getIdPacchPred();
+		return "/impiegato/creazionePacchPred?faces-redirect=true"
+				+ "&amp;id=" + id
+				;
 	}
 
 }
