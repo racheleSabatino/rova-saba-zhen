@@ -5,7 +5,6 @@ import java.util.List;
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,14 +25,24 @@ public class EscursioneBean extends PacchPredBean{
 
 	private EscursioneDTO escursione;
 
-	public EscursioneBean() {
+	private int pacchId;
+
+	public int getPacchId() {
+		return pacchId;
 	}
 
-	@PostConstruct
-	public void init() {
+	public void setPacchId(int pacchId) {
+		this.pacchId = pacchId;
+		init(pacchId);
+	}
+
+	public EscursioneBean() {
 		escursione = new EscursioneDTO();
+	}
+
+	public void init(int id) {
 		escursioni = escursioneMgrBean.getAllEscursione();
-		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
+		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
 		for (EscursioneDTO aDTO : escursioni) {
 			if (compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -42,8 +51,12 @@ public class EscursioneBean extends PacchPredBean{
 			}
 		}
 	}
+	
+	public void init() {
+		init(pacchId);
+	}
 
-	public void init(AjaxBehaviorEvent e) {
+	public void initajax(AjaxBehaviorEvent e) {
 		init();
 	}
 

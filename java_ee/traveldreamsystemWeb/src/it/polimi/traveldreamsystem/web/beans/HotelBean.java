@@ -25,15 +25,25 @@ public class HotelBean extends PacchPredBean {
 	private List<HotelDTO> filteredHotels;
 
 	private HotelDTO hotel;
-	
-	public HotelBean() {
+
+	private int pacchId;
+
+	public int getPacchId() {
+		return pacchId;
 	}
 
-	@PostConstruct
-	public void init() {
+	public void setPacchId(int pacchId) {
+		this.pacchId = pacchId;
+		init(pacchId);
+	}
+	
+	public HotelBean() {
 		hotel = new HotelDTO();
+	}
+
+	public void init(int id) {
 		hotels = hotelMgrBean.getAllHotel();
-		pacchPred = pacchPredMgrBean.getAllPacchPred().get(0);
+		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
 		for (HotelDTO aDTO : hotels) {
 			if (compPacchMgr.findHotel(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -42,8 +52,12 @@ public class HotelBean extends PacchPredBean {
 			}
 		}
 	}
+	
+	public void init() {
+		init(pacchId);
+	}
 
-	public void init(AjaxBehaviorEvent e) {
+	public void initajax(AjaxBehaviorEvent e) {
 		init();
 	}
 
