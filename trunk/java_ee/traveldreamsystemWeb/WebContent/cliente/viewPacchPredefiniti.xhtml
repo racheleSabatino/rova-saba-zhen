@@ -17,23 +17,47 @@
 
 				<p:outputLabel value="Visualizza pacchetti predefiniti" />
 				
-			<p>
-<h:inputText id="userNo"
-title="Type a number from 0 to 10:"
-value="#{userNumberBean.userNumber}">
-<f:validateLongRange minimum="#{userNumberBean.minimum}"
-maximum="#{userNumberBean.maximum}"/>
-</h:inputText>
-<h:commandButton id="submit" value="Submit"
-action="response"/>
-</p>
-<h:message showSummary="true" showDetail="false"
-style="color: #d20005;
-font-family: 'New Century Schoolbook', serif;
-font-style: oblique;
-text-decoration: overline"
-id="errors1"
-for="userNo"/>
+				
+		<h:form id="form">  
+  
+    <p:dataGrid var="pacchPred" value="#{tablePacchPredBean.pacchetti}" columns="3"  
+        rows="12" paginator="true"  
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="9,12,15">  
+  
+        <p:panel header="#{pacchPred.idPacchPred}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage value="/images/vacanza.jpg"/> 
+  
+                <h:outputText value="#{pacchPred.descrizione}" />  
+  
+                <p:commandLink update=":form:pacchPredDetail" oncomplete="PF('pacchPredDialog').show()" title="Vedi dettagli">  
+                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                    <f:setPropertyActionListener value="#{pacchPred}"   
+                            target="#{tablePacchPredBean.selectedPacchetto}" />  
+                </p:commandLink>  
+            </h:panelGrid>  
+        </p:panel>  
+  
+    </p:dataGrid>  
+      
+    <p:dialog header="Dettagli Pacchetto" widgetVar="pacchPredDialog" modal="true">  
+        <p:outputPanel id="pacchPredDetail" style="text-align:center;">  
+          
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel for="Partenze da" value="Model No: " />  
+                <h:outputText id="partenzeDa" value="#{tableBean.selectedCar.idPacchPred}" />  
+                  
+                <h:outputLabel for="Partenze il" value="Year: " />  
+                <h:outputText id="partenzeIl" value="#{tableBean.selectedCar.descrizione}" />  
+                  
+                
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+  
+</h:form>  
 
 			</p:panel>
 
