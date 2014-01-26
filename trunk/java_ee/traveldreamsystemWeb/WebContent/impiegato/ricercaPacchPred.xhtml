@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel>
+    
+    <h:form id="form">   
+  
+    <p:dataTable id="pacchettiPred" var="pacchPred" value="#{tablePacchPredBean.pacchetti}"   
+        rows="12" paginator="true"  
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="9,12,15">  
+  
+        <p:column headerText="Id Pacchetto Predefinito" style="width:24%">  
+            <h:outputText value="#{pacchPred.idPacchPred}" align = "center"/>  
+        </p:column>  
+  
+        <p:column headerText="Descrizione" style="width:24%">  
+            <h:outputText value="#{pacchPred.descrizione}" />  
+        </p:column>  
+ 
+  
+        <p:column style="width:4%">  
+                <p:commandButton id="selectButton" 
+                action = "/impiegato/creazionePacchPred.xhtml?id"
+                icon="ui-icon-search" title="Mostra">  
+                <f:setPropertyActionListener value="#{pacchPred}" target="#{tablePacchPredBean.selectedPacchetto}" />  
+                <f:param name="id" value="pacchPred.idPacchPred" />
+            </p:commandButton>  
+        </p:column>  
+  
+    </p:dataTable>  
+  
+  
+</h:form>  
+    
+    			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
+    
+                          

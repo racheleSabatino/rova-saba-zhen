@@ -3,8 +3,7 @@ package it.polimi.traveldreamsystem.web.beans;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
-
-import java.io.IOException;  
+ 
 import java.io.Serializable;  
 import java.util.ArrayList;  
 import java.util.List;  
@@ -12,7 +11,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
          
 
@@ -39,6 +37,10 @@ public class TablePacchPredBean implements Serializable {
         
         private final static String vacanze[];
         
+        private List<PacchPredDTO> filteredPacchetti;
+        
+        private int idPacchettoSelezionato;
+        
         static {
         	vacanze = new String[3];
         	vacanze[0] = "sedia";
@@ -62,6 +64,7 @@ public class TablePacchPredBean implements Serializable {
         public void setSelectedPacchetto(PacchPredDTO selectedPacchetto) {  
                 this.selectedPacchetto = selectedPacchetto;  
                 updateDetailPacch(selectedPacchetto);
+                idPacchettoSelezionato = selectedPacchetto.getIdPacchPred();
         }  
            
          
@@ -96,7 +99,23 @@ public class TablePacchPredBean implements Serializable {
                 this.cittaPacchSelezionato = cittaPacchSelezionato;
         }
 
-      
-             
+	    public List<PacchPredDTO> getFilteredPacchetti() {  
+	        return filteredPacchetti;  
+	    }  
+	  
+	    public void setFilteredCars(List<PacchPredDTO> filteredPacchetti) {  
+	        this.filteredPacchetti = filteredPacchetti;  
+	    }
+
+		public int getIdPacchettoSelezionato() {
+			return idPacchettoSelezionato;
+		}
+
+		public void setIdPacchettoSelezionato(int idPacchettoSelezionato) {
+			this.idPacchettoSelezionato = idPacchettoSelezionato;
+		}  
+	  
+
+	
            
 }
