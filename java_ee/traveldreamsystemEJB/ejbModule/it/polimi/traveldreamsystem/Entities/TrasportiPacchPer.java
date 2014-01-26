@@ -28,7 +28,7 @@ public class TrasportiPacchPer implements Serializable {
 	private PacchPer pacchPer;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATAACQUISTO", nullable=false)
+	@Column(name="DATAACQUISTO")
 	private Date dataAcquisto;
 	
 	
