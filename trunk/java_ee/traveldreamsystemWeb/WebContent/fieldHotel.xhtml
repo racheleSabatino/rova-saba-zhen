@@ -15,23 +15,23 @@
 						toggleSpeed="500">
 
 						<p:dataTable id="Hotel" var="hotel"
-							value="#{hotelBean.hotels}" paginator="true"
-							filteredValue="#{hotelBean.filteredHotels}" rows="5"
+							value="#{hotelBeanPer.hotels}" paginator="true"
+							filteredValue="#{hotelBeanPer.filteredHotels}" rows="5"
 							editable="true" editMode="cell">
 
 							<p:column headerText=" " style="width:4%">
 									<p:commandButton update="Hotel"
 										rendered="#{hotel.selected}" icon="ui-icon-check"
-										action="#{hotelBean.selected}">
+										action="#{hotelBeanPer.selected}">
 										<f:setPropertyActionListener value="#{hotel}"
-											target="#{hotelBean.hotel}" />
+											target="#{hotelBeanPer.hotel}" />
 									</p:commandButton>
 
 									<p:commandButton update="Hotel"
 										rendered="#{not hotel.selected}" icon="ui-icon-radio-on"
-										action="#{hotelBean.selected}">
+										action="#{hotelBeanPer.selected}">
 										<f:setPropertyActionListener value="#{hotel}"
-											target="#{hotelBean.hotel}" />
+											target="#{hotelBeanPer.hotel}" />
 									</p:commandButton>
 							</p:column>
 

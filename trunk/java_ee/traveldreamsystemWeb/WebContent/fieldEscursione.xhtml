@@ -15,23 +15,23 @@
 						toggleSpeed="500">
 
 						<p:dataTable id="Escursione" var="escursione"
-							value="#{escursioneBean.escursioni}" paginator="true"
-							filteredValue="#{escursioneBean.filteredEscursioni}" rows="5"
+							value="#{escursioneBeanPer.escursioni}" paginator="true"
+							filteredValue="#{escursioneBeanPer.filteredEscursioni}" rows="5"
 							editable="true" editMode="cell">
 
 							<p:column headerText=" " style="width:4%">
 									<p:commandButton update="Escursione"
 										rendered="#{escursione.selected}" icon="ui-icon-check"
-										action="#{escursioneBean.selected}">
+										action="#{escursioneBeanPer.selected}">
 										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBean.escursione}" />
+											target="#{escursioneBeanPer.escursione}" />
 									</p:commandButton>
 
 									<p:commandButton update="Escursione"
 										rendered="#{not escursione.selected}" icon="ui-icon-radio-on"
-										action="#{escursioneBean.selected}">
+										action="#{escursioneBeanPer.selected}">
 										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBean.escursione}" />
+											target="#{escursioneBeanPer.escursione}" />
 									</p:commandButton>
 							</p:column>
 

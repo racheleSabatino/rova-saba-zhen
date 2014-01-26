@@ -7,12 +7,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
+import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 @ManagedBean
 @SessionScoped
 public class PacchPredBean {
+	
+	@EJB
+	protected PacchPerMgrLocal pacchPerMgrBean;
 	
 	@EJB
 	protected PacchPredMgrLocal pacchPredMgrBean;

@@ -15,23 +15,23 @@
 						toggleSpeed="500">
 
 						<p:dataTable id="Trasporto" var="trasporto"
-							value="#{trasportoBean.trasporti}" paginator="true"
-							filteredValue="#{trasportoBean.filteredTrasporti}" rows="5"
+							value="#{trasportoBeanPer.trasporti}" paginator="true"
+							filteredValue="#{trasportoBeanPer.filteredTrasporti}" rows="5"
 							editable="true" editMode="cell">
 
 							<p:column headerText=" " style="width:4%">
 									<p:commandButton update="Trasporto"
 										rendered="#{trasporto.selected}" icon="ui-icon-check"
-										action="#{trasportoBean.selected}">
+										action="#{trasportoBeanPer.selected}">
 										<f:setPropertyActionListener value="#{trasporto}"
-											target="#{trasportoBean.trasporto}" />
+											target="#{trasportoBeanPer.trasporto}" />
 									</p:commandButton>
 
 									<p:commandButton update="Trasporto"
 										rendered="#{not trasporto.selected}" icon="ui-icon-radio-on"
-										action="#{trasportoBean.selected}">
+										action="#{trasportoBeanPer.selected}">
 										<f:setPropertyActionListener value="#{trasporto}"
-											target="#{trasportoBean.trasporto}" />
+											target="#{trasportoBeanPer.trasporto}" />
 									</p:commandButton>
 							</p:column>
 
