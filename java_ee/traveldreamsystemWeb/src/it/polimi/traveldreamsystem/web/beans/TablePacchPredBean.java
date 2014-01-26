@@ -20,7 +20,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class TablePacchPredBean implements Serializable {  
 
-        private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
 
 
         @EJB
@@ -36,16 +36,23 @@ public class TablePacchPredBean implements Serializable {
         private String datePacchSelezionato;
        
         private String cittaPacchSelezionato;
+        
+        private final static String vacanze[];
+        
+        static {
+        	vacanze = new String[3];
+        	vacanze[0] = "sedia";
+        	vacanze[1] = "palma";
+        	vacanze[2] = "sole";
+        }  
        
-        private String ciao;
 
         public TablePacchPredBean() {  
         }
-         
+        
         @PostConstruct
         public void init() {  
                 pacchetti = pacchPredMgr.getAllPacchPred();
-                setCiao("ciao");
         }  
              
         public PacchPredDTO getSelectedPacchetto() {  
@@ -54,6 +61,7 @@ public class TablePacchPredBean implements Serializable {
          
         public void setSelectedPacchetto(PacchPredDTO selectedPacchetto) {  
                 this.selectedPacchetto = selectedPacchetto;  
+                updateDetailPacch(selectedPacchetto);
         }  
            
          
@@ -88,13 +96,7 @@ public class TablePacchPredBean implements Serializable {
                 this.cittaPacchSelezionato = cittaPacchSelezionato;
         }
 
-        public String getCiao() {
-                return ciao;
-        }
-
-        public void setCiao(String ciao) {
-                this.ciao = ciao;
-        }
+      
              
            
 }

@@ -210,9 +210,13 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Date> date = (List<Date>) q.getResultList();
 		String datee = new String();
-		for(int i = 0; i < date.size(); i++) {
+		if(!date.isEmpty()){
+			String newString = new SimpleDateFormat("yyyy-MM-dd").format(date.get(0));
+			datee = newString;
+		}
+		for(int i = 1; i < date.size(); i++) {
 			String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date.get(i));
-			datee = datee + newstring;
+			datee = ", " + newstring;
 		}
 		return datee;
 	}
@@ -227,8 +231,10 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		q.setParameter("idPacchPred", idPacchPred);
 		List<String> citta = (List<String>) q.getResultList();
 		String newCitta = new String();
-		for(int i = 0; i < citta.size(); i++) {
-			newCitta = newCitta + ", " + citta.get(i);
+		if(!citta.isEmpty())
+			newCitta = citta.get(0);
+		for(int i = 1; i < citta.size(); i++) {
+			newCitta = ", " + citta.get(i);
 		}
 		return newCitta;
 	}
