@@ -13,7 +13,8 @@
 
 		<ui:define name="content">
 			<h:form>
-<p:remoteCommand autoRun="true" update="Escursione" actionListener="#{escursioneBean.init}"/>
+				<p:remoteCommand autoRun="true" update="Escursione"
+					actionListener="#{escursioneBean.init}" />
 				<p:growl id="messages" showDetail="true" />
 
 				<p:panel header="Crea Pacchetto Predefinito">
@@ -43,9 +44,16 @@
 
 					<p:panelGrid columns="2">
 						<p:commandButton value="Salva" icon="ui-icon-disk"
-							action="#{escursioneBean.save}" />
+							update="Hotel,Escursione,Trasporto">
+							<f:ajax listener="#{escursioneBean.save}" />
+							<f:ajax listener="#{hotelBean.save}" />
+						</p:commandButton>
+						
 						<p:commandButton value="Reset" icon="ui-icon-refresh"
-							action="#{escursioneBean.init}" update="Escursione" />
+							action="#{escursioneBean.init}"
+							update="Hotel,Escursione,Trasporto">
+
+						</p:commandButton>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>

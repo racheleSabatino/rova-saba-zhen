@@ -2,7 +2,6 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;

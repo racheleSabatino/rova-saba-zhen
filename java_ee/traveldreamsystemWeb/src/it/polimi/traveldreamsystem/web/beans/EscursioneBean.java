@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
-import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,8 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-
-import org.primefaces.event.CellEditEvent;
+import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean
 @SessionScoped
@@ -43,6 +41,10 @@ public class EscursioneBean extends PacchPredBean{
 				aDTO.setSelected(false);
 			}
 		}
+	}
+
+	public void init(AjaxBehaviorEvent e) {
+		init();
 	}
 
 	public void addEscursione() {
@@ -84,7 +86,7 @@ public class EscursioneBean extends PacchPredBean{
 		}
 	}
 
-	public String save() {
+	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save");
 
 		for (EscursioneDTO aDTO : escursioni) {
@@ -101,7 +103,6 @@ public class EscursioneBean extends PacchPredBean{
 			}
 		}
 		pacchPredMgrBean.update(pacchPred);
-		return "/homePage?faces-redirect=true";
 	}
 
 }
