@@ -5,14 +5,9 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
-import it.polimi.traveldreamsystem.Entities.EscursioniPacchPred;
 import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
-import it.polimi.traveldreamsystem.Entities.HotelsPacchPred;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
-import it.polimi.traveldreamsystem.Entities.PacchPred;
-import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
-import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
@@ -122,7 +117,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 
 	@Override
 	public List<EscursioneDTO> getEscursioniPacchPer(int idPacchPer) {
-		Query q = em.createQuery("SELECT e FROM EscursioniPacchPer h JOIN h.pacchPred p JOIN h.escursioni e "
+		Query q = em.createQuery("SELECT e FROM EscursioniPacchPer h JOIN h.pacchPer p JOIN h.escursioni e "
 				+ "WHERE p.idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);
 		List<Escursione> escursioni = (List<Escursione>) q.getResultList();
@@ -138,7 +133,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 
 	@Override
 	public List<TrasportoDTO> getTrasportiPacchPred(int idPacchPer) {
-		Query q = em.createQuery("SELECT h.trasporto FROM TrasportiPacchPer h JOIN h.pacchPred p JOIN h.trasporto e "
+		Query q = em.createQuery("SELECT h.trasporto FROM TrasportiPacchPer h JOIN h.pacchPer p JOIN h.trasporto e "
 				+ "WHERE p.idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);
 		List<Trasporto> trasporti = (List<Trasporto>) q.getResultList();
