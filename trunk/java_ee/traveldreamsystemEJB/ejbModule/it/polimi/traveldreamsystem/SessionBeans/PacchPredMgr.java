@@ -85,6 +85,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		return this.convertToDTO(pacchetto);
 	}
 
+	@Override
 	public List<PacchPredDTO> getAllPacchPred() {
 		List<PacchPred> pacchetti = new ArrayList<PacchPred>();
 		Query q = em.createQuery("SELECT p FROM PacchPred p");

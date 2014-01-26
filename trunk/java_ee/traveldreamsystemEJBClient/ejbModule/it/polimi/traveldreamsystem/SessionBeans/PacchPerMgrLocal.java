@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.SessionBeans;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.Local;
 
@@ -27,5 +28,8 @@ public interface PacchPerMgrLocal {
 			String mailAcquirente);
 
 	int viewCostoTotale(int idPacchPer);
+
+	List<PacchPerDTO> getAllPacchPred();
+
 
 }
