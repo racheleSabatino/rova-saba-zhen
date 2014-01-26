@@ -1,5 +1,9 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
@@ -9,13 +13,26 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
+
 @ManagedBean
 @RequestScoped
 public class UserBean {
 	private String newPsw1;
 	private String oldPsw;
 	private String newPsw2;
+	private UtenteDTO utenteWithNewPsw;
 	
+	
+	public UtenteDTO getUtenteWithNewPsw() {
+		return utenteWithNewPsw;
+	}
+
+	public void setUtenteWithNewPsw(UtenteDTO utenteWithNewPsw) {
+		this.utenteWithNewPsw = utenteWithNewPsw;
+	}
+
 	@EJB
 	private UtenteMgrBeanLocal utenteMgrBean;
 
@@ -57,11 +74,22 @@ public class UserBean {
 	}
 		
 	public void changePassword(){
-		if (newPsw1 == newPsw2 && (utenteMgrBean.getUtenteDTO()).getPassword() == oldPsw){
+        String newPswHash = DigestUtils.sha256Hex(newPsw1);
+		
+		if (newPsw1 == newPsw2 && (utenteMgrBean.getUtenteDTO()).getPassword() == newPswHash){
 			
+			utenteWithNewPsw = utenteMgrBean.getUtenteDTO();
+			utenteWithNewPsw.setPassword(newPswHash);
+			utenteMgrBean.update(utenteWithNewPsw);
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage("Cambio avvenuto con successo"));  
+
+		} else {
+	        FacesContext context = FacesContext.getCurrentInstance();
+	        context.addMessage(null, new FacesMessage("Hai inserito password non uguali"));  
+
 		}
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Cambio avvenuto con successo"));  
+
 	}
 
 	public String getNewPsw1() {
