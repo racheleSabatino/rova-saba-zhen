@@ -52,4 +52,10 @@ public class PacchPredBean {
 				;
 	}
 
+	public String pagPacchPred(String id){
+		return "/impiegato/creazionePacchPred?faces-redirect=true"
+				+ "&amp;id=" + id
+				;
+	}
+
 }
