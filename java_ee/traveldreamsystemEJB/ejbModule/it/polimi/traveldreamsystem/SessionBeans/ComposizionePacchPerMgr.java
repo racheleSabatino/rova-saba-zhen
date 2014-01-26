@@ -132,7 +132,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 
 
 	@Override
-	public List<TrasportoDTO> getTrasportiPacchPred(int idPacchPer) {
+	public List<TrasportoDTO> getTrasportiPacchPer(int idPacchPer) {
 		Query q = em.createQuery("SELECT h.trasporto FROM TrasportiPacchPer h JOIN h.pacchPer p JOIN h.trasporto e "
 				+ "WHERE p.idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);

@@ -27,11 +27,12 @@ public interface ComposizPacchPerMgrLocal {
 
 	List<HotelDTO> getHotelsPacchPer(int idPacchPer);
 
-	List<TrasportoDTO> getTrasportiPacchPred(int idPacchPer);
+	List<TrasportoDTO> getTrasportiPacchPer(int idPacchPer);
 
 	boolean findTrasporto(int idPacchPer, int idTrasporto);
 
 	boolean findHotel(int idPacchPer, int idHotel);
 
 	boolean findEscursione(int idPacchPer, int idEscursione);
+
 }
