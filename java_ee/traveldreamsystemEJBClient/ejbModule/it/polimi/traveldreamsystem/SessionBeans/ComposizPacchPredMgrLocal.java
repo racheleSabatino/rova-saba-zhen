@@ -34,4 +34,8 @@ public interface ComposizPacchPredMgrLocal {
 	boolean findHotel(int idPacchPred, int idHotel);
 
 	boolean findTrasporto(int idPacchPred, int idTrasporto);
+	
+	String getDatePacch(int idPacchPred);
+	
+	String getCittaPartenzaPacch(int idPacchPred); 
 }
