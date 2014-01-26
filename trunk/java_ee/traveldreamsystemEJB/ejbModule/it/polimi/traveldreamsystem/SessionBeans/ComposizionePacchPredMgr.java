@@ -112,7 +112,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public List<HotelDTO> getHotelsPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.hotel FROM HotelsPacchPer h JOIN h.pacchPred p JOIN h.hotel e "
+		Query q = em.createQuery("SELECT e FROM HotelsPacchPred h JOIN h.pacchPred p JOIN h.hotel e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Hotel> hotels = (List<Hotel>) q.getResultList();
