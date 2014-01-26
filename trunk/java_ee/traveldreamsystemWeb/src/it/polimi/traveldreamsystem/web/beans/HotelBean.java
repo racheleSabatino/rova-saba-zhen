@@ -9,11 +9,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class HotelBean extends PacchPredBean {
 
 	@EJB
@@ -40,6 +41,10 @@ public class HotelBean extends PacchPredBean {
 				aDTO.setSelected(false);
 			}
 		}
+	}
+
+	public void init(AjaxBehaviorEvent e) {
+		init();
 	}
 
 	public void addHotel(){
@@ -81,7 +86,7 @@ public class HotelBean extends PacchPredBean {
 		}
 	}
 
-	public String save() {
+	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save");
 
 		for (HotelDTO aDTO : hotels) {
@@ -98,6 +103,5 @@ public class HotelBean extends PacchPredBean {
 			}
 		}
 		pacchPredMgrBean.update(pacchPred);
-		return "/homePage?faces-redirect=true";
 	}
 }
