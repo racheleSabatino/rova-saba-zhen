@@ -20,9 +20,9 @@ public class Escursione implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "IDPRODBASE", unique = true, nullable = false)
-	private int idprodbase;
+	private int idProdBase;
 	
 	@Lob
 	@Column(name = "DESCRIZIONE")
@@ -46,7 +46,7 @@ public class Escursione implements Serializable {
 	public Escursione() {}
 
 	public Escursione(EscursioneDTO escursione) {
-		this.idprodbase = escursione.getIdProdBase();
+		this.idProdBase = escursione.getIdProdBase();
 		this.descrizione = escursione.getDescrizione();
 		this.costo = escursione.getCosto();
 		this.dataPartenza = escursione.getDataPartenza();
@@ -56,11 +56,11 @@ public class Escursione implements Serializable {
 	}
 
 	public int getIdProdBase() {
-		return this.idprodbase;
+		return this.idProdBase;
 	}
 
 	public void setIdProdBase(int idProdBase) {
-		this.idprodbase = idProdBase;
+		this.idProdBase = idProdBase;
 	}
 
 	public int getCosto() {

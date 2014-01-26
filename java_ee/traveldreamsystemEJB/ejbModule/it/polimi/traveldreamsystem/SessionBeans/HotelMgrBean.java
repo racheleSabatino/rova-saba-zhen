@@ -33,7 +33,7 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 
     @Override
 	public List<HotelDTO> getAllHotel() {
-		List<Hotel> hotels = em.createNamedQuery("Hotel.findALL", Hotel.class).getResultList();	
+		List<Hotel> hotels = em.createNamedQuery("Hotel.findAll", Hotel.class).getResultList();	
 		List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();
 		for(int i=0; i<hotels.size(); i++) {
 			Hotel current = hotels.get(i);
@@ -47,12 +47,14 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 			return null;
 		}
 		HotelDTO hotelDTO = new HotelDTO();
-		hotelDTO.setCosto(hotel.getCosto());
-		hotelDTO.setDescrizione(hotel.getDescrizione());
-		hotelDTO.setIdProdBase(hotel.getIdProdBase());
-		hotelDTO.setCitta(hotel.getCitta());
-		hotelDTO.setStelle(hotel.getStelle());
-		hotelDTO.setTipoCamera(hotel.getTipoCamera());
+		hotelDTO.setCosto			(hotel.getCosto());
+		hotelDTO.setDescrizione		(hotel.getDescrizione());
+		hotelDTO.setIdProdBase		(hotel.getIdProdBase());
+		hotelDTO.setCitta			(hotel.getCitta());
+		hotelDTO.setStelle			(hotel.getStelle());
+		hotelDTO.setTipoCamera		(hotel.getTipoCamera());
+		hotelDTO.setDataPartenza	(hotel.getDataPartenza());
+		hotelDTO.setDataRitorno		(hotel.getDataRitorno());
 		return hotelDTO;
 	}
 

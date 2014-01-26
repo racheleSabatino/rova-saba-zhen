@@ -20,6 +20,7 @@ public class PacchPer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="IDPACCHPER", unique=true, nullable=false)
 	private int idPacchPer;
 

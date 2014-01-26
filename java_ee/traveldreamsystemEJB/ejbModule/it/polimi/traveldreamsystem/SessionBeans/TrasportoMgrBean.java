@@ -32,7 +32,7 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
 
     @Override
 	public List<TrasportoDTO> getAllTrasporto() {
-		List<Trasporto> escursioni = em.createNamedQuery("Trasporto.findALL", Trasporto.class).getResultList();	
+		List<Trasporto> escursioni = em.createNamedQuery("Trasporto.findAll", Trasporto.class).getResultList();	
 		List<TrasportoDTO> escursioniDTO = new ArrayList<TrasportoDTO>();
 		for(int i=0; i<escursioni.size(); i++) {
 			Trasporto current = escursioni.get(i);
