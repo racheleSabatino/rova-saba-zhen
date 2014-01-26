@@ -308,4 +308,10 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	h.setDataAcquisto(calendar.getTime());
     	return 0;
     }
+   
+   @Override
+   public PacchPerDTO findPacchPerDTO(int idPacchPer){
+	   PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
+	   return this.convertToDTO(pacchetto);
+   }
 }

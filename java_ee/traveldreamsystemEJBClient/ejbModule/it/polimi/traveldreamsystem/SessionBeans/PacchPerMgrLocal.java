@@ -31,5 +31,7 @@ public interface PacchPerMgrLocal {
 
 	List<PacchPerDTO> getAllPacchPer();
 
+	PacchPerDTO findPacchPerDTO(int idPacchPer);
+
 
 }
