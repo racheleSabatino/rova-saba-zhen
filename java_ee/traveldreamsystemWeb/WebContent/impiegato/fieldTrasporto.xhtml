@@ -14,35 +14,30 @@
 					<p:fieldset legend="Trasporto" collapsed="false" toggleable="true"
 						toggleSpeed="500">
 
-						<p:dataTable id="Trasporto" var="escursione"
-							widgetVar="TabellaEscursione"
-							value="#{escursioneBean.escursioni}" paginator="true"
-							filteredValue="#{escursioneBean.filteredEscursioni}" rows="5"
+						<p:dataTable id="Trasporto" var="trasporto"
+							value="#{trasportoBean.trasporti}" paginator="true"
+							filteredValue="#{trasportoBean.filteredTrasporti}" rows="5"
 							editable="true" editMode="cell">
-
-
-
-							<p:ajax event="cellEdit" listener="#{escursioneBean.onCellEdit}" />
 
 							<p:column headerText=" " style="width:4%">
 									<p:commandButton update="Trasporto"
-										rendered="#{escursione.selected}" icon="ui-icon-check"
-										action="#{escursioneBean.selected}">
-										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBean.escursione}" />
+										rendered="#{trasporto.selected}" icon="ui-icon-check"
+										action="#{trasportoBean.selected}">
+										<f:setPropertyActionListener value="#{trasporto}"
+											target="#{trasportoBean.trasporto}" />
 									</p:commandButton>
 
 									<p:commandButton update="Trasporto"
-										rendered="#{not escursione.selected}" icon="ui-icon-radio-on"
-										action="#{escursioneBean.selected}">
-										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBean.escursione}" />
+										rendered="#{not trasporto.selected}" icon="ui-icon-radio-on"
+										action="#{trasportoBean.selected}">
+										<f:setPropertyActionListener value="#{trasporto}"
+											target="#{trasportoBean.trasporto}" />
 									</p:commandButton>
 							</p:column>
 
-							<p:column headerText="Id Escursione" filterBy="idProdBase"
+							<p:column headerText="Id Trasporto" filterBy="idProdBase" filterMatchMode="contains"
 								style="width:4%">
-								<h:outputText value="#{escursione.idProdBase}" />
+								<h:outputText value="#{trasporto.idProdBase}" />
 							</p:column>
 
 
@@ -50,10 +45,10 @@
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{escursione.dataPartenza}" />
+										<h:outputText value="#{trasporto.dataPartenza}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.dataPartenza}"
+										<p:inputText value="#{trasporto.dataPartenza}"
 											style="width:95%" />
 									</f:facet>
 								</p:cellEditor>
@@ -64,48 +59,59 @@
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{escursione.dataRitorno}" />
+										<h:outputText value="#{trasporto.dataRitorno}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.dataRitorno}"
+										<p:inputText value="#{trasporto.dataRitorno}"
 											style="width:95%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Descrizione" style="width:25%">
+							<p:column headerText="Descrizione" filterBy="descrizione" filterMatchMode="contains" style="width:25%">
 
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{escursione.dataRitorno}" />
+										<h:outputText value="#{trasporto.descrizione}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.dataRitorno}"
+										<p:inputText value="#{trasporto.descrizione}"
 											style="width:95%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Luogo" style="width:15%">
+							<p:column headerText="Citta Partenza" filterBy="cittaPartenza" filterMatchMode="contains" style="width:15%">
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{escursione.luogo}" />
+										<h:outputText value="#{trasporto.cittaPartenza}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.luogo}" style="width:95%" />
+										<p:inputText value="#{trasporto.cittaPartenza}" style="width:95%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
 
-							<p:column headerText="Costo" style="width:5%">
+							<p:column headerText="Citta Ritorno" filterBy="cittaRitorno" filterMatchMode="contains" style="width:15%">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{trasporto.cittaRitorno}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{trasporto.cittaRitorno}" style="width:95%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Costo" filterBy="costo" filterMatchMode="contains" style="width:5%">
 
 								<p:cellEditor>
 									<f:facet name="output">
-										<h:outputText value="#{escursione.costo}" />
+										<h:outputText value="#{trasporto.costo}" />
 									</f:facet>
 									<f:facet name="input">
-										<p:inputText value="#{escursione.costo}" style="width:90%" />
+										<p:inputText value="#{trasporto.costo}" style="width:90%" />
 									</f:facet>
 								</p:cellEditor>
 							</p:column>
