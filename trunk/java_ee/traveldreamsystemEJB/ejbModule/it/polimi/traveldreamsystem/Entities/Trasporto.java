@@ -21,7 +21,7 @@ public class Trasporto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "IDPRODBASE", unique = true, nullable = false)
-	private int idprodbase;
+	private int idProdBase;
 
 	@Column(name = "COSTO")
 	private int costo;
@@ -63,7 +63,7 @@ public class Trasporto implements Serializable {
 	public Trasporto() {}
 
 	public Trasporto(TrasportoDTO trasporto) {
-		this.idprodbase = trasporto.getIdProdBase();
+		this.idProdBase = trasporto.getIdProdBase();
 		this.dataPartenza = trasporto.getDataPartenza();
 		this.dataRitorno = trasporto.getDataRitorno();
 		this.cittaPartenza = trasporto.getCittaPartenza();
@@ -73,11 +73,11 @@ public class Trasporto implements Serializable {
 	}
 
 	public int getIdProdBase() {
-		return this.idprodbase;
+		return this.idProdBase;
 	}
 
 	public void setIdProdBase(int idProdBase) {
-		this.idprodbase = idProdBase;
+		this.idProdBase = idProdBase;
 	}
 
 	public String getCittaPartenza() {
