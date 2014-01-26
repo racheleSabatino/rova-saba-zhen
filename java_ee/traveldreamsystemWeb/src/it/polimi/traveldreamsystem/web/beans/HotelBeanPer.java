@@ -2,11 +2,8 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
-import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,9 +13,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 @ManagedBean
 @SessionScoped
 public class HotelBeanPer extends PacchPerBean {
-
-	@EJB
-	private HotelMgrBeanLocal hotelMgrBean;
 
 	private List<HotelDTO> hotels;
 
@@ -42,10 +36,10 @@ public class HotelBeanPer extends PacchPerBean {
 	}
 
 	public void init(int id) {
-		hotels = hotelMgrBean.getAllHotel();
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
+		hotels = compPacchPredMgr.getHotelsPacchPred(pacchPer.getIdPacchPred());
 		for (HotelDTO aDTO : hotels) {
-			if (compPacchMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+			if (compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
 			} else {
 				aDTO.setSelected(false);
@@ -62,7 +56,7 @@ public class HotelBeanPer extends PacchPerBean {
 	}
 
 	public void addHotel(){
-		hotelMgrBean.addNewHotel(hotel);
+		compPacchPerMgr.addHotelToPacchPer(pacchId, hotel.getIdProdBase());
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 	}
@@ -104,15 +98,14 @@ public class HotelBeanPer extends PacchPerBean {
 		System.out.println("cell save");
 
 		for (HotelDTO aDTO : hotels) {
-			hotelMgrBean.update(aDTO);
 			if (aDTO.getSelected()
-					&& !compPacchMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
-				compPacchMgr.addHotelToPacchPer(pacchPer.getIdPacchPer(),
+					&& !compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.addHotelToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 			if (!aDTO.getSelected()
-					&& compPacchMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
-				compPacchMgr.removeHotelToPacchPer(pacchPer.getIdPacchPer(),
+					&& compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.removeHotelToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 		}
