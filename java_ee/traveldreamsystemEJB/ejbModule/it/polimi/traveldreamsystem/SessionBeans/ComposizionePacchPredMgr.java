@@ -144,7 +144,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 
 	@Override
 	public List<TrasportoDTO> getTrasportiPacchPred(int idPacchPred) {
-		Query q = em.createQuery("SELECT h.trasporto FROM TrasportiPacchPer h JOIN h.pacchPred p JOIN h.trasporto e "
+		Query q = em.createQuery("SELECT e FROM TrasportiPacchPer h JOIN h.pacchPred p JOIN h.trasporto e "
 				+ "WHERE p.idPacchPred = :idPacchPred");
 		q.setParameter("idPacchPred", idPacchPred);
 		List<Trasporto> trasporti = (List<Trasporto>) q.getResultList();
