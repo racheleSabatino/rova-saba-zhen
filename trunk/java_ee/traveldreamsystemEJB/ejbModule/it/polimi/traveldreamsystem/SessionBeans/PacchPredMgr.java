@@ -87,7 +87,8 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 
 	public List<PacchPredDTO> getAllPacchPred() {
 		List<PacchPred> pacchetti = new ArrayList<PacchPred>();
-		pacchetti = em.createNamedQuery("PacchPred.findAll", PacchPred.class).getResultList();
+		Query q = em.createQuery("SELECT p FROM PacchPred p");
+		pacchetti = (List<PacchPred>) q.getResultList();
 		List<PacchPredDTO> pacchettiDTO = new ArrayList<PacchPredDTO>();
 		for(int i=0; i<pacchetti.size(); i++) {
 			PacchPredDTO pacchettoDTO = convertToDTO(pacchetti.get(i));

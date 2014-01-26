@@ -27,11 +27,12 @@
   
         <p:panel header="#{pacchPred.idPacchPred}" style="text-align:center">  
             <h:panelGrid columns="1" style="width:100%">  
-              <p:graphicImage value="/images/vacanza.jpg"/> 
+              <p:graphicImage value="/resources/images/vacanza.jpg"/> 
   
                 <h:outputText value="#{pacchPred.descrizione}" />  
   
-                <p:commandLink update=":form:pacchPredDetail" oncomplete="PF('pacchPredDialog').show()" title="Vedi dettagli">  
+                <p:commandLink  update=":form:pacchPredDetail" 
+                oncomplete="PF('pacchPredDialog').show()" title="Vedi dettagli">  
                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
                     <f:setPropertyActionListener value="#{pacchPred}"   
                             target="#{tablePacchPredBean.selectedPacchetto}" />  
@@ -46,11 +47,11 @@
           
               
             <h:panelGrid  columns="2" cellpadding="5">  
-                <h:outputLabel for="Partenze da" value="Model No: " />  
-                <h:outputText id="partenzeDa" value="#{tableBean.selectedCar.idPacchPred}" />  
+                <h:outputLabel for="Partenze da" value="Partenze da: " />  
+                <h:outputText id="partenzeDa" value="#{tablePacchPredBean.cittaPacchSelezionato}" />  
                   
-                <h:outputLabel for="Partenze il" value="Year: " />  
-                <h:outputText id="partenzeIl" value="#{tableBean.selectedCar.descrizione}" />  
+                <h:outputLabel for="Partenze il" value="Partenze il: " />  
+                <h:outputText id="partenzeIl" value="#{tablePacchPredBean.datePacchSelezionato}" />  
                   
                 
             </h:panelGrid>  
@@ -58,7 +59,8 @@
     </p:dialog>  
   
 </h:form>  
-
+	<p:outputLabel value = "Pacchetti : #{tablePacchPredBean.pacchetti}" />
+		<p:outputLabel value = "Ciao : #{tablePacchPredBean.ciao}" />
 			</p:panel>
 
 		</ui:define>

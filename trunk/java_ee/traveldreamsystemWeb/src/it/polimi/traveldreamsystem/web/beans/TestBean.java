@@ -1,6 +1,7 @@
 package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,12 @@ public class TestBean {
 	private ComposizPacchPredMgrLocal compPacchMgr;
 	
 	private String date;
+	
+	private String citta;
+	
+	private List<PacchPredDTO> pacchetti;
+	
+	private List<Integer> idPacchPred;
 	
 
 	@EJB
@@ -60,20 +67,38 @@ public class TestBean {
 		return "/test";
 	}
 	
-	public String a6(){
-		compPacchMgr.addTrasportoToPacch(1, 1);
-		return "/test";
-	}
-	
 	public String a5(){
 		TrasportoDTO t = new TrasportoDTO();
 		t.setIdProdBase(1);
 		t.setCittaPartenza("Roma");
 		t.setCittaRitorno("maldive");
 		t.setCosto(200);
-		Date d = new Date("2010,12,31"); 
-		t.setDataPartenza("d");
-		this.compPacchMgr.getDatePacch(1);
+		Calendar cal = Calendar.getInstance(); 
+		cal.set(Calendar.YEAR, 2014); 
+		cal.set(Calendar.MONTH, 1); 
+		cal.set(Calendar.DAY_OF_MONTH, 1); 
+		Date dateRepresentation = cal.getTime();
+		t.setDataPartenza(dateRepresentation);
+		t.setDataRitorno(dateRepresentation);
+		t.setDescrizione("volo business");
+		compPacchMgr.addTrasportoToPacch(1, 1);
+		return "/test";
+	}
+	
+	public String a6(){
+		date = this.compPacchMgr.getDatePacch(1);
+		setCitta(this.compPacchMgr.getCittaPartenzaPacch(1));
+		return null;
+	}
+	
+	public String a7(){
+		pacchetti = pacchPredMgrBean.getAllPacchPred();
+		setPacchetti(this.pacchPredMgrBean.getAllPacchPred());
+		List<Integer> ids = new ArrayList<Integer>();
+		for(int i=0; i < pacchetti.size(); i++) {
+			ids.add(pacchetti.get(i).getIdPacchPred());
+		}
+		setIdPacchPred(ids);
 		return null;
 	}
 
@@ -83,6 +108,30 @@ public class TestBean {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getCitta() {
+		return citta;
+	}
+
+	public void setCitta(String citta) {
+		this.citta = citta;
+	}
+
+	public List<PacchPredDTO> getPacchetti() {
+		return pacchetti;
+	}
+
+	public void setPacchetti(List<PacchPredDTO> pacchetti) {
+		this.pacchetti = pacchetti;
+	}
+
+	public List<Integer> getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(List<Integer> idPacchPred) {
+		this.idPacchPred = idPacchPred;
 	}
 
 }

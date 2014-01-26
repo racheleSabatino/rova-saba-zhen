@@ -1,6 +1,8 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
@@ -18,6 +20,7 @@ import javax.ejb.Stateless;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.text.DateFormatter;
 
 /**
  * Session Bean implementation class ComposizionePacchPredMgr
@@ -196,5 +199,37 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		else {
 			return true;
 		}
+	}
+
+
+
+	@Override
+	public String getDatePacch(int idPacchPred) {
+		Query q = em.createQuery("SELECT o.dataPartenza FROM TrasportiPacchPred t JOIN t.pacchPred p JOIN t.trasporto o "
+				+ "WHERE p.idPacchPred = :idPacchPred");
+		q.setParameter("idPacchPred", idPacchPred);
+		List<Date> date = (List<Date>) q.getResultList();
+		String datee = new String();
+		for(int i = 0; i < date.size(); i++) {
+			String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date.get(i));
+			datee = datee + newstring;
+		}
+		return datee;
+	}
+
+
+
+	@Override
+	public String getCittaPartenzaPacch(int idPacchPred) {
+		Query q = em.createQuery("SELECT c.cittaPartenza FROM TrasportiPacchPred t JOIN t.pacchPred p "
+				+ "JOIN t.trasporto c "
+				+ "WHERE p.idPacchPred = :idPacchPred");
+		q.setParameter("idPacchPred", idPacchPred);
+		List<String> citta = (List<String>) q.getResultList();
+		String newCitta = new String();
+		for(int i = 0; i < citta.size(); i++) {
+			newCitta = newCitta + ", " + citta.get(i);
+		}
+		return newCitta;
 	}
 }

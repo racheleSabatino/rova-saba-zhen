@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "HotelsPacchPred")
+@Table(name = "hotelsPacchPred")
 public class HotelsPacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
 

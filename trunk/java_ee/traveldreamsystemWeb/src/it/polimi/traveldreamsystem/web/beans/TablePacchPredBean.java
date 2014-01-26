@@ -1,5 +1,6 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
@@ -13,20 +14,31 @@ import javax.ejb.EJB;
 	  
 public class TablePacchPredBean implements Serializable {  
 
+	private static final long serialVersionUID = 1L;
+
+
+	@EJB
+	ComposizPacchPredMgrLocal comp;
+	
 	@EJB
 	PacchPredMgrLocal pacchPredMgr;
-
 	  
     private List<PacchPredDTO> pacchetti;  
       
 	private PacchPredDTO selectedPacchetto;  
+	
+	private String datePacchSelezionato;
+	
+	private String cittaPacchSelezionato;
+	
+	private String ciao; 
 	  
 	public TablePacchPredBean() {  
-		pacchetti = new ArrayList<PacchPredDTO>();  
-		populateRandomPacchetti(pacchetti, 50);  
+		pacchetti = pacchPredMgr.getAllPacchPred();
+		setCiao("ciao");
 	}  
 	      
-	public PacchPredDTO getSelectedPacchPredDTO() {  
+	public PacchPredDTO getSelectedPacchetto() {  
 		return selectedPacchetto;  
 	}  
 	  
@@ -34,14 +46,45 @@ public class TablePacchPredBean implements Serializable {
 		this.selectedPacchetto = selectedPacchetto;  
 	}  
 	    
-	private void populateRandomPacchetti(List<PacchPredDTO> list, int size) {
-		pacchetti = pacchPredMgr.getAllPacchPred();
-	}  
 	  
-	public List<PacchPredDTO> getPacchPredDTOs() {  
+	public List<PacchPredDTO> getPacchetti() {  
 		return pacchetti;  
-	}  
+	} 
+	
+	public List<PacchPredDTO> setPacchetti(List<PacchPredDTO> list) {  
+		return pacchetti = list;  
+	} 
 	  
+	public String updateDetailPacch(PacchPredDTO selectedPacchetto){
+		setDatePacchSelezionato(comp.getDatePacch(selectedPacchetto.getIdPacchPred()));
+		setCittaPacchSelezionato(comp.getCittaPartenzaPacch(selectedPacchetto.getIdPacchPred()));
+		return null;
+	}
+	
+
+	public String getDatePacchSelezionato() {
+		return datePacchSelezionato;
+	}
+
+	public void setDatePacchSelezionato(String datePacchSelezionato) {
+		this.datePacchSelezionato = datePacchSelezionato;
+	}
+
+	public String getCittaPacchSelezionato() {
+		return cittaPacchSelezionato;
+	}
+
+	public void setCittaPacchSelezionato(String cittaPacchSelezionato) {
+		this.cittaPacchSelezionato = cittaPacchSelezionato;
+	}
+
+	public String getCiao() {
+		return ciao;
+	}
+
+	public void setCiao(String ciao) {
+		this.ciao = ciao;
+	}
 	      
 	   
 }

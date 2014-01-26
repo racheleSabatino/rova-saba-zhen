@@ -12,7 +12,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name = "PacchPred")
+@Table(name = "pacchPred")
 @NamedQuery(name = "PacchPred.findAll", query = "SELECT p FROM PacchPred p")
 public class PacchPred implements Serializable {
 	private static final long serialVersionUID = 1L;
