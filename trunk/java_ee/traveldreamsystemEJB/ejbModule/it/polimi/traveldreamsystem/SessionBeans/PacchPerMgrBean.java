@@ -202,7 +202,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		Query q = em
 				.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
 						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND o.idprodbase = :idHotel");
+						+ "AND p.listaRegali = TRUE AND o.idProdBase = :idHotel");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idHotel", idHotel);
@@ -284,7 +284,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		Query q = em
 				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
 						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND e.idprodbase = :idEscursione");
+						+ "AND p.listaRegali = TRUE AND e.idProdBase = :idEscursione");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idEscursione", idEscursione);
@@ -312,7 +312,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		Query q = em
 				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "
 						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND o.idprodbase =: idTrasporto");
+						+ "AND p.listaRegali = TRUE AND o.idProdBase =: idTrasporto");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idTrasporto", idTrasporto);
