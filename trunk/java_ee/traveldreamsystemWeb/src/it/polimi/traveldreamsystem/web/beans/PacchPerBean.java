@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
-import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 @ManagedBean
 @SessionScoped
