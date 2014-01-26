@@ -27,7 +27,8 @@
   
         <p:panel header="#{pacchPred.idPacchPred}" style="text-align:center">  
             <h:panelGrid columns="1" style="width:100%">  
-              <p:graphicImage value="/resources/images/vacanza.jpg"/> 
+              <p:graphicImage width="50" height="50" value="/resources/images/sole.jpg"/> 
+              
   
                 <h:outputText value="#{pacchPred.descrizione}" />  
   
@@ -53,14 +54,14 @@
                 <h:outputLabel for="Partenze il" value="Partenze il: " />  
                 <h:outputText id="partenzeIl" value="#{tablePacchPredBean.datePacchSelezionato}" />  
                   
+                <h:commandButton id="submit" value="Seleziona il pacchetto" />
                 
             </h:panelGrid>  
         </p:outputPanel>  
     </p:dialog>  
   
 </h:form>  
-	<p:outputLabel value = "Pacchetti : #{tablePacchPredBean.pacchetti}" />
-		<p:outputLabel value = "Ciao : #{tablePacchPredBean.ciao}" />
+
 			</p:panel>
 
 		</ui:define>
