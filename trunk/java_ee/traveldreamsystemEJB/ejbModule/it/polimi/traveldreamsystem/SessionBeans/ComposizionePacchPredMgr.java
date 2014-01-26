@@ -156,7 +156,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	@Override
 	public boolean findEscursione(int idPacchPred, int idEscursione){ 
 		Query q = em.createQuery("SELECT e FROM EscursioniPacchPred h JOIN h.pacchPred p JOIN h.escursioni e "
-				+ "WHERE p.idPacchPred = :idPacchPred AND e.idprodbase =:idEscursione");
+				+ "WHERE p.idPacchPred = :idPacchPred AND e.idProdBase =:idEscursione");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idEscursione", idEscursione);
 		List list = q.getResultList();
@@ -171,7 +171,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	@Override
 	public boolean findHotel(int idPacchPred, int idHotel){ 
 		Query q = em.createQuery("SELECT e FROM HotelsPacchPred h JOIN h.pacchPred p JOIN h.hotel e "
-				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idHotel");
+				+ "WHERE p.idPacchPred = :idPacchPred AND e.idProdBase = :idHotel");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idHotel", idHotel);
 		List list = q.getResultList();
@@ -186,7 +186,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 	@Override
 	public boolean findTrasporto(int idPacchPred, int idTrasporto){ 
 		Query q = em.createQuery("SELECT e FROM TrasportiPacchPred h JOIN h.pacchPred p JOIN h.trasporto e "
-				+ "WHERE p.idPacchPred = : idPacchPred AND e.idprodbase = :idTrasporto");
+				+ "WHERE p.idPacchPred = :idPacchPred AND e.idProdBase = :idTrasporto");
 		q.setParameter("idPacchPred", idPacchPred);
 		q.setParameter("idTrasporto", idTrasporto);
 		List list = q.getResultList();
