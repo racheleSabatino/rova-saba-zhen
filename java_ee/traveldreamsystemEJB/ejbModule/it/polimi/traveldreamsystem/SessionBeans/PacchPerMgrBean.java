@@ -10,10 +10,12 @@ import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
 import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
+import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -55,10 +57,21 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     		
     }
  
+    @Override
+    public List<PacchPerDTO> getAllPacchPred() {
+		List<PacchPer> pacchetti = new ArrayList<PacchPer>();
+		Query q = em.createQuery("SELECT p FROM PacchPer p");
+		pacchetti = (List<PacchPer>) q.getResultList();
+		List<PacchPerDTO> pacchettiDTO = new ArrayList<PacchPerDTO>();
+		for(int i=0; i<pacchetti.size(); i++) {
+			PacchPerDTO pacchettoDTO = convertToDTO(pacchetti.get(i));
+			pacchettiDTO.add(pacchettoDTO);
+		}
+		return pacchettiDTO;
+	}
     
-    /*
-     * restituisce i pacchetti personalizzati non ancora acquistati di un cliente. 
-     */
+    
+
     public List<PacchPer> getClientePacchPerNonAcquistati(String mail) {
     	Query q1 = em.createQuery(" SELECT distinct p FROM PacchPer p JOIN p.cliente c "
     			+ "WHERE c.mail =: mail AND "
@@ -69,11 +82,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
     	 + "OR EXIST { SELECT t FROM TrasportiPacchPer t " + 
     	 "WHERE p3.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
     	q1.setParameter("mail", mail);
-    	if(q1.getResultList() != null) {
-    		return (List<PacchPer>) q1.getResultList();
-    	}
-    	//il cliente non ha pacchetti personalizzati non ancora acquistati 
-    	return null;
+    	return (List<PacchPer>)q1.getResultList();
+    	
     }
     
     
