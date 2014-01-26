@@ -20,7 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * Session Bean implementation class ComposizionePacchPredMgr
+ * Session Bean implementation class ComposizionePacchPerMgr
  */
 @Stateless
 @LocalBean
@@ -61,7 +61,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	public void addTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
-		Query q = em.createQuery("DELETE FROM TrasportiPacchPred e "
+		Query q = em.createQuery("DELETE FROM TrasportiPacchPer e "
 				+ "WHERE e.pacchPred = :pacchPred AND e.trasporto = :trasporto");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("trasporto", trasporto);
