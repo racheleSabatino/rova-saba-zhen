@@ -14,7 +14,6 @@ public class TrasportoDTO {
 	
 	private int costo;
 	
-	@NotEmpty
 	private String descrizione;
 	
 	private Boolean selected = false;

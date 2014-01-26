@@ -13,7 +13,6 @@ public class HotelDTO {
 	
 	private int costo;
 
-	@NotEmpty
 	private String descrizione;
 
 	@NotEmpty

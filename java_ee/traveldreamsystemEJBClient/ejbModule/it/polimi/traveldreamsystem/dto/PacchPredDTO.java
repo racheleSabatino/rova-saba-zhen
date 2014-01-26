@@ -1,8 +1,5 @@
 package it.polimi.traveldreamsystem.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class PacchPredDTO {
@@ -13,7 +10,6 @@ public class PacchPredDTO {
 	@NotEmpty
 	private int idPacchPred;
 
-	@NotEmpty
 	private String descrizione;
 	
 	public PacchPredDTO () {
