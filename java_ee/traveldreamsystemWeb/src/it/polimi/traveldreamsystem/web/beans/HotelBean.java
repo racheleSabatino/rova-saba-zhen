@@ -2,6 +2,7 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
+import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
@@ -19,6 +20,9 @@ public class HotelBean extends PacchPredBean {
 
 	@EJB
 	private HotelMgrBeanLocal hotelMgrBean;
+	
+	@EJB
+	private CheckDateLocal checkDateBean;
 
 	private List<HotelDTO> hotels;
 
@@ -62,9 +66,16 @@ public class HotelBean extends PacchPredBean {
 	}
 
 	public void addHotel(){
-		hotelMgrBean.addNewHotel(hotel);
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(!checkDateBean.checkDate(hotel.getDataRitorno(), hotel.getDataPartenza())){
+			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
+					+ "la data di partenza deve essere successiva o perlomeno uguale alla data della arrivo. "
+					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
+		}
+		else {
+			hotelMgrBean.addNewHotel(hotel);
+			context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+		}
 	}
 
 	public HotelDTO getHotel() {

@@ -35,4 +35,12 @@ public interface ComposizPacchPerMgrLocal {
 
 	boolean findEscursione(int idPacchPer, int idEscursione);
 
+	String convertToStringHotel(int idPacchPer);
+
+	String convertToStringEscursione(int idPacchPer);
+	
+	String convertToStringTrasporto(int idPacchPer);
+
+	
+
 }

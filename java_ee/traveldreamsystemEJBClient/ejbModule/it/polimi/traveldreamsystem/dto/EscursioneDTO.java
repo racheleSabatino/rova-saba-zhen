@@ -82,5 +82,15 @@ public class EscursioneDTO {
 		this.selected = selected;
 	}
 
-
+	public String toString() {
+		String rep = "Descrizione escursione: " + this.descrizione +
+				"\npresso: " + this.getLuogo() + 
+				"\ngiorno/ora inizio: " + this.getDataPartenza() + 
+				"\ngiorno/ora fine: " + this.getDataRitorno() + 
+				"\ncosto totale: " + this.getCosto();
+		return rep;
+				
+		
+	}
+	
 }

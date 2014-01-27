@@ -34,21 +34,11 @@ public class TablePacchPredBean implements Serializable {
         private String datePacchSelezionato;
        
         private String cittaPacchSelezionato;
-        
-        private final static String vacanze[];
-        
+               
         private List<PacchPredDTO> filteredPacchetti;
         
         private int idPacchettoSelezionato;
         
-        static {
-        	vacanze = new String[3];
-        	vacanze[0] = "sedia";
-        	vacanze[1] = "palma";
-        	vacanze[2] = "sole";
-        }  
-       
-
         public TablePacchPredBean() {  
         }
         

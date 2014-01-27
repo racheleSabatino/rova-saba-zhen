@@ -3,8 +3,10 @@ package it.polimi.traveldreamsystem.web.beans;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
@@ -27,7 +29,8 @@ public class PacchPredBean {
 	protected PacchPredDTO pacchPred;
 
 	public void addPacchPred(){
-		pacchPredMgrBean.addNewPacchPred(pacchPred);
+			pacchPredMgrBean.addNewPacchPred(pacchPred);
+		
 	}
 
 	public PacchPredDTO getPacchPred() {
@@ -42,6 +45,7 @@ public class PacchPredBean {
 		return pacchPredMgrBean.getAllPacchPred().get(0);
 	}
 
+	
 	public String creazionePacchPred(){
 		PacchPredDTO pacchPred = new PacchPredDTO();
 		pacchPredMgrBean.addNewPacchPred(pacchPred);

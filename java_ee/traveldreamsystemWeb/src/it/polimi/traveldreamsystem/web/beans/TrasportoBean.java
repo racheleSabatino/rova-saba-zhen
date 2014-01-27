@@ -2,6 +2,7 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
+import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
@@ -19,6 +20,9 @@ public class TrasportoBean extends PacchPredBean {
 
 	@EJB
 	private TrasportoMgrBeanLocal trasportoMgrBean;
+	
+	@EJB
+	private CheckDateLocal checkDateBean;
 
 	private List<TrasportoDTO> trasporti;
 
@@ -62,10 +66,16 @@ public class TrasportoBean extends PacchPredBean {
 	}
 
 	public void addTrasporto(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(!checkDateBean.checkDate(trasporto.getDataRitorno(), trasporto.getDataPartenza())){
+			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
+					+ "la data di ritorno deve essere uguale o successiva alla data della partenza. "
+					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
+		}
+		else {
 		trasportoMgrBean.addNewTrasporto(trasporto);
-        FacesContext context = FacesContext.getCurrentInstance();  
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
-
+		}
 	}
 
 	public TrasportoDTO getTrasporto() {

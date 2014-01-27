@@ -13,35 +13,45 @@
 
 		<ui:define name="content">
 
-			<p:panel header="Pacchetti in fase di personalizzazione">
-				    <h:form id="form">  
+			<p:panel header="Pacchetto Cliente"> 
                   
-        <p:dataList value="#{pacchPerClienteBean.pacchetti}" var="pacchPer" id="pacchetti"  
-            paginator="true" rows="5"  
-            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
-            rowsPerPageTemplate="5,10,15" type="none">  
-      
-                <f:facet name="header">  
-                    Pacchetti Personalizzati  
-                </f:facet>  
-      
       			<h:outputText value="#{pacchPer.idPacchPer}" /> 
+      			      			
+      			<h:panelGrid columns="3" id="regGrid">
+							<h:outputLabel for="id">Id Pacchetto Personalizzato :</h:outputLabel>
+							<p:inputText id="id" value="#{riepilogoBean.pacchetto.idPacchPer}" />
+							<p:message for="id" />
+							<h:outputText />
+						</h:panelGrid>
+
+						<p:outputPanel id="resultGrid">
+							<p:outputPanel>
+									<h:panelGrid columns="1">
+
+									<p:outputLabel
+										value="Hotel: #{riepilogoBean.hotel}" />
+									<p:outputLabel
+										value="Hotel: #{findEscursioneBean.searchedEscursione.dataRitorno}" />
+									<p:outputLabel
+										value="Escursioni: #{findEscursioneBean.searchedEscursione.costo}" />
+								
+									</h:panelGrid>
+
+							</p:outputPanel>
+						</p:outputPanel>
       			
-      			<p:commandButton title = "Mostra" 
-      			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
-      				
-      			</p:commandButton>
+					</p:panel>
       			
                 <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
-                title="Modifica" >  
+                action = "#{pacchPerClienteBean.pagPacchPer(pacchPer.idPacchPer)}"
+                icon="ui-icon-search" title="Modifica" >  
                 </p:commandButton>  
                 
-      			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchetto)">
+      			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto)">
       			</p:commandButton>
       			
       			
-      			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" />
+      			<p:commandButton value = "Elimina" type="button" onclick="PF('cd').show()" />
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="cd">
@@ -49,16 +59,8 @@
 					update="messages" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
-                
-                  
-        </p:dataList>  
-          
-     
-    </h:form>  
-                          
-
-			</p:panel>
-
+   
+           
 		</ui:define>
 
 	</ui:composition>

@@ -102,5 +102,15 @@ public class HotelDTO {
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
 	}
-	
+
+
+	public String toString(){
+		String rep = "Descrizione hotel : " + descrizione + 
+		" \n Hotel a  " + stelle + "\nsituato a " + citta +
+		"\ninizio prenotazione: " + dataPartenza +
+		"\nfine prenotazione: " + dataRitorno + 
+		"tipo camera: " + tipoCamera +
+		"\ncosto totale soggiorno in hotel: " + costo;
+		return rep;
+	}
 }

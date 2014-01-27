@@ -1,6 +1,8 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
@@ -15,6 +17,7 @@ import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -189,6 +192,35 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 			return true;
 		}
 	}
-		
+	
+	@Override
+	public String convertToStringHotel(int idPacchPer){
+		List<HotelDTO> hotels = this.getHotelsPacchPer(idPacchPer);
+		String hotelRep = new String();
+		for(HotelDTO hotel: hotels) {
+			hotelRep = hotelRep + hotel.toString() + "\n\n\n";
+		}
+		return hotelRep;
 	}
+
+	@Override
+	public String convertToStringEscursione(int idPacchPer){
+		List<EscursioneDTO> escursioni = this.getEscursioniPacchPer(idPacchPer);
+		String escursioniRep = new String();
+		for(EscursioneDTO escursione: escursioni) {
+			escursioniRep = escursioniRep + escursione.toString() + "\n\n\n";
+		}
+		return escursioniRep;
+	}
+	
+	@Override
+	public String convertToStringTrasporto(int idPacchPer){
+		List<TrasportoDTO> trasporti = this.getTrasportiPacchPer(idPacchPer);
+		String trasportoRep = new String();
+		for(TrasportoDTO trasporto: trasporti) {
+			trasportoRep = trasportoRep + trasporto.toString() + "\n\n\n";
+		}
+		return trasportoRep;
+	}
+}
     
