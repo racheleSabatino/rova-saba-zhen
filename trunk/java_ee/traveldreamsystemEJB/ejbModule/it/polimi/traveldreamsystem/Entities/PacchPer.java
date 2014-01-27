@@ -1,5 +1,6 @@
 package it.polimi.traveldreamsystem.Entities;
 
+import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgr;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
 import java.io.Serializable;
@@ -48,9 +49,9 @@ public class PacchPer implements Serializable {
 
 	public PacchPer(PacchPerDTO newPacchetto) {
 		this.idPacchPer = newPacchetto.getIdPacchPer();
-		this.listaRegali = newPacchetto.getListaRegali();
-		this.pacchPred.setIdPacchPred(newPacchetto.getIdPacchPer());
-		this.cliente.setMail(newPacchetto.getMailCliente());
+		this.listaRegali = newPacchetto.isListaRegali();
+		this.pacchPred = new PacchPred(newPacchetto.getPacchPred());
+		this.cliente = new Utente(newPacchetto.getCliente());
 	}
 
 	public int getIdPacchPer() {

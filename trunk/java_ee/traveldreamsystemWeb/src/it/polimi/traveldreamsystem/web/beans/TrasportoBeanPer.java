@@ -40,9 +40,9 @@ public class TrasportoBeanPer extends PacchPerBean {
 
 	public void init(int id) {
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
-		trasporti = compPacchPredMgr.getTrasportiPacchPred(pacchPer.getIdPacchPred());
+		trasporti = compPacchPredMgr.getTrasportiPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (TrasportoDTO aDTO : trasporti) {
-			if (compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+			if (compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
 			} else {
 				aDTO.setSelected(false);
@@ -103,13 +103,13 @@ public class TrasportoBeanPer extends PacchPerBean {
 
 		for (TrasportoDTO aDTO : trasporti) {
 			if (aDTO.getSelected()
-					&& !compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchPerMgr.addTrasportoToPacchPer(pacchPer.getIdPacchPred(),
+					&& !compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.addTrasportoToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 			if (!aDTO.getSelected()
-					&& compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchPerMgr.removeTrasportoToPacchPer(pacchPer.getIdPacchPred(),
+					&& compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.removeTrasportoToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 		}

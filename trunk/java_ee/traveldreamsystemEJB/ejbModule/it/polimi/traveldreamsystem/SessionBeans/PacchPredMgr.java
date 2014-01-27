@@ -98,7 +98,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		return pacchettiDTO;
 	}
 
-	public PacchPredDTO convertToDTO(PacchPred pacchetto) {
+	static public PacchPredDTO convertToDTO(PacchPred pacchetto) {
 		if (pacchetto == null) {
 			return null;
 		}

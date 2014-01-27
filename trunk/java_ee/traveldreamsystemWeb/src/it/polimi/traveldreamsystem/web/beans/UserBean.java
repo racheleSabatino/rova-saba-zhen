@@ -37,7 +37,9 @@ public class UserBean {
 	private UtenteMgrBeanLocal utenteMgrBean;
 
 
-
+	public UtenteDTO getCurrentUtente() {
+		return utenteMgrBean.getUtenteDTO();
+	}
 
 
 
