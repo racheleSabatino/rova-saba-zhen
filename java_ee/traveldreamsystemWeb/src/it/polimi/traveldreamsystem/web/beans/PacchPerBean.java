@@ -25,6 +25,10 @@ public class PacchPerBean {
 	protected ComposizPacchPredMgrLocal compPacchPredMgr;
 
 	protected PacchPerDTO pacchPer;
+	
+	private int idPacchPred;
+	
+	private String cliente;
 
 	public void addPacchPer(){
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
@@ -43,13 +47,29 @@ public class PacchPerBean {
 	}
 
 	public String creazionePacchPer(){
-		PacchPerDTO pacchPer = new PacchPerDTO();
+		PacchPerDTO pacchPer = new PacchPerDTO(false, idPacchPred, cliente);
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
 		List<PacchPerDTO> listDTO = pacchPerMgrBean.getAllPacchPer();
 		int id = listDTO.get(listDTO.size() -1).getIdPacchPer();
 		return "/creazionePacchPer?faces-redirect=true"
 				+ "&amp;id=" + id
 				;
+	}
+
+	public int getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
+	}
+
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
 	}
 
 }
