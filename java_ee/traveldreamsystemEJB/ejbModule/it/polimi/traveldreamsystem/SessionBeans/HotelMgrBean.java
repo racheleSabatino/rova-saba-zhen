@@ -88,4 +88,9 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 		em.merge(new Hotel(hotel));
 	}
 
+	@Override
+	public String pagRiepilogoPacchPer(int id){
+		return "/impiegato/creazioneHotel?faces-redirect=true"
+		+ "&amp;id=" + id;
+	}
 }

@@ -45,15 +45,25 @@
 
 							</p:outputPanel>
 						</p:outputPanel>
-
-
 					</p:panel>
-					<p:commandButton value="Elimina Escursione"
-						actionListener="#{findEscursioneBean.remove}" />
+					
+					<p:growl id="growl" showDetail="true" sticky="true" />  
+					
+					<p:commandButton value="Elimina Escursione" 
+						actionListener="#{findEscursioneBean.remove}" update = "growl"/>  
+				
+						
+					<p:commandButton id="selectButton" 
+                actionListener = "#{escursioneBean.getPage(findEscursioneBean.searchedId)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findEscursioneBean.searchedEscursione}" target="escursioneBean.escursione"/> 
+                                 
+            </p:commandButton>	
+            
+            <p:commandButton type="reset" value="Reset" />
 
 				</h:form>
 			</p:panel>
-
+			
 		</ui:define>
 
 	</ui:composition>

@@ -19,4 +19,6 @@ public interface EscursioneMgrBeanLocal {
 
 	void update(EscursioneDTO escursione);
 
+	String pagRiepilogoPacchPer(int idEscursione);
+
 }

@@ -1,11 +1,15 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+
 import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean
 @RequestScoped
@@ -56,12 +60,14 @@ public class FindHotelBean {
 		this.searchedHotel = searchedHotel;
 	}
 
-	public void remove() {
+	public void remove(ActionEvent actionEvent) {
+		 FacesContext context = FacesContext.getCurrentInstance();  
 		try {
-		hotelMgrBean.removeHotel(searchedId);
-		setRemoveOK("Eliminazione hotel terminata con successo");
+			hotelMgrBean.removeHotel(searchedId);
+			context.addMessage(null, new FacesMessage("Successo", "L'eliminazione dell'hotel è andata a buon fine"));
 		} catch(Exception e) {
-			setRemoveOK("L'hotel nn pu¨° essere eliminato perch¨¨ fa parte di un pacchetto");
+			context.addMessage(null, new FacesMessage("Attenzione", "L'hotel non può essere eliminato perchè"
+				+ " fa parte di un pacchetto vacanza"));
 		}
 	}
 
@@ -72,5 +78,6 @@ public class FindHotelBean {
 	public void setRemoveOK(String removeOK) {
 		this.removeOK = removeOK;
 	}
+	
 	
 }

@@ -6,7 +6,6 @@ import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -130,4 +129,7 @@ public class TrasportoBean extends PacchPredBean {
 		pacchPredMgrBean.update(pacchPred);
 	}
 	
+	public String getPage(int idTrasporto){
+		return trasportoMgrBean.pagRiepilogoPacchPer(idTrasporto);
+	}
 }

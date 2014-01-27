@@ -128,5 +128,9 @@ public class EscursioneBean extends PacchPredBean{
 		}
 		pacchPredMgrBean.update(pacchPred);
 	}
+	
+	public String getPage(int idEscursione){
+		return this.escursioneMgrBean.pagRiepilogoPacchPer(idEscursione);
+	}
 
 }

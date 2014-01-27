@@ -17,7 +17,7 @@
 				header="Inserisci i dati per creare un nuovo prodotto base hotel">
 				<h:form id="Hotel">
 					<h:panelGrid id="grid" columns="3" cellpadding="5">
-						<h:outputLabel for="dataPartenza" value="Data arrivo:" />
+						<h:outputLabel for="dataPartenza" value="Data inizio prenotazione:" />
 						<p:calendar id="dataPartenza"  required="true"
 							value="#{hotelBean.hotel.dataPartenza}"
 							pattern="MM/dd/yyyy HH:mm" />
@@ -27,7 +27,7 @@
 						<h:outputText value="&#160;" />
 						<h:outputText value="&#160;" />
 
-						<h:outputText for="dataRitorno" value="Data partenza:" />
+						<h:outputText for="dataRitorno" value="Data fine prenotazione:" />
 						<p:calendar id="dataRitorno" required="true"
 							value="#{hotelBean.hotel.dataRitorno}"
 							pattern="MM/dd/yyyy HH:mm" />
