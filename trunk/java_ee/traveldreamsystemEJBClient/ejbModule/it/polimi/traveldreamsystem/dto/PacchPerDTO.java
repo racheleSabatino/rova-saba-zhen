@@ -14,6 +14,24 @@ public class PacchPerDTO {
 	
 	public PacchPerDTO() {
 	}
+	
+
+	public PacchPerDTO(int idPacchPer, boolean listaRegali, int idPacchPred,
+			String mailCliente) {
+		this.idPacchPer = idPacchPer;
+		this.listaRegali = listaRegali;
+		this.idPacchPred = idPacchPred;
+		this.mailCliente = mailCliente;
+	}
+	
+
+	public PacchPerDTO(boolean listaRegali, int idPacchPred,
+			String mailCliente) {
+		this.listaRegali = listaRegali;
+		this.idPacchPred = idPacchPred;
+		this.mailCliente = mailCliente;
+	}
+
 
 	public int getIdPacchPer() {
 		return this.idPacchPer;
