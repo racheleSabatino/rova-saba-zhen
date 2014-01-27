@@ -11,104 +11,62 @@
 
 	<ui:composition>
 
-					<p:fieldset legend="Escursione" collapsed="false" toggleable="true"
-						toggleSpeed="500">
+		<p:fieldset legend="Escursione" collapsed="false" toggleable="true"
+			toggleSpeed="500">
 
-						<p:dataTable id="Escursione" var="escursione"
-							value="#{escursioneBeanPer.escursioni}" paginator="true"
-							filteredValue="#{escursioneBeanPer.filteredEscursioni}" rows="5"
-							editable="true" editMode="cell">
+			<p:dataTable id="Escursione" var="escursione"
+				value="#{escursioneBeanPer.escursioni}" paginator="true"
+				filteredValue="#{escursioneBeanPer.filteredEscursioni}" rows="5">
 
-							<p:column headerText=" " style="width:4%">
-									<p:commandButton update="Escursione"
-										rendered="#{escursione.selected}" icon="ui-icon-check"
-										action="#{escursioneBeanPer.selected}">
-										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBeanPer.escursione}" />
-									</p:commandButton>
+				<p:column headerText=" " style="width:4%">
+					<p:commandButton update="Escursione"
+						rendered="#{escursione.selected}" icon="ui-icon-check"
+						action="#{escursioneBeanPer.selected}">
+						<f:setPropertyActionListener value="#{escursione}"
+							target="#{escursioneBeanPer.escursione}" />
+					</p:commandButton>
 
-									<p:commandButton update="Escursione"
-										rendered="#{not escursione.selected}" icon="ui-icon-radio-on"
-										action="#{escursioneBeanPer.selected}">
-										<f:setPropertyActionListener value="#{escursione}"
-											target="#{escursioneBeanPer.escursione}" />
-									</p:commandButton>
-							</p:column>
+					<p:commandButton update="Escursione"
+						rendered="#{not escursione.selected}" icon="ui-icon-radio-on"
+						action="#{escursioneBeanPer.selected}">
+						<f:setPropertyActionListener value="#{escursione}"
+							target="#{escursioneBeanPer.escursione}" />
+					</p:commandButton>
+				</p:column>
 
-							<p:column headerText="Id Escursione" filterBy="idProdBase" filterMatchMode="contains"
-								style="width:4%">
-								<h:outputText value="#{escursione.idProdBase}" />
-							</p:column>
-
-
-							<p:column headerText="Data Partenza" style="width:25%">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.dataPartenza}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.dataPartenza}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Data Ritorno" style="width:25%">
+				<p:column headerText="Id Escursione" filterBy="idProdBase"
+					filterMatchMode="contains" style="width:4%">
+					<h:outputText value="#{escursione.idProdBase}" />
+				</p:column>
 
 
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.dataRitorno}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.dataRitorno}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Data Partenza" style="width:25%">
+					<h:outputText value="#{escursione.dataPartenza}" />
+				</p:column>
 
-							<p:column headerText="Descrizione" filterBy="descrizione" filterMatchMode="contains" style="width:25%">
+				<p:column headerText="Data Ritorno" style="width:25%">
+					<h:outputText value="#{escursione.dataRitorno}" />
+				</p:column>
 
+				<p:column headerText="Descrizione" filterBy="descrizione"
+					filterMatchMode="contains" style="width:25%">
+					<h:outputText value="#{escursione.descrizione}" />
+				</p:column>
 
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.descrizione}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.descrizione}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Luogo" filterBy="luogo"
+					filterMatchMode="contains" style="width:15%">
+					<h:outputText value="#{escursione.luogo}" />
+				</p:column>
 
-							<p:column headerText="Luogo" filterBy="luogo" filterMatchMode="contains" style="width:15%">
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.luogo}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.luogo}" style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Costo" filterBy="costo"
+					filterMatchMode="contains" style="width:5%">
+					<h:outputText value="#{escursione.costo}" />
+				</p:column>
+			</p:dataTable>
 
-							<p:column headerText="Costo" filterBy="costo" filterMatchMode="contains" style="width:5%">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{escursione.costo}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{escursione.costo}" style="width:90%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-						</p:dataTable>
-
-					</p:fieldset>
+		</p:fieldset>
 
 	</ui:composition>
-	
+
 </h:body>
 </html>
