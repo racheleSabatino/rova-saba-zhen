@@ -57,6 +57,8 @@ public class PacchPerBean {
 				+ "&amp;id=" + id
 				;
 	}
+	
+	
 
 	public PacchPredDTO getPacchPred() {
 		return pacchPred;
@@ -74,4 +76,5 @@ public class PacchPerBean {
 		this.cliente = cliente;
 	}
 
+	
 }

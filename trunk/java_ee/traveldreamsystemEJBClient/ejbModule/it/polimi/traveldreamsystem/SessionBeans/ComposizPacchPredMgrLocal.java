@@ -2,6 +2,7 @@ package it.polimi.traveldreamsystem.SessionBeans;
 
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import java.util.List;
@@ -37,5 +38,7 @@ public interface ComposizPacchPredMgrLocal {
 	
 	String getDatePacch(int idPacchPred);
 	
-	String getCittaPartenzaPacch(int idPacchPred); 
+	String getCittaPartenzaPacch(int idPacchPred);
+
+	boolean checkPacchPredValido(PacchPredDTO pacchPred); 
 }

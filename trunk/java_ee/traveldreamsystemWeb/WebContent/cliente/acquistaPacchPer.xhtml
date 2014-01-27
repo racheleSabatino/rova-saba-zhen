@@ -16,7 +16,7 @@
 			<p:panel header="Pacchetti in fase di personalizzazione">
 				    <h:form id="form">  
                   
-        <p:dataList value="#{pacchPerClienteBean.pacchetti}" var="pacchPer" id="pacchetti"  
+        <p:dataList value="#{pacchPerBean.pacchetti}" var="pacchPer" id="pacchetti"  
             paginator="true" rows="5"  
             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
             rowsPerPageTemplate="5,10,15" type="none">  
@@ -24,36 +24,17 @@
                 <f:facet name="header">  
                     Pacchetti Personalizzati  
                 </f:facet>  
-      
       			<h:outputText value="#{pacchPer.idPacchPer}" /> 
-      			
-      			<p:commandButton title = "Mostra" 
-      			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
-      				
-      			</p:commandButton>
-      			
-                <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
-                title="Modifica" >  
+                <p:commandButton icon="ui-icon-search" update=":form:pacchDetail" oncomplete="PF('carDialog').show()" title="View Detail">  
+                    <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
                 </p:commandButton>  
                 
-      			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchetto)">
-      			</p:commandButton>
-      			
-      			
-      			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" />
-				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
-					header="Cancellazioni pacchetto vacanza" severity="alert"
-					widgetVar="cd">
-					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
-					update="messages" oncomplete="PF('cd').hide()"/>
-				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
-				</p:confirmDialog>
-                
-                  
+     
+               
         </p:dataList>  
           
-     
+  
+      
     </h:form>  
                           
 

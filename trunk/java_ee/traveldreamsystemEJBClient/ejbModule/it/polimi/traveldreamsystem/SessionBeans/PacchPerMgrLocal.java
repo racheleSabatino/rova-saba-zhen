@@ -35,5 +35,7 @@ public interface PacchPerMgrLocal {
 
 	void update(PacchPerDTO pacchetto);
 
+	void removePacchPer(int idPacchPer);
+
 
 }

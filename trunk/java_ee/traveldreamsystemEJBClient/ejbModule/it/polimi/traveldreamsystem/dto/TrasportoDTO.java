@@ -97,5 +97,15 @@ public class TrasportoDTO {
 	public void setSelected(Boolean selected) {
 		this.selected = selected;
 	}
+	
+	public String toString() {
+		String rep = "Dettagli mezzo di trasporto: " + this.descrizione +
+				"\ncittà partenza: " + this.cittaPartenza +
+				"\ngiorno/ora partenza " + this.dataPartenza +
+				"\ncittà arrivo: " + cittaRitorno + 
+				"\ngiorno/ora arrivo: " + dataRitorno +
+				"costo viaggio: " + this.costo;
+		return rep;
+	}
 
 }

@@ -14,8 +14,11 @@ import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.Entities.Utente;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
+import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -32,9 +35,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	@PersistenceContext
 	protected EntityManager em;
+	
+	ComposizionePacchPerMgr cmpPacchPer;
 
 	public PacchPerMgrBean() {
-
+		cmpPacchPer = new ComposizionePacchPerMgr();
 	}
 
 	@Override
@@ -56,6 +61,24 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	}
 
+	@Override
+	public void removePacchPer(int idPacchPer) {
+		PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
+		List<HotelDTO> hotels = cmpPacchPer.getHotelsPacchPer(idPacchPer);
+		List<EscursioneDTO> escursioni = cmpPacchPer.getEscursioniPacchPer(idPacchPer);
+		List<TrasportoDTO> trasporti = cmpPacchPer.getTrasportiPacchPer(idPacchPer);
+		for(int i=0; i < hotels.size(); i++) {
+			cmpPacchPer.removeHotelToPacchPer(idPacchPer, hotels.get(i).getIdProdBase());
+		}
+		for(int i=0; i < escursioni.size(); i++) {
+			cmpPacchPer.removeEscursioneToPacchPer(idPacchPer, escursioni.get(i).getIdProdBase());
+		}
+		for(int i=0; i < trasporti.size(); i++) {
+			cmpPacchPer.removeHotelToPacchPer(idPacchPer, trasporti.get(i).getIdProdBase());
+		}
+		em.remove(pacchetto);
+	}
+	
 	@Override
 	public List<PacchPerDTO> getAllPacchPer() {
 		List<PacchPer> pacchetti = new ArrayList<PacchPer>();

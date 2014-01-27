@@ -2,6 +2,7 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
+import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 
@@ -19,6 +20,9 @@ public class EscursioneBean extends PacchPredBean{
 	@EJB
 	private EscursioneMgrBeanLocal escursioneMgrBean;
 
+	@EJB
+	private CheckDateLocal checkDateBean;
+	
 	private List<EscursioneDTO> escursioni;
 
 	private List<EscursioneDTO> filteredEscursioni;
@@ -61,9 +65,16 @@ public class EscursioneBean extends PacchPredBean{
 	}
 
 	public void addEscursione() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		if(!checkDateBean.checkDate(escursione.getDataRitorno(), escursione.getDataPartenza())){
+			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
+					+ "la data di ritorno deve essere uguale o successiva alla data della partenza. "
+					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
+		}
+		else {
 		escursioneMgrBean.addNewEscursione(escursione);
-        FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+        }
 	}
 
 	public EscursioneDTO getEscursione() {

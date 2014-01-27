@@ -14,6 +14,7 @@ import it.polimi.traveldreamsystem.Entities.TrasportiPacchPred;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.Stateless;
@@ -238,4 +239,22 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		}
 		return newCitta;
 	}
+	
+	//ci siamo andati ad infognare
+	public boolean checkPacchPredValido(PacchPredDTO pacchetto){
+		int id = pacchetto.getIdPacchPred();
+		Query q = em.createQuery("SELECT t.dataPartenza FROM TrasportiPacchPred h JOIN h.trasporto t "
+				+ "JOIN h.pacchPred p "
+				+ "WHERE p.idPacchPred = :id ");
+		q.setParameter("idPacchPred", id);
+		
+		int id2 = pacchetto.getIdPacchPred();
+		Query q2 = em.createQuery("SELECT t.dataPartenza FROM TrasportiPacchPred h JOIN h.trasporto t "
+				+ "JOIN h.pacchPred p "
+				+ "WHERE p.idPacchPred = :id ");
+		q2.setParameter("idPacchPred", id);
+		return false;
+	}
+	
 }
+
