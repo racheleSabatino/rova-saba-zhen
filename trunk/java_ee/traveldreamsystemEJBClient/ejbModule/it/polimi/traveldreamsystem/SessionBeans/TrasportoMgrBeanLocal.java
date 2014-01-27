@@ -19,4 +19,6 @@ public interface TrasportoMgrBeanLocal {
 
 	void update(TrasportoDTO trasporto);
 
+	String pagRiepilogoPacchPer(int idTrasporto);
+
 }

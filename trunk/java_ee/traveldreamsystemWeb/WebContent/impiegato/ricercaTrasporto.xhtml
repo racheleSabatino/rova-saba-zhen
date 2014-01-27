@@ -40,22 +40,30 @@
 										value="Data Partenza: #{findTrasportoBean.searchedTrasporto.dataPartenza}" />
 									<p:outputLabel
 										value="Data Ritorno: #{findTrasportoBean.searchedTrasporto.dataRitorno}" />
-									<p:outputLabel
-										value="Descrizione: #{findTrasportoBean.searchedTrasporto.descrizione}" />
-
+	
 								</h:panelGrid>
 
 							</p:outputPanel>
 						</p:outputPanel>
-
-
 					</p:panel>
-					<p:commandButton value="Elimina Trasporto"
-						actionListener="#{findTrasportoBean.remove}" />
+					
+					<p:growl id="growl" showDetail="true" sticky="true" />  
+					
+					<p:commandButton value="Elimina Escursione" 
+						actionListener="#{findTrasportoBean.remove}" update = "growl"/>  
+				
+						
+					<p:commandButton id="selectButton" 
+                actionListener = "#{trasportoBean.getPage(findTrasportoBean.searchedId)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findTrasportoBean.searchedTrasporto}" target="trasportoBean.trasporto"/> 
+                                 
+            </p:commandButton>	
+            
+            <p:commandButton type="reset" value="Reset" />
 
 				</h:form>
 			</p:panel>
-
+			
 		</ui:define>
 
 	</ui:composition>

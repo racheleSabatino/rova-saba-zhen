@@ -86,6 +86,12 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
 		em.merge(new Trasporto(Trasporto));
 	}
 
+	@Override
+	public String pagRiepilogoPacchPer(int idTrasporto) {
+		return "/impiegato/creazioneTrasporto?faces-redirect=true"
+				+ "&amp;id=" + idTrasporto;
+	}
+
 
 
 }

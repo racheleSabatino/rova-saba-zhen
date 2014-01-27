@@ -45,11 +45,21 @@
 
 							</p:outputPanel>
 						</p:outputPanel>
-
-
 					</p:panel>
-					<p:commandButton value="Elimina Hotel"
-						actionListener="#{findHotelBean.remove}" />
+					
+					<p:growl id="growl" showDetail="true" sticky="true" />  
+					
+					<p:commandButton value="Elimina Hotel" 
+						actionListener="#{findHotelBean.remove}" update = "growl"/>  
+				
+						
+					<p:commandButton id="selectButton" 
+                actionListener = "#{hotelBean.getPage(findHotelBean.searchedId)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="hotelBean.hotel"/> 
+                                 
+            </p:commandButton>	
+            
+            <p:commandButton type="reset" value="Reset" />
 
 				</h:form>
 			</p:panel>

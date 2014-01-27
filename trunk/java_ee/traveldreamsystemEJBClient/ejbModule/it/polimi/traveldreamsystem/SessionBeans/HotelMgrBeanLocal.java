@@ -19,4 +19,6 @@ public interface HotelMgrBeanLocal {
 
 	void update(HotelDTO hotel);
 
+	String pagRiepilogoPacchPer(int id);
+
 }

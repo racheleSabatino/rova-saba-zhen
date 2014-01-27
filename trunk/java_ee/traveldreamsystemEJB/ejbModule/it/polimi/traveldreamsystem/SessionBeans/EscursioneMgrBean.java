@@ -89,5 +89,11 @@ public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
 		em.merge(new Escursione(Escursione));
 	}
 
+	@Override
+	public String pagRiepilogoPacchPer(int idEscursione) {
+		return "/impiegato/creazioneEscursione?faces-redirect=true"
+				+ "&amp;id=" + idEscursione;
+	}
+
 
 }

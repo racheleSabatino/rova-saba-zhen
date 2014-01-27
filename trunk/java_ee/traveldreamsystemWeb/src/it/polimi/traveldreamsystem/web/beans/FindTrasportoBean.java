@@ -1,11 +1,15 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import java.awt.event.ActionEvent;
+
 import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
@@ -56,9 +60,15 @@ public class FindTrasportoBean {
 		this.searchedTrasporto = searchedTrasporto;
 	}
 
-	public void remove() {
-		trasportoMgrBean.removeTrasporto(searchedId);
-		setRemoveOK("Eliminazione trasporto terminata con successo");
+	public void remove(ActionEvent actionEvent) {
+		 FacesContext context = FacesContext.getCurrentInstance();  
+			try {
+				trasportoMgrBean.removeTrasporto(searchedId);
+				context.addMessage(null, new FacesMessage("Successo", "L'eliminazione del mezzo di trasporto è andata a buon fine"));
+			} catch(Exception e) {
+				context.addMessage(null, new FacesMessage("Attenzione", "Il mezzo di trasporto non può essere eliminato perchè"
+					+ " fa parte di un pacchetto vacanza"));
+			}
 	
 	}
 
