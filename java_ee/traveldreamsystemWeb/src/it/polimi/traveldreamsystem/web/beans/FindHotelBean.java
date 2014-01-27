@@ -57,9 +57,12 @@ public class FindHotelBean {
 	}
 
 	public void remove() {
+		try {
 		hotelMgrBean.removeHotel(searchedId);
 		setRemoveOK("Eliminazione hotel terminata con successo");
-	
+		} catch(Exception e) {
+			setRemoveOK("L'hotel nn pu¨° essere eliminato perch¨¨ fa parte di un pacchetto");
+		}
 	}
 
 	public String getRemoveOK() {
