@@ -41,9 +41,6 @@ public class TestBean {
 	@EJB
 	private PacchPerMgrLocal pacchPerMgr;
 	
-	@PersistenceContext
-	protected EntityManager em;
-	
 	private String date;
 	
 	private String citta;
@@ -140,7 +137,7 @@ public class TestBean {
 	}
 	
 	public String a10() {
-		pacchPerMgr.getClientePacchPerDTOACquistati("rachele");
+		pacchPerMgr.getClientePacchPerDTOAcquistati("rachele");
 		return null;
 	}
 

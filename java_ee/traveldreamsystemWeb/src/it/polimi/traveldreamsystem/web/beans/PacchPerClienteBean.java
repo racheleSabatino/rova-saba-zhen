@@ -37,7 +37,7 @@ public class PacchPerClienteBean {
     @PostConstruct
     public void init() {  
     	String mailCliente = utenteMgr.getPrincipalEmail();
-    	pacchetti = pacchPerMgr.getClientePacchPerDTONonACquistati(mailCliente);
+    	pacchetti = pacchPerMgr.getClientePacchPerDTONonAcquistati(mailCliente);
     }  
            
     public PacchPerDTO getSelectedPacchetto() {  

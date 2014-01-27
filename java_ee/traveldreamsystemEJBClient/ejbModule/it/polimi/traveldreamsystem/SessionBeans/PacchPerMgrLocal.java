@@ -16,9 +16,7 @@ public interface PacchPerMgrLocal {
 
 	void creaListaRegali(int idPacchPer);
 
-	List<PacchPerDTO> getClientePacchPerDTONonACquistati(String mail);
-
-	List<PacchPerDTO> getClientePacchPerDTOACquistati(String mail);
+	List<PacchPerDTO> getClientePacchPerDTONonAcquistati(String mail);
 
 	int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente);
 
@@ -36,6 +34,8 @@ public interface PacchPerMgrLocal {
 	void update(PacchPerDTO pacchetto);
 
 	void removePacchPer(int idPacchPer);
+
+	List<PacchPerDTO> getClientePacchPerDTOAcquistati(String mail);
 
 
 }
