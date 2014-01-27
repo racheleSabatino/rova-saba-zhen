@@ -37,7 +37,7 @@ public class HotelBeanPer extends PacchPerBean {
 
 	public void init(int id) {
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
-		hotels = compPacchPredMgr.getHotelsPacchPred(pacchPer.getIdPacchPred());
+		hotels = compPacchPredMgr.getHotelsPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (HotelDTO aDTO : hotels) {
 			if (compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);

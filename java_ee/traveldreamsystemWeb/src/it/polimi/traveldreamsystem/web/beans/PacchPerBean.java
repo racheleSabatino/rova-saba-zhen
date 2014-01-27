@@ -10,6 +10,8 @@ import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
+import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 @ManagedBean
 @SessionScoped
@@ -26,9 +28,9 @@ public class PacchPerBean {
 
 	protected PacchPerDTO pacchPer;
 	
-	private int idPacchPred;
+	private PacchPredDTO pacchPred;
 	
-	private String cliente;
+	private UtenteDTO cliente;
 
 	public void addPacchPer(){
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
@@ -47,28 +49,28 @@ public class PacchPerBean {
 	}
 
 	public String creazionePacchPer(){
-		PacchPerDTO pacchPer = new PacchPerDTO(false, idPacchPred, cliente);
+		PacchPerDTO pacchPer = new PacchPerDTO(0, false, pacchPred, cliente);
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
 		List<PacchPerDTO> listDTO = pacchPerMgrBean.getAllPacchPer();
 		int id = listDTO.get(listDTO.size() -1).getIdPacchPer();
-		return "/creazionePacchPer?faces-redirect=true"
+		return "/cliente/creazionePacchPer?faces-redirect=true"
 				+ "&amp;id=" + id
 				;
 	}
 
-	public int getIdPacchPred() {
-		return idPacchPred;
+	public PacchPredDTO getPacchPred() {
+		return pacchPred;
 	}
 
-	public void setIdPacchPred(int idPacchPred) {
-		this.idPacchPred = idPacchPred;
+	public void setPacchPred(PacchPredDTO pacchPred) {
+		this.pacchPred = pacchPred;
 	}
 
-	public String getCliente() {
+	public UtenteDTO getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(String cliente) {
+	public void setCliente(UtenteDTO cliente) {
 		this.cliente = cliente;
 	}
 

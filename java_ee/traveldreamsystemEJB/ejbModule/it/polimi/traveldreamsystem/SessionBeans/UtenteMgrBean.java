@@ -82,7 +82,7 @@ public class UtenteMgrBean implements UtenteMgrBeanLocal {
 		return context.getCallerPrincipal().getName();
 	}
 
-	public UtenteDTO convertToDTO(Utente utente) {
+	static public UtenteDTO convertToDTO(Utente utente) {
 		if (utente == null) {
 			return null;
 		}

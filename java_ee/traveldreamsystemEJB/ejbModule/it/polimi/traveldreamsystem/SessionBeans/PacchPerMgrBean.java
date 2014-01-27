@@ -43,15 +43,15 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		em.persist(newPacchPer);
 	}
 
-	public PacchPerDTO convertToDTO(PacchPer pacchetto) {
+	static public PacchPerDTO convertToDTO(PacchPer pacchetto) {
 		if (pacchetto == null) {
 			return null;
 		}
 		PacchPerDTO pacchDTO = new PacchPerDTO();
 		pacchDTO.setIdPacchPer(pacchetto.getIdPacchPer());
 		pacchDTO.setListaRegali(pacchetto.isListaRegali());
-		pacchDTO.setIdPacchPred(pacchetto.getPacchPred().getIdPacchPred());
-		pacchDTO.setMailCliente(pacchetto.getCliente().getMail());
+		pacchDTO.setPacchPred(PacchPredMgr.convertToDTO(pacchetto.getPacchPred()));
+		pacchDTO.setCliente(UtenteMgrBean.convertToDTO(pacchetto.getCliente()));
 		return pacchDTO;
 
 	}

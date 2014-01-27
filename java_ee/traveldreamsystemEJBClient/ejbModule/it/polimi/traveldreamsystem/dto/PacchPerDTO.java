@@ -8,63 +8,60 @@ public class PacchPerDTO {
 
 	private boolean listaRegali;
 	
-	private int idPacchPred;
+	private PacchPredDTO pacchPred;
 	
-	private String mailCliente;
+	private UtenteDTO cliente;
 	
 	public PacchPerDTO() {
 	}
-	
 
-	public PacchPerDTO(int idPacchPer, boolean listaRegali, int idPacchPred,
-			String mailCliente) {
+	public PacchPerDTO(int idPacchPer, boolean listaRegali,
+			PacchPredDTO pacchPred, UtenteDTO cliente) {
 		this.idPacchPer = idPacchPer;
 		this.listaRegali = listaRegali;
-		this.idPacchPred = idPacchPred;
-		this.mailCliente = mailCliente;
+		this.pacchPred = pacchPred;
+		this.cliente = cliente;
 	}
-	
 
-	public PacchPerDTO(boolean listaRegali, int idPacchPred,
-			String mailCliente) {
-		this.listaRegali = listaRegali;
-		this.idPacchPred = idPacchPred;
-		this.mailCliente = mailCliente;
-	}
+
 
 
 	public int getIdPacchPer() {
-		return this.idPacchPer;
+		return idPacchPer;
 	}
+
 
 	public void setIdPacchPer(int idPacchPer) {
 		this.idPacchPer = idPacchPer;
 	}
 
-	public boolean getListaRegali() {
-		return this.listaRegali;
+
+	public boolean isListaRegali() {
+		return listaRegali;
 	}
+
 
 	public void setListaRegali(boolean listaRegali) {
 		this.listaRegali = listaRegali;
 	}
 
-	public int getIdPacchPred() {
-		return idPacchPred;
+
+	public PacchPredDTO getPacchPred() {
+		return pacchPred;
 	}
 
-	public void setIdPacchPred(int idPacchPred) {
-		this.idPacchPred = idPacchPred;
+
+	public void setPacchPred(PacchPredDTO pacchPred) {
+		this.pacchPred = pacchPred;
 	}
 
-	public String getMailCliente() {
-		return mailCliente;
+
+	public UtenteDTO getCliente() {
+		return cliente;
 	}
 
-	public void setMailCliente(String mailCliente) {
-		this.mailCliente = mailCliente;
+
+	public void setCliente(UtenteDTO cliente) {
+		this.cliente = cliente;
 	}
-
-	
-
 }

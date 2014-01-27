@@ -55,8 +55,8 @@
                 <h:outputText id="partenzeIl" value="#{tablePacchPredBean.datePacchSelezionato}" />  
                   
                 <h:commandButton id="submit" action="#{pacchPerBean.creazionePacchPer}" value="Seleziona il pacchetto">
-                    <f:setPropertyActionListener value="#{tablePacchPredBean.idPacchettoSelezionato}" target="#{pacchPerBean.idPacchPred}"/>
-                    <f:setPropertyActionListener value="#{userBean.mail}" target="#{pacchPerBean.cliente}"/>
+                    <f:setPropertyActionListener value="#{tablePacchPredBean.selectedPacchetto}" target="#{pacchPerBean.pacchPred}"/>
+                    <f:setPropertyActionListener value="#{userBean.currentUtente}" target="#{pacchPerBean.cliente}"/>
                 </h:commandButton>
                 
             </h:panelGrid>  

@@ -39,9 +39,9 @@ public class EscursioneBeanPer extends PacchPerBean{
 
 	public void init(int id) {
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
-		escursioni = compPacchPredMgr.getEscursioniPacchPred(pacchPer.getIdPacchPred());
+		escursioni = compPacchPredMgr.getEscursioniPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (EscursioneDTO aDTO : escursioni) {
-			if (compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
+			if (compPacchPerMgr.findEscursione(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
 			} else {
 				aDTO.setSelected(false);
@@ -101,13 +101,13 @@ public class EscursioneBeanPer extends PacchPerBean{
 
 		for (EscursioneDTO aDTO : escursioni) {
 			if (aDTO.getSelected()
-					&& !compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchPerMgr.addEscursioneToPacchPer(pacchPer.getIdPacchPred(),
+					&& !compPacchPerMgr.findEscursione(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.addEscursioneToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 			if (!aDTO.getSelected()
-					&& compPacchPerMgr.findEscursione(pacchPer.getIdPacchPred(), aDTO.getIdProdBase())) {
-				compPacchPerMgr.removeEscursioneToPacchPer(pacchPer.getIdPacchPred(),
+					&& compPacchPerMgr.findEscursione(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
+				compPacchPerMgr.removeEscursioneToPacchPer(pacchPer.getIdPacchPer(),
 						aDTO.getIdProdBase());
 			}
 		}
