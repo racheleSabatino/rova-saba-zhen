@@ -11,119 +11,65 @@
 
 	<ui:composition>
 
-					<p:fieldset legend="Hotel" collapsed="false" toggleable="true"
-						toggleSpeed="500">
+		<p:fieldset legend="Hotel" collapsed="false" toggleable="true"
+			toggleSpeed="500">
 
-						<p:dataTable id="Hotel" var="hotel"
-							value="#{hotelBeanPer.hotels}" paginator="true"
-							filteredValue="#{hotelBeanPer.filteredHotels}" rows="5"
-							editable="true" editMode="cell">
+			<p:dataTable id="Hotel" var="hotel" value="#{hotelBeanPer.hotels}"
+				paginator="true" filteredValue="#{hotelBeanPer.filteredHotels}"
+				rows="5">
 
-							<p:column headerText=" " style="width:4%">
-									<p:commandButton update="Hotel"
-										rendered="#{hotel.selected}" icon="ui-icon-check"
-										action="#{hotelBeanPer.selected}">
-										<f:setPropertyActionListener value="#{hotel}"
-											target="#{hotelBeanPer.hotel}" />
-									</p:commandButton>
+				<p:column headerText=" " style="width:4%">
+					<p:commandButton update="Hotel" rendered="#{hotel.selected}"
+						icon="ui-icon-check" action="#{hotelBeanPer.selected}">
+						<f:setPropertyActionListener value="#{hotel}"
+							target="#{hotelBeanPer.hotel}" />
+					</p:commandButton>
 
-									<p:commandButton update="Hotel"
-										rendered="#{not hotel.selected}" icon="ui-icon-radio-on"
-										action="#{hotelBeanPer.selected}">
-										<f:setPropertyActionListener value="#{hotel}"
-											target="#{hotelBeanPer.hotel}" />
-									</p:commandButton>
-							</p:column>
+					<p:commandButton update="Hotel" rendered="#{not hotel.selected}"
+						icon="ui-icon-radio-on" action="#{hotelBeanPer.selected}">
+						<f:setPropertyActionListener value="#{hotel}"
+							target="#{hotelBeanPer.hotel}" />
+					</p:commandButton>
+				</p:column>
 
-							<p:column headerText="Id Hotel" filterBy="idProdBase" filterMatchMode="contains"
-								style="width:4%">
-								<h:outputText value="#{hotel.idProdBase}" />
-							</p:column>
+				<p:column headerText="Id Hotel" filterBy="idProdBase"
+					filterMatchMode="contains" style="width:4%">
+					<h:outputText value="#{hotel.idProdBase}" />
+				</p:column>
 
-							<p:column headerText="Citta" filterBy="citta" filterMatchMode="contains" style="width:25%">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.citta}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.citta}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Citta" filterBy="citta"
+					filterMatchMode="contains" style="width:25%">
+					<h:outputText value="#{hotel.citta}" />
+				</p:column>
 
 
-							<p:column headerText="Data Arrivo" style="width:25%">
+				<p:column headerText="Data Arrivo" style="width:25%">
+					<h:outputText value="#{hotel.dataPartenza}" />
+				</p:column>
 
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.dataPartenza}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.dataPartenza}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Data Ritorno" style="width:25%">
+					<h:outputText value="#{hotel.dataRitorno}" />
+				</p:column>
 
-							<p:column headerText="Data Ritorno" style="width:25%">
+				<p:column headerText="Descrizione" filterBy="descrizione"
+					filterMatchMode="contains" style="width:25%">
+					<h:outputText value="#{hotel.descrizione}" />
+				</p:column>
 
+				<p:column headerText="Stelle" filterBy="stelle"
+					filterMatchMode="contains" style="width:25%">
+					<h:outputText value="#{hotel.stelle}" />
+				</p:column>
 
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.dataRitorno}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.dataRitorno}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
+				<p:column headerText="Costo" filterBy="costo"
+					filterMatchMode="contains" style="width:5%">
+					<h:outputText value="#{hotel.costo}" />
+				</p:column>
+			</p:dataTable>
 
-							<p:column headerText="Descrizione" filterBy="descrizione" filterMatchMode="contains" style="width:25%">
-
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.descrizione}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.descrizione}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-							
-							<p:column headerText="Stelle" filterBy="stelle" filterMatchMode="contains" style="width:25%">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.stelle}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.stelle}"
-											style="width:95%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-
-							<p:column headerText="Costo" filterBy="costo" filterMatchMode="contains" style="width:5%">
-
-								<p:cellEditor>
-									<f:facet name="output">
-										<h:outputText value="#{hotel.costo}" />
-									</f:facet>
-									<f:facet name="input">
-										<p:inputText value="#{hotel.costo}" style="width:90%" />
-									</f:facet>
-								</p:cellEditor>
-							</p:column>
-						</p:dataTable>
-
-					</p:fieldset>
+		</p:fieldset>
 
 	</ui:composition>
-	
+
 </h:body>
 </html>
