@@ -76,7 +76,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Hotel hotel = em.find(Hotel.class, idHotel);
 		Query q = em.createQuery("DELETE FROM HotelsPacchPer e "
-				+ "WHERE e.pacchPer = :pacchPred AND e.hotel = :hotel");
+				+ "WHERE e.pacchPer = :pacchPer AND e.hotel = :hotel");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("hotel", hotel);
 		q.executeUpdate();
@@ -87,7 +87,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Escursione escursione = em.find(Escursione.class, idEscursione);
 		Query q = em.createQuery("DELETE FROM EscursioniPacchPer e "
-				+ "WHERE e.pacchPer = :pacchPred AND e.escursioni = :escursione");
+				+ "WHERE e.pacchPer = :pacchPer AND e.escursioni = :escursione");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("escursione", escursione);
 		q.executeUpdate();
@@ -95,10 +95,12 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 
 	@Override
 	public void removeTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
-		Query q = em.createQuery("DELETE FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN h.trasporto o "
-				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idTrasporto");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("idEscursione", idTrasporto);
+		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
+		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
+		Query q = em.createQuery("DELETE FROM TrasportiPacchPer h "
+				+ "WHERE p.pacchPer = :pacchPer AND h.trasporto= :trasporto");
+		q.setParameter("pacchPer", pacchPer);
+		q.setParameter("trasporto", trasporto);
 		q.executeUpdate();
 	}
 	
