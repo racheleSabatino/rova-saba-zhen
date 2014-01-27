@@ -54,8 +54,8 @@
 				
 						
 					<p:commandButton id="selectButton" 
-                actionListener = "#{hotelBean.getPage(findHotelBean.searchedId)}" value = "Modifica">
-                 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="hotelBean.hotel"/> 
+                action = "#{hotelBean.getPage(findHotelBean.searchedId)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
                                  
             </p:commandButton>	
             
