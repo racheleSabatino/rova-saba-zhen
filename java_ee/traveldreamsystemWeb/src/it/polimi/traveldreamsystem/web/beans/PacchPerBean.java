@@ -43,10 +43,6 @@ public class PacchPerBean {
 	public void setPacchPer(PacchPerDTO pacchPer) {
 		this.pacchPer = pacchPer;
 	}
-	
-	public PacchPerDTO getTestPacch() {
-		return pacchPerMgrBean.getAllPacchPer().get(0);
-	}
 
 	public String creazionePacchPer(){
 		PacchPerDTO pacchPer = new PacchPerDTO(0, false, pacchPred, cliente);

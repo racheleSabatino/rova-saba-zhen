@@ -41,11 +41,6 @@ public class PacchPredBean {
 		this.pacchPred = pacchPred;
 	}
 	
-	public PacchPredDTO getTestPacch() {
-		return pacchPredMgrBean.getAllPacchPred().get(0);
-	}
-
-	
 	public String creazionePacchPred(){
 		PacchPredDTO pacchPred = new PacchPredDTO();
 		pacchPredMgrBean.addNewPacchPred(pacchPred);
