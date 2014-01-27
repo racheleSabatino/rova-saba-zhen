@@ -37,10 +37,15 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	protected EntityManager em;
 	
 	ComposizionePacchPerMgr cmpPacchPer;
+	
+	public final static int ACQUISTATO = 0;
+	
+	public final static int NON_ACQUISTATO = 1;
 
 	public PacchPerMgrBean() {
 		cmpPacchPer = new ComposizionePacchPerMgr();
 	}
+
 
 	@Override
 	public void addNewPacchPer(PacchPerDTO newPacchetto) {
@@ -92,25 +97,58 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return pacchettiDTO;
 	}
 
-	public List<PacchPer> getClientePacchPerNonAcquistati(String mail) {
-		Query q1 = em
-				.createQuery(" SELECT distinct p FROM PacchPer p JOIN p.cliente c "
-						+ "WHERE c.mail =: mail AND "
-						+ "(EXIST { SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p1 "
-						+ "WHERE p1.idPacchPer = p.idPacchPer AND h.dataAcquisto = null } "
-						+ "OR EXIST { SELECT e FROM EscursioniPacchPer e JOIN e.pacchPer p2 "
-						+ "WHERE p2.idPacchPer = p.idPacchPer AND e.dataAcquisto = null } "
-						+ "OR EXIST { SELECT t FROM TrasportiPacchPer t "
-						+ "WHERE p3.idPacchPer = p.idPacchPer AND t.dataAcquisto = null })");
-		q1.setParameter("mail", mail);
-		return (List<PacchPer>) q1.getResultList();
-
+	
+	public List<PacchPer> getClientePacchPer(String mail, int which) {
+		List<PacchPer> pacchetti = getClientePacchPer(mail);
+		List<PacchPer> pacchettiNonAcquistati = new ArrayList<PacchPer>();
+		List<PacchPer> pacchettiAcquistati = new ArrayList<PacchPer>();
+			for(PacchPer p: pacchetti) {
+				int id = p.getIdPacchPer();
+				Query q2 = em.createQuery("SELECT h.dataAcquisto FROM HotelsPacchPer h JOIN h.pacchPer p1 "
+						+ "WHERE p1.idPacchPer = p.idPacchPer");
+				Query q3 = em.createQuery("SELECT e.dataAcquisto FROM EscursioniPacchPer e JOIN e.pacchPer p2 "
+						+ "WHERE p2.idPacchPer = p.idPacchPer ");
+				Query q4 = em.createQuery(" SELECT t.dataAcquisto FROM TrasportiPacchPer t "
+						+ "WHERE p3.idPacchPer = p.idPacchPer ");
+				q2.setParameter("idPacchPer", id);
+				q3.setParameter("idPacchPer", id);
+				q4.setParameter("idPacchPer", id);
+				List<Date> dateHotel = (List<Date>) q2.getResultList();
+				List<Date> dateEscursione = (List<Date>) q3.getResultList();
+				List<Date> dateTrasporto = (List<Date>) q4.getResultList();
+				if(which == NON_ACQUISTATO) {
+					if(checkNull(dateHotel) || checkNull(dateEscursione) || checkNull(dateTrasporto)) 
+						pacchettiNonAcquistati.add(p);
+				}
+				else {
+						pacchettiAcquistati.add(p);
+				}
+			}
+			if(which == NON_ACQUISTATO) 
+				return pacchettiNonAcquistati;
+			else
+				return pacchettiAcquistati;
 	}
 
+	//utilizzato per verificare se almeno un elemento della lista è nullo
+	private boolean checkNull(List<Date> liste){
+		for(int i=0; i < liste.size(); i++) {
+			if(liste.get(i) == null)
+				return true;
+		}
+		return false;
+	}
+	
+	public List<PacchPer> getClientePacchPer(String mail) {
+		Query q = em.createQuery("SELECT p FROM PacchPer p JOIN p.cliente c "
+				+ "WHERE c.mail = :mail");
+		q.setParameter("mail", mail);
+		return (List<PacchPer>) q.getResultList();
+	}
+	
 	@Override
-	public List<PacchPerDTO> getClientePacchPerDTONonACquistati(String mail) {
-		List<PacchPer> pacchettiNonAcquistati = this
-				.getClientePacchPerNonAcquistati(mail);
+	public List<PacchPerDTO> getClientePacchPerDTONonAcquistati(String mail) {
+		List<PacchPer> pacchettiNonAcquistati = this.getClientePacchPer(mail, NON_ACQUISTATO);
 		List<PacchPerDTO> pacchettiDTO = new ArrayList<PacchPerDTO>();
 		for (int i = 0; i < pacchettiNonAcquistati.size(); i++) {
 			PacchPerDTO pacchDTO = convertToDTO(pacchettiNonAcquistati.get(i));
@@ -119,31 +157,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return pacchettiDTO;
 	}
 
-	/*
-	 * restituisce i pacchetti personalizzati acquistati di un cliente.
-	 */
-	public List<PacchPer> getClientePacchPerAcquistati(String mail) {
-		Query q1 = em
-				.createQuery(" SELECT distinct p FROM PacchPer p JOIN p.cliente c "
-						+ "WHERE c.mail =: mail AND "
-						+ "(NOT EXIST { SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p1 "
-						+ "WHERE p1.idPacchPer = p.idPacchPer AND h.dataAcquisto IS NULL } "
-						+ " AND NOT EXIST { SELECT e FROM EscursioniPacchPer e JOIN e.pacchPer p2 "
-						+ "WHERE p2.idPacchPer = p.idPacchPer AND e.dataAcquisto IS NULL } "
-						+ "AND NOT EXIST { SELECT t FROM TrasportiPacchPer t JOIN t.pacchPer p3 "
-						+ "WHERE p3.idPacchPer = p.idPacchPer AND t.dataAcquisto IS NULL })");
-		q1.setParameter("mail", mail);
-		if (q1.getResultList() != null) {
-			return (List<PacchPer>) q1.getResultList();
-		}
-		// il cliente non ha pacchetti personalizzati ancora acquistati
-		return null;
-	}
 
 	@Override
-	public List<PacchPerDTO> getClientePacchPerDTOACquistati(String mail) {
-		List<PacchPer> pacchettiAcquistati = this
-				.getClientePacchPerAcquistati(mail);
+	public List<PacchPerDTO> getClientePacchPerDTOAcquistati(String mail) {
+		List<PacchPer> pacchettiAcquistati = this.getClientePacchPer(mail, ACQUISTATO);
+				
 		List<PacchPerDTO> pacchettiDTO = new ArrayList<PacchPerDTO>();
 		for (int i = 0; i < pacchettiAcquistati.size(); i++) {
 			PacchPerDTO pacchDTO = convertToDTO(pacchettiAcquistati.get(i));
