@@ -23,7 +23,7 @@ public class PacchPred implements Serializable {
 	private int idPacchPred;
 
 	@Lob
-	@Column(name = "DESCRIZIONE")
+	@Column(name = "DESCRIZIONE", nullable = false)
 	private String descrizione;
 	
 	 @OneToMany(mappedBy="pacchPred")

@@ -28,7 +28,7 @@ public class EscursioniPacchPer implements Serializable {
 	private PacchPer pacchPer;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATAACQUISTO")
+	@Column(name="DATAACQUISTO", nullable = true)
 	private Date dataAcquisto;
 
 	public EscursioniPacchPer() {
