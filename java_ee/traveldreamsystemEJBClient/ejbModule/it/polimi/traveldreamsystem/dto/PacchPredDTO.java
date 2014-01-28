@@ -15,6 +15,10 @@ public class PacchPredDTO {
 	public PacchPredDTO () {
 	}
 
+	public PacchPredDTO(int id) {
+		idPacchPred = id;
+	}
+
 	public int getIdPacchPred() {
 		return idPacchPred;
 	}
