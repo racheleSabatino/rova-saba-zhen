@@ -5,6 +5,7 @@ import java.util.List;
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -47,6 +48,9 @@ public class EscursioneBean extends PacchPredBean{
 	public void init(int id) {
 		escursioni = escursioneMgrBean.getAllEscursione();
 		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
+		if(pacchPred == null) {
+			pacchPred = new PacchPredDTO(id);
+		}
 		for (EscursioneDTO aDTO : escursioni) {
 			if (compPacchMgr.findEscursione(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -111,8 +115,9 @@ public class EscursioneBean extends PacchPredBean{
 	}
 
 	public void save(AjaxBehaviorEvent e) {
-		System.out.println("cell save");
+		System.out.println("cell save escursioni");
 
+		pacchPredMgrBean.update(pacchPred);
 		for (EscursioneDTO aDTO : escursioni) {
 			escursioneMgrBean.update(aDTO);
 			if (aDTO.getSelected()
@@ -126,7 +131,6 @@ public class EscursioneBean extends PacchPredBean{
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPredMgrBean.update(pacchPred);
 	}
 	
 	public String getPage(int idEscursione){

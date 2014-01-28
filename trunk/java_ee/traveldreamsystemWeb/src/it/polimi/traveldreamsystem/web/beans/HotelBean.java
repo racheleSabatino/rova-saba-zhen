@@ -5,6 +5,7 @@ import java.util.List;
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -47,6 +48,9 @@ public class HotelBean extends PacchPredBean {
 	public void init(int id) {
 		hotels = hotelMgrBean.getAllHotel();
 		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
+		if(pacchPred == null) {
+			pacchPred = new PacchPredDTO(id);
+		}
 		for (HotelDTO aDTO : hotels) {
 			if (compPacchMgr.findHotel(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -111,8 +115,9 @@ public class HotelBean extends PacchPredBean {
 	}
 
 	public void save(AjaxBehaviorEvent e) {
-		System.out.println("cell save");
+		System.out.println("cell save hotels");
 
+		pacchPredMgrBean.update(pacchPred);
 		for (HotelDTO aDTO : hotels) {
 			hotelMgrBean.update(aDTO);
 			if (aDTO.getSelected()
@@ -126,7 +131,6 @@ public class HotelBean extends PacchPredBean {
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPredMgrBean.update(pacchPred);
 	}
 	
 	public String getPage(int idHotel){
