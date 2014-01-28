@@ -232,7 +232,7 @@ li .ui-corner-all, .ui-button, input, textarea, .ui-fieldset-legend {
 	border-style: none !important;
 }
 
-.ui-dialog, .ui-menu-list, .inner-menu, .inner-content, li .ui-corner-all{
+.ui-dialog, .inner-menu, .inner-content, li .ui-corner-all{
 	border: 10px solid rgba(220, 220, 255, .5);
 	border-radius: 0px;
 	background-clip: padding-box;
