@@ -13,22 +13,22 @@
 
 		<ui:define name="content">
 
-			<p:panel>
-				<h:form>
+			<p:panel >
+				<h:form id="resultGrid">
 					<p:panel header="Ricerca Hotel">
 						<h:panelGrid columns="3" id="regGrid">
 							<h:outputLabel for="id">id:</h:outputLabel>
 							<p:inputText id="id" value="#{findHotelBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica"
 								actionListener="#{findHotelBean.find}" />
 						</h:panelGrid>
 
-						<p:outputPanel id="resultGrid">
-							<p:outputPanel
+						<p:outputPanel>
+							<p:outputPanel 
 								rendered="#{findHotelBean.resultPanelVisible}">
-								<h:panelGrid columns="1">
+								<h:panelGrid columns="1" redered="#{findHotelBean.resultPanelVisible}">
 
 									<p:outputLabel
 										value="Citta: #{findHotelBean.searchedHotel.citta}" />
@@ -38,30 +38,45 @@
 										value="Costo: #{findHotelBean.searchedHotel.costo}" />
 									<p:outputLabel
 										value="tipoCamera: #{findHotelBean.searchedHotel.tipoCamera}" />
-									<p:outputLabel
+									<p:outputLabel 
 										value="Descrizione: #{findHotelBean.searchedHotel.descrizione}" />
 
 								</h:panelGrid>
-
+							</p:outputPanel>	
+							
+							<p:outputPanel rendered = "#{findHotelBean.noResultPanelVisible}" >
+							<p:outputLabel value = "Non è stato trovato un hotel a cui corrisponde l'id  
+											inserito, controllare di aver digitato un id corretto" />
 							</p:outputPanel>
+											
+							
 						</p:outputPanel>
+			
+					
+						<p:growl id="growl" showDetail="true" />  
+					
+						<p:commandButton id="elimina" value = "Elimina" rendered = "#{findHotelBean.resultPanelVisible}"
+						type="button" onclick="PF('cd').show()" />
+						<!--  -->
+						<p:confirmDialog message="Sei sicuro di voler eliminare l'hotel?"
+						header="Eliminazione hotel" severity="alert"
+						widgetVar="cd">
+						<p:commandButton value="Si" actionListener="#{findHotelBean.remove}"
+						update="growl" oncomplete="PF('cd').hide()"/>
+						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+						</p:confirmDialog>
+						
+						<p:commandButton immediate="true" id="modifica" rendered = "#{findHotelBean.resultPanelVisible}"
+						  action = "/homePage" value = "Modifica">
+                		 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
+                                 
+            			</p:commandButton>
+            			
+            			<p:commandButton immediate ="true" rendered="#{findHotelBean.resultPanelVisible}" action="/homePage?faces'redirect=true" />
+            			<p:commandButton immediate = "true" type ="reset" value="Reset" update="resultGrid"/>
 					</p:panel>
 					
-					<p:growl id="growl" showDetail="true" sticky="true" />  
-					
-					<p:commandButton value="Elimina Hotel" 
-						actionListener="#{findHotelBean.remove}" update = "growl"/>  
-				
-						
-					<p:commandButton id="selectButton" 
-                action = "#{hotelBean.getPage(findHotelBean.searchedId)}" value = "Modifica">
-                 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
-                                 
-            </p:commandButton>	
-            
-            <p:commandButton type="reset" value="Reset" />
-
-				</h:form>
+					</h:form>
 			</p:panel>
 
 		</ui:define>

@@ -16,7 +16,7 @@
 			<p:panel header="Pacchetti in fase di personalizzazione">
 				    <h:form id="form">  
                   
-        <p:dataList value="#{pacchPerClienteBean.pacchetti}" var="pacchPer" id="pacchetti"  
+        <p:dataList value="#{pacchPerClienteBean.pacchettiNonAcquistati}" var="pacchPer" id="pacchetti"  
             paginator="true" rows="5"  
             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
             rowsPerPageTemplate="5,10,15" type="none">  
@@ -29,7 +29,8 @@
       			
       			<p:commandButton title = "Mostra" 
       			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
-      				
+      			<f:setPropertyActionListener value="#{pacchPer}" 
+      			target="#{riepilogoPacchPerBean.pacchetto}"/>
       			</p:commandButton>
       			
                 <p:commandButton id="selectButton" 

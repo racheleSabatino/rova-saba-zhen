@@ -31,9 +31,12 @@
 									<p:outputLabel
 										value="Hotel: #{riepilogoBean.hotel}" />
 									<p:outputLabel
-										value="Hotel: #{findEscursioneBean.searchedEscursione.dataRitorno}" />
+										value="Escursioni: #{riepilogoBean.escursione}" />
 									<p:outputLabel
-										value="Escursioni: #{findEscursioneBean.searchedEscursione.costo}" />
+										value="Trasporti: #{riepilogoBean.trasporto}" />
+										
+									<p:outputLabel
+										value="Costo totale: #{riepilogoBean.costoTotale}" />	
 								
 									</h:panelGrid>
 
@@ -41,10 +44,10 @@
 						</p:outputPanel>
       			
 					</p:panel>
-      			
+      		
                 <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagPacchPer(pacchPer.idPacchPer)}"
-                icon="ui-icon-search" title="Modifica" >  
+                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
+                icon="ui-icon-search" value="Modifica" >  
                 </p:commandButton>  
                 
       			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto)">
@@ -59,6 +62,15 @@
 					update="messages" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
+				
+				<p:fieldset legend="Crea lista regali" toggleable="true">
+					<h:panelGrid column="2">
+						<h:outputText value="Se crei una lista regalo dal pacchetto, potrai inviare una mai
+						ai tuoi amici chiedendogli di comprarti un prodotto dalla tua lista.
+						Inserisci nel seguente campo l'email di un amico e poi clicca su invia. " />
+						<h:inputText value = "#{riepilogoPacchPerBean.mailAmico}" />
+					</h:panelGrid>
+				</p:fieldset>
    
            
 		</ui:define>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Pacchetti in fase di personalizzazione">
+				    <h:form id="form">  
+                  
+        <p:dataList value="#{pacchPerClienteBean.pacchettiNonAcquistati}" var="pacchPer" id="pacchetti"  
+            paginator="true" rows="5"  
+            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+            rowsPerPageTemplate="5,10,15" type="none">  
+      
+                <f:facet name="header">  
+                    Pacchetti Personalizzati  
+                </f:facet>  
+      
+      			<h:outputText value="#{pacchPer.idPacchPer}" /> 
+      			
+      			<p:commandButton title = "Mostra" 
+      			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
+      				
+      			</p:commandButton>
+      			
+                <p:commandButton id="selectButton" 
+                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
+                title="Modifica" >  
+                </p:commandButton>  
+                
+      			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchetto)">
+      			</p:commandButton>
+      			
+      			
+      			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
+					header="Cancellazioni pacchetto vacanza" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
+					update="messages" oncomplete="PF('cd').hide()"/>
+				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
+                
+                  
+        </p:dataList>  
+          
+     
+    </h:form>  
+                          
+
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

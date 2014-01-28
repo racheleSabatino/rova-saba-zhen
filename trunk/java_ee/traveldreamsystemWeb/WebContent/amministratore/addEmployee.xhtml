@@ -39,9 +39,13 @@
 						<p:password id="pwd2" label="Confirm Password"
 							value="#{addImpiegatoBean.impiegato.password}" />
 					</h:panelGrid>
-					<p:commandButton value="Aggiungi" update="regGrid"
-						action="#{addImpiegatoBean.add()}" />
+					<p:growl id = "growl" />
+					
+					<p:commandButton value="Aggiungi" update="growl"
+						action="#{addImpiegatoBean.add}" />
 
+					<p:commandButton value = "Reset" type = "reset">
+					</p:commandButton>
 				</p:panel>
 			</h:form>
 
