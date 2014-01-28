@@ -42,10 +42,13 @@ public class PacchPredBean {
 	}
 	
 	public String creazionePacchPred(){
-		PacchPredDTO pacchPred = new PacchPredDTO();
-		pacchPredMgrBean.addNewPacchPred(pacchPred);
 		List<PacchPredDTO> listDTO = pacchPredMgrBean.getAllPacchPred();
-		int id = listDTO.get(listDTO.size() -1).getIdPacchPred();
+		int id;
+		if(listDTO.isEmpty()) {
+			id = 1;
+		} else {
+			id = listDTO.get(listDTO.size() -1).getIdPacchPred() + 1;
+		}
 		return "/impiegato/creazionePacchPred?faces-redirect=true"
 				+ "&amp;id=" + id
 				;

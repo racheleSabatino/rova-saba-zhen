@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
+import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.EJB;
@@ -47,6 +48,9 @@ public class TrasportoBean extends PacchPredBean {
 	public void init(int id) {
 		trasporti = trasportoMgrBean.getAllTrasporto();
 		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
+		if(pacchPred == null) {
+			pacchPred = new PacchPredDTO(id);
+		}
 		for (TrasportoDTO aDTO : trasporti) {
 			if (compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				aDTO.setSelected(true);
@@ -111,8 +115,9 @@ public class TrasportoBean extends PacchPredBean {
 	}
 
 	public void save(AjaxBehaviorEvent e) {
-		System.out.println("cell save");
+		System.out.println("cell save trasporti");
 
+		pacchPredMgrBean.update(pacchPred);
 		for (TrasportoDTO aDTO : trasporti) {
 			trasportoMgrBean.update(aDTO);
 			if (aDTO.getSelected()
@@ -126,7 +131,6 @@ public class TrasportoBean extends PacchPredBean {
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPredMgrBean.update(pacchPred);
 	}
 	
 	public String getPage(int idTrasporto){
