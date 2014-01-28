@@ -25,7 +25,7 @@ public class Escursione implements Serializable {
 	private int idProdBase;
 	
 	@Lob
-	@Column(name = "DESCRIZIONE")
+	@Column(name = "DESCRIZIONE", nullable = false)
 	private String descrizione;
 
 	@Temporal(TemporalType.TIMESTAMP)

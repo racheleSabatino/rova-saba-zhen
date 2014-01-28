@@ -26,7 +26,7 @@ public class Hotel implements Serializable {
 	private int costo;
 
 	@Lob
-	@Column(name = "DESCRIZIONE")
+	@Column(name = "DESCRIZIONE", nullable = false)
 	private String descrizione;
 
 	@Column(name = "CITTA", nullable = false, length = 45)

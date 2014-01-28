@@ -105,11 +105,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			for(PacchPer p: pacchetti) {
 				int id = p.getIdPacchPer();
 				Query q2 = em.createQuery("SELECT h.dataAcquisto FROM HotelsPacchPer h JOIN h.pacchPer p1 "
-						+ "WHERE p1.idPacchPer = p.idPacchPer");
-				Query q3 = em.createQuery("SELECT e.dataAcquisto FROM EscursioniPacchPer e JOIN e.pacchPer p2 "
-						+ "WHERE p2.idPacchPer = p.idPacchPer ");
-				Query q4 = em.createQuery(" SELECT t.dataAcquisto FROM TrasportiPacchPer t "
-						+ "WHERE p3.idPacchPer = p.idPacchPer ");
+						+ "WHERE p1.idPacchPer = :idPacchPer");
+				Query q3 = em.createQuery("SELECT e.dataAcquisto FROM EscursioniPacchPer e JOIN e.pacchPer p1 "
+						+ "WHERE p1.idPacchPer = :idPacchPer ");
+				Query q4 = em.createQuery(" SELECT t.dataAcquisto FROM TrasportiPacchPer t JOIN t.pacchPer p1 "
+						+ "WHERE p1.idPacchPer = :idPacchPer ");
 				q2.setParameter("idPacchPer", id);
 				q3.setParameter("idPacchPer", id);
 				q4.setParameter("idPacchPer", id);
@@ -183,20 +183,53 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	}
 
+	private Date estraiDataScadenzaPacch(int idPacchPer) {
+		Query q = em.createQuery("SELECT o.dataRitorno FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel o "
+				+ "WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", idPacchPer);
+		Query q1 = em.createQuery("SELECT o.dataRitorno FROM EscursioniPacchPer h JOIN h.pacchPer p JOIN h.escursioni o "
+				+ "WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", idPacchPer);
+		Query q2 = em.createQuery("SELECT o.dataRitorno FROM TrasportiPacchPer h JOIN h.pacchPer p JOIN h.trasporto o "
+				+ "WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", idPacchPer);
+		List<Date> lista = (List<Date>) q.getResultList();
+		List<Date> lista1 = (List<Date>) q1.getResultList();
+		List<Date> lista2 = (List<Date>) q2.getResultList();
+		lista.addAll(lista1);
+		lista.addAll(lista2);
+		return trovaMaxData(lista);
+	}
+	
+	private Date trovaMaxData(List<Date> date) {
+		Date max = date.get(0);
+		for(int i=1; i < date.size(); i++) {
+			if(date.get(i).compareTo(date.get(i + 1)) > 0) 
+				max = date.get(i);
+		}
+		return max;
+	}
+	
 	// acquista il pacchetto personalizzato, si inserisce la data di acquisto in
 	// ogni prodotto base del pacchetto
 	@Override
 	public void acquistaPacchPer(int idPacchPer) {
 		Calendar calendar = Calendar.getInstance();
 		Date data = calendar.getTime();
+		if(this.estraiDataScadenzaPacch(idPacchPer).after(data)) {
+			;
+		}
 		Query q = em
-				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto =: data "
+						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
+						.setParameter("null", null);
 		q.setParameter("data", data);
 		Query q1 = em
-				.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+				.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto =: data "
+						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
+						.setParameter("null", null);
 		q1.setParameter("data", data);
 		Query q2 = em
-				.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto =: data WHERE h.idPacchPer = :idPacchPer");
+				.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto =: data "
+						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
+						.setParameter("null", null);
 		q2.setParameter("data", data);
 		q.executeUpdate();
 		q1.executeUpdate();
