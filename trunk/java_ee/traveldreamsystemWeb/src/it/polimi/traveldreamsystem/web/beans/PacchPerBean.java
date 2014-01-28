@@ -3,9 +3,12 @@ package it.polimi.traveldreamsystem.web.beans;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
+import eccezioni.PacchettoScadutoException;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
@@ -31,6 +34,16 @@ public class PacchPerBean {
 	private PacchPredDTO pacchPred;
 	
 	private UtenteDTO cliente;
+	
+	public String mailAmico;
+
+	public String getMailAmico() {
+		return mailAmico;
+	}
+
+	public void setMailAmico(String mailAmico) {
+		this.mailAmico = mailAmico;
+	}
 
 	public void addPacchPer(){
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
@@ -72,5 +85,20 @@ public class PacchPerBean {
 		this.cliente = cliente;
 	}
 
+	public void acquistaPacchetto() {
+		 FacesContext context = FacesContext.getCurrentInstance();  
+		try {
+			pacchPerMgrBean.acquistaPacchPer(pacchPer.getIdPacchPer());
+			context.addMessage(null, new FacesMessage("Conferma pacchetto acquistato con successo"));
+		} catch (PacchettoScadutoException e) {
+			 context.addMessage(null, new FacesMessage("Mi dispiace, il pacchetto non può più essere"
+			 		+ "acquistato, poichè la data di pagamento è successiva alla data di ritorno dell'ultimo"
+			 		+ "prodotto base che compone il pacchetto"));
+		}
+	}
+	
+	public void inviaInvitoListaRegali(){
+		
+	}
 	
 }

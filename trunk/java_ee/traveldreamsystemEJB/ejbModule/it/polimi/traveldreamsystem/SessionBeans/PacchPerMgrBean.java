@@ -26,6 +26,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import eccezioni.PacchettoScadutoException;
+
 /**
  * Session Bean implementation class PacchPerMgrBean
  */
@@ -180,7 +182,23 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		q.setParameter("idPacchPer", idPacchPer);
 		Integer costoTotale = (Integer) q.getSingleResult();
 		return (Integer) q.getSingleResult();
-
+	}
+	
+	@Override
+	public int viewTotaleAcquistatoDaAmici(int idPacchPer){
+		PacchPer pacch = em.find(PacchPer.class, idPacchPer);
+		if(!pacch.isListaRegali()) 
+			return 0;
+		else {
+			Query q = em.createQuery("SELECT SUM(h.hotel.costo + p.escursione.costo + t.trasporto.costo) "
+				+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e JOIN p.trasportiPacchPer t "
+				+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto != :null "
+				+ "AND e.dataAcquisto != :null "
+				+ "AND t.dataAcquisto != :null ")
+				.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("null", null);
+		return (Integer) q.getSingleResult();
+		}
 	}
 
 	private Date estraiDataScadenzaPacch(int idPacchPer) {
@@ -210,11 +228,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	// acquista il pacchetto personalizzato, si inserisce la data di acquisto in
 	// ogni prodotto base del pacchetto
 	@Override
-	public void acquistaPacchPer(int idPacchPer) {
+	public void acquistaPacchPer(int idPacchPer) throws PacchettoScadutoException {
 		Calendar calendar = Calendar.getInstance();
 		Date data = calendar.getTime();
 		if(this.estraiDataScadenzaPacch(idPacchPer).after(data)) {
-			;
+			throw new PacchettoScadutoException("il pacchetto è scaduto");
 		}
 		Query q = em
 				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto =: data "
@@ -246,49 +264,25 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		q.executeUpdate();
 	}
 
-	/*
-	 * acquista un prodotto base di un pacchetto. Controllare che il cliente non
-	 * acquisti un prodotto di una sua lista regali, che il pacchetto non sia
-	 * gia completamente acquistato
-	 * 
-	 * @return -1 se l'id del pacchetto personalizzato non esiste in database -2
-	 * se la mail dell'acquirente non corrisponde alla mail di un cliente in
-	 * database -3 se la mail dell'acquirente corrisponde al cliente
-	 * proprietario della lista regali, cioe un cliente non puo acquistare un
-	 * prodotto dalla sua lista regali -4 se non esiste l'id dell'hotel 0 se
-	 * l'acquisto si conclude con successo
-	 */
+	
 	@Override
-	public int acquistaHotelListaRegali(int idHotel, int idPacchPer,
-			String mailAcquirente) {
-		if (!existIdPacchPer(idPacchPer)) {
-			return -1;
-		}
-		if (!existMailUtente(mailAcquirente)) {
-			return -2;
-		}
-		if (!check(mailAcquirente, idPacchPer)) {
-			return -3;
-		}
-		if (!existIdHotel(idHotel)) {
-			return -4;
-		}
+	public void acquistaHotelListaRegali(int idHotel, int idPacchPer, String mailAcquirente) {
 		Query q = em
 				.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
-						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
+						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
 						+ "AND p.listaRegali = TRUE AND o.idProdBase = :idHotel");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idHotel", idHotel);
+		q.setParameter("null", null);
 		HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
 		Calendar calendar = Calendar.getInstance();
 		h.setDataAcquisto(calendar.getTime());
-		return 0;
 	}
 
 	// controlla che un utente non acquista un prodotto di una propria lista
 	// regali
-	private boolean check(String mailAcquirente, int idPacchPer) {
+	private boolean check(String mailAcquirente, int idPacchPer)  {
 		Query q = em
 				.createQuery("SELECT p FROM PacchPer p JOIN p.utente u "
 						+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
@@ -300,100 +294,38 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return true;
 	}
 
-	private boolean existIdPacchPer(int idPacchPer) {
-		PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
-		if (pacchetto == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean existMailUtente(String mail) {
-		Utente utente = em.find(Utente.class, mail);
-		if (utente == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean existIdHotel(int idHotel) {
-		Hotel hotel = em.find(Hotel.class, idHotel);
-		if (hotel == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean existIdEscursione(int idEscursione) {
-		Escursione escursione = em.find(Escursione.class, idEscursione);
-		if (escursione == null) {
-			return false;
-		}
-		return true;
-	}
-
-	private boolean existIdTrasporto(int idTrasporto) {
-		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
-		if (trasporto == null) {
-			return false;
-		}
-		return true;
-	}
+	
 
 	@Override
-	public int acquistaEscursioneListaRegali(int idEscursione, int idPacchPer,
+	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer,
 			String mailAcquirente) {
-		if (!existIdPacchPer(idPacchPer)) {
-			return -1;
-		}
-		if (!existMailUtente(mailAcquirente)) {
-			return -2;
-		}
-		if (!check(mailAcquirente, idPacchPer)) {
-			return -3;
-		}
-		if (!existIdEscursione(idEscursione)) {
-			return -4;
-		}
 		Query q = em
 				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
-						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
+						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
 						+ "AND p.listaRegali = TRUE AND e.idProdBase = :idEscursione");
 		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("null", null);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idEscursione", idEscursione);
 		HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
 		Calendar calendar = Calendar.getInstance();
 		h.setDataAcquisto(calendar.getTime());
-		return 0;
+
 	}
 
 	@Override
-	public int acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer,
-			String mailAcquirente) {
-		if (!existIdPacchPer(idPacchPer)) {
-			return -1;
-		}
-		if (!existMailUtente(mailAcquirente)) {
-			return -2;
-		}
-		if (!check(mailAcquirente, idPacchPer)) {
-			return -3;
-		}
-		if (!existIdTrasporto(idTrasporto)) {
-			return -4;
-		}
+	public void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente){
 		Query q = em
 				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "
-						+ "WHERE h.dataAcquisto IS NULL AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
+						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
 						+ "AND p.listaRegali = TRUE AND o.idProdBase =: idTrasporto");
 		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("null", null);
 		q.setParameter("mailAcquirente", mailAcquirente);
 		q.setParameter("idTrasporto", idTrasporto);
 		TrasportiPacchPer h = (TrasportiPacchPer) q.getSingleResult();
 		Calendar calendar = Calendar.getInstance();
 		h.setDataAcquisto(calendar.getTime());
-		return 0;
 	}
 
 	@Override

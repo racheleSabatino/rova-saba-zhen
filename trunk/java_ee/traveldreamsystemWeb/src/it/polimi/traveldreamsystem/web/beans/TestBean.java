@@ -137,7 +137,7 @@ public class TestBean {
 	}
 	
 	public String a10() {
-		pacchPerMgr.getClientePacchPerDTOAcquistati("rachele");
+		pacchPerMgr.viewCostoTotale(3);
 		return null;
 	}
 
