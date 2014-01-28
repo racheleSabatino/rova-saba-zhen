@@ -26,6 +26,10 @@ public class PacchPerDTO {
 
 
 
+	public PacchPerDTO(int id) {
+		this.idPacchPer = id;
+	}
+
 	public int getIdPacchPer() {
 		return idPacchPer;
 	}
