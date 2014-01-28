@@ -70,11 +70,13 @@
 
 						
 
-						<p:commandButton value="Submit" update="grid"
+						<p:commandButton value="Submit" update="grid, msg"
 							action="#{escursioneBean.addEscursione}" />
+							
+						<p:commandButton type="reset" value="Reset" />
 
 
-    					<p:messages id="msg" sticky="true" display="icon"/>  
+    					<p:messages id="msg" display="icon"/>  
       
 
 					</h:panelGrid>

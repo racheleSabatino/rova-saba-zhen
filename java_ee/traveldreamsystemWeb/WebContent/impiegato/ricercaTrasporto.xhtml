@@ -44,16 +44,29 @@
 								</h:panelGrid>
 
 							</p:outputPanel>
+							
+							<p:outputPanel rendered = "#{findTrasportoBean.noResultPanelVisible}" >
+							<p:outputLabel value = "Non è stato trovato un mezzo di trasporto a cui corrisponde l'id, 
+											inserito, controllare di aver digitato un id corretto" />
+							</p:outputPanel>
+											
+							
 						</p:outputPanel>
 					</p:panel>
 					
-					<p:growl id="growl" showDetail="true" sticky="true" />  
+					<p:growl id="growl" showDetail="true" />  
 					
-					<p:commandButton value="Elimina Escursione" 
-						actionListener="#{findTrasportoBean.remove}" update = "growl"/>  
-				
+					<p:commandButton value = "Elimina" rendered = "#{findTrasportoBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler eliminare il mezzo di trasporto?"
+					header="Eliminazione mezzo di trasporto" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si" actionListener="#{findTrasportoBean.remove}"
+					update="growl" oncomplete="PF('cd').hide()"/>
+				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
+
 						
-					<p:commandButton id="selectButton" 
+					<p:commandButton id="selectButton" rendered = "#{findTrasportoBean.resultPanelVisible}"
                 actionListener = "#{trasportoBean.getPage(findTrasportoBean.searchedId)}" value = "Modifica">
                  <f:setPropertyActionListener value="#{findTrasportoBean.searchedTrasporto}" target="trasportoBean.trasporto"/> 
                                  

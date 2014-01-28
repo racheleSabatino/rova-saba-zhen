@@ -21,7 +21,7 @@
 							<p:inputText id="id" value="#{findEscursioneBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica"
 								actionListener="#{findEscursioneBean.find}" />
 						</h:panelGrid>
 
@@ -44,26 +44,36 @@
 								</h:panelGrid>
 
 							</p:outputPanel>
-						</p:outputPanel>
-					</p:panel>
+								<p:outputPanel rendered = "#{findEscursioneBean.noResultPanelVisibile}" >
+									<p:outputLabel value = "Non è stato trovato una escursione a cui corrisponde l'id, 
+											inserito, controllare di aver digitato un id corretto" />
+								</p:outputPanel>
+											
+							</p:outputPanel>
+						</p:panel>
 					
-					<p:growl id="growl" showDetail="true" sticky="true" />  
+					<p:growl id="growl" showDetail="true" />  
 					
-					<p:commandButton value="Elimina Escursione" 
-						actionListener="#{findEscursioneBean.remove}" update = "growl"/>  
-				
+					<p:commandButton id = "elimina" value = "Elimina" type="button" 
+					rendered = "#{findEscursioneBean.resultPanelVisible}" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler eliminare l'escursione"
+					header="Eliminazione escursione" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si" actionListener="#{findEscursionBean.remove}"
+					update="growl" oncomplete="PF('cd').hide()"/>
+				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
 						
-					<p:commandButton id="selectButton" 
-                actionListener = "#{escursioneBean.getPage(findEscursioneBean.searchedId)}" value = "Modifica">
-                 <f:setPropertyActionListener value="#{findEscursioneBean.searchedEscursione}" target="escursioneBean.escursione"/> 
-                                 
-            </p:commandButton>	
+					<p:commandButton id="modifica" rendered = "#{findEscursioneBean.resultPanelVisible}"
+                action = "#{escursioneBean.getPage(findEscursioneBean.searchedId)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findEscursioneBean.searchedEscursione}" 
+                 target="#{escursioneBean.escursione}"/>                
+           		 </p:commandButton>	
             
             <p:commandButton type="reset" value="Reset" />
-
-				</h:form>
-			</p:panel>
 			
+			</h:form>
+			</p:panel>
 		</ui:define>
 
 	</ui:composition>

@@ -13,26 +13,43 @@
 
 		<ui:define name="content">
 
-			<p:panel header="Pacchetti in fase di personalizzazione">
+			<p:panel header="Inserimento dati per acquisto pacchetto">
 				    <h:form id="form">  
                   
-        <p:dataList value="#{pacchPerBean.pacchetti}" var="pacchPer" id="pacchetti"  
-            paginator="true" rows="5"  
-            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
-            rowsPerPageTemplate="5,10,15" type="none">  
-      
+        
                 <f:facet name="header">  
-                    Pacchetti Personalizzati  
+                    Pacchetto Personalizzato 
                 </f:facet>  
       			<h:outputText value="#{pacchPer.idPacchPer}" /> 
-                <p:commandButton icon="ui-icon-search" update=":form:pacchDetail" oncomplete="PF('carDialog').show()" title="View Detail">  
-                    <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
-                </p:commandButton>  
-                
-     
-               
-        </p:dataList>  
-          
+                 
+     		<h:panelGrid columns="2">
+     		
+     			<p:outputLabel value="Nome: #{userBean.name}" />
+     			
+				<p:outputLabel value="#Cognome: {userBean.cognome} "/>
+				
+				<p:outputLabel value="Costo totale pacchetto: #{riepilogoPacchetto.costoTotale}" />
+				
+				<p:outputLabel value = "Inserisci i seguenti dati" />
+				
+				<p:outputLabel value="Numero carta di credito "/>
+				<p:inputText readonly="true"/>
+				
+				<p:outputLabel value="Data scadenza carta di credito "/>
+				<p:inputText readonly="true"/>
+				
+				<p:commandButton value = "Acquista" type="button" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler procedere all'acquisto del pacchetto?
+											L'operazione non può essere annullata"
+					header="Conferma acquisto pacchetto vacanza" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si, procedo" actionListener="#{pacchPerBean.acquistaPacchetto}"
+					update="messages" oncomplete="PF('cd').hide()"/>
+					<p:commandButton value="No, continuo in un altro momento" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
+				
+ 
+          </h:panelGrid>
   
       
     </h:form>  

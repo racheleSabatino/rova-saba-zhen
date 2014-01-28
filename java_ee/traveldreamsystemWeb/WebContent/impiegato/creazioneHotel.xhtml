@@ -16,6 +16,16 @@
 			<p:panel
 				header="Inserisci i dati per creare un nuovo prodotto base hotel">
 				<h:form id="Hotel">
+				
+				<f:metadata>
+					<f:viewParam name="dataRitorno" value="#{hotelBean.hotel.dataRitorno}" />
+					<f:viewParam name="dataPartenza" value="#{hotelBean.hotel.dataPartenza}" />
+					<f:viewParam name="descrizione" value="#{hotelBean.hotel.descrizione}" />
+					<f:viewParam name="costo" value="#{hotelBean.hotel.costo}" />
+					<f:viewParam name="tipoCamera" value="#{hotelBean.hotel.tipoCamera}" />
+					<f:viewParam name="stelle" value="#{hotelBean.hotel.stelle}" />
+				</f:metadata>
+				
 					<h:panelGrid id="grid" columns="3" cellpadding="5">
 						<h:outputLabel for="dataPartenza" value="Data inizio prenotazione:" />
 						<p:calendar id="dataPartenza"  required="true"
@@ -83,6 +93,8 @@
 						<p:commandButton value="Salva" update="grid"
 							action="#{hotelBean.addHotel}" />
 							
+						<p:commandButton type="reset" value="Reset" />
+						
 						<p:messages id="msg"  sticky="true" />  
 							
 

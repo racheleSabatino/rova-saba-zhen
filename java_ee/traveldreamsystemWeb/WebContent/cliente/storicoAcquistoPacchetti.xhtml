@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Pacchetti acquistati">
+				    <h:form id="form">  
+                  
+         <p:dataGrid var="pacchPer" value="#{pacchPerClienteBean.pacchettiNonAcquistati}" columns="3"  
+        rows="9" paginator="true"  
+        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="9,12,15">  
+  
+        <p:panel header="#{pacchPer.idPacchPer}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage width="50" height="50" /> 
+              
+  
+                <h:outputText value="#{pacchPer.descrizione}" />  
+  
+                <p:commandLink  update=":form:pacchPerDetail" 
+                oncomplete="PF('pacchPerDialog').show()" title="Vedi dettagli">  
+                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
+                    <f:setPropertyActionListener value="#{pacchPer}"   
+                            target="#{pacchPerClienteBean.selectedPacchetto}" />  
+                </p:commandLink>  
+            </h:panelGrid>  
+        </p:panel>  
+  
+    </p:dataGrid>  
+      
+    <p:dialog header="Dettagli Pacchetto Acquistato" widgetVar="pacchPerDialog" modal="true">  
+        <p:outputPanel id="pacchPredDetail" style="text-align:center;">  
+          
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel for = "Hotel: " value="Hotel: " />  
+                <h:outputText id="hotel" value="#{riepilogoPacchPerBean.hotel}" />  
+                  
+                <h:outputLabel for="Escursioni: " value="Escursioni: " />  
+                <h:outputText id="escursioni" value="#{riepilogoPacchPerBean.escursione}" />  
+                
+                <h:outputLabel for="Trasporto " value="Partenze il: " />  
+                <h:outputText id="trasporto" value="#{riepilogoPacchPerBean.trasporto}" />    
+                       
+            </h:panelGrid>  
+          </p:outputPanel>
+     	</p:dialog>
+    </h:form>  
+                          
+	</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

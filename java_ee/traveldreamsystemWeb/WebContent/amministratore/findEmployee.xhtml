@@ -37,15 +37,30 @@
 									<p:outputLabel
 										value="Mail impiegato: #{findEmployeeBean.searchedEmployee.mail}" />
 
-								</h:panelGrid>
-
+								</h:panelGrid>		
 							</p:outputPanel>
+							
+							<p:outputPanel rendered = "#{findEmployeeBean.noResultPanelVisibile}" >
+							<p:outputLabel value = "Non è stato trovato un impiegato a cui corrisponde la mail, 
+											inserita, controllare di aver digitato una mail corretta" />
+							</p:outputPanel>
+											
 						</p:outputPanel>
 
-
+					<p:growl id="message" />
+					
 					</p:panel>
-					<p:commandButton value="Elimina Impiegato"
-						actionListener="#{findEmployeeBean.remove}" />
+					
+				<p:commandButton value = "Elimina" rendered = "#{findEmployeeBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler eliminare l'impiegato?"
+					header="Eliminazione impiegato" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si" actionListener="#{findEmployeeBean.remove}"
+					update="message" oncomplete="PF('cd').hide()"/>
+				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
+
+				<p:commandButton value = "Reset" type = "reset" />
 
 				</h:form>
 			</p:panel>
