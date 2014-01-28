@@ -45,12 +45,15 @@
       			
 					</p:panel>
       		
+      			<p:growl id="messaggi"/>
+      			
                 <p:commandButton id="selectButton" 
                 action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
                 icon="ui-icon-search" value="Modifica" >  
                 </p:commandButton>  
                 
       			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto)">
+      				 <f:setPropertyActionListener value="#{riepilogoBean.pacchetto}" target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
       			
@@ -59,16 +62,16 @@
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="cd">
 					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
-					update="messages" oncomplete="PF('cd').hide()"/>
+					update="messagi" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
 				
-				<p:fieldset legend="Crea lista regali" toggleable="true">
+				<p:fieldset legend="Crea lista regali" toggleable="true" id = "listaRegali">
 					<h:panelGrid column="2">
 						<h:outputText value="Se crei una lista regalo dal pacchetto, potrai inviare una mai
 						ai tuoi amici chiedendogli di comprarti un prodotto dalla tua lista.
 						Inserisci nel seguente campo l'email di un amico e poi clicca su invia. " />
-						<h:inputText value = "#{riepilogoPacchPerBean.mailAmico}" />
+						<h:inputText value = "#{pacchPerBean.mailAmico}" />
 					</h:panelGrid>
 				</p:fieldset>
    

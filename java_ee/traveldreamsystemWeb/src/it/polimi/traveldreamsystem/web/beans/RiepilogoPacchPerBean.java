@@ -32,13 +32,23 @@ public class RiepilogoPacchPerBean {
     
     private String trasporto;
     
+    public int costoTotale;
+    
+    public int regaloAmici;
+    
+    public int totaleDaPagare;
+    
     public RiepilogoPacchPerBean() {
     }
     @PostConstruct
     public void init() {  
-        hotel = comp.convertToStringHotel(pacchetto.getIdPacchPer());
-        escursione = comp.convertToStringEscursione(pacchetto.getIdPacchPer());
-        trasporto = comp.convertToStringTrasporto(pacchetto.getIdPacchPer());
+    	int id = pacchetto.getIdPacchPer();
+        hotel = comp.convertToStringHotel(id);
+        escursione = comp.convertToStringEscursione(id);
+        trasporto = comp.convertToStringTrasporto(id);
+        costoTotale = pacchPerMgr.viewCostoTotale(id);
+        regaloAmici = pacchPerMgr.viewTotaleAcquistatoDaAmici(id);
+        totaleDaPagare = costoTotale - regaloAmici;
     }
 
     public PacchPerDTO getPacchetto() {
@@ -65,9 +75,27 @@ public class RiepilogoPacchPerBean {
 		return trasporto;
 	}
 
+	public int getCostoTotale() {
+		return costoTotale;
+	}
+	public void setCostoTotale(int costoTotale) {
+		this.costoTotale = costoTotale;
+	}
+	public int getRegaloAmici() {
+		return regaloAmici;
+	}
+	public void setRegaloAmici(int regaloAmici) {
+		this.regaloAmici = regaloAmici;
+	}
 	public void setTrasporto(String trasporto) {
 		this.trasporto = trasporto;
 	}
 	
-
+	public void setTotaleDaPagare(int tot) {
+		totaleDaPagare = tot;
+	}
+	
+	public int getTotaleDaPagare(){
+		return totaleDaPagare;
+	}
 }
