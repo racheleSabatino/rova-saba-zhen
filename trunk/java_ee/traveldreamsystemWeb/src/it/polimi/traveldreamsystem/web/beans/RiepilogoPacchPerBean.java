@@ -74,8 +74,8 @@ public class RiepilogoPacchPerBean {
         hotels = comp.getHotelsPacchPer(id);
         escursioni = comp.getEscursioniPacchPer(id);
         trasporti = comp.getTrasportiPacchPer(id);  
-        prove.add("uno");
-        prove.add("due"); prove.add("tre");
+    //    prove.add("uno");
+     //   prove.add("due"); prove.add("tre");
     }
     
     public HotelDTO getSelectedHotel() {
