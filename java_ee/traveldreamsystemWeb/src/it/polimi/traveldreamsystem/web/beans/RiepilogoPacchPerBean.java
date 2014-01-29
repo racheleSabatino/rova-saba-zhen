@@ -48,18 +48,8 @@ public class RiepilogoPacchPerBean {
     
     private String escursione;
     
-    private List<String> prove;
+    private boolean creaListaRegali;
     
-    private String prova;
-    
-    public List<String> getProve() {
-		return prove;
-	}
-
-	public void setProve(List<String> prove) {
-		this.prove = prove;
-	}
-
 	public RiepilogoPacchPerBean() {
     }
     
@@ -73,9 +63,13 @@ public class RiepilogoPacchPerBean {
         totaleDaPagare = costoTotale - regaloAmici;
         hotels = comp.getHotelsPacchPer(id);
         escursioni = comp.getEscursioniPacchPer(id);
-        trasporti = comp.getTrasportiPacchPer(id);  
-    //    prove.add("uno");
-     //   prove.add("due"); prove.add("tre");
+        trasporti = comp.getTrasportiPacchPer(id); 
+        if(pacchetto.isListaRegali()) {
+        	creaListaRegali = false;
+        } else {
+        	creaListaRegali = true;
+        }
+        
     }
     
     public HotelDTO getSelectedHotel() {
@@ -190,20 +184,20 @@ public class RiepilogoPacchPerBean {
 		this.pacchetto = pacchetto;
 		init();
 	}
-
-	public String getProva() {
-		return prova;
-	}
-
-	public void setProva(String prova) {
-		this.prova = prova;
-	}
 	
 	public void creaListaRegali() {
 		pacchPerMgr.creaListaRegali(pacchetto.getIdPacchPer());
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "ora il tuo pacchetto personalizzato è diventato"
 				+ " una lista regali"));
+	}
+
+	public boolean isCreaListaRegali() {
+		return creaListaRegali;
+	}
+
+	public void setCreaListaRegali(boolean creaListaRegali) {
+		this.creaListaRegali = creaListaRegali;
 	}
 }
 
