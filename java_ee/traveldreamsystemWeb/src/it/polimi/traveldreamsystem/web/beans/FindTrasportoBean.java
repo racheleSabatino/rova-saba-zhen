@@ -54,8 +54,9 @@ public class FindTrasportoBean {
 			resultPanelVisible = true;
 		}
 		else {
-			messaggio.addMessage(null, new FacesMessage("Non è stato trovato un hotel avente l'id digitato, "
+			messaggio.addMessage(null, new FacesMessage("Attenzione, Non è stato trovato un hotel avente l'id digitato, "
 					+ "accertarsi di aver inserito un id corretto"));
+			resultPanelVisible = false;
 		}
 	}
 

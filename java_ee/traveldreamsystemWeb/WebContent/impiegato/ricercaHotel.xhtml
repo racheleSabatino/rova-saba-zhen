@@ -59,14 +59,16 @@
 						update="growl" oncomplete="PF('cd').hide()"/>
 						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 						</p:confirmDialog>
+					
 						
 						<p:commandButton id="modifica" rendered = "#{findHotelBean.resultPanelVisible}"
-						  action = "/homePage" value = "Modifica">
+						  action = "#{hotelBean.goToPaginaModifica(findHotelBean.searchedHotel.idProdBase)}" 
+						  value = "Modifica" immediate = "true">
                 		 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
                                  
             			</p:commandButton>
             			
-                  		<p:commandButton immediate = "true" type ="reset" value="Reset" update="resultGrid"/>
+                  		<p:commandButton immediate = "true" type ="reset" value="Reset" update="id"/>
 					</p:panel>
 					
 					</h:form>

@@ -135,8 +135,9 @@ public class HotelBean extends PacchPredBean {
 		}
 	}
 	
-	public String getPage(int idHotel){
-		return hotelMgrBean.pagRiepilogoPacchPer(idHotel);
+	public String goToPaginaModifica(int idHotel){
+		return "/impiegato/creazioneHotel?faces-redirect=true"
+				+ "&amp;id=" + idHotel;
 	}
 	
 	public void reset() {  
