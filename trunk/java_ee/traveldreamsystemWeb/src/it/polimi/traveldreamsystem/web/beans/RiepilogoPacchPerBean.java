@@ -10,7 +10,6 @@ import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -95,7 +94,7 @@ public class RiepilogoPacchPerBean {
     public PacchPerDTO getPacchetto() {
     	return pacchetto;
     }
-
+  
 	public String getHotel() {
 		return hotel;
 	}
