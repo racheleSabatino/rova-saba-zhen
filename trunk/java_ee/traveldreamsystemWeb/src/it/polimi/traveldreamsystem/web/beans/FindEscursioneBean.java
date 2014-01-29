@@ -34,10 +34,6 @@ public class FindEscursioneBean {
 	
 	private boolean resultPanelVisible;
 	
-	
-	private boolean noResultPanelVisible;
-	
-	
 	public boolean isResultPanelVisible() {
 		return resultPanelVisible;
 	}
@@ -49,7 +45,6 @@ public class FindEscursioneBean {
 	public FindEscursioneBean() {
 		searchedEscursione = new EscursioneDTO();
 		this.resultPanelVisible = false;
-		this.setNoResultPanelVisible(false);
 	}
 	
 	public void find() {
@@ -59,9 +54,9 @@ public class FindEscursioneBean {
 			resultPanelVisible = true;
 		}
 		else {
-			messaggio.addMessage(null, new FacesMessage("Non è stato trovato una escursione avente l'id "
+			messaggio.addMessage(null, new FacesMessage("Attenzione", "Non è stato trovato una escursione avente l'id "
 					+ "digitato, accertarsi di aver inserito un id corretto"));
-			noResultPanelVisible = true;
+			resultPanelVisible = false;
 		}
 	}
 
@@ -93,13 +88,6 @@ public class FindEscursioneBean {
 		this.removeOK = removeOK;
 	}
 
-	public boolean isNoResultPanelVisible() {
-		return noResultPanelVisible;
-	}
-
-	public void setNoResultPanelVisible(boolean noResultPanelVisible) {
-		this.noResultPanelVisible = noResultPanelVisible;
-	}
 	
 	
 	

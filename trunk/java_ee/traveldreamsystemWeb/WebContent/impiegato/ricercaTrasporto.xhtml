@@ -21,7 +21,7 @@
 							<p:inputText id="id" value="#{findTrasportoBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, selectButton, growl"
 								actionListener="#{findTrasportoBean.find}" />
 						</h:panelGrid>
 
@@ -50,7 +50,8 @@
 					
 					<p:growl id="growl" showDetail="true" />  
 					
-					<p:commandButton value = "Elimina" rendered = "#{findTrasportoBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
+					<p:commandButton value = "Elimina" id="elimina"
+					rendered = "#{findTrasportoBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
 				<p:confirmDialog message="Sei sicuro di voler eliminare il mezzo di trasporto?"
 					header="Eliminazione mezzo di trasporto" severity="alert"
 					widgetVar="cd">
