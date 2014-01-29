@@ -32,7 +32,9 @@ public class FindHotelBean {
 
 	private String removeOK;
 	
-	private boolean resultPanelVisible = false;
+	private boolean resultPanelVisible;
+	
+	private boolean noResultPanelVisible;
 	
 	
 	public boolean isResultPanelVisible() {
