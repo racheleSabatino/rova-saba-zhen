@@ -191,7 +191,7 @@
 				</p:confirmDialog>
 				
 				<br/>
-			<p:panel rendered = "true"> 
+			<p:panel rendered = "#{riepilogoBean.creaListaRegali}"> 
 				<h:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
 				mail ai tuoi amici, chiedendo loro di comprare uno o più prodotti dalla tua lista. 
 				In questo modo risparmierai.
@@ -214,7 +214,8 @@
 						Inserisci nel seguente campo l'email di un amico che vuoi informare
 						della tua lista regali e poi clicca su invia. " />
 						<h:inputText value = "#{pacchPerBean.mailAmico}" />
-						<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvitoLista" update = "messaggi"/>
+						<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvitoLista(riepilogoBean.pacchetto.idPacchPer)" 
+						update = "messaggi"/>
 					</h:panelGrid>
 				</p:panel>
 				
@@ -225,7 +226,8 @@
 						una splendida vacanza e vorresti che partecipasse anche lui " />
 						<h:outputText value = "Inserisci nel campo seguente l'email di un amico, e premi invia " />
 						<h:inputText value = "#{pacchPerBean.mailAmico}" />
-					<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvito" update = "messaggi"/>
+					<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvito(riepilogoBean.pacchetto.idPacchPer)" 
+					update = "messaggi"/>
 					</h:panelGrid>
 				</p:panel>
 				
