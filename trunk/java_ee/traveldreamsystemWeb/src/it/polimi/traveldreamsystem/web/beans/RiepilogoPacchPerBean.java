@@ -166,7 +166,7 @@ public class RiepilogoPacchPerBean {
 	
 
 	public void removePacchetto(){
-	//	pacchPerMgr.removePacchPer(selectedPacchettoA.getIdPacchPer());
+		pacchPerMgr.removePacchPer(pacchetto.getIdPacchPer());
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Pacchetto personalizzato eliminato con successo"));
 	}

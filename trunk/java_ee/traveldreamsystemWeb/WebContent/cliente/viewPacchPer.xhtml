@@ -25,35 +25,39 @@
                     Pacchetti Personalizzati  
                 </f:facet>  
       
-      			<h:outputText value="#{pacchPer.idPacchPer}" /> 
+      			<h:outputText value= "Id pacchetto: #{pacchPer.idPacchPer}" /> 
       			
-      			<p:commandButton title = "Mostra" 
+      			<p:commandButton title = "Mostra" value = "Mostra"
       			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
       			<f:setPropertyActionListener value="#{pacchPer}" 
-      			target="#{riepilogoPacchPerBean.pacchetto}"/>
+      			target="#{riepilogoBean.pacchetto}"/>
       			</p:commandButton>
       			
-                <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}"
-                title="Modifica" >  
+                <p:commandButton id="selectButton" value = "Modifica" title = "Modifica"
+                action = "#{pacchPerClienteBean.pagModificaPacchPer(pacchPer.idPacchPer)}">  
                 </p:commandButton>  
                 
-      			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchetto)">
+      			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchPer" value = "Acquista">
       			<f:setPropertyActionListener value="#{pacchPer}" 
       			target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
+      			<p:growl id = "messages"> </p:growl>
       			
-      			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" />
+      			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" value = "Elimina"/>
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="cd">
-					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
-					update="messages" oncomplete="PF('cd').hide()"/>
+					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
+					update="messages" oncomplete="PF('cd').hide()">
+					<f:setPropertyActionListener value="#{pacchPer}" target = "riepilogoBean.pacchetto" />
+					</p:commandButton>>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
                 
-                  
+              <br />
+              <br />
+              <br />   
         </p:dataList>  
           
      
