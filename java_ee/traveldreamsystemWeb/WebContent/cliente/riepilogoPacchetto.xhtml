@@ -168,26 +168,7 @@
     </p:dialog>  
   
 </h:form>  
-      		<h:form id = "form 4"> 
-      		
-      		 <p:dataList value="#{riepilogoBean.prove}" var="prova" id="prova"  
-        paginator="true" rows="5"  
-        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
-        rowsPerPageTemplate="5,10,15" type="none">  
-  
-            <f:facet name="header">  
-               Prova
-            </f:facet>  
-  
-     
-            <p:commandButton value = "Acquista" />  
-      
-  
-            <h:outputText value="#{prova.toString}, #{prova.toString}" style="margin-left:10px" />  
-            <br />  
-    </p:dataList>  
-      		</h:form>
-      		
+      <br/> <br/> <br/>      		
       			<p:growl id="messaggi"/>
       			
                 <p:commandButton id="selectButton" 
@@ -210,8 +191,8 @@
 				</p:confirmDialog>
 				
 				<br/>
-			<p:panel rendered = "false"> 
-				<p:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
+			<p:panel rendered = "true"> 
+				<h:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
 				mail ai tuoi amici, chiedendo loro di comprare uno o più prodotti dalla tua lista. 
 				In questo modo risparmierai.
 				Ricordati, più amici inviti, più probabilità ci sono che compreranno qualcosa e tu 
