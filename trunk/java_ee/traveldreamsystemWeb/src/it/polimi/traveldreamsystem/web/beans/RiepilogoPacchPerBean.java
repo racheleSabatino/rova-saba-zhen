@@ -51,7 +51,7 @@ public class RiepilogoPacchPerBean {
     
     public RiepilogoPacchPerBean() {
     }
-    @PostConstruct
+
     public void init() {  
     	int id = pacchetto.getIdPacchPer();
         hotel = comp.convertToStringHotel(id);
@@ -169,6 +169,11 @@ public class RiepilogoPacchPerBean {
 		pacchPerMgr.removePacchPer(pacchetto.getIdPacchPer());
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Pacchetto personalizzato eliminato con successo"));
+	}
+
+	public void setPacchetto(PacchPerDTO pacchetto) {
+		this.pacchetto = pacchetto;
+		init();
 	}
 }
 
