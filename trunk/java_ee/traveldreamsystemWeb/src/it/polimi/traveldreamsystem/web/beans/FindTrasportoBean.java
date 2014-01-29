@@ -54,7 +54,7 @@ public class FindTrasportoBean {
 			resultPanelVisible = true;
 		}
 		else {
-			messaggio.addMessage(null, new FacesMessage("Attenzione, Non è stato trovato un hotel avente l'id digitato, "
+			messaggio.addMessage(null, new FacesMessage("Attenzione, Non è stato trovato un mezzo di trasporto coll'id digitato, "
 					+ "accertarsi di aver inserito un id corretto"));
 			resultPanelVisible = false;
 		}
@@ -87,5 +87,11 @@ public class FindTrasportoBean {
 	public void setRemoveOK(String removeOK) {
 		this.removeOK = removeOK;
 	}
+	
+	public void resetForm(){
+		searchedTrasporto = null; 
+		searchedId = 0;
+	}
+
 	
 }
