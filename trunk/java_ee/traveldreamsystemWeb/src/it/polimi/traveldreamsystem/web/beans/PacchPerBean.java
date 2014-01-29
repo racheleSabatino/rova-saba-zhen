@@ -12,8 +12,11 @@ import eccezioni.PacchettoScadutoException;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
+import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 @ManagedBean
@@ -35,8 +38,10 @@ public class PacchPerBean {
 	
 	private UtenteDTO cliente;
 	
-	public String mailAmico;
+	private String mailAmico;
 
+	
+	
 	public String getMailAmico() {
 		return mailAmico;
 	}
@@ -100,5 +105,7 @@ public class PacchPerBean {
 	public void inviaInvitoListaRegali(){
 		
 	}
+
+	
 	
 }

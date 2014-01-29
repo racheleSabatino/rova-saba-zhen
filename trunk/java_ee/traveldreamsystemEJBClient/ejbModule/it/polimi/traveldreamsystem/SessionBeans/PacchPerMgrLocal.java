@@ -7,7 +7,9 @@ import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.Local;
 
+import eccezioni.AcquistoProdDaPropriaLista;
 import eccezioni.PacchettoScadutoException;
+import eccezioni.ProdottoGiaAcquistato;
 
 @Local
 public interface PacchPerMgrLocal {
@@ -25,7 +27,7 @@ public interface PacchPerMgrLocal {
 	void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente);
 
 	void acquistaHotelListaRegali(int idHotel, int idPacchPer,
-			String mailAcquirente);
+			String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato;
 
 	int viewCostoTotale(int idPacchPer);
 

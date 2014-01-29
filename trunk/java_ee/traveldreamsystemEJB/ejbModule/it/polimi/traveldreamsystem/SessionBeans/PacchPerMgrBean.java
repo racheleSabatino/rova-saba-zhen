@@ -26,7 +26,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import eccezioni.AcquistoProdDaPropriaLista;
 import eccezioni.PacchettoScadutoException;
+import eccezioni.ProdottoGiaAcquistato;
 
 /**
  * Session Bean implementation class PacchPerMgrBean
@@ -235,17 +237,17 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			throw new PacchettoScadutoException("il pacchetto è scaduto");
 		}
 		Query q = em
-				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto =: data "
+				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto = :data "
 						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
 						.setParameter("null", null);
 		q.setParameter("data", data);
 		Query q1 = em
-				.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto =: data "
+				.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto = :data "
 						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
 						.setParameter("null", null);
 		q1.setParameter("data", data);
 		Query q2 = em
-				.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto =: data "
+				.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto = :data "
 						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
 						.setParameter("null", null);
 		q2.setParameter("data", data);
@@ -259,14 +261,18 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	@Override
 	public void creaListaRegali(int idPacchPer) {
 		Query q = em
-				.createQuery("UPDATE PacchPer p SET p.listaRegali =: lista WHERE idPacchPer = :idPacchPer");
+				.createQuery("UPDATE PacchPer p SET p.listaRegali = :lista WHERE idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("lista", true);
 		q.executeUpdate();
 	}
 
 	
 	@Override
-	public void acquistaHotelListaRegali(int idHotel, int idPacchPer, String mailAcquirente) {
+	public void acquistaHotelListaRegali(int idHotel, int idPacchPer, String mailAcquirente) 
+		throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
+		if(this.check(mailAcquirente, idPacchPer))
+			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 		Query q = em
 				.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
@@ -294,8 +300,43 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return true;
 	}
 
-	
+	private boolean ckeckHotelGiaAcquistato(int idPacchPer, int idProdBase) {
+		Query q = em.createQuery("SELECT h.dataAcquisto FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idProdBase", idProdBase);
+		if(q.getSingleResult() == null)
+			return false;
+		else
+			return true;
+	}
 
+	private boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase) {
+		Query q = em.createQuery("SELECT h.dataAcquisto FROM EscursioniPacchPer h JOIN h.pacchPer p "
+				+ "JOIN h.escursioni o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idProdBase", idProdBase);
+		if(q.getSingleResult() == null)
+			return false;
+		else
+			return true;
+	}
+
+	
+	private boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase) {
+		Query q = em.createQuery("SELECT h.dataAcquisto FROM TrasportoPacchPer h JOIN h.pacchPer p "
+				+ "JOIN h.trasporto o "
+				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
+		q.setParameter("idPacchPer", idPacchPer);
+		q.setParameter("idProdBase", idProdBase);
+		if(q.getSingleResult() == null)
+			return false;
+		else
+			return true;
+	}
+
+	
 	@Override
 	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer,
 			String mailAcquirente) {
