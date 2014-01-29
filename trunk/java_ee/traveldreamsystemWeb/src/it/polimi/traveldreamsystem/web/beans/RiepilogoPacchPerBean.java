@@ -48,9 +48,21 @@ public class RiepilogoPacchPerBean {
     
     private String escursione;
     
-    public RiepilogoPacchPerBean() {
-    }
+    private List<String> prove;
+    
+    private String prova;
+    
+    public List<String> getProve() {
+		return prove;
+	}
 
+	public void setProve(List<String> prove) {
+		this.prove = prove;
+	}
+
+	public RiepilogoPacchPerBean() {
+    }
+    
     public void init() {  
     	int id = pacchetto.getIdPacchPer();
         hotel = comp.convertToStringHotel(id);
@@ -62,6 +74,8 @@ public class RiepilogoPacchPerBean {
         hotels = comp.getHotelsPacchPer(id);
         escursioni = comp.getEscursioniPacchPer(id);
         trasporti = comp.getTrasportiPacchPer(id);  
+        prove.add("uno");
+        prove.add("due"); prove.add("tre");
     }
     
     public HotelDTO getSelectedHotel() {
@@ -115,6 +129,10 @@ public class RiepilogoPacchPerBean {
 		return trasporto;
 	}
 
+	public void setTrasporto(String trasporto) {
+		this.trasporto = trasporto;
+	}
+	
 	public int getCostoTotale() {
 		return costoTotale;
 	}
@@ -127,9 +145,7 @@ public class RiepilogoPacchPerBean {
 	public void setRegaloAmici(int regaloAmici) {
 		this.regaloAmici = regaloAmici;
 	}
-	public void setTrasporto(String trasporto) {
-		this.trasporto = trasporto;
-	}
+
 	
 	public void setTotaleDaPagare(int tot) {
 		totaleDaPagare = tot;
@@ -167,12 +183,27 @@ public class RiepilogoPacchPerBean {
 	public void removePacchetto(){
 		pacchPerMgr.removePacchPer(pacchetto.getIdPacchPer());
 		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Pacchetto personalizzato eliminato con successo"));
+		messaggio.addMessage(null, new FacesMessage("Successo", "Il pacchetto personalizzato è stato eliminato"));
 	}
 
 	public void setPacchetto(PacchPerDTO pacchetto) {
 		this.pacchetto = pacchetto;
 		init();
+	}
+
+	public String getProva() {
+		return prova;
+	}
+
+	public void setProva(String prova) {
+		this.prova = prova;
+	}
+	
+	public void creaListaRegali() {
+		pacchPerMgr.creaListaRegali(pacchetto.getIdPacchPer());
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		messaggio.addMessage(null, new FacesMessage("Successo", "ora il tuo pacchetto personalizzato è diventato"
+				+ " una lista regali"));
 	}
 }
 

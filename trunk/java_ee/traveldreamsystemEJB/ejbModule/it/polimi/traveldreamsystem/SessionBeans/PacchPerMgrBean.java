@@ -223,7 +223,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	
 	private Date trovaMaxData(List<Date> date) {
 		Date max = date.get(0);
-		for(int i=1; i < date.size(); i++) {
+		for(int i=1; i < date.size() - 1; i++) {
 			if(date.get(i).compareTo(date.get(i + 1)) > 0) 
 				max = date.get(i);
 		}
