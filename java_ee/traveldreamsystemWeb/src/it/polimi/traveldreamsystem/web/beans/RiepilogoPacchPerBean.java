@@ -12,8 +12,10 @@ import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 
 @ManagedBean(name = "riepilogoBean")
@@ -160,6 +162,13 @@ public class RiepilogoPacchPerBean {
 
 	public void setTrasporti(List<TrasportoDTO> trasporti) {
 		this.trasporti = trasporti;
+	}
+	
+
+	public void removePacchetto(){
+	//	pacchPerMgr.removePacchPer(selectedPacchettoA.getIdPacchPer());
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		messaggio.addMessage(null, new FacesMessage("Pacchetto personalizzato eliminato con successo"));
 	}
 }
 

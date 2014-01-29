@@ -273,6 +273,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
 		if(this.check(mailAcquirente, idPacchPer))
 			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
+		if(this.ckeckHotelGiaAcquistato(idPacchPer, idHotel))
+			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
@@ -339,7 +341,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	
 	@Override
 	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer,
-			String mailAcquirente) {
+			String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
+			if(this.check(mailAcquirente, idPacchPer))
+				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
+			if(this.ckeckHotelGiaAcquistato(idPacchPer, idEscursione))
+				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
@@ -355,7 +361,12 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	}
 
 	@Override
-	public void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente){
+	public void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente)
+			throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
+		if(this.check(mailAcquirente, idPacchPer))
+			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
+		if(this.ckeckHotelGiaAcquistato(idPacchPer, idTrasporto))
+			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "

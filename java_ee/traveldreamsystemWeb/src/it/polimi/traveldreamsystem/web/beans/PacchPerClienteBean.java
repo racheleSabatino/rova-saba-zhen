@@ -28,35 +28,39 @@ public class PacchPerClienteBean {
     @EJB
     UtenteMgrBeanLocal utenteMgr;
     
-    private List<PacchPerDTO> pacchetti;  
+    private List<PacchPerDTO> pacchettiNonAcquistati;
+    
+    private List<PacchPerDTO> pacchettiAcquistati;
    
-    private PacchPerDTO selectedPacchetto;  
+    private PacchPerDTO selectedPacchettoA;  
       
-      
+    private PacchPerDTO selectedPacchettoN; 
+    
     public PacchPerClienteBean() {
     	
     }
     @PostConstruct
     public void init() {  
     	String mailCliente = utenteMgr.getPrincipalEmail();
-    	pacchetti = pacchPerMgr.getClientePacchPerDTONonAcquistati(mailCliente);
+    	pacchettiNonAcquistati = pacchPerMgr.getClientePacchPerDTONonAcquistati(mailCliente);
+    	pacchettiAcquistati = pacchPerMgr.getClientePacchPerDTOAcquistati(mailCliente);
     }  
            
-    public PacchPerDTO getSelectedPacchetto() {  
-        return selectedPacchetto;  
+    public PacchPerDTO getSelectedPacchettoA() {  
+        return selectedPacchettoA;  
     }  
        
     public void setSelectedPacchetto(PacchPerDTO selectedPacchetto) {  
-        this.selectedPacchetto = selectedPacchetto;  
+        this.selectedPacchettoA = selectedPacchetto;  
       }  
          
        
-    public List<PacchPerDTO> getPacchetti() {  
-    	return pacchetti;  
+    public List<PacchPerDTO> getPacchettiNonAcquistati() {  
+    	return pacchettiNonAcquistati;  
     }
      
     public List<PacchPerDTO> setPacchetti(List<PacchPerDTO> list) {  
-    	return pacchetti = list;  
+    	return pacchettiNonAcquistati = list;  
     }
  
 	  
@@ -70,10 +74,17 @@ public class PacchPerClienteBean {
 		+ "&amp;id=" + id;
 	}
 	
-	public void removePacchetto(){
-		pacchPerMgr.removePacchPer(selectedPacchetto.getIdPacchPer());
-		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Pacchetto personalizzato eliminato con successo"));
+	public List<PacchPerDTO> getPacchettiAcquistati() {
+		return pacchettiAcquistati;
+	}
+	public void setPacchettiAcquistati(List<PacchPerDTO> pacchettiAcquistati) {
+		this.pacchettiAcquistati = pacchettiAcquistati;
+	}
+	public PacchPerDTO getSelectedPacchettoN() {
+		return selectedPacchettoN;
+	}
+	public void setSelectedPacchettoN(PacchPerDTO selectedPacchettoN) {
+		this.selectedPacchettoN = selectedPacchettoN;
 	}
 
 	
