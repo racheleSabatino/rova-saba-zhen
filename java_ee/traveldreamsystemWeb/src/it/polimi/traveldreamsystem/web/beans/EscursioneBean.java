@@ -70,7 +70,7 @@ public class EscursioneBean extends PacchPredBean{
 
 	public void addEscursione() {
 		FacesContext context = FacesContext.getCurrentInstance();
-		if(!checkDateBean.checkDate(escursione.getDataRitorno(), escursione.getDataPartenza())){
+		if(!checkDateBean.checkDate(escursione.getDataPartenza(), escursione.getDataRitorno())){
 			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
 					+ "la data di ritorno deve essere uguale o successiva alla data della partenza. "
 					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
