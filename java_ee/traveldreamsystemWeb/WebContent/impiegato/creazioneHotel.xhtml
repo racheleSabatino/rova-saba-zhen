@@ -93,7 +93,9 @@
 						<p:commandButton value="Salva" update="grid"
 							action="#{hotelBean.addHotel}" />
 							
-						<p:commandButton type="reset" value="Reset" />
+						 <p:commandButton value="Reset Tag" update="grid" process="@this"  >  
+     				   <p:resetInput target="grid" />  
+   					 </p:commandButton>  
 						
 						<p:messages id="msg"  sticky="true" />  
 							

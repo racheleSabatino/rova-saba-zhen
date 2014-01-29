@@ -4,8 +4,10 @@ import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
@@ -20,8 +22,9 @@ public class FindEmployeeBean {
 	
 	private String removeOK;
 	
-	private boolean resultPanelVisible = false;
+	private boolean resultPanelVisible;
 	
+	private boolean noResultPanelVisible;
 	
 	public boolean isResultPanelVisible() {
 		return resultPanelVisible;
@@ -34,12 +37,21 @@ public class FindEmployeeBean {
 	public FindEmployeeBean() {
 		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
-		setRemoveOK(new String());
+		resultPanelVisible = false;
+		noResultPanelVisible = false;
 	}
 	
 	public void find() {
-		resultPanelVisible = true;
+		FacesContext context = FacesContext.getCurrentInstance();
 		searchedEmployee = utenteMgrBean.findUtenteDTO(searchedMail);
+		if(searchedEmployee == null) {
+			resultPanelVisible = true;
+		}
+		else {
+			context.addMessage(null, new FacesMessage("L'impiegato non è presente in database, accertarsi di aver digitato"
+					+ "una mail corretta"));
+			noResultPanelVisible = true;
+			}
 	}
 	
 	public UtenteDTO getSearchedEmployee() {

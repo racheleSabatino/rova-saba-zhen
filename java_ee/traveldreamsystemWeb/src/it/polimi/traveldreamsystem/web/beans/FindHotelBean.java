@@ -34,8 +34,6 @@ public class FindHotelBean {
 	
 	private boolean resultPanelVisible;
 	
-	private boolean noResultPanelVisible;
-	
 	
 	public boolean isResultPanelVisible() {
 		return resultPanelVisible;
@@ -50,8 +48,15 @@ public class FindHotelBean {
 	}
 	
 	public void find() {
-		resultPanelVisible = true;
+		FacesContext messaggio = FacesContext.getCurrentInstance();
 		searchedHotel = hotelMgrBean.findHotelDTO(searchedId);
+		if(searchedHotel != null) {
+			resultPanelVisible = true;
+		}
+		else {
+			messaggio.addMessage(null, new FacesMessage("Non è stato trovato un hotel avente l'id digitato, "
+					+ "accertarsi di aver inserito un id corretto"));
+		}
 	}
 
 	public HotelDTO getSearchedHotel() {
