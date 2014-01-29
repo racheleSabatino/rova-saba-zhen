@@ -178,13 +178,13 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	@Override
 	public int viewCostoTotale(int idPacchPer) {
 		Query q = em
-				.createQuery("SELECT SUM(h.costo + p.costo + t.costo) "
-						+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e "
-						+ "JOIN p.trasportiPacchPer t "
+				.createQuery("SELECT SUM(h1.costo + e1.costo + t1.costo) "
+						+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursionePacchPer e "
+						+ "JOIN p.trasportiPacchPer t JOIN h.hotel h1 JOIN e.escursioni e1 "
+						+ "JOIN t.trasporto t1 "
 						+ "WHERE p.idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);
-		Integer costoTotale = (Integer) q.getSingleResult();
-		return (Integer) q.getSingleResult();
+		return ((Long) q.getSingleResult()).intValue();
 	}
 	
 	@Override
@@ -193,15 +193,16 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		if(!pacch.isListaRegali()) 
 			return 0;
 		else {
-			Query q = em.createQuery("SELECT SUM(h.costo + p.costo + t.costo) "
-				+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursioniPacchPer e "
+			Query q = em.createQuery("SELECT SUM(h1.costo + p1.costo + t1.costo) "
+				+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursionePacchPer e "
+				+ "JOIN h.hotel h1 JOIN e.escursioni e1 JOIN t.trasporto t1 "
 				+ "JOIN p.trasportiPacchPer t "
 				+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto != :null "
 				+ "AND e.dataAcquisto != :null "
 				+ "AND t.dataAcquisto != :null ")
 				.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("null", null);
-		return (Integer) q.getSingleResult();
+		return ((Long)q.getSingleResult()).intValue();
 		}
 	}
 

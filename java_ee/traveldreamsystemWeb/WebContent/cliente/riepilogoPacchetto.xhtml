@@ -18,7 +18,7 @@
 				<p:outputLabel value="Riepilogo pacchetto personalizzato" />
 				
 				
-		<h:form id="form">  
+		<h:form id="form1">  
               
     <p:dataList value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
         paginator="true" rows="5"  
@@ -46,27 +46,27 @@
         <p:outputPanel id="dettagliHotel" style="text-align:center;" layout="block">  
               
             <h:panelGrid  columns="2" cellpadding="5">  
-                <h:outputLabel for="descrizione" value="Descrizione: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.descrizione}" />  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{riepilogoBean.selectedHotel.descrizione}" />  
                   
-                <h:outputLabel for="descrizione" value="Citta': " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.citta}" />  
+                <h:outputLabel value="Citta': " />  
+                <h:outputText value="#{riepilogoBean.selectedHotel.citta}" />  
                   
-                 <h:outputLabel for="descrizione" value="Data/ora inizio prenotazione: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.dataPartenza}" />  
+                 <h:outputLabel value="Data/ora inizio prenotazione: " />  
+                <h:outputText value="#{riepilogoBean.selectedHotel.dataPartenza}" />  
                 
-                 <h:outputLabel for="descrizione" value="Data/ora fine prenotazione): " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.dataRitorno}" />  
+                 <h:outputLabel value="Data/ora fine prenotazione): " />  
+                <h:outputText value="#{riepilogoBean.selectedHotel.dataRitorno}" />  
                 
-                 <h:outputLabel for="descrizione" value="Costo: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.costo}" />  
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{riepilogoBean.selectedHotel.costo}" />  
                 
             </h:panelGrid>  
         </p:outputPanel>  
     </p:dialog>  
   
 </h:form>  
-		<h:form id="form">  
+		<h:form id="form2">  
               
     <p:dataList value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
         paginator="true" rows="5"  
@@ -94,23 +94,23 @@
         <p:outputPanel id="dettagliTraporto" style="text-align:center;" layout="block">  
               
             <h:panelGrid  columns="2" cellpadding="5">  
-                <h:outputLabel for="descrizione" value="Descrizione: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.descrizione}" />  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.descrizione}" />  
                   
-                <h:outputLabel for="descrizione" value="Citta partenza': " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.cittaPartenza}" />  
+                <h:outputLabel value="Citta partenza': " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.cittaPartenza}" />  
                   
-                 <h:outputLabel for="descrizione" value="Data/ora partenza: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.dataPartenza}" />  
+                 <h:outputLabel value="Data/ora partenza: " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.dataPartenza}" />  
                 
-                <h:outputLabel for="descrizione" value="Citta arrivo': " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.cittaRitorno}" />  
+                <h:outputLabel value="Citta arrivo': " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.cittaRitorno}" />  
                 
-                 <h:outputLabel for="descrizione" value="Data/ora arrivo): " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.dataRitorno}" />  
+                 <h:outputLabel value="Data/ora arrivo): " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.dataRitorno}" />  
                 
-                 <h:outputLabel for="descrizione" value="Costo: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedTrasporto.costo}" />  
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{riepilogoBean.selectedTrasporto.costo}" />  
                 
             </h:panelGrid>  
         </p:outputPanel>  
@@ -118,7 +118,7 @@
   
 </h:form>  
 
-	<h:form id="form">  
+	<h:form id="form3">  
               
     <p:dataList value="#{riepilogoBean.escursioni}" var="escursione" id="escursione"  
         paginator="true" rows="5"  
@@ -146,20 +146,20 @@
         <p:outputPanel id="dettagliEscursione" style="text-align:center;" layout="block">  
               
             <h:panelGrid  columns="2" cellpadding="5">  
-                <h:outputLabel for="descrizione" value="Descrizione: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedEscursione.descrizione}" />  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{riepilogoBean.selectedEscursione.descrizione}" />  
                   
-                <h:outputLabel for="descrizione" value="Citta': " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedEscursione.luogo}" />  
+                <h:outputLabel value="Citta': " />  
+                <h:outputText value="#{riepilogoBean.selectedEscursione.luogo}" />  
                   
-                 <h:outputLabel for="descrizione" value="Data/ora inizio prenotazione: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedEscursione.dataPartenza}" />  
+                 <h:outputLabel value="Data/ora inizio prenotazione: " />  
+                <h:outputText value="#{riepilogoBean.selectedEscursione.dataPartenza}" />  
                 
-                 <h:outputLabel for="descrizione" value="Data/ora fine prenotazione): " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedEscursione.dataRitorno}" />  
+                 <h:outputLabel value="Data/ora fine prenotazione): " />  
+                <h:outputText value="#{riepilogoBean.selectedEscursione.dataRitorno}" />  
                 
-                 <h:outputLabel for="descrizione" value="Costo: " />  
-                <h:outputText id="descrizione" value="#{riepilogoBean.selectedEscursione.costo}" />  
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{riepilogoBean.selectedEscursione.costo}" />  
                 
             </h:panelGrid>  
         </p:outputPanel>  
@@ -183,7 +183,7 @@
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="elimina">
-					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
+					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
 					update="messaggi" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
@@ -193,7 +193,7 @@
 				<p:confirmDialog message="Sei sicuro di voler creare una lista regali dal pacchetto?"
 					header="Creazione lista regali" 
 					widgetVar="lista">
-					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
+					<p:commandButton value="Si" 
 					update="messaggi" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="Non ora" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
