@@ -71,7 +71,7 @@ public class PacchPerClienteBean {
 	
 	public String pagRiepilogoPacchPer(int id){
 		return "/cliente/riepilogoPacchetto?faces-redirect=true"
-		+ "&amp;id=" + id;
+	+ "&amp;id=" + id;
 	}
 	
 	public List<PacchPerDTO> getPacchettiAcquistati() {
