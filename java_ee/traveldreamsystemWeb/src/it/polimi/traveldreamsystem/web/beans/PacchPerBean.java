@@ -114,7 +114,7 @@ public class PacchPerBean {
 		}
 	}
 	
-	public void inviaInvitoListaRegali(){
+	public void inviaInvitoLista(){
 		String senderMailID = utenteMgr.getPrincipalEmail();
 		String link = "http://localhost:8080/traveldreamsystemWeb/homePage.xhtml";
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico"
