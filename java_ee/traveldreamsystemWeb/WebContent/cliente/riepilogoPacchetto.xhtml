@@ -12,6 +12,66 @@
 	<ui:composition template="../template/common.xhtml">
 
 		<ui:define name="content">
+		
+				<p:panel>
+
+				<p:outputLabel value="Riepilogo pacchetto personalizzato" />
+				
+				
+		<h:form id="form">  
+              
+    <p:dataList value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
+        paginator="true" rows="5"  
+        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="5,10,15" type="none">  
+  
+            <f:facet name="header">  
+                Hotel prenotati 
+            </f:facet>  
+  
+            <p:commandButton value = "Mostra Dettagli" update=":form:hotelDetail" oncomplete="PF('hotelDialog').show()" title="View Detail">  
+                <f:setPropertyActionListener value="#{hotel}" target="#{riepilogoBean.selectedHotel}" />  
+            </p:commandButton>  
+            
+            <p:commandButton value = "Acquista" type="button" onclick="PF('acquista').show()" />
+				<p:confirmDialog message="Sei sicuro di voler procedere all'acquisto del pacchetto?
+											L'operazione non può essere annullata"
+					header="Conferma acquisto pacchetto vacanza" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si, procedo" actionListener="#{pacchPerBean.acquistaPacchetto}"
+					update="messages" oncomplete="PF('cd').hide()"/>
+					<p:commandButton value="No, continuo in un altro momento" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog> 
+  
+            <h:outputText value="#{selectedHotel.citta}, #{selectedHote.stelle}" style="margin-left:10px" />  
+            <br />  
+    </p:dataList>  
+      
+    <p:dialog header="Dettagli Hotel" widgetVar="hotelDialog" modal="true" showEffect="fade">  
+        <p:outputPanel id="dettagliHotel" style="text-align:center;" layout="block">  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel for="descrizione" value="Descrizione: " />  
+                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.descrizione}" />  
+                  
+                <h:outputLabel for="descrizione" value="Citta': " />  
+                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.citta}" />  
+                  
+                 <h:outputLabel for="descrizione" value="Data/ora inizio prenotazione: " />  
+                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.dataPartenza}" />  
+                
+                 <h:outputLabel for="descrizione" value="Data/ora fine prenotazione): " />  
+                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.dataRitorno}" />  
+                
+                 <h:outputLabel for="descrizione" value="Costo: " />  
+                <h:outputText id="descrizione" value="#{riepilogoBean.selectedHotel.costo}" />  
+                
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+  
+</h:form>  
+			</p:panel>
 
 			<p:panel header="Pacchetto Cliente"> 
                   

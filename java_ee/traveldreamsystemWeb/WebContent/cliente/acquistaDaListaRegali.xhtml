@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+
+			<p:panel header="Inserimento dati per acquisto pacchetto">
+				    <h:form id="form">  
+                  
+        
+                <f:facet name="header">  
+                    Acquisto prodotto da lista regali
+                </f:facet>  
+      			<h:outputText value="#{pacchPer.idPacchPer}" /> 
+      			
+      			<p:outputPanel value = "Ricordati che prima di poter acquistare un prodotto dalla lista regali
+      			di un amico, devi fare il login se già iscritto al sito, oppure procedere alla registrazione">
+      			</p:outputPanel>
+                 
+     		<h:panelGrid columns="2">
+     		
+				
+				<p:outputLabel value="Costo totale pacchetto: #{riepilogoBean.costoTotale}" />
+				
+				<p:outputLabel value = "Totale acquistato da amici se è una lista regali:
+				 #{riepilogoBean.regaloAmici}" />
+				
+				<p:outputLabel value = "Totale da pagare = Costo totale - Regali amici:
+				#{riepilogoBean.totaleDaPagare}" />
+				
+				<p:outputLabel value = "Per completare il pagamento, è necessario inserire i seguenti dati" />
+				
+				<p:outputLabel value="Numero carta di credito " />
+				<p:inputText readonly="true" requested = "true" />
+				
+				<p:outputLabel value="Data scadenza carta di credito "/>
+				<p:inputText readonly="true" requested = "true" />
+				
+				<p:growl id="messages" />
+				
+				<p:commandButton value = "Acquista" type="button" onclick="PF('cd').show()" />
+				<p:confirmDialog message="Sei sicuro di voler procedere all'acquisto del pacchetto?
+											L'operazione non può essere annullata"
+					header="Conferma acquisto pacchetto vacanza" severity="alert"
+					widgetVar="cd">
+					<p:commandButton value="Si, procedo" actionListener="#{pacchPerBean.acquistaPacchetto}"
+					update="messages" oncomplete="PF('cd').hide()"/>
+					<p:commandButton value="No, continuo in un altro momento" onclick="PF('cd').hide();" type="button" />
+				</p:confirmDialog>
+				
+ 
+          </h:panelGrid>
+  
+      
+    </h:form>  
+                          
+
+			</p:panel>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
