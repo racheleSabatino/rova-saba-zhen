@@ -39,6 +39,8 @@
                 </p:commandButton>  
                 
       			<p:commandButton title = "Acquista" action="/cliente/acquistaPacchetto)">
+      			<f:setPropertyActionListener value="#{pacchPer}" 
+      			target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
       			

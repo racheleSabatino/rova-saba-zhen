@@ -33,6 +33,8 @@
                     <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />   
                     <f:setPropertyActionListener value="#{pacchPer}"   
                             target="#{pacchPerClienteBean.selectedPacchetto}" />  
+                   <f:setPropertyActionListener value="#{pacchPer}"   
+                            target="#{riepilogoPacchPerBean.pacchetto}" />           
                 </p:commandLink>  
             </h:panelGrid>  
         </p:panel>  

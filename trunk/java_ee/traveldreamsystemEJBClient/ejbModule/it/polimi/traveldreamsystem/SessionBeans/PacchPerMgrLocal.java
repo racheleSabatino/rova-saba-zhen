@@ -22,9 +22,11 @@ public interface PacchPerMgrLocal {
 
 	List<PacchPerDTO> getClientePacchPerDTONonAcquistati(String mail);
 
-	void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente);
+	void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente)
+			throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato;
 
-	void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente);
+	void acquistaTrasportoListaRegali(int idTrasporto, int idPacchPer, String mailAcquirente)
+			throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato;
 
 	void acquistaHotelListaRegali(int idHotel, int idPacchPer,
 			String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato;
