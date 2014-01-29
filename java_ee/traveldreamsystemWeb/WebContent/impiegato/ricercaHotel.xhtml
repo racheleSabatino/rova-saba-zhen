@@ -21,14 +21,14 @@
 							<p:inputText id="id" value="#{findHotelBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl, reset"
 								actionListener="#{findHotelBean.find}" />
 						</h:panelGrid>
 
 						<p:outputPanel>
 							<p:outputPanel 
 								rendered="#{findHotelBean.resultPanelVisible}">
-								<h:panelGrid columns="1" redered="#{findHotelBean.resultPanelVisible}">
+								<h:panelGrid columns="1" rendered="#{findHotelBean.resultPanelVisible}">
 
 									<p:outputLabel
 										value="Citta: #{findHotelBean.searchedHotel.citta}" />
@@ -51,7 +51,6 @@
 					
 						<p:commandButton id="elimina" value = "Elimina" rendered = "#{findHotelBean.resultPanelVisible}"
 						type="button" onclick="PF('cd').show()" />
-						<!--  -->
 						<p:confirmDialog message="Sei sicuro di voler eliminare l'hotel?"
 						header="Eliminazione hotel" severity="alert"
 						widgetVar="cd">
@@ -68,7 +67,9 @@
                                  
             			</p:commandButton>
             			
-                  		<p:commandButton immediate = "true" type ="reset" value="Reset" update="id"/>
+                  		<p:commandButton id="reset" value="Reset" process="@this"
+                  		 actionListener="#{findHotelBean.resetForm}"  rendered="#{findHotelBean.resultPanelVisible}"
+                  		 update="id, regGrid, resultGrid, elimina, modifica, growl, reset"/>
 					</p:panel>
 					
 					</h:form>

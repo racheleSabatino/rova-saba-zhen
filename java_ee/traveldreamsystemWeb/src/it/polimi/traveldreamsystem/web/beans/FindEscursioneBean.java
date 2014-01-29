@@ -44,7 +44,6 @@ public class FindEscursioneBean {
 
 	public FindEscursioneBean() {
 		searchedEscursione = new EscursioneDTO();
-		this.resultPanelVisible = false;
 	}
 	
 	public void find() {
@@ -88,7 +87,11 @@ public class FindEscursioneBean {
 		this.removeOK = removeOK;
 	}
 
-	
+	public void resetForm(){
+		searchedEscursione = null; 
+		searchedId = 0;
+	}
+
 	
 	
 

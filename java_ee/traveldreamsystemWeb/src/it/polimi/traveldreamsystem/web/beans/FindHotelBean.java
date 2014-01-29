@@ -88,4 +88,9 @@ public class FindHotelBean {
 	}
 	
 	
+	public void resetForm(){
+		searchedHotel = null; 
+		searchedId = 0;
+	}
+	
 }

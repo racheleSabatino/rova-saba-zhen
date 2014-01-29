@@ -14,21 +14,21 @@
 		<ui:define name="content">
 
 			<p:panel>
-				<h:form>
+				<h:form id="resultGrid">
 					<p:panel header="Ricerca Escursione">
 						<h:panelGrid columns="3" id="regGrid">
 							<h:outputLabel for="id">id:</h:outputLabel>
 							<p:inputText id="id" value="#{findEscursioneBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl, reset"
 								actionListener="#{findEscursioneBean.find}" />
 						</h:panelGrid>
 
-						<p:outputPanel id="resultGrid">
+						<p:outputPanel>
 							<p:outputPanel
 								rendered="#{findEscursioneBean.resultPanelVisible}">
-								<h:panelGrid columns="1">
+								<h:panelGrid columns="1" rendered="#{findEscursioneBean.resultPanelVisible}">
 
 									<p:outputLabel
 										value="Data Partenza: #{findEscursioneBean.searchedEscursione.dataPartenza}" />
@@ -46,13 +46,12 @@
 							</p:outputPanel>
 											
 							</p:outputPanel>
-						</p:panel>
 					
 					<p:growl id="growl" showDetail="true" />  
 					
 					<p:commandButton id = "elimina" value = "Elimina" type="button" 
 					rendered = "#{findEscursioneBean.resultPanelVisible}" onclick="PF('cd').show()" />
-				<p:confirmDialog message="Sei sicuro di voler eliminare l'escursione"
+				<p:confirmDialog message="Sei sicuro di voler eliminare l'escursione?"
 					header="Eliminazione escursione" severity="alert"
 					widgetVar="cd">
 					<p:commandButton value="Si" actionListener="#{findEscursionBean.remove}"
@@ -66,7 +65,10 @@
                  target="#{escursioneBean.escursione}"/>                
            		 </p:commandButton>	
             
-            <p:commandButton type="reset" value="Reset" />
+                  		<p:commandButton id="reset" value="Reset" process="@this"
+                  		 actionListener="#{findEscursioneBean.resetForm}"  rendered="#{findEscursioneBean.resultPanelVisible}"
+                  		 update="id, regGrid, resultGrid, elimina, modifica, growl, reset"/>
+					</p:panel>
 			
 			</h:form>
 			</p:panel>
