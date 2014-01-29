@@ -14,6 +14,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.context.RequestContext;
+
 @ManagedBean
 @SessionScoped
 public class HotelBean extends PacchPredBean {
@@ -136,4 +138,8 @@ public class HotelBean extends PacchPredBean {
 	public String getPage(int idHotel){
 		return hotelMgrBean.pagRiepilogoPacchPer(idHotel);
 	}
+	
+	public void reset() {  
+        RequestContext.getCurrentInstance().reset("form:panel");  
+    }  
 }

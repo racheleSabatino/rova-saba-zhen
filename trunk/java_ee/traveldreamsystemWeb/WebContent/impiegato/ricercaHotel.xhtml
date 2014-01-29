@@ -21,7 +21,7 @@
 							<p:inputText id="id" value="#{findHotelBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl"
 								actionListener="#{findHotelBean.find}" />
 						</h:panelGrid>
 
@@ -44,12 +44,6 @@
 								</h:panelGrid>
 							</p:outputPanel>	
 							
-							<p:outputPanel rendered = "#{findHotelBean.noResultPanelVisible}" >
-							<p:outputLabel value = "Non è stato trovato un hotel a cui corrisponde l'id  
-											inserito, controllare di aver digitato un id corretto" />
-							</p:outputPanel>
-											
-							
 						</p:outputPanel>
 			
 					
@@ -66,14 +60,13 @@
 						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 						</p:confirmDialog>
 						
-						<p:commandButton immediate="true" id="modifica" rendered = "#{findHotelBean.resultPanelVisible}"
+						<p:commandButton id="modifica" rendered = "#{findHotelBean.resultPanelVisible}"
 						  action = "/homePage" value = "Modifica">
                 		 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
                                  
             			</p:commandButton>
             			
-            			<p:commandButton immediate ="true" rendered="#{findHotelBean.resultPanelVisible}" action="/homePage?faces'redirect=true" />
-            			<p:commandButton immediate = "true" type ="reset" value="Reset" update="resultGrid"/>
+                  		<p:commandButton immediate = "true" type ="reset" value="Reset" update="resultGrid"/>
 					</p:panel>
 					
 					</h:form>

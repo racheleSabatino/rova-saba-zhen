@@ -26,7 +26,7 @@
 						<h:outputText value="&#160;" />
 						<h:outputText value="&#160;" />
 
-						<h:outputText for="dataRitorno" value="Data ritorno:  " />
+						<h:outputText for="dataRitorno" value="Data arrivo:  " />
 						<p:calendar id="dataRitorno" required="true"
 							value="#{trasportoBean.trasporto.dataRitorno}"
 							pattern="MM/dd/yyyy HH:mm" />
@@ -45,7 +45,7 @@
 						<h:outputText value="&#160;" />
 						<h:outputText value="&#160;" />
 
-						<h:outputText for="cittaRitorno" value="Città ritorno:" />
+						<h:outputText for="cittaRitorno" value="Città arrivo:" />
 						<p:inputText id="cittaRitorno" required="true"
 							value="#{trasportoBean.trasporto.cittaRitorno}" />
 						<p:message for="cittaRitorno" display="icon"/>
@@ -78,7 +78,7 @@
 						<p:commandButton value="Submit" update="grid"
 							action="#{trasportoBean.addTrasporto}" />
 							
-						<p:commandButton type="reset" value="Reset" />
+						<p:commandButton type="reset" value="Reset" update = "grid" />
 							
     					<p:messages id="msg"  sticky="true" />  
 							

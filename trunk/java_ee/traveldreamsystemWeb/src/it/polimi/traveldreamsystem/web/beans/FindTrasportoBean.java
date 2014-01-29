@@ -48,8 +48,15 @@ public class FindTrasportoBean {
 	}
 	
 	public void find() {
-		resultPanelVisible = true;
-		searchedTrasporto = trasportoMgrBean.findTrasportoDTO(searchedId);
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		searchedTrasporto= trasportoMgrBean.findTrasportoDTO(searchedId);
+		if(searchedTrasporto != null) {
+			resultPanelVisible = true;
+		}
+		else {
+			messaggio.addMessage(null, new FacesMessage("Non è stato trovato un hotel avente l'id digitato, "
+					+ "accertarsi di aver inserito un id corretto"));
+		}
 	}
 
 	public TrasportoDTO getSearchedTrasporto() {

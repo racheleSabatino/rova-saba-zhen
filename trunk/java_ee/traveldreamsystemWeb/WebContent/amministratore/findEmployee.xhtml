@@ -18,11 +18,12 @@
 				<h:form>
 					<p:panel header="Ricerca impiegato">
 						<h:panelGrid columns="3" id="regGrid">
+		
 							<h:outputLabel for="mail">Email:</h:outputLabel>
 							<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
 							<p:message for="mail" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid"
+							<p:commandButton value="Cerca" update="resultGrid, message, elimina, growl"
 								actionListener="#{findEmployeeBean.find}" />
 						</h:panelGrid>
 
@@ -39,11 +40,6 @@
 
 								</h:panelGrid>		
 							</p:outputPanel>
-							
-							<p:outputPanel rendered = "#{findEmployeeBean.noResultPanelVisibile}" >
-							<p:outputLabel value = "Non è stato trovato un impiegato a cui corrisponde la mail, 
-											inserita, controllare di aver digitato una mail corretta" />
-							</p:outputPanel>
 											
 						</p:outputPanel>
 
@@ -52,7 +48,7 @@
 					</p:panel>
 					
 				<p:commandButton value = "Elimina" rendered = "#{findEmployeeBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
-				<p:confirmDialog message="Sei sicuro di voler eliminare l'impiegato?"
+				<p:confirmDialog message="Sei sicuro di voler eliminare l'impiegato?" id="elimina"
 					header="Eliminazione impiegato" severity="alert"
 					widgetVar="cd">
 					<p:commandButton value="Si" actionListener="#{findEmployeeBean.remove}"
@@ -60,7 +56,7 @@
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
 
-				<p:commandButton value = "Reset" type = "reset" />
+				<p:commandButton value = "Reset" type = "reset" update = "regGrid, resultGrid, elimina" />
 
 				</h:form>
 			</p:panel>

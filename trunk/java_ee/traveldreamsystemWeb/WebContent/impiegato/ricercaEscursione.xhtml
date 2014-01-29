@@ -21,7 +21,7 @@
 							<p:inputText id="id" value="#{findEscursioneBean.searchedId}" />
 							<p:message for="id" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica"
+							<p:commandButton value="Cerca" update="resultGrid, elimina, modifica, growl"
 								actionListener="#{findEscursioneBean.find}" />
 						</h:panelGrid>
 
@@ -44,10 +44,6 @@
 								</h:panelGrid>
 
 							</p:outputPanel>
-								<p:outputPanel rendered = "#{findEscursioneBean.noResultPanelVisibile}" >
-									<p:outputLabel value = "Non è stato trovato una escursione a cui corrisponde l'id, 
-											inserito, controllare di aver digitato un id corretto" />
-								</p:outputPanel>
 											
 							</p:outputPanel>
 						</p:panel>
