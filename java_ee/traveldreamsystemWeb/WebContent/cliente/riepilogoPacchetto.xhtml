@@ -20,27 +20,29 @@
 				
 		<h:form id="form1">  
               
-    <p:dataList value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
+    <p:dataGrid value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
         paginator="true" rows="5"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
         rowsPerPageTemplate="5,10,15" type="none">  
   
-            <f:facet name="header">  
-                Hotel prenotati 
-            </f:facet>  
-  
-            <p:commandButton value = "Mostra Dettagli" update=":form:dettagliHotel" oncomplete="PF('hotelDialog').show()" title="View Detail">  
-                <f:setPropertyActionListener value="#{hotel}" target="#{riepilogoBean.selectedHotel}" />  
-            </p:commandButton>  
+  			<f:facet name="header">  
+            	    Hotel prenotati 
+            	</f:facet> 
             
-            <p:commandButton value = "Acquista" rendered = "#{riepilogoBean.pacchetto.listaRegali}"
-            action = "/cliente/acquistaDaListaRegali" >
-             <f:setPropertyActionListener value="#{hotel}" target="#{listaRegaliBean.hotel}" />  
-            </p:commandButton>
+      <p:panel header="Id hotel: #{hotel.idProdBase}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage width="50" height="50" value="/resources/images/palma.png"/> 
+              
   
-            <h:outputText value="#{hotel.citta}, #{hotel.stelle}" style="margin-left:10px" />  
-            <br />  
-    </p:dataList>  
+                <h:outputText value="#{hotel.citta}, #{hotel.stelle}" style="margin-left:10px" />  
+
+            <p:commandLink value = "Mostra Dettagli" update=":form:dettagliHotel" oncomplete="PF('hotelDialog').show()" title="View Detail">  
+                <f:setPropertyActionListener value="#{hotel}" target="#{riepilogoBean.selectedHotel}" />  
+            </p:commandLink>  
+  
+            </h:panelGrid>  
+        </p:panel>  
+    </p:dataGrid>  
       
     <p:dialog header="Dettagli Hotel" widgetVar="hotelDialog" modal="true" showEffect="fade">  
         <p:outputPanel id="dettagliHotel" style="text-align:center;" layout="block">  
@@ -83,11 +85,6 @@
                 <f:setPropertyActionListener value="#{trasporto}" target="#{riepilogoBean.selectedTrasporto}" />  
             </p:commandButton>  
             
-            <p:commandButton value = "Acquista" rendered = "#{riepilogoBean.pacchetto.listaRegali}"
-            action = "/cliente/acquistaDaListaRegali" >
-             <f:setPropertyActionListener value="#{trasporto}" target="#{listaRegaliBean.trasporto}" />  
-            </p:commandButton>
-  
             <h:outputText value="#{trasporto.citta}, #{trasporto.stelle}" style="margin-left:10px" />  
             <br />  
     </p:dataList>  
@@ -135,11 +132,6 @@
                 <f:setPropertyActionListener value="#{escursione}" target="#{riepilogoBean.selectedEscursione}" />  
             </p:commandButton>  
             
-            <p:commandButton value = "Acquista" rendered = "#{riepilogoBean.pacchetto.listaRegali}"
-            action = "/cliente/acquistaDaListaRegali" >
-             <f:setPropertyActionListener value="#{escursione}" target="#{listaRegaliBean.escursione}" />  
-            </p:commandButton>
-  
             <h:outputText value="#{escursione.citta}, #{escursione.luogo}" style="margin-left:10px" />  
             <br />  
     </p:dataList>  
@@ -167,27 +159,27 @@
         </p:outputPanel>  
     </p:dialog>  
   
-</h:form>  
+
       <br/> <br/> <br/>      		
       			<p:growl id="messaggi"/>
       			
                 <p:commandButton id="selectButton" 
                 action = "#{pacchPerClienteBean.pagModificaPacchPer(riepilogoBean.pacchetto.idPacchPer)}"
-                value="Modifica" >  
+                value="Modifica" ajax = "false" >  
                 </p:commandButton>  
                 
-      			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto?faces-redirect=true">
+      			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto?faces-redirect=true" ajax = "false">
       				 <f:setPropertyActionListener value="#{riepilogoBean.pacchetto}" target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
       			
-      			<p:commandButton value = "Elimina" type="button" onclick="PF('elimina').show()" />
+      			<p:commandButton value = "Elimina" type="button" onclick="PF('elimina').show()" ajax = "false"/>
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="elimina">
 					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
 					update="messaggi" oncomplete="PF('cd').hide()"/>
-				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" ajax = "false"/>
 				</p:confirmDialog>
 				
 				<br/>
@@ -197,14 +189,14 @@
 				In questo modo risparmierai.
 				Ricordati, più amici inviti, più probabilità ci sono che compreranno qualcosa e tu 
 				spenderai meno per la tua vacanza "/>
-				<p:commandButton value = "Crea lista regali"
+				<p:commandButton value = "Crea lista regali" ajax = "false"
 				type="button" onclick="PF('lista').show()" />
 				<p:confirmDialog message="Sei sicuro di voler creare una lista regali dal pacchetto?"
 					header="Creazione lista regali" 
 					widgetVar="lista">
 					<p:commandButton value="Si, certo" action = "riepilogoBean.creaListaRegali"
 					update="messaggi" oncomplete="PF('cd').hide()"/>
-				<p:commandButton value="Non ora" onclick="PF('cd').hide();" type="button" />
+				<p:commandButton value="Non ora" onclick="PF('cd').hide();" type="button" ajax = "false"/>
 				</p:confirmDialog>
 			</p:panel>	
 				
@@ -215,7 +207,7 @@
 						della tua lista regali e poi clicca su invia. " />
 						<h:inputText value = "#{pacchPerBean.mailAmico}" />
 						<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvitoLista(riepilogoBean.pacchetto.idPacchPer)" 
-						update = "messaggi"/>
+						update = "messaggi" ajax = "false"/>
 					</h:panelGrid>
 				</p:panel>
 				
@@ -227,9 +219,15 @@
 						<h:outputText value = "Inserisci nel campo seguente l'email di un amico, e premi invia " />
 						<h:inputText value = "#{pacchPerBean.mailAmico}" />
 					<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvito(riepilogoBean.pacchetto.idPacchPer)" 
-					update = "messaggi"/>
+					update = "messaggi" ajax = "false"/>
 					</h:panelGrid>
 				</p:panel>
+				
+				<p:panel >
+				<h:outputText value = "#{riepilogoBean.hotel}" />
+					<h:outputText value = "#{riepilogoBean.hotels}" />
+				</p:panel>
+	</h:form>  			
 				
    </p:panel>
            
