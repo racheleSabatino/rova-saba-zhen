@@ -60,7 +60,7 @@
 				</p:confirmDialog>
 						
 					<p:commandButton id="modifica" rendered = "#{findEscursioneBean.resultPanelVisible}"
-                action = "/homepage" value = "Modifica">
+                action = "#{escursioneBean.goToPaginaModifica(findEscursioneBean.searchedEscursione.idProdBase)}" value = "Modifica">
                  <f:setPropertyActionListener value="#{findEscursioneBean.searchedEscursione}" 
                  target="#{escursioneBean.escursione}"/>                
            		 </p:commandButton>	
