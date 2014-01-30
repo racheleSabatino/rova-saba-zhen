@@ -32,6 +32,8 @@ public class RiepilogoPacchPerBean {
    
     private PacchPerDTO pacchetto; 
     
+    private int idPacchPer;
+   
     private List<HotelDTO> hotels;
 	
 	private List<EscursioneDTO> escursioni;
@@ -54,16 +56,16 @@ public class RiepilogoPacchPerBean {
     }
     
     public void init() {  
-    	int id = pacchetto.getIdPacchPer();
-        hotel = comp.convertToStringHotel(id);
-        escursione = comp.convertToStringEscursione(id);
-        trasporto = comp.convertToStringTrasporto(id);
-        costoTotale = pacchPerMgr.viewCostoTotale(id);
-        regaloAmici = pacchPerMgr.viewTotaleAcquistatoDaAmici(id);
+    	idPacchPer = pacchetto.getIdPacchPer();
+        hotel = comp.convertToStringHotel(idPacchPer);
+        escursione = comp.convertToStringEscursione(idPacchPer);
+        trasporto = comp.convertToStringTrasporto(idPacchPer);
+        costoTotale = pacchPerMgr.viewCostoTotale(idPacchPer);
+        regaloAmici = pacchPerMgr.viewTotaleAcquistatoDaAmici(idPacchPer);
         totaleDaPagare = costoTotale - regaloAmici;
-        hotels = comp.getHotelsPacchPer(id);
-        escursioni = comp.getEscursioniPacchPer(id);
-        trasporti = comp.getTrasportiPacchPer(id); 
+        hotels = comp.getHotelsPacchPer(idPacchPer);
+        escursioni = comp.getEscursioniPacchPer(idPacchPer);
+        trasporti = comp.getTrasportiPacchPer(idPacchPer); 
         if(pacchetto.isListaRegali()) {
         	creaListaRegali = false;
         } else {
@@ -175,7 +177,7 @@ public class RiepilogoPacchPerBean {
 	
 
 	public void removePacchetto(){
-		pacchPerMgr.removePacchPer(pacchetto.getIdPacchPer());
+		pacchPerMgr.removePacchPer(idPacchPer);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "Il pacchetto personalizzato è stato eliminato"));
 	}
@@ -186,7 +188,7 @@ public class RiepilogoPacchPerBean {
 	}
 	
 	public void creaListaRegali() {
-		pacchPerMgr.creaListaRegali(pacchetto.getIdPacchPer());
+		pacchPerMgr.creaListaRegali(idPacchPer);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "ora il tuo pacchetto personalizzato è diventato"
 				+ " una lista regali"));
@@ -198,6 +200,19 @@ public class RiepilogoPacchPerBean {
 
 	public void setCreaListaRegali(boolean creaListaRegali) {
 		this.creaListaRegali = creaListaRegali;
+	}
+	
+	public String showListaRegalo() {
+		this.setPacchetto(pacchPerMgr.findPacchPerDTO(idPacchPer));
+		return "/cliente/viewListeRegalo?faces-redirect=true";
+	}
+
+	public int getIdPacchPer() {
+		return idPacchPer;
+	}
+
+	public void setIdPacchPer(int idPacchPer) {
+		this.idPacchPer = idPacchPer;
 	}
 }
 

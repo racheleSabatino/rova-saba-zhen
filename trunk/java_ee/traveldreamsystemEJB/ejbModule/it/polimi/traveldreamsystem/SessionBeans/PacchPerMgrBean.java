@@ -177,32 +177,84 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	// ritorna il costo totale del pacchetto personalizzato
 	@Override
 	public int viewCostoTotale(int idPacchPer) {
+		int t1, t2, t3;
 		Query q = em
-				.createQuery("SELECT SUM(h1.costo + e1.costo + t1.costo) "
-						+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursionePacchPer e "
-						+ "JOIN p.trasportiPacchPer t JOIN h.hotel h1 JOIN e.escursioni e1 "
+				.createQuery("SELECT SUM(h1.costo)"
+						+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN h.hotel h1 " 
+						+ "WHERE p.idPacchPer = :idPacchPer "
+						+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+		Query q2 = em
+				.createQuery("SELECT SUM(e1.costo) "
+						+ "FROM PacchPer p JOIN p.escursionePacchPer e "
+						+ "JOIN e.escursioni e1 "
+						+ "WHERE p.idPacchPer = :idPacchPer "
+						+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);;
+		Query q3 = em
+				.createQuery("SELECT SUM(t1.costo) "
+						+ "FROM PacchPer p JOIN p.trasportiPacchPer t "
 						+ "JOIN t.trasporto t1 "
-						+ "WHERE p.idPacchPer = :idPacchPer");
-		q.setParameter("idPacchPer", idPacchPer);
-		return ((Long) q.getSingleResult()).intValue();
+						+ "WHERE p.idPacchPer = :idPacchPer "
+						+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+		if(q.getSingleResult() == null) {
+			t1 = 0;
+		}
+		else 
+			t1 = ((Long) q.getSingleResult()).intValue();
+		if(q2.getSingleResult() == null)
+			t2 = 0;
+		else
+			t2 = ((Long) q2.getSingleResult()).intValue();
+		if(q3.getSingleResult() == null)
+			t3 = 0;
+		else
+			t3 = ((Long) q3.getSingleResult()).intValue();
+		return t1 + t2 + t3;
 	}
 	
 	@Override
 	public int viewTotaleAcquistatoDaAmici(int idPacchPer){
+		int t1, t2, t3;
 		PacchPer pacch = em.find(PacchPer.class, idPacchPer);
 		if(!pacch.isListaRegali()) 
 			return 0;
 		else {
-			Query q = em.createQuery("SELECT SUM(h1.costo + p1.costo + t1.costo) "
-				+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN p.escursionePacchPer e "
-				+ "JOIN h.hotel h1 JOIN e.escursioni e1 JOIN t.trasporto t1 "
-				+ "JOIN p.trasportiPacchPer t "
-				+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto != :null "
-				+ "AND e.dataAcquisto != :null "
-				+ "AND t.dataAcquisto != :null ")
-				.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("null", null);
-		return ((Long)q.getSingleResult()).intValue();
+			Query q = em
+					.createQuery("SELECT SUM(h1.costo)"
+							+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN h.hotel h1 " 
+							+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto != :null "
+							+ "AND p.listaRegali = :true "
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q.setParameter("true", true);
+			Query q2 = em
+					.createQuery("SELECT SUM(e1.costo) "
+							+ "FROM PacchPer p JOIN p.escursionePacchPer e "
+							+ "JOIN e.escursioni e1 "
+							+ "WHERE p.idPacchPer = :idPacchPer AND e.dataAcquisto != :null "
+							+ "AND p.listaRegali = :true " 
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q2.setParameter("true", true);
+			Query q3 = em
+					.createQuery("SELECT SUM(t1.costo) "
+							+ "FROM PacchPer p JOIN p.trasportiPacchPer t "
+							+ "JOIN t.trasporto t1 "
+							+ "WHERE p.idPacchPer = :idPacchPer AND t.dataAcquisto != :null "
+							+ "AND p.listaRegali = :true " 
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q3.setParameter("true", true);
+			if(q.getSingleResult() == null) {
+				t1 = 0;
+			}
+			else 
+				t1 = ((Long) q.getSingleResult()).intValue();
+			if(q2.getSingleResult() == null)
+				t2 = 0;
+			else
+				t2 = ((Long) q2.getSingleResult()).intValue();
+			if(q3.getSingleResult() == null)
+				t3 = 0;
+			else
+				t3 = ((Long) q3.getSingleResult()).intValue();
+			return t1 + t2 + t3;
 		}
 	}
 

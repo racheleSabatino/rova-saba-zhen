@@ -35,9 +35,6 @@ public class PacchPerBean {
 	protected ComposizPacchPredMgrLocal compPacchPredMgr;
 	
 	@EJB
-	protected MailerBeanLocal mailerMgr;
-	
-	@EJB
 	protected UtenteMgrBeanLocal utenteMgr;
 
 	protected PacchPerDTO pacchPer;
@@ -141,12 +138,15 @@ public class PacchPerBean {
 				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
 				+ "\n" + link;
 		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
+		System.out.println("invio con successo2");
 		mailMgr.sendMessage(mailAmico, emailSubject, emailBody);
+		System.out.println("invio con successo3");
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
 				+ "inviata con successo"));
+		System.out.println("invio con successo1");
 	}
 
-	
+	public void goToPaginaListaRegali(){}
 	
 }

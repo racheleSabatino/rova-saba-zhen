@@ -14,9 +14,34 @@
 		<ui:define name="content">
 		
 				<p:panel>
+				
+				<p:header value = "Invito ad acquistare da una lista regali"/>
+				
+				<h:outputText value = "Se hai ricevuto una mail da parte di un tuo amico che ti informava riguardo 
+				la sua creazione di una lista regali per un pacchetto vacanza, ti trovi nella pagina giusta! "/>
 
-				<p:outputLabel value="Riepilogo pacchetto personalizzato" />
+				<h:outputText value = "Per poter vedere la sua lista regali, ti basta inserire nei campi sottostanti 
+				la mail del tuo amico e il numero del suo pacchetto vacanza che trovi nella mail che ti abbiamo 
+				inviato "/>
+				
+				<h:outputText value = "Fai attenzione, però, prima di poter vedere la sua lista regali, devi prima 
+				aver fatto login nel sito, se già registrato, altrimenti registrarti in pochi e semplici passi. 
+				Clicca sul pulsante Accedi presente nella barra del menù a destra, e poi ritorna in questa pagina "/>
+				
+				<h:outputText value = "Inserisci la mail dell'amico che ti ha invitato alla sua lista: "/>
+				
+				<p:inputText value = "#{riepilogoPacchetto.mailAmico}" />
+				
+				<br/>
+				<h:outputText value = "Inserisci il numero del pacchetto del tuo amico che trovi nella
+				mail che hai ricevuto: "/>
+				
+				<p:inputText value = "#{riepilogoPacchetto.idPacchPer}" />
+				
+				<p:commandButton value = "Mostra Lista Regalo" 
+					action = "/"/>
 		
+			
    			</p:panel>
            
 		</ui:define>

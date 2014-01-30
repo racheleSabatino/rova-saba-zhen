@@ -106,9 +106,10 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	
 	@Override
 	public List<HotelDTO> getHotelsPacchPer(int idPacchPer) {
-		Query q = em.createQuery("SELECT e FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel e "
-				+ "WHERE p.idPacchPer = :idPacchPer");
-		q.setParameter("idPacchPer", idPacchPer);
+		PacchPer pacch = em.find(PacchPer.class, idPacchPer);
+		Query q = em.createQuery("SELECT e FROM HotelsPacchPer h JOIN h.hotel e "
+				+ "WHERE h.pacchPer = :pacch");
+		q.setParameter("pacch", pacch);
 		List<Hotel> hotels = (List<Hotel>) q.getResultList();
 		List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();
 		for(int i=0; i < hotels.size(); i++) {
@@ -117,8 +118,6 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		}
 		return hotelsDTO;
 	}
-
-
 
 	@Override
 	public List<EscursioneDTO> getEscursioniPacchPer(int idPacchPer) {
