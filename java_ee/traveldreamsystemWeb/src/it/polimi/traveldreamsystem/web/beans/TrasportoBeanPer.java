@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.web.beans;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.annotation.PostConstruct;
@@ -115,5 +116,5 @@ public class TrasportoBeanPer extends PacchPerBean {
 		}
 		pacchPerMgrBean.update(pacchPer);
 	}
-	
 }
+

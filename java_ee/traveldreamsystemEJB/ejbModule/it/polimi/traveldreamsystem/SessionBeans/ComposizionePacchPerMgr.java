@@ -143,8 +143,8 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		List<Trasporto> trasporti = (List<Trasporto>) q.getResultList();
 		List<TrasportoDTO> trasportiDTO = new ArrayList<TrasportoDTO>();
 		for(int i=0; i < trasporti.size(); i++) {
-			TrasportoDTO hotelDTO= trasportoMgrBean.convertToDTO(trasporti.get(i));
-			trasportiDTO.add(hotelDTO);
+			TrasportoDTO trasportoDTO= trasportoMgrBean.convertToDTO(trasporti.get(i));
+			trasportiDTO.add(trasportoDTO);
 		}
 		return trasportiDTO;
 	}
