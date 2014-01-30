@@ -23,7 +23,7 @@
 							<p:inputText id="mail" value="#{findEmployeeBean.searchedMail}" />
 							<p:message for="mail" />
 							<h:outputText />
-							<p:commandButton value="Cerca" update="resultGrid, message, elimina, growl"
+							<p:commandButton value="Cerca" update="resultGrid, message, elimina"
 								actionListener="#{findEmployeeBean.find}" />
 						</h:panelGrid>
 
@@ -41,13 +41,11 @@
 								</h:panelGrid>		
 							</p:outputPanel>
 											
-						</p:outputPanel>
 
 					<p:growl id="message" />
 					
-					</p:panel>
 					
-				<p:commandButton value = "Elimina" rendered = "#{findEmployeeBean.resultPanelVisible}"  type="button" onclick="PF('cd').show()" />
+				<p:commandButton value = "Elimina" type="button" onclick="PF('cd').show()" />
 				<p:confirmDialog message="Sei sicuro di voler eliminare l'impiegato?" id="elimina"
 					header="Eliminazione impiegato" severity="alert"
 					widgetVar="cd">
@@ -56,11 +54,14 @@
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
 
-				<p:commandButton value = "Reset" type = "reset" update = "regGrid, resultGrid, elimina" />
-
-				</h:form>
+				<p:commandButton value = "Reset" actionListerner="#{findEmployeeBean.reset}" type = "reset" update = "regGrid, resultGrid, elimina" />
+				</p:outputPanel>
+				
 			</p:panel>
 
+				</h:form>
+
+					</p:panel>
 
 
 		</ui:define>
