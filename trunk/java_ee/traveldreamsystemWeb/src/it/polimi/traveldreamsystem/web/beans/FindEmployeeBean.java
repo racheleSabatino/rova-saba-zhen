@@ -25,7 +25,6 @@ public class FindEmployeeBean {
 	
 	private boolean resultPanelVisible;
 	
-	private boolean noResultPanelVisible;
 	
 	public boolean isResultPanelVisible() {
 		return resultPanelVisible;
@@ -36,22 +35,21 @@ public class FindEmployeeBean {
 	}
 
 	public FindEmployeeBean() {
-		searchedEmployee = new UtenteDTO();
 		searchedMail = new String();
 		resultPanelVisible = false;
-		noResultPanelVisible = false;
 	}
 	
 	public void find() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		searchedEmployee = utenteMgrBean.findUtenteDTO(searchedMail);
 		if(searchedEmployee == null) {
-			resultPanelVisible = true;
+			resultPanelVisible = false;
+			context.addMessage(null, new FacesMessage("L'impiegato non è presente in database, accertarsi di aver digitato"
+													+ " una mail corretta"));
 		}
 		else {
-			context.addMessage(null, new FacesMessage("L'impiegato non è presente in database, accertarsi di aver digitato"
-					+ "una mail corretta"));
-			noResultPanelVisible = true;
+			
+			resultPanelVisible = true;
 			}
 	}
 	
@@ -85,7 +83,9 @@ public class FindEmployeeBean {
 		this.removeOK = removeOK;
 	}
 	
-	
+	public void reset(){
+		resultPanelVisible = false;
+	}
 	
 
 }
