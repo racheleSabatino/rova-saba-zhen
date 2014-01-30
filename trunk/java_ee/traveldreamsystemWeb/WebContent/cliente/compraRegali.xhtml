@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+
+	<ui:composition template="../template/common.xhtml">
+
+		<ui:define name="content">
+		
+ 			<p:panel>
+				<h:form id="resultGrid">
+					<p:panel header="Ricerca pacchetto personalizzato">
+						<f:metadata>
+					<f:viewParam name="id" value="#{invitoPacchBean.searchedId}" />
+					<f:viewParam name="mail" value="#{invitoPacchBean.mail}" />
+						</f:metadata>
+				
+							<h:outputText />
+							<p:commandButton value="Fai un regalo al tuo amico tuo amico!" update="resultGrid"
+								actionListener="#{invitoPacchBean.find}" />
+								
+								
+					</p:panel>
+					
+						<p:outputPanel >
+							<p:outputPanel 
+								rendered="#{invitoPacchBean.resultPanelVisible}">
+								<h:panelGrid columns="1" rendered="#{invitoPacchBean.resultPanelVisible}">
+									<p:outputLabel value="Effettua il login per unirti al tuo amico!"></p:outputLabel>
+											
+              
+    <p:dataGrid value="#{invitoPacchBean.escursioni}" var="escursione" id="escursione"  
+        paginator="true" rows="5"  
+        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="5,10,15" type="none">  
+  
+  			<f:facet name="header">  
+            	    Escursioni prenotate
+            	</f:facet> 
+            
+      <p:panel header="Id escursione: #{escursione.idProdBase}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage width="50" height="50" value="/resources/images/palma.png"/> 
+              
+  
+                <h:outputText value="#{escursione.luogo}" style="margin-left:10px" />  
+
+            <p:commandLink value = "Mostra Dettagli" update=":resultGrid:dettagliEscursione" 
+            					oncomplete="PF('escursioneDialog').show()" title="View Detail">  
+                <f:setPropertyActionListener value="#{escursione}" target="#{invitoPacchBean.selectedEscursione}" />  
+            </p:commandLink>  
+  
+            </h:panelGrid>  
+        </p:panel>  
+    </p:dataGrid>  
+    <p:dialog header="Dettagli Escursione" widgetVar="escursioneDialog" modal="true" 
+    		resizable="false" showEffect="fade">  
+        <p:outputPanel id="dettagliEscursione" style="text-align:center;" layout="block">  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{invitoPacchBean.selectedEscursione.descrizione}" />  
+                  
+                <h:outputLabel value="Luogo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedEscursione.luogo}" />  
+                  
+                 <h:outputLabel value="Data/ora inizio: " />  
+                <h:outputText value="#{invitoPacchBean.selectedEscursione.dataPartenza}" />  
+                
+                 <h:outputLabel value="Data/ora fine: " />  
+                <h:outputText value="#{invitoPacchBean.selectedEscursione.dataRitorno}" />  
+                
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedEscursione.costo}" />  
+                
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+
+	<br/> <br/>
+
+    <p:dataGrid value="#{invitoPacchBean.hotels}" var="hotel" id="hotel"  
+        paginator="true" rows="5"  
+        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="5,10,15" type="none">  
+  
+  			<f:facet name="header">  
+            	    Hotel prenotati 
+            	</f:facet> 
+            
+      <p:panel header="Id hotel: #{hotel.idProdBase}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage width="50" height="50" value="/resources/images/palma.png"/> 
+              
+  
+                <h:outputText value="#{hotel.citta}" style="margin-left:10px" />  
+
+            <p:commandLink value = "Mostra Dettagli" update=":resultGrid:dettagliHotel" 
+            					oncomplete="PF('hotelDialog').show()" title="View Detail">  
+                <f:setPropertyActionListener value="#{hotel}" target="#{invitoPacchBean.selectedHotel}" />  
+            </p:commandLink>  
+  
+            </h:panelGrid>  
+        </p:panel>  
+    </p:dataGrid>  
+    <p:dialog header="Dettagli Hotel" widgetVar="hotelDialog" modal="true" 
+    		resizable="false" showEffect="fade">  
+        <p:outputPanel id="dettagliHotel" style="text-align:center;" layout="block">  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.descrizione}" />  
+                  
+                <h:outputLabel value="Citta': " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.citta}" />  
+                  
+                 <h:outputLabel value="Data/ora inizio: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.dataPartenza}" />  
+                
+                 <h:outputLabel value="Data/ora fine: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.dataRitorno}" />  
+                
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.costo}" />  
+                
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+
+	<br/> <br/>
+	
+    <p:dataGrid value="#{invitoPacchBean.trasporti}" var="trasporto" id="trasporto"  
+        paginator="true" rows="5"  
+        paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
+        rowsPerPageTemplate="5,10,15" type="none">  
+  
+  			<f:facet name="header">  
+            	    trasporti prenotati 
+            	</f:facet> 
+            
+      <p:panel header="Id trasporto: #{trasporto.idProdBase}" style="text-align:center">  
+            <h:panelGrid columns="1" style="width:100%">  
+              <p:graphicImage width="50" height="50" value="/resources/images/palma.png"/> 
+              
+  
+                <h:outputText value="#{trasporto.cittaPartenza}, #{trasporto.cittaRitorno}" style="margin-left:10px" />  
+
+            <p:commandLink value = "Mostra Dettagli" update=":resultGrid:dettagliTrasporto" 
+            					oncomplete="PF('trasportoDialog').show()" title="View Detail">  
+                <f:setPropertyActionListener value="#{trasporto}" target="#{invitoPacchBean.selectedTrasporto}" />  
+            </p:commandLink>  
+  
+            </h:panelGrid>  
+        </p:panel>  
+    </p:dataGrid>  
+    <p:dialog header="Dettagli Trasporto" widgetVar="trasportoDialog" modal="true" 
+    		resizable="false" showEffect="fade">  
+        <p:outputPanel id="dettagliTrasporto" style="text-align:center;" layout="block">  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.descrizione}" />  
+                  
+                <h:outputLabel value="Partenza: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.cittaPartenza}" />  
+                
+                 <h:outputLabel value="Arrivo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.cittaRitorno}" />  
+                   
+                 <h:outputLabel value="Data/ora partenza: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.dataPartenza}" />  
+                
+                 <h:outputLabel value="Data/ora arrivo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.dataRitorno}" />  
+                
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.costo}" />  
+                
+            </h:panelGrid>  
+        </p:outputPanel>  
+    </p:dialog>  
+
+	<br/> <br/>	              
+    
+  
+
+      <br/> <br/> <br/>      		
+      			<p:growl id="messaggi"/>
+      			
+                <p:commandButton id="selectButton" 
+                action = "#{pacchPerClienteBean.pagModificaPacchPer(invitoPacchBean.pacchetto.idPacchPer)}"
+                value="Modifica" ajax = "false" >  
+                </p:commandButton>  
+                
+				</h:panelGrid>
+			</p:outputPanel>
+			</p:outputPanel>
+			</h:form>
+			</p:panel>
+			
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
