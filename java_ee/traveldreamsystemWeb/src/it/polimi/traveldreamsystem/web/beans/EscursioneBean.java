@@ -136,5 +136,11 @@ public class EscursioneBean extends PacchPredBean{
 	public String getPage(int idEscursione){
 		return this.escursioneMgrBean.pagRiepilogoPacchPer(idEscursione);
 	}
+	
+	public String goToPaginaModifica(int idEscursione){
+		return "/impiegato/creazioneEscursione?faces-redirect=true"
+				+ "&amp;id=" + idEscursione;
+	}
+
 
 }

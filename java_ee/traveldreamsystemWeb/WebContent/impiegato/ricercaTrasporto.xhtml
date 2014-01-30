@@ -61,8 +61,8 @@
 
 						
 					<p:commandButton id="modifica" rendered = "#{findTrasportoBean.resultPanelVisible}"
-                actionListener = "#{trasportoBean.getPage(findTrasportoBean.searchedId)}" value = "Modifica">
-                 <f:setPropertyActionListener value="#{findTrasportoBean.searchedTrasporto}" target="trasportoBean.trasporto"/> 
+                action = "#{trasportoBean.goToPaginaModifica(findTrasportoBean.searchedTrasporto.idProdBase)}" value = "Modifica">
+                 <f:setPropertyActionListener value="#{findTrasportoBean.searchedTrasporto}" target="#{trasportoBean.trasporto}"/> 
                                  
             </p:commandButton>	
             

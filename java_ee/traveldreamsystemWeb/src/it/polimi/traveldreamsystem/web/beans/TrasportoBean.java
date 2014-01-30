@@ -136,4 +136,10 @@ public class TrasportoBean extends PacchPredBean {
 	public String getPage(int idTrasporto){
 		return trasportoMgrBean.pagRiepilogoPacchPer(idTrasporto);
 	}
+	
+	public String goToPaginaModifica(int idTrasporto){
+		return "/impiegato/creazioneTrasporto?faces-redirect=true"
+				+ "&amp;id=" + idTrasporto;
+	}
+
 }
