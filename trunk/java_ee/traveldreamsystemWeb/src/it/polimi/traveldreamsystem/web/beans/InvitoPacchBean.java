@@ -16,6 +16,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import com.sun.org.apache.xml.internal.security.Init;
+
 
 @ManagedBean
 @SessionScoped
@@ -224,5 +226,9 @@ public class InvitoPacchBean {
 			resultPanelVisible = false;
 		}
 	}
-
+	
+	public void Init(){
+		find();
+		
+	}
 }
