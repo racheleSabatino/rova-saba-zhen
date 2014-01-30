@@ -62,7 +62,7 @@
 						
 						<p:commandButton id="modifica" rendered = "#{findHotelBean.resultPanelVisible}"
 						  action = "#{hotelBean.goToPaginaModifica(findHotelBean.searchedHotel.idProdBase)}" 
-						  value = "Modifica" immediate = "true">
+						  value = "Modifica" immediate = "true" ajax = "false">
                 		 <f:setPropertyActionListener value="#{findHotelBean.searchedHotel}" target="#{hotelBean.hotel}"/> 
                                  
             			</p:commandButton>
