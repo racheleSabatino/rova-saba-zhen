@@ -13,22 +13,22 @@
 
 		<ui:define name="content">
 		
- 			<p:panel >
+ 			<p:panelGrid id="panelGrid">
+ 			<h:form>
+ 				<p:remoteCommand autoRun="true" update=":panelGrid:resultGrid" action="#{invitoPacchBean.find}"/>
+ 			</h:form>
 				<h:form id="resultGrid">
 					<p:panel header="Ricerca pacchetto predefinito">
-						<h:panelGrid columns="3" id="regGrid">
-							<h:outputLabel for="id">id:</h:outputLabel>
-							<p:inputText id="id" value="#{invitoPacchBean.searchedId}" />
-							<p:message for="id" />
-							
-							<h:outputLabel for="mail">mail dell'amico:</h:outputLabel>
-							<p:inputText id="mail" value="#{invitoPacchBean.mail}" />
-							<p:message for="mail" />
-							
+						<f:metadata>
+					<f:viewParam name="id" value="#{invitoPacchBean.searchedId}" />
+					<f:viewParam name="mail" value="#{invitoPacchBean.mail}" />
+						</f:metadata>
+				
 							<h:outputText />
 							<p:commandButton value="Cerca" update="resultGrid"
 								actionListener="#{invitoPacchBean.find}" />
-						</h:panelGrid>
+								
+								
 					</p:panel>
 					
 						<p:outputPanel >
@@ -183,7 +183,7 @@
 			</p:outputPanel>
 			</p:outputPanel>
 			</h:form>
-			</p:panel>
+			</p:panelGrid>
 			
 		</ui:define>
 
