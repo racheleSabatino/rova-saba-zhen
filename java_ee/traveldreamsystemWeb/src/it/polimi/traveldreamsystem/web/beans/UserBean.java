@@ -76,12 +76,12 @@ public class UserBean {
 	}
 		
 	public void changePassword(){
-        String newPswHash = DigestUtils.sha256Hex(newPsw1);
+        String oldPswHash = DigestUtils.sha256Hex(oldPsw);
 		
-		if (newPsw1 == newPsw2 && (utenteMgrBean.getUtenteDTO()).getPassword() == newPswHash){
+		if (newPsw1.equals(newPsw2) && (utenteMgrBean.getUtenteDTO()).getPassword().equals(oldPswHash)){
 			
 			utenteWithNewPsw = utenteMgrBean.getUtenteDTO();
-			utenteWithNewPsw.setPassword(newPswHash);
+			utenteWithNewPsw.setPassword(newPsw1);
 			utenteMgrBean.update(utenteWithNewPsw);
 	        FacesContext context = FacesContext.getCurrentInstance();
 	        context.addMessage(null, new FacesMessage("Cambio avvenuto con successo"));  
