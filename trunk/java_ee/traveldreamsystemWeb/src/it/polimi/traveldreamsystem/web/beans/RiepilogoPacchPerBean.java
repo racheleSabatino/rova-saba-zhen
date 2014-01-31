@@ -211,13 +211,6 @@ public class RiepilogoPacchPerBean {
 		init();
 	}
 	
-	public void creaListaRegali() {
-		pacchPerMgr.creaListaRegali(idPacchPer);
-		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Successo", "ora il tuo pacchetto personalizzato è diventato"
-				+ " una lista regali"));
-	}
-
 	public boolean isCreaListaRegali() {
 		return creaListaRegali;
 	}
@@ -281,6 +274,26 @@ public class RiepilogoPacchPerBean {
 				+ "inviata con successo"));
 		System.out.println("invio con successo1");
 	}
+	
+	public void inviaInvitoLista(int idPacchPer){
+		pacchPerMgr.creaListaRegali(idPacchPer);
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+
+		String senderMailID = utenteMgr.getPrincipalEmail();
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/compraRegali.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
+		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico"
+				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e ha bisogno del tuo aiuto. "
+				+ "Il nostro sito gli ha offerto la possibilità di creare una lista regalo dal suo pacchetto, "
+				+ "se ne hai la possibilità, fagli un regalo! Acquista per lui un prodotto della lista e gli"
+				+ " mostrerai la tua amicizia."
+				+ "Clicca sul link seguente: " + link + 
+				" \n\n\n Ti aspettiamo sul nostro sito \n\n\nServizio Clienti TravelDreamSystem";
+		String emailSubject = "INVITO PER LISTA REGALO";
+		mailerBean.sendMessage(mailAmicoRegali, emailSubject, emailBody);
+		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
+				+ " inviata con successo"));
+	}
+
 	
 }
 
