@@ -114,8 +114,8 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		q.setParameter("pacch", pacch);
 		List<Hotel> hotels = (List<Hotel>) q.getResultList();
 		List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();
-		for(int i=0; i < hotels.size(); i++) {
-			HotelDTO hotelDTO= hotelMgrBean.convertToDTO(hotels.get(i));
+		for(Hotel hotel : hotels) {
+			HotelDTO hotelDTO= hotelMgrBean.convertToDTO(hotel);
 			hotelsDTO.add(hotelDTO);
 		}
 		return hotelsDTO;
