@@ -225,7 +225,7 @@
 						una splendida vacanza e vorresti che partecipasse anche lui " />
 						<h:outputText value = "Inserisci nel campo seguente l'email di un amico, e premi invia " />
 						<h:inputText value = "#{pacchPerBean.mailAmico}" />
-					<p:commandButton value = "Invia" action = "pacchPerBean.inviaInvito(riepilogoBean.pacchetto.idPacchPer)" 
+					<p:commandButton value = "Invia" action = "#{pacchPerBean.inviaInvito(riepilogoBean.pacchetto.idPacchPer)}" 
 					update = "messaggi" />
 					</h:panelGrid>
 				</p:panel>
