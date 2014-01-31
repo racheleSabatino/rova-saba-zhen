@@ -39,13 +39,16 @@ public class RecuperaPasswordBean {
 	public String sendMessage() {
 		try {
 			UtenteDTO utente = utenteMgr.findUtenteDTO(receiverEmailID);
+			utente.setPassword("pippo");
 			String password = utente.getPassword();
+			utenteMgr.update(utente);
 			String nameUtente = utente.getNome();
 			emailBody = "Ciao " + nameUtente + " ricevi questa mail perché hai dimenticato la tua password, qui di sotto "
-				+ "riportata \nTua password " + password + 
-				"Se la richiesta non è stata inviata da te, ignora questa mail.\n\n" +
+				+ " è riportata una password temporanea \n" + password + 
+				"\nEntra nel tuo account usando questa mail e poi cambiala usando la funzione Cambia Password " + 
+				"\nSe la richiesta non è stata inviata da te, ignora questa mail.\n\n" +
 				"\n\n\nGrazie e a presto, \nServizio Clienti Travel Dream" 
-				+ "Questa mail viene inviata automaticamente, le risposte a questo indirizzo non verranno lette";
+				+ "\nQuesta mail viene inviata automaticamente, le risposte a questo indirizzo non verranno lette";
 			mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody);
 			return "/homePage?faces-redirect=true";
 		}
