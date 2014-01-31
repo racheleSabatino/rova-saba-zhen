@@ -347,7 +347,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	// regali
 	private boolean check(String mailAcquirente, int idPacchPer)  {
 		Query q = em
-				.createQuery("SELECT p FROM PacchPer p JOIN p.utente u "
+				.createQuery("SELECT p FROM PacchPer p JOIN p.cliente u "
 						+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
@@ -404,7 +404,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
-				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
+				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.escursioni e "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
 						+ "AND p.listaRegali = TRUE AND e.idProdBase = :idEscursione");
 		q.setParameter("idPacchPer", idPacchPer);
@@ -425,7 +425,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		if(this.ckeckTrasportoGiaAcquistato(idPacchPer, idTrasporto))
 			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
-				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "
+				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.trasporto o "
 						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
 						+ "AND p.listaRegali = TRUE AND o.idProdBase =: idTrasporto");
 		q.setParameter("idPacchPer", idPacchPer);

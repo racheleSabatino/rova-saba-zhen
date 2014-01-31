@@ -215,5 +215,33 @@ public class RiepilogoPacchPerBean {
 	public void setIdPacchPer(int idPacchPer) {
 		this.idPacchPer = idPacchPer;
 	}
+	
+	public String isEscursioneAcquistata() {
+		if(pacchPerMgr.ckeckEscursioneGiaAcquistata(idPacchPer, selectedEscursione.getIdProdBase())) {
+		return "è stato acquistato da un tuo amico";
+	}
+		else {
+			return "Non è ancora acquistato da un tuo amico";
+		}
+	}
+	
+	public String isHotelAcquistato() {
+		if(pacchPerMgr.ckeckHotelGiaAcquistato(idPacchPer, selectedHotel.getIdProdBase())) {
+		return "è stato acquistato da un tuo amico";
+	}
+		else {
+			return "Non è ancora stato acquistato da un tuo amico";
+		}
+	}
+	
+	public String isTrasportoAcquistato() {
+		if(pacchPerMgr.ckeckTrasportoGiaAcquistato(idPacchPer, selectedTrasporto.getIdProdBase())) {
+		return "è stato acquistato da un tuo amico";
+	}
+		else {
+			return "Non è ancora stato acquistato da un tuo amico";
+		}
+	}
+	
 }
 
