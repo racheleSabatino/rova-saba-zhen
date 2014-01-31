@@ -131,8 +131,6 @@ public class TrasportoBean extends PacchPredBean {
 						aDTO.getIdProdBase());
 			}
 		}
-		FacesContext mex = FacesContext.getCurrentInstance();
-		mex.addMessage("null", new FacesMessage("Successo", "Salvataggio completato correttamente"));
 	}
 	
 	public String getPage(int idTrasporto){
