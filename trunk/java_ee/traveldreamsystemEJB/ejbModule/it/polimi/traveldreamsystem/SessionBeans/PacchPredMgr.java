@@ -107,18 +107,35 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		pacchettoDTO.setIdPacchPred(pacchetto.getIdPacchPred());
 		return pacchettoDTO;
 	}
-
-	@Override
-	public void modificaPacchPred(PacchPredDTO pacchetto) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	@Override
 	public void update(PacchPredDTO pacchetto) {
 		em.merge(new PacchPred(pacchetto));
 	}
 	
+	@Override
+	public List<PacchPredDTO> getCittaHotelPacch(String citta){
+		List<PacchPred> pacchetti;
+		List<PacchPred> pacchettiCercati = new ArrayList<PacchPred>();
+		Query q = em.createQuery("SELECT p FROM PacchPred");
+		pacchetti = (List<PacchPred>) q.getResultList();
+		if(pacchetti.isEmpty()) 
+			return null;
+		for(PacchPred p: pacchetti) {
+			Query q1 = em.createQuery("SELECT c FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel c"
+					+ " WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", p.getIdPacchPred());
+			List<String> cittaa = (List<String>) q1.getResultList();
+			for(String s: cittaa) {
+				if(s.toLowerCase().contains(citta.toLowerCase()))
+					pacchettiCercati.add(p);
+			}
+		}
+		List<PacchPredDTO> pacchettiCercatiDTO = new ArrayList<PacchPredDTO>();
+		for(PacchPred p: pacchettiCercati) {
+			pacchettiCercatiDTO.add(convertToDTO(p));
+		}
+		return pacchettiCercatiDTO;
+	}
 
 	
 	
