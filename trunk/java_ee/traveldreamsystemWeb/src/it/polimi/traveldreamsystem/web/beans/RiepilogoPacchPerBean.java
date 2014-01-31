@@ -3,6 +3,7 @@ package it.polimi.traveldreamsystem.web.beans;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
+import it.polimi.traveldreamsystem.SessionBeans.MailerBeanLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
@@ -30,6 +31,9 @@ public class RiepilogoPacchPerBean {
        
     @EJB
     UtenteMgrBeanLocal utenteMgr; 
+    
+    @EJB
+    MailerBeanLocal mailerBean;
    
     private PacchPerDTO pacchetto; 
     
@@ -53,6 +57,26 @@ public class RiepilogoPacchPerBean {
     
     private boolean creaListaRegali;
     
+    private String mailAmicoInvito;
+    
+    private String mailAmicoRegali;
+    
+	public String getMailAmicoInvito() {
+		return mailAmicoInvito;
+	}
+
+	public void setMailAmicoInvito(String mailAmicoInvito) {
+		this.mailAmicoInvito = mailAmicoInvito;
+	}
+
+	public String getMailAmicoRegali() {
+		return mailAmicoRegali;
+	}
+
+	public void setMailAmicoRegali(String mailAmicoRegali) {
+		this.mailAmicoRegali = mailAmicoRegali;
+	}
+
 	public RiepilogoPacchPerBean() {
     }
     
@@ -241,6 +265,22 @@ public class RiepilogoPacchPerBean {
 		else {
 			return "Non è ancora stato acquistato da un tuo amico";
 		}
+	}
+	
+	public void inviaInvito(){
+		String senderMailID = utenteMgr.getPrincipalEmail();
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
+		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
+				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
+				+ "\n" + link;
+		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
+		System.out.println("invio con successo2");
+		mailerBean.sendMessage(mailAmicoInvito, emailSubject, emailBody);
+		System.out.println("invio con successo3");
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata "
+				+ "inviata con successo"));
+		System.out.println("invio con successo1");
 	}
 	
 }

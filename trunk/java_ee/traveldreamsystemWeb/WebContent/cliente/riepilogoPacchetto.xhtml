@@ -168,8 +168,6 @@
   </h:form>
 
       <br/> <br/> <br/>   
-      <h:form>		
-      			<p:growl id="messaggi"/>
       			
                 <p:commandButton id="selectButton" 
                 action = "#{pacchPerClienteBean.pagModificaPacchPer(riepilogoBean.pacchetto.idPacchPer)}"
@@ -188,9 +186,13 @@
 					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
 					update="messaggi" oncomplete="PF('elimina').hide()"/>
 				<p:commandButton value="No" onclick="PF('elimina').hide();" type="button" />
+								      			<p:growl id="messaggi"/>
+				
 				</p:confirmDialog>
 				
 				<br/>
+				      <h:form>		
+				
 			<p:panel rendered = "#{riepilogoBean.creaListaRegali}"> 
 				<h:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
 				mail ai tuoi amici, chiedendo loro di comprare uno o più prodotti dalla tua lista. 
@@ -203,8 +205,9 @@
 					header="Creazione lista regali" 
 					widgetVar="lista">
 					<p:commandButton value="Si, certo" action = "riepilogoBean.creaListaRegali"
-					update="messaggi" oncomplete="PF('lista').hide()"/>
+					update="messaggi2" oncomplete="PF('lista').hide()"/>
 				<p:commandButton value="Non ora" onclick="PF('lista').hide();" type="button"/>
+				<p:growl id="messaggi2"/>
 				</p:confirmDialog>
 			</p:panel>	
 				
@@ -213,9 +216,11 @@
 						<h:outputText value=" 
 						Inserisci nel seguente campo l'email di un amico che vuoi informare
 						della tua lista regali e poi clicca su invia. " />
-						<p:inputText value = "#{pacchPerBean.mailAmicoRegali}" />
-						<p:commandButton value = "Invia" action = "#{pacchPerBean.inviaInvitoLista(riepilogoBean.pacchetto.idPacchPer)}" 
-						update = "messaggi"/>
+						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoRegali}" />
+						<p:commandButton value = "Invia"  
+						update = "messaggi3"/>
+						<p:growl id="messaggi3"/>
+						
 					</h:panelGrid>
 				</p:panel>
 				
@@ -225,9 +230,11 @@
 						tuo pacchetto, inviagli una mail per fargli sapere che stai per partire per 
 						una splendida vacanza e vorresti che partecipasse anche lui " />
 						<h:outputText value = "Inserisci nel campo seguente l'email di un amico, e premi invio " />
-						<p:inputText value = "#{pacchPerBean.mailAmicoInvito}" />
-					<p:commandButton value = "Invia" action = "#{pacchPerBean.inviaInvito(riepilogoBean.pacchetto.idPacchPer)}" 
-					update = "messaggi" />
+						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoInvito}" />
+					<p:commandButton value = "Invia" action = "#{riepilogoPacchPerBean.inviaInvito}" 
+					update = "messaggi4" />
+				<p:growl id="messaggi4"/>
+					
 					</h:panelGrid>
 				</p:panel>
 				
