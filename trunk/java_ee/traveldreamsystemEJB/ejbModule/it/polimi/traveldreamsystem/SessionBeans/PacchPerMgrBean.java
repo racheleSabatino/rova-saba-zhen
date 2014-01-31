@@ -290,6 +290,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		if(this.estraiDataScadenzaPacch(idPacchPer).after(data)) {
 			throw new PacchettoScadutoException("il pacchetto è scaduto");
 		}
+		PacchPer p = em.find(PacchPer.class, idPacchPer);
+		
 		Query q = em
 				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto = :data "
 						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
