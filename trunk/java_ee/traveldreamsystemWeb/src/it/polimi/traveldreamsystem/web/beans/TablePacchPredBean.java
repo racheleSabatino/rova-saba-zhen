@@ -116,9 +116,7 @@ public class TablePacchPredBean implements Serializable {
 				mex.addMessage("null", new FacesMessage("Non ci sono pacchetti vacanza aventi la destinazione "
 						+ "digitata"));
 			}
-			else {
-				setPacchetti(pacchettiCercati);
-			}
+			setPacchetti(pacchettiCercati);
 		}
 	
            

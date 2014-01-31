@@ -125,13 +125,12 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 			Query q1 = em.createQuery("SELECT c.citta FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel c"
 					+ " WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", p.getIdPacchPred());
 			List<String> cittaa = (List<String>) q1.getResultList();
-			if(cittaa.isEmpty()) {
-				return null;
-			}
 			for(int i=0; i < cittaa.size(); i++) {
 				String s = cittaa.get(i);
 				if(s.toLowerCase().contains(citta.toLowerCase()))
-					pacchettiCercati.add(p);
+					if(!pacchettiCercati.contains(p)) {
+						pacchettiCercati.add(p);
+					}
 			}
 		}
 		List<PacchPredDTO> pacchettiCercatiDTO = new ArrayList<PacchPredDTO>();
