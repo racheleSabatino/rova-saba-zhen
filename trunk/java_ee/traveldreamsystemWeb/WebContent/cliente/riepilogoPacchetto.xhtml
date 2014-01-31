@@ -216,7 +216,7 @@
 						<h:outputText value=" 
 						Inserisci nel seguente campo l'email di un amico che vuoi informare
 						della tua lista regali e poi clicca su invia. " />
-						<p:inputText value = "#{riepilogoBean.mailAmicoRegali}" />
+						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoRegali}" />
 						<p:commandButton value = "Invia"  
 						update = "messaggi3"/>
 						<p:growl id="messaggi3"/>
@@ -230,8 +230,8 @@
 						tuo pacchetto, inviagli una mail per fargli sapere che stai per partire per 
 						una splendida vacanza e vorresti che partecipasse anche lui " />
 						<h:outputText value = "Inserisci nel campo seguente l'email di un amico, e premi invio " />
-						<p:inputText value = "#{riepilogoBean.mailAmicoInvito}" />
-					<p:commandButton value = "Invia" action = "#{riepilogoBean.inviaInvito}" 
+						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoInvito}" />
+					<p:commandButton value = "Invia" action = "#{riepilogoPacchPerBean.inviaInvito}" 
 					update = "messaggi4" />
 				<p:growl id="messaggi4"/>
 					
