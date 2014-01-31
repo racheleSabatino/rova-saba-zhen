@@ -1,14 +1,18 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
+import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
+import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
@@ -21,8 +25,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import eccezioni.AcquistoProdDaPropriaLista;
+import eccezioni.ErroreException;
 import eccezioni.PacchettoScadutoException;
 import eccezioni.ProdottoGiaAcquistato;
 
@@ -330,28 +336,27 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 		if(this.ckeckHotelGiaAcquistato(idPacchPer, idHotel))
 			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
-		Query q = em
-				.createQuery("SELECT h FROM HotelsPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.hotel o "
-						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND o.idProdBase = :idHotel");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("mailAcquirente", mailAcquirente);
-		q.setParameter("idHotel", idHotel);
-		q.setParameter("null", null);
-		HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
+		Hotel e = em.find(Hotel.class, idHotel);
+		PacchPer p = em.find(PacchPer.class, idPacchPer);
+		Query q2 = em.createQuery("UPDATE HotelsPacchPer e SET e.dataAcquisto = :data "
+				+ "WHERE e.hotel = :hotel AND e.pacchPer = :pacchPer");
 		Calendar calendar = Calendar.getInstance();
-		h.setDataAcquisto(calendar.getTime());
+		Date dataAcquisto = calendar.getTime();
+		q2.setParameter("data", dataAcquisto);
+		q2.setParameter("hotel", e);
+		q2.setParameter("pacchPer", p);
+		q2.executeUpdate();
 	}
 
 	// controlla che un utente non acquista un prodotto di una propria lista
-	// regali
+	// regali, ritorna falsa se la lista è vuota, cioè la mail del cliente è diversa da quello dell'acquirente
 	private boolean check(String mailAcquirente, int idPacchPer)  {
 		Query q = em
 				.createQuery("SELECT p FROM PacchPer p JOIN p.cliente u "
 						+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
-		if (q.getResultList() != null) {
+		if (q.getResultList().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -363,20 +368,20 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idProdBase", idProdBase);
-		if(q.getSingleResult() == null)
+		if((q.getResultList().get(0)) == null) 
 			return false;
 		else
 			return true;
 	}
 
 	@Override
-	public boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase) {
+	public boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase){
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM EscursioniPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.escursioni o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idProdBase", idProdBase);
-		if(q.getSingleResult() == null)
+		if((q.getResultList().get(0)) == null) 
 			return false;
 		else
 			return true;
@@ -384,12 +389,12 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	@Override
 	public boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase) {
-		Query q = em.createQuery("SELECT h.dataAcquisto FROM TrasportoPacchPer h JOIN h.pacchPer p "
+		Query q = em.createQuery("SELECT h.dataAcquisto FROM TrasportiPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.trasporto o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("idProdBase", idProdBase);
-		if(q.getSingleResult() == null)
+		if((q.getResultList().get(0)) == null) 
 			return false;
 		else
 			return true;
@@ -402,28 +407,17 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
-		Query q = em
-				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.escursioni e "
-						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer "
-						+ "AND p.listaRegali = :true AND e.idProdBase = :idEscursione");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("null", null);
-		q.setParameter("true", true);
-		q.setParameter("idEscursione", idEscursione);
-		if(!q.getResultList().isEmpty()) {
-			EscursioniPacchPer h = (EscursioniPacchPer) q.getResultList().get(0);
+			Escursione e = em.find(Escursione.class, idEscursione);
+			PacchPer p = em.find(PacchPer.class, idPacchPer);
+			Query q2 = em.createQuery("UPDATE EscursioniPacchPer e SET e.dataAcquisto = :data "
+					+ "WHERE e.escursioni = :escursione AND e.pacchPer = :pacchPer");
 			Calendar calendar = Calendar.getInstance();
 			Date dataAcquisto = calendar.getTime();
-			Query q2 = em.createQuery("UPDATE EscursioniPacchPer e SET e.dataAcquisto = :data "
-					+ "WHERE e = :escursione");
+			
 			q2.setParameter("data", dataAcquisto);
-			q2.setParameter("escursione", h);
+			q2.setParameter("escursione", e);
+			q2.setParameter("pacchPer", p);
 			q2.executeUpdate();
-			System.out.println("fatto");
-		}
-		else
-			System.out.println("non acquistato");
-		
 	}
 
 	@Override
@@ -433,17 +427,16 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 		if(this.ckeckTrasportoGiaAcquistato(idPacchPer, idTrasporto))
 			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
-		Query q = em
-				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.trasporto o "
-						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND o.idProdBase =: idTrasporto");
-		q.setParameter("idPacchPer", idPacchPer);
-		q.setParameter("null", null);
-		q.setParameter("mailAcquirente", mailAcquirente);
-		q.setParameter("idTrasporto", idTrasporto);
-		TrasportiPacchPer h = (TrasportiPacchPer) q.getSingleResult();
+		Trasporto e = em.find(Trasporto.class, idTrasporto);
+		PacchPer p = em.find(PacchPer.class, idPacchPer);
+		Query q2 = em.createQuery("UPDATE TrasportiPacchPer e SET e.dataAcquisto = :data "
+				+ "WHERE e.trasporto = :trasporto AND e.pacchPer = :pacchPer");
 		Calendar calendar = Calendar.getInstance();
-		h.setDataAcquisto(calendar.getTime());
+		Date dataAcquisto = calendar.getTime();
+		q2.setParameter("data", dataAcquisto);
+		q2.setParameter("trasporto", e);
+		q2.setParameter("pacchPer", p);
+		q2.executeUpdate();
 	}
 
 	@Override
@@ -456,4 +449,6 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
 		return this.convertToDTO(pacchetto);
 	}
+	
+	
 }
