@@ -5,21 +5,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
-import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
-import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
-import it.polimi.traveldreamsystem.Entities.Trasporto;
-import it.polimi.traveldreamsystem.Entities.Utente;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
-import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -47,7 +43,11 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	public final static int NON_ACQUISTATO = 1;
 
 	public PacchPerMgrBean() {
-		cmpPacchPer = new ComposizionePacchPerMgr();
+	}
+	
+	@PostConstruct
+	public void init() {
+		cmpPacchPer = new ComposizionePacchPerMgr(em);
 	}
 
 
@@ -351,7 +351,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 						+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
-		if (q.getResultList().isEmpty()) {
+		if (q.getResultList() != null) {
 			return false;
 		}
 		return true;
@@ -398,7 +398,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	
 	@Override
 	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
-			if(!this.check(mailAcquirente, idPacchPer))
+			if(this.check(mailAcquirente, idPacchPer))
 				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
