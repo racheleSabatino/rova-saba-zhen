@@ -36,11 +36,15 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	TrasportoMgrBean trasportoMgrBean;
 	
 	public ComposizionePacchPerMgr () {
-		hotelMgrBean = new HotelMgrBean();
-		escursioneMgrBean = new EscursioneMgrBean();
-		trasportoMgrBean = new TrasportoMgrBean();
 	}
 	
+	public ComposizionePacchPerMgr(EntityManager em) {
+		this.em = em;
+		hotelMgrBean = new HotelMgrBean(em);
+		escursioneMgrBean = new EscursioneMgrBean(em);
+		trasportoMgrBean = new TrasportoMgrBean(em);
+	}
+
 	@Override
 	public void addHotelToPacchPer(int idPacchPer, int idHotel) {
 		Hotel hotel = em.find(Hotel.class, idHotel);
