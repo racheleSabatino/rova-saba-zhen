@@ -31,7 +31,11 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
    
     }
 
-    @Override
+    public HotelMgrBean(EntityManager em) {
+		this.em = em;
+	}
+
+	@Override
 	public List<HotelDTO> getAllHotel() {
 		List<Hotel> hotels = em.createNamedQuery("Hotel.findAll", Hotel.class).getResultList();	
 		List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();

@@ -23,7 +23,11 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
     public TrasportoMgrBean() {
     }
     
-    @PersistenceContext
+    public TrasportoMgrBean(EntityManager em) {
+		this.em = em;
+	}
+
+	@PersistenceContext
 	protected EntityManager em;
 
 	@Resource

@@ -26,7 +26,11 @@ public class EscursioneMgrBean implements EscursioneMgrBeanLocal {
     public EscursioneMgrBean() {
     }
     
-    @PersistenceContext
+    public EscursioneMgrBean(EntityManager em) {
+		this.em = em;
+	}
+
+	@PersistenceContext
 	protected EntityManager em;
 
 	@Resource
