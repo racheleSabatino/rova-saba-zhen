@@ -122,10 +122,14 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 		if(pacchetti.isEmpty()) 
 			return null;
 		for(PacchPred p: pacchetti) {
-			Query q1 = em.createQuery("SELECT c FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel c"
+			Query q1 = em.createQuery("SELECT c.citta FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel c"
 					+ " WHERE p.idPacchPer = :idPacchPer").setParameter("idPacchPer", p.getIdPacchPred());
 			List<String> cittaa = (List<String>) q1.getResultList();
-			for(String s: cittaa) {
+			if(cittaa.isEmpty()) {
+				return null;
+			}
+			for(int i=0; i < cittaa.size(); i++) {
+				String s = cittaa.get(i);
 				if(s.toLowerCase().contains(citta.toLowerCase()))
 					pacchettiCercati.add(p);
 			}
