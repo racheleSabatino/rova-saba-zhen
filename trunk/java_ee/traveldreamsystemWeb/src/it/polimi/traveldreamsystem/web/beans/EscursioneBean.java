@@ -23,6 +23,7 @@ public class EscursioneBean extends PacchPredBean{
 
 	@EJB
 	private CheckDateLocal checkDateBean;
+	 
 	
 	private List<EscursioneDTO> escursioni;
 
@@ -76,8 +77,15 @@ public class EscursioneBean extends PacchPredBean{
 					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
 		}
 		else {
-		escursioneMgrBean.addNewEscursione(escursione);
-        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+			EscursioneDTO e = escursioneMgrBean.findEscursioneDTO(escursione.getIdProdBase());
+			if(e != null) {
+				escursioneMgrBean.update(escursione);
+				context.addMessage(null, new FacesMessage("Modifica avvenuta con successo")); 
+			}
+			else {
+			escursioneMgrBean.addNewEscursione(escursione);
+			context.addMessage(null, new FacesMessage("Creazione avvenuta con successo")); 
+			}
         }
 	}
 
