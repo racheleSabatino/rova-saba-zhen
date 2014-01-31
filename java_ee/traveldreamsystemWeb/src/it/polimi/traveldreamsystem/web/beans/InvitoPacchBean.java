@@ -12,15 +12,22 @@ import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.sun.org.apache.xml.internal.security.Init;
 
+import eccezioni.AcquistoProdDaPropriaLista;
+import eccezioni.PacchettoScadutoException;
+import eccezioni.ProdottoGiaAcquistato;
+
 
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class InvitoPacchBean {
 	private boolean resultPanelVisible;
 	
@@ -230,5 +237,50 @@ public class InvitoPacchBean {
 	public void Init(){
 		find();
 		
+	}
+	
+	public boolean isEscursioneAcquistato(int idEscursione){
+		return !pacchPerMgr.ckeckEscursioneGiaAcquistata(searchedId, idEscursione);
+		
+	}
+	
+	public boolean isHotelAcquistato(int idHotel){
+		return !pacchPerMgr.ckeckHotelGiaAcquistato(searchedId, idHotel);
+		
+	}
+	
+	public boolean isTrasportoAcquistato(int idTrasporto){
+		return !pacchPerMgr.ckeckTrasportoGiaAcquistato(searchedId, idTrasporto);
+		
+	}
+	
+	public void compraEscursione() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		pacchPerMgr.acquistaEscursioneListaRegali(selectedEscursione.getIdProdBase(), searchedId, mail);
+	}
+	
+	
+	public void compraHotel() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		pacchPerMgr.acquistaHotelListaRegali(selectedHotel.getIdProdBase(), searchedId, mail);
+	}
+	
+	public void compraTrasporto() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		pacchPerMgr.acquistaTrasportoListaRegali(selectedTrasporto.getIdProdBase(), searchedId, mail);
+	}
+	
+	private boolean b = true;
+	
+	
+	public String goMyUrl() {
+		StringBuffer s=((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURL(); 
+		b = false;
+		return s.toString();
+	}
+
+	public boolean isB() {
+		return b;
+	}
+
+	public void setB(boolean b) {
+		this.b = b;
 	}
 }
