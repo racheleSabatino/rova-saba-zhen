@@ -45,5 +45,11 @@ public interface PacchPerMgrLocal {
 
 	int viewTotaleAcquistatoDaAmici(int idPacchPer);
 
+	boolean ckeckHotelGiaAcquistato(int idPacchPer, int idProdBase);
+
+	boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase);
+
+	boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase);
+
 
 }
