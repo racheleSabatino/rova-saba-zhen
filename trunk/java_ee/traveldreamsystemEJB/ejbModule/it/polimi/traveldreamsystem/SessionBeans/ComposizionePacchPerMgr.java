@@ -8,6 +8,7 @@ import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
 import it.polimi.traveldreamsystem.Entities.Hotel;
 import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
+import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
@@ -36,6 +37,9 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	TrasportoMgrBean trasportoMgrBean;
 	
 	public ComposizionePacchPerMgr () {
+		hotelMgrBean = new HotelMgrBean(em);
+		escursioneMgrBean = new EscursioneMgrBean(em);
+		trasportoMgrBean = new TrasportoMgrBean(em);
 	}
 	
 	public ComposizionePacchPerMgr(EntityManager em) {
@@ -65,11 +69,8 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	public void addTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
-		Query q = em.createQuery("DELETE FROM TrasportiPacchPer e "
-				+ "WHERE e.pacchPred = :pacchPred AND e.trasporto = :trasporto");
-		q.setParameter("pacchPer", pacchPer);
-		q.setParameter("trasporto", trasporto);
-		
+		TrasportiPacchPer e = new TrasportiPacchPer(trasporto, pacchPer);
+		em.persist(e);
 	}
 
 	@Override
