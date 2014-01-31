@@ -25,21 +25,15 @@
 				<p:outputLabel value="Cognome:"/>
 				<p:inputText value="#{userBean.cognome}" readonly="true"/>
 				
-				</h:panelGrid>
-				<h:panelGrid columns="5">
 						
 				<p:commandButton value="Offerte Pacchetti Vacanza" ajax="false"
 					action="/cliente/viewPacchPredefiniti?faces-redirect=true" />
 				<p:commandButton value="Pacchetti Personalizzati" ajax="false"
 					action="/cliente/viewPacchPer?faces-redirect=true" />
-				<p:commandButton value="Liste regalo" ajax="false"
-					action="/viewListeRegalo?faces-redirect=true" />
-				<p:commandButton value="invia Invito" ajax="false"
-					action="/cliente/sendInvitoPacch?faces-redirect=true" />
 				<p:commandButton value="Cambia password" ajax="false"
 				 action="/cliente/cambioPassword?faces-redirect=true"/>
+			</h:panelGrid>
 								
-				</h:panelGrid>
 			</h:form>
 			</p:panel>
 

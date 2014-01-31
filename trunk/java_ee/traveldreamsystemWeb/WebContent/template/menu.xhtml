@@ -19,9 +19,6 @@
 				<p:menuitem value="dove siamo" icon="ui-icon-person"
 					action="/public/doveSiamo?faces-redirect=true" />
 					
-					<p:menuitem value="test" icon="ui-icon-person"
-					action="/test?faces-redirect=true" />
-
 				<p:submenu rendered="#{userBean.isRoleCliente}" label="Cliente"
 					icon="ui-icon-person"
 					action="/cliente/homeCliente?faces-redirect=true">
@@ -71,10 +68,7 @@
 					<p:menuitem value="Cerca impiegato"
 						action="/amministratore/findEmployee?faces-redirect=true" />
 				</p:submenu>
-				
-				<p:menuitem value="Lista regalo di un amico"
-						action="/public/invitoPerListaRegali?faces-redirect=true" />
-						
+										
 				<p:menuitem rendered="#{not empty request.remoteUser}" type="button"
 					value="Logout" icon="ui-icon-extlink" action="#{logoutBean.logout}" />
 				<p:menuitem rendered="#{empty request.remoteUser}" type="button"
