@@ -169,12 +169,13 @@
 
       <br/> <br/> <br/>   
       			
+				      <h:form>		
+				
                 <p:commandButton id="selectButton" 
                 action = "#{pacchPerClienteBean.pagModificaPacchPer(riepilogoPacchPerBean.pacchetto.idPacchPer)}"
                 value="Modifica" >  
                 </p:commandButton>  
-                
-      			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto?faces-redirect=true" >
+      			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchPer?faces-redirect=true" >
       				 <f:setPropertyActionListener value="#{riepilogoPacchPerBean.pacchetto}" target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
@@ -191,8 +192,6 @@
 				</p:confirmDialog>
 				
 				<br/>
-				      <h:form>		
-				
 			<p:panel rendered = "#{riepilogoPacchPerBean.creaListaRegali}"> 
 				<h:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
 				mail ai tuoi amici, chiedendo loro di comprare uno o più prodotti dalla tua lista. 
