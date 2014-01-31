@@ -117,7 +117,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 	public List<PacchPredDTO> getCittaHotelPacch(String citta){
 		List<PacchPred> pacchetti;
 		List<PacchPred> pacchettiCercati = new ArrayList<PacchPred>();
-		Query q = em.createQuery("SELECT p FROM PacchPred");
+		Query q = em.createQuery("SELECT p FROM PacchPred p");
 		pacchetti = (List<PacchPred>) q.getResultList();
 		if(pacchetti.isEmpty()) 
 			return null;

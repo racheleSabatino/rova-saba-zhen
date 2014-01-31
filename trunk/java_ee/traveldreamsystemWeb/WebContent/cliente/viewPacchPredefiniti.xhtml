@@ -48,10 +48,10 @@
           
               
             <h:panelGrid  columns="2" cellpadding="5">  
-                <h:outputLabel for="Partenze da" value="Partenze da: " />  
+                <h:outputLabel  value="Partenze da: " />  
                 <h:outputText id="partenzeDa" value="#{tablePacchPredBean.cittaPacchSelezionato}" />  
                   
-                <h:outputLabel for="Partenze il" value="Partenze il: " />  
+                <h:outputLabel  value="Partenze il: " />  
                 <h:outputText id="partenzeIl" value="#{tablePacchPredBean.datePacchSelezionato}" />  
                   
                 <h:commandButton id="submit" action="#{pacchPerBean.creazionePacchPer}" value="Seleziona il pacchetto">
@@ -68,16 +68,16 @@
 				<h:outputText value = "Trova qui il pacchetto più adatto alle tue esigente " />
 				
 				<br/> <br/>
-				<h:outputLabel value = "Inserisci la destinazione" />
-				<h:inputText value = "#{tablePacchPredBean.destinazioneCercata }" />
+				<h:outputLabel value = "Inserisci la destinazione      " />
+				<p:inputText value = "#{tablePacchPredBean.destinazioneCercata }" />
 				
-				<p:commandButton value="Cerca" update="form, msg"
+				<p:commandButton value="Cerca" update="form"
 							action="#{tablePacchPredBean.findPerDestinazione}" />
 			
 			</p:panel>
 			
-			<p:messages id="msg" display="icon"/>  
 			
+	
 		</p:panel>
 
 	</ui:define>
