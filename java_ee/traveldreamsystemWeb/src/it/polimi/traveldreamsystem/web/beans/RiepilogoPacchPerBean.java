@@ -126,6 +126,8 @@ public class RiepilogoPacchPerBean {
     public int totaleDaPagare;
 
     public PacchPerDTO getPacchetto() {
+    	if(pacchetto != null)
+    		pacchetto = pacchPerMgr.findPacchPerDTO(pacchetto.getIdPacchPer());
     	return pacchetto;
     }
   
@@ -211,6 +213,14 @@ public class RiepilogoPacchPerBean {
 		init();
 	}
 	
+	public String creaLRegali() {
+		pacchPerMgr.creaListaRegali(idPacchPer);
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		messaggio.addMessage(null, new FacesMessage("Successo", "ora il tuo pacchetto personalizzato è diventato"
+				+ " una lista regali"));
+		return "riepilogoPacchetto?faces-redirect=true";
+	}
+
 	public boolean isCreaListaRegali() {
 		return creaListaRegali;
 	}
