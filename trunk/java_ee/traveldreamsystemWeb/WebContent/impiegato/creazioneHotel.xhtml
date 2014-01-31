@@ -33,9 +33,6 @@
 							pattern="MM/dd/yyyy HH:mm" />
 						<p:message for="dataPartenza" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 
 						<h:outputText for="dataRitorno" value="Data fine prenotazione:" />
 						<p:calendar id="dataRitorno" required="true"
@@ -43,51 +40,33 @@
 							pattern="MM/dd/yyyy HH:mm" />
 						<p:message for="dataRitorno" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 
 						<h:outputText for="citta" value="Città:" />
 						<p:inputText id="citta" value="#{hotelBean.hotel.citta}" required="true" />
 						<p:message for="citta" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 
 						<h:outputText for="stelle" value="Stelle" />
 						<p:rating id="stelle" value="#{hotelBean.hotel.stelle}"  required="true"
 							cancel="false" />
 						<p:message for="stelle" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 
 						<h:outputText for="tipoCamera" value="Tipo camera" />
 						<p:inputText id="tipoCamera" value="#{hotelBean.hotel.tipoCamera}"  required="true"/>
 						<p:message for="tipoCamera" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 						
 						<h:outputText for="costo" value="Costo:" />
 						<p:inputText id="costo" value="#{hotelBean.hotel.costo}"  required="true"/>
 						<p:message for="costo" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 
 						<h:outputText for="descrizione" value="Descrizione:       " />
 						<p:inputTextarea id="descrizione" required="true"  rows="5" cols="50"
 							value="#{hotelBean.hotel.descrizione}" />
 						<p:message for="descrizione" display="icon"/>
 						
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
-						<h:outputText value="&#160;" />
 						<h:outputText value="&#160;" />
 
 						<p:commandButton value="Salva" update="grid"
