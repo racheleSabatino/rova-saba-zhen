@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
 import it.polimi.traveldreamsystem.Entities.EscursioniPacchPred;
@@ -239,22 +240,8 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		}
 		return newCitta;
 	}
-	
-	//ci siamo andati ad infognare
-	public boolean checkPacchPredValido(PacchPredDTO pacchetto){
-		int id = pacchetto.getIdPacchPred();
-		Query q = em.createQuery("SELECT t.dataPartenza FROM TrasportiPacchPred h JOIN h.trasporto t "
-				+ "JOIN h.pacchPred p "
-				+ "WHERE p.idPacchPred = :id ");
-		q.setParameter("idPacchPred", id);
-		
-		int id2 = pacchetto.getIdPacchPred();
-		Query q2 = em.createQuery("SELECT t.dataPartenza FROM TrasportiPacchPred h JOIN h.trasporto t "
-				+ "JOIN h.pacchPred p "
-				+ "WHERE p.idPacchPred = :id ");
-		q2.setParameter("idPacchPred", id);
-		return false;
-	}
+
+
 	
 }
 

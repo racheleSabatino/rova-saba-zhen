@@ -1,8 +1,6 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
@@ -17,7 +15,6 @@ import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.NamedQuery;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -223,5 +220,15 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		}
 		return trasportoRep;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
     

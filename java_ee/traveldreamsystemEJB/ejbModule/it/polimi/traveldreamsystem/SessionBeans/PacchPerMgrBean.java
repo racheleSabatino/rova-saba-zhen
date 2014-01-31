@@ -134,7 +134,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				return pacchettiAcquistati;
 	}
 
-	//utilizzato per verificare se almeno un elemento della lista è nullo
+	
 	private boolean checkNull(List<Date> liste){
 		for(int i=0; i < liste.size(); i++) {
 			if(liste.get(i) == null)
@@ -195,16 +195,16 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 						+ "JOIN t.trasporto t1 "
 						+ "WHERE p.idPacchPer = :idPacchPer "
 						+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
-		if(q.getSingleResult() == null) {
+		if(q.getResultList().isEmpty()) {
 			t1 = 0;
 		}
 		else 
 			t1 = ((Long) q.getSingleResult()).intValue();
-		if(q2.getSingleResult() == null)
+		if(q2.getResultList().isEmpty())
 			t2 = 0;
 		else
 			t2 = ((Long) q2.getSingleResult()).intValue();
-		if(q3.getSingleResult() == null)
+		if(q3.getResultList().isEmpty())
 			t3 = 0;
 		else
 			t3 = ((Long) q3.getSingleResult()).intValue();
@@ -241,16 +241,16 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 							+ "AND p.listaRegali = :true " 
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q3.setParameter("true", true);
-			if(q.getSingleResult() == null) {
+			if(q.getResultList().isEmpty()) {
 				t1 = 0;
 			}
 			else 
 				t1 = ((Long) q.getSingleResult()).intValue();
-			if(q2.getSingleResult() == null)
+			if(q2.getResultList().isEmpty())
 				t2 = 0;
 			else
 				t2 = ((Long) q2.getSingleResult()).intValue();
-			if(q3.getSingleResult() == null)
+			if(q3.getResultList().isEmpty())
 				t3 = 0;
 			else
 				t3 = ((Long) q3.getSingleResult()).intValue();
@@ -357,7 +357,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return true;
 	}
 
-	private boolean ckeckHotelGiaAcquistato(int idPacchPer, int idProdBase) {
+	public boolean ckeckHotelGiaAcquistato(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
 		q.setParameter("idPacchPer", idPacchPer);
@@ -368,7 +368,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			return true;
 	}
 
-	private boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase) {
+	public boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM EscursioniPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.escursioni o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
@@ -381,7 +381,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	}
 
 	
-	private boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase) {
+	public boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM TrasportoPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.trasporto o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
@@ -399,7 +399,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
 			if(this.check(mailAcquirente, idPacchPer))
 				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
-			if(this.ckeckHotelGiaAcquistato(idPacchPer, idEscursione))
+			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.escursioni e "
@@ -420,7 +420,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
 		if(this.check(mailAcquirente, idPacchPer))
 			throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
-		if(this.ckeckHotelGiaAcquistato(idPacchPer, idTrasporto))
+		if(this.ckeckTrasportoGiaAcquistato(idPacchPer, idTrasporto))
 			throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM TrasportiPacchPer h JOIN h.PacchPer p JOIN p.cliente c JOIN h.trasporto o "

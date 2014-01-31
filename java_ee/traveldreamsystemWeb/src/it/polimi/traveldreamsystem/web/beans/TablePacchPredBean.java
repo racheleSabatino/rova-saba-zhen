@@ -4,14 +4,18 @@ import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
  
+
+
 import java.io.Serializable;  
 import java.util.ArrayList;  
 import java.util.List;  
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
          
 
 @ManagedBean
@@ -34,10 +38,10 @@ public class TablePacchPredBean implements Serializable {
         private String datePacchSelezionato;
        
         private String cittaPacchSelezionato;
-               
-        private List<PacchPredDTO> filteredPacchetti;
         
         private int idPacchettoSelezionato;
+        
+        private String destinazioneCercata;
         
         public TablePacchPredBean() {  
         }
@@ -89,23 +93,33 @@ public class TablePacchPredBean implements Serializable {
                 this.cittaPacchSelezionato = cittaPacchSelezionato;
         }
 
-	    public List<PacchPredDTO> getFilteredPacchetti() {  
-	        return filteredPacchetti;  
-	    }  
-	  
-	    public void setFilteredCars(List<PacchPredDTO> filteredPacchetti) {  
-	        this.filteredPacchetti = filteredPacchetti;  
-	    }
-
 		public int getIdPacchettoSelezionato() {
 			return idPacchettoSelezionato;
 		}
 
 		public void setIdPacchettoSelezionato(int idPacchettoSelezionato) {
 			this.idPacchettoSelezionato = idPacchettoSelezionato;
+		}
+
+		public String getDestinazioneCercata() {
+			return destinazioneCercata;
+		}
+
+		public void setDestinazioneCercata(String destinazioneCercata) {
+			this.destinazioneCercata = destinazioneCercata;
 		}  
 	  
-
+		public void findPerDestinazione(){
+			List<PacchPredDTO> pacchettiCercati = pacchPredMgr.getCittaHotelPacch(destinazioneCercata);
+			if(pacchettiCercati != null){
+				FacesContext mex = FacesContext.getCurrentInstance();
+				mex.addMessage("null", new FacesMessage("Non ci sono pacchetti vacanza aventi la destinazione "
+						+ "digitata"));
+			}
+			else {
+				setPacchetti(pacchettiCercati);
+			}
+		}
 	
            
 }

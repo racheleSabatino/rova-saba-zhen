@@ -40,5 +40,4 @@ public interface ComposizPacchPredMgrLocal {
 	
 	String getCittaPartenzaPacch(int idPacchPred);
 
-	boolean checkPacchPredValido(PacchPredDTO pacchPred); 
 }

@@ -20,7 +20,7 @@
 		<h:form id="form">  
   
     <p:dataGrid var="pacchPred" value="#{tablePacchPredBean.pacchetti}" columns="3"  
-        rows="12" paginator="true"  
+        rows="12" paginator="true" 
         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
         rowsPerPageTemplate="9,12,15">  
   
@@ -61,15 +61,30 @@
                 
             </h:panelGrid>  
         </p:outputPanel>  
-    </p:dialog>  
+    </p:dialog> 
   
 </h:form>  
-
+			<p:panel header="Ricerca il migliore pacchetto vacanza ">
+				<h:outputText value = "Trova qui il pacchetto più adatto alle tue esigente " />
+				
+				<br/> <br/>
+				<h:outputLabel value = "Inserisci la destinazione" />
+				<h:inputText value = "#{tablePacchPredBean.destinazioneCercata }" />
+				
+				<p:commandButton value="Cerca" update="form, msg"
+							action="#{tablePacchPredBean.findPerDestinazione}" />
+			
 			</p:panel>
+			
+			<p:messages id="msg" display="icon"/>  
+			
+		</p:panel>
 
-		</ui:define>
+	</ui:define>
 
-	</ui:composition>
+</ui:composition>
 
 </h:body>
 </html>
+
+
