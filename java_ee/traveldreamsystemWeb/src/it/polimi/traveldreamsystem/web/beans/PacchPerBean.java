@@ -43,7 +43,9 @@ public class PacchPerBean {
 	
 	private UtenteDTO cliente;
 	
-	private String mailAmico;
+	private String mailAmicoInvito;
+	
+	private String mailAmicoRegali;
 
 	private MailerManagedBean mailMgr;
 	
@@ -51,13 +53,6 @@ public class PacchPerBean {
 		mailMgr = new MailerManagedBean();
 	}
 	
-	public String getMailAmico() {
-		return mailAmico;
-	}
-
-	public void setMailAmico(String mailAmico) {
-		this.mailAmico = mailAmico;
-	}
 
 	public void addPacchPer(){
 		pacchPerMgrBean.addNewPacchPer(pacchPer);
@@ -122,7 +117,7 @@ public class PacchPerBean {
 				+ "Clicca sul link seguente:" + link + 
 				"\n\n\n Ti aspettiamo sul nostro sito \n\n\nServizio Clienti TravelDreamSystem";
 		String emailSubject = "INVITO PER LISTA REGALO";
-		mailMgr.sendMessage(mailAmico, emailSubject, emailBody);
+		mailMgr.sendMessage(mailAmicoRegali, emailSubject, emailBody);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
 				+ " inviata con successo"));
@@ -137,7 +132,7 @@ public class PacchPerBean {
 				+ "\n" + link;
 		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
 		System.out.println("invio con successo2");
-		mailMgr.sendMessage(mailAmico, emailSubject, emailBody);
+		mailMgr.sendMessage(mailAmicoInvito, emailSubject, emailBody);
 		System.out.println("invio con successo3");
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata "
@@ -146,5 +141,25 @@ public class PacchPerBean {
 	}
 
 	public void goToPaginaListaRegali(){}
+
+
+	public String getMailAmicoRegali() {
+		return mailAmicoRegali;
+	}
+
+
+	public void setMailAmicoRegali(String mailAmicoRegali) {
+		this.mailAmicoRegali = mailAmicoRegali;
+	}
+
+
+	public String getMailAmicoInvito() {
+		return mailAmicoInvito;
+	}
+
+
+	public void setMailAmicoInvito(String mailAmicoInvito) {
+		this.mailAmicoInvito = mailAmicoInvito;
+	}
 	
 }
