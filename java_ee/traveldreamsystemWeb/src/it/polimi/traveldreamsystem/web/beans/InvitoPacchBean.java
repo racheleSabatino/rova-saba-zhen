@@ -255,16 +255,16 @@ public class InvitoPacchBean {
 	}
 	
 	public void compraEscursione() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
-		pacchPerMgr.acquistaEscursioneListaRegali(selectedEscursione.getIdProdBase(), searchedId, mail);
+		pacchPerMgr.acquistaEscursioneListaRegali(selectedEscursione.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	
 	
 	public void compraHotel() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
-		pacchPerMgr.acquistaHotelListaRegali(selectedHotel.getIdProdBase(), searchedId, mail);
+		pacchPerMgr.acquistaHotelListaRegali(selectedHotel.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	
 	public void compraTrasporto() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
-		pacchPerMgr.acquistaTrasportoListaRegali(selectedTrasporto.getIdProdBase(), searchedId, mail);
+		pacchPerMgr.acquistaTrasportoListaRegali(selectedTrasporto.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	
 	private boolean b = true;
