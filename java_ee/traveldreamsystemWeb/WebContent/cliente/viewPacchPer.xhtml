@@ -25,12 +25,12 @@
                     Pacchetti Personalizzati  
                 </f:facet>  
       
-      			<h:outputText value= "              Id pacchetto: #{pacchPer.idPacchPer}" /> 
+      			<h:outputText value= "Id pacchetto: #{pacchPer.idPacchPer}" /> 
       			
       			<p:commandButton title = "Mostra" value = "Mostra"
       			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
       			<f:setPropertyActionListener value="#{pacchPer}" 
-      			target="#{riepilogoPacchPerBean.pacchetto}"/>
+      			target="#{riepilogoBean.pacchetto}"/>
       			</p:commandButton>
       			
                 <p:commandButton id="selectButton" value = "Modifica" title = "Modifica"
