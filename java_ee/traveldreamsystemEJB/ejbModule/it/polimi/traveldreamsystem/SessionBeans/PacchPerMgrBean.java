@@ -315,7 +315,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	@Override
 	public void creaListaRegali(int idPacchPer) {
 		Query q = em
-				.createQuery("UPDATE PacchPer p SET p.listaRegali = :lista WHERE idPacchPer = :idPacchPer");
+				.createQuery("UPDATE PacchPer p SET p.listaRegali = :lista "
+						+ "WHERE p.idPacchPer = :idPacchPer");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("lista", true);
 		q.executeUpdate();
@@ -442,6 +443,8 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		PacchPer pacchetto = em.find(PacchPer.class, idPacchPer);
 		return this.convertToDTO(pacchetto);
 	}
+	
+	
 	
 	
 }
