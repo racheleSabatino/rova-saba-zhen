@@ -20,7 +20,7 @@
 				
 		<h:form id="form1">  
               
-    <p:dataGrid value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
+    <p:dataGrid value="#{riepilogoPacchPerBean.hotels}" var="hotel" id="hotel"  
         paginator="true" rows="5"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
         rowsPerPageTemplate="5,10,15" type="none">  
@@ -37,7 +37,7 @@
                 <h:outputText value="#{hotel.citta}, #{hotel.stelle}" style="margin-left:10px" />  
 
             <p:commandLink value = "Mostra Dettagli" update=":form1:dettagliHotel" oncomplete="PF('hotelDialog').show()" title="View Detail">  
-                <f:setPropertyActionListener value="#{hotel}" target="#{riepilogoBean.selectedHotel}" />  
+                <f:setPropertyActionListener value="#{hotel}" target="#{riepilogoPacchPerBean.selectedHotel}" />  
             </p:commandLink>  
   
             </h:panelGrid>  
@@ -49,23 +49,23 @@
               
             <h:panelGrid  columns="2" cellpadding="5">  
                 <h:outputLabel value="Descrizione: " />  
-                <h:outputText value="#{riepilogoBean.selectedHotel.descrizione}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedHotel.descrizione}" />  
                   
                 <h:outputLabel value="Citta': " />  
-                <h:outputText value="#{riepilogoBean.selectedHotel.citta}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedHotel.citta}" />  
                   
                  <h:outputLabel value="Data/ora inizio prenotazione: " />  
-                <h:outputText value="#{riepilogoBean.selectedHotel.dataPartenza}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedHotel.dataPartenza}" />  
                 
                  <h:outputLabel value="Data/ora fine prenotazione): " />  
-                <h:outputText value="#{riepilogoBean.selectedHotel.dataRitorno}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedHotel.dataRitorno}" />  
                 
                  <h:outputLabel value="Costo: " />  
-                <h:outputText value="#{riepilogoBean.selectedHotel.costo}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedHotel.costo}" />  
                 
               <p:panel rendered="#{riepologoBean.pacchetto.listaRegali}" >  
                 <h:outputLabel value = "Dalla tua lista regali, il prodotto :"/>
-                <h:outputText value ="#{riepilogoBean.isHotelAcquistato}" />
+                <h:outputText value ="#{riepilogoPacchPerBean.isHotelAcquistato}" />
              </p:panel>   
             </h:panelGrid>  
         </p:outputPanel>  
@@ -76,7 +76,7 @@
 	<br/> <br/>
 		<h:form id="form2">  
               
-    <p:dataGrid value="#{riepilogoBean.hotels}" var="hotel" id="hotel"  
+    <p:dataGrid value="#{riepilogoPacchPerBean.hotels}" var="hotel" id="hotel"  
         paginator="true" rows="5"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
         rowsPerPageTemplate="5,10,15" type="none">  
@@ -87,7 +87,7 @@
               
               <h:outputText value="#{trasporto.citta}, #{trasporto.stelle}" style="margin-left:10px" />  
             <p:commandLink value = "Mostra Dettagli" update=":form2:dettagliTrasporto" oncomplete="PF('trasportoDialog').show()" title="View Detail">  
-                <f:setPropertyActionListener value="#{trasporto}" target="#{riepilogoBean.selectedTrasporto}" />  
+                <f:setPropertyActionListener value="#{trasporto}" target="#{riepilogoPacchPerBean.selectedTrasporto}" />  
             </p:commandLink>  
 
     </h:panelGrid>  
@@ -99,22 +99,22 @@
               
             <h:panelGrid  columns="2" cellpadding="5">  
                 <h:outputLabel value="Descrizione: " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.descrizione}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.descrizione}" />  
                   
                 <h:outputLabel value="Citta partenza': " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.cittaPartenza}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.cittaPartenza}" />  
                   
                  <h:outputLabel value="Data/ora partenza: " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.dataPartenza}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.dataPartenza}" />  
                 
                 <h:outputLabel value="Citta arrivo': " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.cittaRitorno}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.cittaRitorno}" />  
                 
                  <h:outputLabel value="Data/ora arrivo): " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.dataRitorno}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.dataRitorno}" />  
                 
                  <h:outputLabel value="Costo: " />  
-                <h:outputText value="#{riepilogoBean.selectedTrasporto.costo}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.costo}" />  
                 
             </h:panelGrid>  
         </p:outputPanel>  
@@ -124,7 +124,7 @@
 	<br /> <br/>
 	<h:form id="form3">  
               
-    <p:dataGrid value="#{riepilogoBean.escursioni}" var="escursione" id="escursione"  
+    <p:dataGrid value="#{riepilogoPacchPerBean.escursioni}" var="escursione" id="escursione"  
         paginator="true" rows="5"  
         paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"  
         rowsPerPageTemplate="5,10,15" type="none">  
@@ -136,7 +136,7 @@
              <h:outputText value="#{escursione.luogo}" style="margin-left:10px" />  
           
             <p:commandLink value = "Mostra Dettagli" update=":form3:dettagliEscursione" oncomplete="PF('escursioneDialog').show()" title="View Detail">  
-                <f:setPropertyActionListener value="#{escursione}" target="#{riepilogoBean.selectedEscursione}" />  
+                <f:setPropertyActionListener value="#{escursione}" target="#{riepilogoPacchPerBean.selectedEscursione}" />  
             </p:commandLink>  
             
            </h:panelGrid>
@@ -148,19 +148,19 @@
               
             <h:panelGrid  columns="2" cellpadding="5">  
                 <h:outputLabel value="Descrizione: " />  
-                <h:outputText value="#{riepilogoBean.selectedEscursione.descrizione}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.descrizione}" />  
                   
                 <h:outputLabel value="Citta': " />  
-                <h:outputText value="#{riepilogoBean.selectedEscursione.luogo}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.luogo}" />  
                   
                  <h:outputLabel value="Data/ora inizio prenotazione: " />  
-                <h:outputText value="#{riepilogoBean.selectedEscursione.dataPartenza}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.dataPartenza}" />  
                 
                  <h:outputLabel value="Data/ora fine prenotazione): " />  
-                <h:outputText value="#{riepilogoBean.selectedEscursione.dataRitorno}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.dataRitorno}" />  
                 
                  <h:outputLabel value="Costo: " />  
-                <h:outputText value="#{riepilogoBean.selectedEscursione.costo}" />  
+                <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.costo}" />  
                 
             </h:panelGrid>  
         </p:outputPanel>  
@@ -170,12 +170,12 @@
       <br/> <br/> <br/>   
       			
                 <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(riepilogoBean.pacchetto.idPacchPer)}"
+                action = "#{pacchPerClienteBean.pagModificaPacchPer(riepilogoPacchPerBean.pacchetto.idPacchPer)}"
                 value="Modifica" >  
                 </p:commandButton>  
                 
       			<p:commandButton value = "Acquista" action="/cliente/acquistaPacchetto?faces-redirect=true" >
-      				 <f:setPropertyActionListener value="#{riepilogoBean.pacchetto}" target="#{pacchPerBean.pacchPer}"/>
+      				 <f:setPropertyActionListener value="#{riepilogoPacchPerBean.pacchetto}" target="#{pacchPerBean.pacchPer}"/>
       			</p:commandButton>
       			
       			
@@ -183,7 +183,7 @@
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="elimina">
-					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
+					<p:commandButton value="Si" actionListener="#{riepilogoPacchPerBean.removePacchetto}"
 					update="messaggi" oncomplete="PF('elimina').hide()"/>
 				<p:commandButton value="No" onclick="PF('elimina').hide();" type="button" />
 								      			<p:growl id="messaggi"/>
@@ -193,7 +193,7 @@
 				<br/>
 				      <h:form>		
 				
-			<p:panel rendered = "#{riepilogoBean.creaListaRegali}"> 
+			<p:panel rendered = "#{riepilogoPacchPerBean.creaListaRegali}"> 
 				<h:outputText value = "Creando una lista regalo dal pacchetto, hai la possibilità di inviare
 				mail ai tuoi amici, chiedendo loro di comprare uno o più prodotti dalla tua lista. 
 				In questo modo risparmierai.
@@ -204,14 +204,14 @@
 				<p:confirmDialog message="Sei sicuro di voler creare una lista regali dal pacchetto?"
 					header="Creazione lista regali" 
 					widgetVar="lista">
-					<p:commandButton value="Si, certo" action = "riepilogoBean.creaListaRegali"
+					<p:commandButton value="Si, certo" action = "riepilogoPacchPerBean.creaListaRegali"
 					update="messaggi2" oncomplete="PF('lista').hide()"/>
 				<p:commandButton value="Non ora" onclick="PF('lista').hide();" type="button"/>
 				<p:growl id="messaggi2"/>
 				</p:confirmDialog>
 			</p:panel>	
 				
-				<p:panel legend="Crea lista regali" rendered = "#{riepilogoBean.pacchetto.listaRegali}" id = "listaRegali">
+				<p:panel legend="Crea lista regali" rendered = "#{riepilogoPacchPerBean.pacchetto.listaRegali}" id = "listaRegali">
 					<h:panelGrid column="2">
 						<h:outputText value=" 
 						Inserisci nel seguente campo l'email di un amico che vuoi informare
@@ -239,8 +239,8 @@
 				</p:panel>
 				
 				<p:panel >
-				<h:outputText value = "#{riepilogoBean.hotel}" />
-					<h:outputText value = "#{riepilogoBean.hotels}" />
+				<h:outputText value = "#{riepilogoPacchPerBean.hotel}" />
+					<h:outputText value = "#{riepilogoPacchPerBean.hotels}" />
 				</p:panel>
  			
 				</h:form>   
