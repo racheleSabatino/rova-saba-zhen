@@ -351,7 +351,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 						+ "WHERE p.idPacchPer = :idPacchPer AND u.mail = :mailAcquirente");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("mailAcquirente", mailAcquirente);
-		if (q.getResultList() != null) {
+		if (q.getResultList().isEmpty()) {
 			return false;
 		}
 		return true;
@@ -398,7 +398,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 	
 	@Override
 	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
-			if(this.check(mailAcquirente, idPacchPer))
+			if(!this.check(mailAcquirente, idPacchPer))
 				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
