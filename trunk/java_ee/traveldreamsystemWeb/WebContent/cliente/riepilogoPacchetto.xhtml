@@ -13,7 +13,9 @@
 
 		<ui:define name="content">
 		
-				<p:panel header="Riepilogo pacchetto personalizzato" >
+				<p:panel>
+
+				<p:outputLabel value="Riepilogo pacchetto personalizzato" />
 				
 				
 		<h:form id="form1">  
@@ -206,8 +208,16 @@
 				In questo modo risparmierai.
 				Ricordati, più amici inviti, più probabilità ci sono che compreranno qualcosa e tu 
 				spenderai meno per la tua vacanza "/>
-				<p:commandButton value = "Invia invito per  lista regali"/>
+				<p:commandButton value = "Crea lista regali" 
+				type="button" onclick="PF('lista').show()" />
+				<p:confirmDialog message="Sei sicuro di voler creare una lista regali dal pacchetto?"
+					header="Creazione lista regali" 
+					widgetVar="lista">
+					<p:commandButton value="Si, certo" action = "#{riepilogoPacchPerBean.creaLRegali}"
+					update="messaggi2" oncomplete="PF('lista').hide()"/>
+				<p:commandButton value="Non ora" onclick="PF('lista').hide();" type="button"/>
 				<p:growl id="messaggi2"/>
+				</p:confirmDialog>
 			</p:panel>	
 				
 				<p:panel header="Crea lista regali" rendered = "true" id = "listaRegali">
