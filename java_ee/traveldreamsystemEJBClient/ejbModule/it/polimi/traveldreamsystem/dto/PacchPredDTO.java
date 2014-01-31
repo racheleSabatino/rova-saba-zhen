@@ -17,6 +17,7 @@ public class PacchPredDTO {
 
 	public PacchPredDTO(int id) {
 		idPacchPred = id;
+		descrizione = new String(" ");
 	}
 
 	public int getIdPacchPred() {
