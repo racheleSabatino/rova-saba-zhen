@@ -15,25 +15,21 @@
 		
  			<p:panel>
 				<h:form id="resultGrid">
-				<p:remoteCommand rendered="#{invitoPacchBean.b}" autoRun="true" actionListener="#{invitoPacchBean.goMyUrl}"></p:remoteCommand>
-					<p:panel header="Ricerca pacchetto personalizzato">
+				 	<p:panel header="Ricerca pacchetto personalizzato">
+				 		<p:commandButton rendered="#{invitoPacchBean.b}" update="resultGrid" value="Compra regali" actionListener="#{invitoPacchBean.find}"/>
+				 	
 						<f:metadata>
 					<f:viewParam name="id" value="#{invitoPacchBean.searchedId}" />
 					<f:viewParam name="mail" value="#{invitoPacchBean.mail}" />
 						</f:metadata>
 				
-							<h:outputText />
-							<p:commandButton value="Fai un regalo al tuo amico tuo amico!" update="resultGrid"
-								actionListener="#{invitoPacchBean.find}" />
-								
-								
+				<p:growl id="message"/>
+							
 					</p:panel>
 					
-						<p:outputPanel >
-							<p:outputPanel 
-								rendered="#{invitoPacchBean.resultPanelVisible}">
-								<h:panelGrid columns="1" rendered="#{invitoPacchBean.resultPanelVisible}">
-									<p:outputLabel value="Effettua il login per unirti al tuo amico!"></p:outputLabel>
+						<p:outputPanel rendered="#{invitoPacchBean.resultPanelVisible}">
+							<p:outputPanel>
+								<h:panelGrid columns="1">
 											
               
     <p:dataGrid value="#{invitoPacchBean.escursioni}" var="escursione" id="escursione"  
@@ -64,7 +60,7 @@
         </p:panel>  
     </p:dataGrid>  
     <p:confirmDialog header="Compra Escursione" widgetVar="acquistaEscursioneDialog" modal="true" 
-    		resizable="false" showEffect="fade">  
+    		resizable="false" showEffect="fade" message="Sei sicuro?">  
         <p:outputPanel id="confermaEscursione" style="text-align:center;" layout="block">  
               
             <h:panelGrid  columns="2" cellpadding="5">  
@@ -84,11 +80,10 @@
                 <h:outputText value="#{invitoPacchBean.selectedEscursione.costo}" />  
                 
                 
-                <p:commandButton value="Si" actionListener="#{invitoPacchBean.compraEscursione}" update="message,resultGrid"
+                <p:commandButton value="Si" actionListener="#{invitoPacchBean.compraEscursione}" update="message, resultGrid"
 					 oncomplete="PF('acquistaEscursioneDialog').hide()"/>
 				<p:commandButton value="No" onclick="PF('acquistaEscursioneDialog').hide();" type="button" />
 				
-				<p:growl id="message"/>
 				
             </h:panelGrid>  
         </p:outputPanel>  
@@ -139,12 +134,44 @@
             					oncomplete="PF('hotelDialog').show()" title="View Detail">  
                 <f:setPropertyActionListener value="#{hotel}" target="#{invitoPacchBean.selectedHotel}" />  
             </p:commandLink>  
-  
+    				<p:commandLink value="Acquista questo prodotto" rendered="#{invitoPacchBean.isHotelAcquistato(hotel.idProdBase)}"
+  				update=":resultGrid:confermaHotel" oncomplete="PF('acquistaHotelDialog').show()" title="Compra regalo">  
+  					<f:setPropertyActionListener value="#{hotel}" target="#{invitoPacchBean.selectedHotel}" />  
+         	   </p:commandLink>  
             </h:panelGrid>  
         </p:panel>  
     </p:dataGrid>  
+    <p:confirmDialog header="Compra Hotel" widgetVar="acquistaHotelDialog" modal="true" 
+    		resizable="false" showEffect="fade" message="Sei sicuro?">  
+        <p:outputPanel id="confermaHotel" style="text-align:center;" layout="block">  
+              
+            <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.descrizione}" />  
+                  
+                <h:outputLabel value="Citta': " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.citta}" />  
+                  
+                 <h:outputLabel value="Data/ora inizio: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.dataPartenza}" />  
+                
+                 <h:outputLabel value="Data/ora fine: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.dataRitorno}" />  
+                
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedHotel.costo}" />  
+                
+                
+                <p:commandButton value="Si" actionListener="#{invitoPacchBean.compraHotel}" update="message, resultGrid"
+					 oncomplete="PF('acquistaHotelDialog').hide()"/>
+				<p:commandButton value="No" onclick="PF('acquistaHotelDialog').hide();" type="button" />
+				
+				
+            </h:panelGrid>  
+        </p:outputPanel>  
+	</p:confirmDialog>
     <p:dialog header="Dettagli Hotel" widgetVar="hotelDialog" modal="true" 
-    		resizable="false" showEffect="fade">  
+    		resizable="false" showEffect="fade" >  
         <p:outputPanel id="dettagliHotel" style="text-align:center;" layout="block">  
               
             <h:panelGrid  columns="2" cellpadding="5">  
@@ -189,10 +216,45 @@
             					oncomplete="PF('trasportoDialog').show()" title="View Detail">  
                 <f:setPropertyActionListener value="#{trasporto}" target="#{invitoPacchBean.selectedTrasporto}" />  
             </p:commandLink>  
-  
+  				<p:commandLink value="Acquista questo prodotto" rendered="#{invitoPacchBean.isTrasportoAcquistato(trasporto.idProdBase)}"
+  				update=":resultGrid:confermaTrasporto" oncomplete="PF('acquistaTrasportoDialog').show()" title="Compra regalo">  
+  					<f:setPropertyActionListener value="#{trasporto}" target="#{invitoPacchBean.selectedTrasporto}" />  
+         	   </p:commandLink>  
             </h:panelGrid>  
         </p:panel>  
     </p:dataGrid>  
+    <p:confirmDialog header="Compra Trasporto" widgetVar="trasportoHotelDialog" modal="true" 
+    		resizable="false" showEffect="fade" message="Sei sicuro?">  
+        <p:outputPanel id="confermaTrasporto" style="text-align:center;" layout="block">  
+              
+           <h:panelGrid  columns="2" cellpadding="5">  
+                <h:outputLabel value="Descrizione: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.descrizione}" />  
+                  
+                <h:outputLabel value="Partenza: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.cittaPartenza}" />  
+                
+                 <h:outputLabel value="Arrivo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.cittaRitorno}" />  
+                   
+                 <h:outputLabel value="Data/ora partenza: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.dataPartenza}" />  
+                
+                 <h:outputLabel value="Data/ora arrivo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.dataRitorno}" />  
+                
+                 <h:outputLabel value="Costo: " />  
+                <h:outputText value="#{invitoPacchBean.selectedTrasporto.costo}" />  
+                
+                
+                <p:commandButton value="Si" actionListener="#{invitoPacchBean.compraTrasporto}" update="message, resultGrid"
+					 oncomplete="PF('acquistaTrasportoDialog').hide()"/>
+				<p:commandButton value="No" onclick="PF('acquistaTrasportoDialog').hide();" type="button" />
+				
+				
+            </h:panelGrid>  
+        </p:outputPanel>  
+	</p:confirmDialog>
     <p:dialog header="Dettagli Trasporto" widgetVar="trasportoDialog" modal="true" 
     		resizable="false" showEffect="fade">  
         <p:outputPanel id="dettagliTrasporto" style="text-align:center;" layout="block">  
@@ -227,10 +289,6 @@
       <br/> <br/> <br/>      		
       			<p:growl id="messaggi"/>
       			
-                <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(invitoPacchBean.pacchetto.idPacchPer)}"
-                value="Modifica" ajax = "false" >  
-                </p:commandButton>  
                 
 				</h:panelGrid>
 			</p:outputPanel>
