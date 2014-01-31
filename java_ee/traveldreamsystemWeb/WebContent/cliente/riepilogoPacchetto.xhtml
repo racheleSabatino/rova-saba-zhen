@@ -116,6 +116,11 @@
                  <h:outputLabel value="Costo: " />  
                 <h:outputText value="#{riepilogoPacchPerBean.selectedTrasporto.costo}" />  
                 
+                 <p:panel rendered="#{riepologoBean.pacchetto.listaRegali}" >  
+                <h:outputLabel value = "Dalla tua lista regali, il prodotto :"/>
+                <h:outputText value ="#{riepilogoPacchPerBean.isEscursioneAcquistata}" />
+             </p:panel>   
+                
             </h:panelGrid>  
         </p:outputPanel>  
     </p:dialog>  
@@ -161,6 +166,11 @@
                 
                  <h:outputLabel value="Costo: " />  
                 <h:outputText value="#{riepilogoPacchPerBean.selectedEscursione.costo}" />  
+                
+                 <p:panel rendered="#{riepologoBean.pacchetto.listaRegali}" >  
+                <h:outputLabel value = "Dalla tua lista regali, il prodotto :"/>
+                <h:outputText value ="#{riepilogoPacchPerBean.isTrasportoAcquistato}" />
+             </p:panel>   
                 
             </h:panelGrid>  
         </p:outputPanel>  

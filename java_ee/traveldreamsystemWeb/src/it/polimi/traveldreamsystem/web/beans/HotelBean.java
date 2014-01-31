@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
+import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
@@ -78,6 +79,11 @@ public class HotelBean extends PacchPredBean {
 					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
 		}
 		else {
+			HotelDTO e = hotelMgrBean.findHotelDTO(hotel.getIdProdBase());
+			if(e != null) {
+				hotelMgrBean.update(hotel);
+				context.addMessage(null, new FacesMessage("Modifica avvenuta con successo")); 
+			}
 			hotelMgrBean.addNewHotel(hotel);
 			context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 		}
