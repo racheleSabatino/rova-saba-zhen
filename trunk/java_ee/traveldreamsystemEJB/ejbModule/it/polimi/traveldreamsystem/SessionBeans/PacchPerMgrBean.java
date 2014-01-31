@@ -24,6 +24,7 @@ import javax.persistence.Query;
 
 
 import eccezioni.AcquistoProdDaPropriaLista;
+import eccezioni.ErroreException;
 import eccezioni.PacchettoScadutoException;
 import eccezioni.ProdottoGiaAcquistato;
 
@@ -121,13 +122,10 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				List<Date> dateHotel = (List<Date>) q2.getResultList();
 				List<Date> dateEscursione = (List<Date>) q3.getResultList();
 				List<Date> dateTrasporto = (List<Date>) q4.getResultList();
-				if(which == NON_ACQUISTATO) {
-					if(checkNull(dateHotel) || checkNull(dateEscursione) || checkNull(dateTrasporto)) 
-						pacchettiNonAcquistati.add(p);
-				}
-				else {
-						pacchettiAcquistati.add(p);
-				}
+				if(checkNull(dateHotel) || checkNull(dateEscursione) || checkNull(dateTrasporto)) 
+					pacchettiNonAcquistati.add(p);
+				else
+					pacchettiAcquistati.add(p);
 			}
 			if(which == NON_ACQUISTATO) 
 				return pacchettiNonAcquistati;
@@ -135,7 +133,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				return pacchettiAcquistati;
 	}
 
-	
+	//ritorna true se il pacchetto nn e stato acquistato
 	private boolean checkNull(List<Date> liste){
 		for(int i=0; i < liste.size(); i++) {
 			if(liste.get(i) == null)
