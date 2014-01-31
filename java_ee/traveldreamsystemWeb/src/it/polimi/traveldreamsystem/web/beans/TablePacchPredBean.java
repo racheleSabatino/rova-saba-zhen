@@ -111,7 +111,7 @@ public class TablePacchPredBean implements Serializable {
 	  
 		public void findPerDestinazione(){
 			List<PacchPredDTO> pacchettiCercati = pacchPredMgr.getCittaHotelPacch(destinazioneCercata);
-			if(pacchettiCercati != null){
+			if(pacchettiCercati.isEmpty()){
 				FacesContext mex = FacesContext.getCurrentInstance();
 				mex.addMessage("null", new FacesMessage("Non ci sono pacchetti vacanza aventi la destinazione "
 						+ "digitata"));

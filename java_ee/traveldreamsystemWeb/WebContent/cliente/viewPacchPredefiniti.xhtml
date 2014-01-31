@@ -63,14 +63,13 @@
         </p:outputPanel>  
     </p:dialog> 
   
-</h:form>  
 
 			<p:panel header="Ricerca il migliore pacchetto vacanza ">
 				<h:outputText value = "Trova qui il pacchetto più adatto alle tue esigente " />
 				
 				<br/> <br/>
 				<h:outputLabel value = "Inserisci la destinazione      " />
-				<p:inputText value = "#{tablePacchPredBean.destinazioneCercata }" />
+				<p:inputText value = "#{tablePacchPredBean.destinazioneCercata}" />
 				
 				<p:commandButton value="Cerca" update="form, noPacchetti"
 							action="#{tablePacchPredBean.findPerDestinazione}" />
@@ -79,6 +78,7 @@
 			
 			<p:messages id = "noPacchetti" ></p:messages>
 		
+</h:form>  
 	
 		</p:panel>
 
