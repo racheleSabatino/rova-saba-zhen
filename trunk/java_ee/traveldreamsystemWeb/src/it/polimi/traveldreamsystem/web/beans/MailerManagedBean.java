@@ -5,9 +5,10 @@ import it.polimi.traveldreamsystem.SessionBeans.MailerBeanLocal;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MailerManagedBean {
 
 	@EJB
