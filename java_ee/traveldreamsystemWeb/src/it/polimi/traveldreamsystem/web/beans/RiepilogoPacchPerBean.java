@@ -18,7 +18,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 
-@ManagedBean(name = "riepilogoBean")
+@ManagedBean
 @SessionScoped
 public class RiepilogoPacchPerBean {
 
