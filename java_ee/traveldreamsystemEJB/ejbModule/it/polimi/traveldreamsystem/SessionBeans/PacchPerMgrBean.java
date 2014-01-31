@@ -230,6 +230,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 							+ "AND p.listaRegali = :true "
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q.setParameter("true", true);
+			q.setParameter("null", null);
 			Query q2 = em
 					.createQuery("SELECT SUM(e1.costo) "
 							+ "FROM PacchPer p JOIN p.escursionePacchPer e "
@@ -238,6 +239,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 							+ "AND p.listaRegali = :true " 
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q2.setParameter("true", true);
+			q2.setParameter("null", null);
 			Query q3 = em
 					.createQuery("SELECT SUM(t1.costo) "
 							+ "FROM PacchPer p JOIN p.trasportiPacchPer t "
@@ -246,6 +248,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 							+ "AND p.listaRegali = :true " 
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q3.setParameter("true", true);
+			q3.setParameter("null", null);
 			if(q.getResultList().isEmpty()) {
 				t1 = 0;
 			}
