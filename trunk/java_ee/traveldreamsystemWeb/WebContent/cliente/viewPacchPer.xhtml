@@ -30,7 +30,7 @@
       			<p:commandButton title = "Mostra" value = "Mostra"
       			 action = "#{pacchPerClienteBean.pagRiepilogoPacchPer(pacchPer.idPacchPer)}" >
       			<f:setPropertyActionListener value="#{pacchPer}" 
-      			target="#{riepilogoBean.pacchetto}"/>
+      			target="#{riepilogoPacchPerBean.pacchetto}"/>
       			</p:commandButton>
       			
                 <p:commandButton id="selectButton" value = "Modifica" title = "Modifica"
@@ -46,14 +46,14 @@
       			<p:growl id = "messages"> </p:growl>
       			
       			<p:commandButton title = "Elimina" type="button" onclick="PF('cd').show()" value = "Elimina">
-      			<f:setPropertyActionListener value="#{pacchPer}" target = "riepilogoBean.pacchetto" />
       			</p:commandButton>
-				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
+				<p:confirmDialog message="Sei sicuro di voler eliminasre il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="cd">
-					<p:commandButton value="Si" actionListener="#{riepilogoBean.removePacchetto}"
+					<p:commandButton value="Si" action="#{riepilogoPacchPerBean.removePacchetto}"
 					update="messages" oncomplete="PF('cd').hide()">
-					</p:commandButton>>
+      				<f:setPropertyActionListener value="#{pacchPer}" target = "#{riepilogoPacchPerBean.pacchetto}" />
+					</p:commandButton>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
                 
