@@ -275,7 +275,7 @@ public class RiepilogoPacchPerBean {
 		System.out.println("invio con successo1");
 	}
 	
-	public void inviaInvitoLista(int idPacchPer){
+	public void inviaInvitoLista(){
 		pacchPerMgr.creaListaRegali(idPacchPer);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 
