@@ -94,35 +94,21 @@ public class PacchPerBean {
 		this.cliente = cliente;
 	}
 
-	public void acquistaPacchetto() {
+	public String acquistaPacchetto() {
 		 FacesContext context = FacesContext.getCurrentInstance();  
 		try {
 			pacchPerMgrBean.acquistaPacchPer(pacchPer.getIdPacchPer());
 			context.addMessage(null, new FacesMessage("Conferma pacchetto acquistato con successo"));
+			return "http://localhost:8080/traveldreamsystemWeb/cliente/accountCliente.xhtml";
 			
 		} catch (PacchettoScadutoException e) {
 			 context.addMessage(null, new FacesMessage("Mi dispiace, il pacchetto non può più essere"
 			 		+ "acquistato, poichè la data di pagamento è successiva alla data di ritorno dell'ultimo"
 			 		+ "prodotto base che compone il pacchetto"));
 		}
+		return null;
 	}
 	
-	public void inviaInvitoLista(int idPacchPer){
-		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
-		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico"
-				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e ha bisogno del tuo aiuto. "
-				+ "Il nostro sito gli ha offerto la possibilità di creare una lista regalo dal suo pacchetto, "
-				+ "se ne hai la possibilità, fagli un regalo! Acquista per lui un prodotto della lista e gli"
-				+ " mostrerai la tua amicizia."
-				+ "Clicca sul link seguente:" + link + 
-				"\n\n\n Ti aspettiamo sul nostro sito \n\n\nServizio Clienti TravelDreamSystem";
-		String emailSubject = "INVITO PER LISTA REGALO";
-		mailMgr.sendMessage(mailAmicoRegali, emailSubject, emailBody);
-		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
-				+ " inviata con successo"));
-	}
 	
 	
 	public PacchPerMgrLocal getPacchPerMgrBean() {
