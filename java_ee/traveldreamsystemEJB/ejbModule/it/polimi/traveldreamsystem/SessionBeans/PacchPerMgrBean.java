@@ -24,7 +24,6 @@ import javax.persistence.Query;
 
 
 import eccezioni.AcquistoProdDaPropriaLista;
-import eccezioni.ErroreException;
 import eccezioni.PacchettoScadutoException;
 import eccezioni.ProdottoGiaAcquistato;
 
