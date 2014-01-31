@@ -203,7 +203,7 @@
 				<p:confirmDialog message="Sei sicuro di voler creare una lista regali dal pacchetto?"
 					header="Creazione lista regali" 
 					widgetVar="lista">
-					<p:commandButton value="Si, certo" action = "riepilogoPacchPerBean.creaListaRegali"
+					<p:commandButton value="Si, certo" action = "#{riepilogoPacchPerBean.creaListaRegali}"
 					update="messaggi2" oncomplete="PF('lista').hide()"/>
 				<p:commandButton value="Non ora" onclick="PF('lista').hide();" type="button"/>
 				<p:growl id="messaggi2"/>
