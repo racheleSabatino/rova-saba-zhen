@@ -77,33 +77,42 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 	public void removeHotelToPacchPer(int idPacchPer, int idHotel) {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Hotel hotel = em.find(Hotel.class, idHotel);
-		Query q = em.createQuery("DELETE FROM HotelsPacchPer e "
+		Query q = em.createQuery("SELECT e FROM HotelsPacchPer e "
 				+ "WHERE e.pacchPer = :pacchPer AND e.hotel = :hotel");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("hotel", hotel);
-		q.executeUpdate();
+		if(!q.getResultList().isEmpty()) {
+			HotelsPacchPer h = (HotelsPacchPer) q.getResultList().get(0);
+			em.remove(h);
+		}
 	}
 
 	@Override
 	public void removeEscursioneToPacchPer(int idPacchPer, int idEscursione) {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Escursione escursione = em.find(Escursione.class, idEscursione);
-		Query q = em.createQuery("DELETE FROM EscursioniPacchPer e "
+		Query q = em.createQuery("SELECT e FROM EscursioniPacchPer e "
 				+ "WHERE e.pacchPer = :pacchPer AND e.escursioni = :escursione");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("escursione", escursione);
-		q.executeUpdate();
+		if(!q.getResultList().isEmpty()) {
+			EscursioniPacchPer h = (EscursioniPacchPer) q.getResultList().get(0);
+			em.remove(h);
+		}
 	}
 
 	@Override
 	public void removeTrasportoToPacchPer(int idPacchPer, int idTrasporto) {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
-		Query q = em.createQuery("DELETE FROM TrasportiPacchPer h "
+		Query q = em.createQuery("SELECT h FROM TrasportiPacchPer h "
 				+ "WHERE p.pacchPer = :pacchPer AND h.trasporto= :trasporto");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("trasporto", trasporto);
-		q.executeUpdate();
+		if(!q.getResultList().isEmpty()) {
+			TrasportiPacchPer h = (TrasportiPacchPer) q.getResultList().get(0);
+			em.remove(h);
+		}
 	}
 	
 	@Override
