@@ -1,9 +1,5 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
@@ -84,11 +80,12 @@ public class UserBean {
 			utenteWithNewPsw.setPassword(newPsw1);
 			utenteMgrBean.update(utenteWithNewPsw);
 	        FacesContext context = FacesContext.getCurrentInstance();
-	        context.addMessage(null, new FacesMessage("Cambio avvenuto con successo"));  
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hai una nuova password","Cambio avvenuto con successo")); 
+
 
 		} else {
 	        FacesContext context = FacesContext.getCurrentInstance();
-	        context.addMessage(null, new FacesMessage("Hai inserito password non uguali"));  
+	        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Errore", "Hai inserito password non uguali"));  
 
 		}
 
