@@ -261,7 +261,7 @@ public class RiepilogoPacchPerBean {
 	
 	public void inviaInvito(){
 		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = new String("http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
 				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
 				+ "\n" + link;
