@@ -174,21 +174,7 @@ public class PacchPerBean {
 	}
 
 
-	public void inviaInvito(int idPacchPer){
-		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = new String("http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
-		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
-				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
-				+ "\n" + link;
-		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
-		System.out.println("invio con successo2");
-		mailMgr.sendMessage(mailAmicoInvito, emailSubject, emailBody);
-		System.out.println("invio con successo3");
-		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata "
-				+ "inviata con successo"));
-		System.out.println("invio con successo1");
-	}
+	
 
 	public void goToPaginaListaRegali(){}
 
