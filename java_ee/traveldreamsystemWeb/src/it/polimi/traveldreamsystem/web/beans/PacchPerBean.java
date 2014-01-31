@@ -124,6 +124,56 @@ public class PacchPerBean {
 	}
 	
 	
+	public PacchPerMgrLocal getPacchPerMgrBean() {
+		return pacchPerMgrBean;
+	}
+
+
+	public void setPacchPerMgrBean(PacchPerMgrLocal pacchPerMgrBean) {
+		this.pacchPerMgrBean = pacchPerMgrBean;
+	}
+
+
+	public ComposizPacchPerMgrLocal getCompPacchPerMgr() {
+		return compPacchPerMgr;
+	}
+
+
+	public void setCompPacchPerMgr(ComposizPacchPerMgrLocal compPacchPerMgr) {
+		this.compPacchPerMgr = compPacchPerMgr;
+	}
+
+
+	public ComposizPacchPredMgrLocal getCompPacchPredMgr() {
+		return compPacchPredMgr;
+	}
+
+
+	public void setCompPacchPredMgr(ComposizPacchPredMgrLocal compPacchPredMgr) {
+		this.compPacchPredMgr = compPacchPredMgr;
+	}
+
+
+	public UtenteMgrBeanLocal getUtenteMgr() {
+		return utenteMgr;
+	}
+
+
+	public void setUtenteMgr(UtenteMgrBeanLocal utenteMgr) {
+		this.utenteMgr = utenteMgr;
+	}
+
+
+	public MailerManagedBean getMailMgr() {
+		return mailMgr;
+	}
+
+
+	public void setMailMgr(MailerManagedBean mailMgr) {
+		this.mailMgr = mailMgr;
+	}
+
+
 	public void inviaInvito(int idPacchPer){
 		String senderMailID = utenteMgr.getPrincipalEmail();
 		String link = new String("http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
