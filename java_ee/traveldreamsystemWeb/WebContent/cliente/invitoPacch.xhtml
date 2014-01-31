@@ -191,9 +191,13 @@
       <br/> <br/> <br/>      		
       			<p:growl id="messaggi"/>
       			
-                <p:commandButton id="selectButton" 
-                action = "#{pacchPerClienteBean.pagModificaPacchPer(invitoPacchBean.pacchetto.idPacchPer)}"
-                value="Modifica" ajax = "false" >  
+      	<h:outputText value = "Se ti interessa aggiungere questo pacchetto, per poterlo comprare, devi prima  
+      	 effettuare il login se già registrato, oppure registrati. Utilizza il pulsante Accedi che trovi nella barra 
+      	 del menù in alto " />
+      			
+                <p:commandButton id="selectButton" rendered = "#{not empty request.remoteUser}"
+                action = "#{invitoPacchBean.aggiungi}"
+                value="Aggiungi ai tuoi pacchetti" ajax = "false" >  
                 </p:commandButton>  
                 
 				</h:panelGrid>
