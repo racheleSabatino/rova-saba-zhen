@@ -99,6 +99,7 @@ public class PacchPerBean {
 		try {
 			pacchPerMgrBean.acquistaPacchPer(pacchPer.getIdPacchPer());
 			context.addMessage(null, new FacesMessage("Conferma pacchetto acquistato con successo"));
+			
 		} catch (PacchettoScadutoException e) {
 			 context.addMessage(null, new FacesMessage("Mi dispiace, il pacchetto non può più essere"
 			 		+ "acquistato, poichè la data di pagamento è successiva alla data di ritorno dell'ultimo"
