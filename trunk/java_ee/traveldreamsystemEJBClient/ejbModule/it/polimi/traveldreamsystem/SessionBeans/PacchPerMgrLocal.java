@@ -8,6 +8,7 @@ import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import javax.ejb.Local;
 
 import eccezioni.AcquistoProdDaPropriaLista;
+import eccezioni.ErroreException;
 import eccezioni.PacchettoScadutoException;
 import eccezioni.ProdottoGiaAcquistato;
 
@@ -49,7 +50,8 @@ public interface PacchPerMgrLocal {
 
 	boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase);
 
-	boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase);
+	boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase)
+;
 
 
 }
