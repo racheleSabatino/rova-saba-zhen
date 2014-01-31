@@ -9,6 +9,7 @@ import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
+import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -115,29 +116,7 @@ public class InvitoPacchBean {
 		this.pacchMgrBean = pacchMgrBean;
 	}
 
-	public ComposizPacchPerMgrLocal getComp() {
-		return comp;
-	}
-
-	public void setComp(ComposizPacchPerMgrLocal comp) {
-		this.comp = comp;
-	}
-
-	public PacchPerMgrLocal getPacchPerMgr() {
-		return pacchPerMgr;
-	}
-
-	public void setPacchPerMgr(PacchPerMgrLocal pacchPerMgr) {
-		this.pacchPerMgr = pacchPerMgr;
-	}
-
-	public UtenteMgrBeanLocal getUtenteMgr() {
-		return utenteMgr;
-	}
-
-	public void setUtenteMgr(UtenteMgrBeanLocal utenteMgr) {
-		this.utenteMgr = utenteMgr;
-	}
+	
 
 	public String getTrasporto() {
 		return trasporto;
@@ -282,5 +261,23 @@ public class InvitoPacchBean {
 
 	public void setB(boolean b) {
 		this.b = b;
+	}
+	
+	public void aggiungi(){
+		PacchPerDTO p = new PacchPerDTO();
+		p.setIdPacchPer(searchedPacch.getIdPacchPer() + 10000);
+		p.setListaRegali(searchedPacch.isListaRegali());
+		p.setPacchPred(searchedPacch.getPacchPred());
+		String mail = utenteMgr.getPrincipalEmail();
+		UtenteDTO utente = this.utenteMgr.findUtenteDTO(mail);
+		p.setCliente(utente);
+		int id = p.getIdPacchPer();
+		this.pacchMgrBean.addNewPacchPer(p);
+		for(EscursioneDTO e: this.escursioni) 
+			comp.addEscursioneToPacchPer(id, e.getIdProdBase());
+		for(HotelDTO h: this.hotels)
+			comp.addHotelToPacchPer(id, h.getIdProdBase());
+		for(TrasportoDTO t: this.trasporti)
+			comp.addTrasportoToPacchPer(id, t.getIdProdBase());
 	}
 }
