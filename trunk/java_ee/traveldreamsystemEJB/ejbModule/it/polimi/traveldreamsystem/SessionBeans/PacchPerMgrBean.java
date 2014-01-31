@@ -397,24 +397,33 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 
 	
 	@Override
-	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer,
-			String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
+	public void acquistaEscursioneListaRegali(int idEscursione, int idPacchPer, String mailAcquirente) throws AcquistoProdDaPropriaLista, ProdottoGiaAcquistato {
 			if(this.check(mailAcquirente, idPacchPer))
 				throw new AcquistoProdDaPropriaLista("non puoi acquistare un prodotto da una propria lista regali");
 			if(this.ckeckEscursioneGiaAcquistata(idPacchPer, idEscursione))
 				throw new ProdottoGiaAcquistato("il prodotto e' gia' stato acquistato");
 		Query q = em
 				.createQuery("SELECT h FROM EscursioniPacchPer h JOIN h.pacchPer p JOIN p.cliente c JOIN h.escursioni e "
-						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer AND c.mail != :mailAcquirente "
-						+ "AND p.listaRegali = TRUE AND e.idProdBase = :idEscursione");
+						+ "WHERE h.dataAcquisto = :null AND p.idPacchPer = :idPacchPer "
+						+ "AND p.listaRegali = :true AND e.idProdBase = :idEscursione");
 		q.setParameter("idPacchPer", idPacchPer);
 		q.setParameter("null", null);
-		q.setParameter("mailAcquirente", mailAcquirente);
+		q.setParameter("true", true);
 		q.setParameter("idEscursione", idEscursione);
-		HotelsPacchPer h = (HotelsPacchPer) q.getSingleResult();
-		Calendar calendar = Calendar.getInstance();
-		h.setDataAcquisto(calendar.getTime());
-
+		if(!q.getResultList().isEmpty()) {
+			EscursioniPacchPer h = (EscursioniPacchPer) q.getResultList().get(0);
+			Calendar calendar = Calendar.getInstance();
+			Date dataAcquisto = calendar.getTime();
+			Query q2 = em.createQuery("UPDATE EscursioniPacchPer e SET e.dataAcquisto = :data "
+					+ "WHERE e = :escursione");
+			q2.setParameter("data", dataAcquisto);
+			q2.setParameter("escursione", h);
+			q2.executeUpdate();
+			System.out.println("fatto");
+		}
+		else
+			System.out.println("non acquistato");
+		
 	}
 
 	@Override
