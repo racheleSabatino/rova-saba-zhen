@@ -15,13 +15,6 @@
 
 			<p:panel header="Inserimento dati per acquisto pacchetto">
 				    <h:form id="form">  
-                  
-        
-                <f:facet name="header">  
-                    Pacchetto Personalizzato 
-                </f:facet>  
-      			<h:outputText value="#{pacchPer.idPacchPer}" /> 
-                 
      		<h:panelGrid columns="1">
      		
      			<p:outputLabel value="Nome: #{userBean.name}" />
@@ -52,8 +45,11 @@
 											L'operazione non può essere annullata"
 					header="Conferma acquisto pacchetto vacanza" severity="alert"
 					widgetVar="cd">
-					<p:commandButton value="Si, procedo" actionListener="#{pacchPerBean.acquistaPacchetto}"
-					update="messages" oncomplete="PF('cd').hide()"/>
+					<p:commandButton value="Si, procedo" action="#{pacchPerBean.acquistaPacchetto}"
+					update="messages" oncomplete="PF('cd').hide()">
+					<f:setPropertyActionListener value="#{riepilogoPacchPerBean.pacchetto}" 
+      				target="#{pacchPerBean.pacchPer}"/>
+					</p:commandButton>
 					<p:commandButton value="No, continuo in un altro momento" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
 				
