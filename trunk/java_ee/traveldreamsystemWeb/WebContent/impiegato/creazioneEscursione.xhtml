@@ -15,12 +15,22 @@
 
 			<p:panel header="Escursione">
 				<h:form id="Escursione">
-				
+
 				<h1> "Inserisci valori "</h1>
 				<h2> crea una nuova escursione </h2>
 				
+				<h2> Form per la creazione o modifica di una escursione </h2>
+				<h3> Inserire nei campi i valori richiesti. 
+				Nei campi Data/ora partenza e Data/ora ritorno, cliccando sul campo si apre un calendario
+				in cui impostare la data e l'orario. L'ora si imposta trascinando i due quadratini visibili
+				in basso al riquadro calendario.  
+				Accertarsi che la data/ora di partenza sia precedente alla data/ora di ritorno.
+				Al termine premere il pulsante Salva.
+				</h3>
+
+				
 					<h:panelGrid columns="3" id="grid" >
-						<h:outputText for="dataPartenza" value="Data partenza:" />
+						<h:outputText for="dataPartenza" value="Data/ora partenza:" />
 						<p:calendar id="dataPartenza"
 							value="#{escursioneBean.escursione.dataPartenza}"
 							pattern="MM/dd/yyyy HH:mm"  required="true"/>
@@ -74,7 +84,7 @@
 
 						
 
-						<p:commandButton value="Submit" update="grid, msg"
+						<p:commandButton value="Salva" update="grid, msg"
 							action="#{escursioneBean.addEscursione}" />
 							
 						<p:commandButton type="reset" value="Reset" update = "grid" />
