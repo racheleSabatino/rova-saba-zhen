@@ -357,6 +357,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 		return true;
 	}
 
+	@Override
 	public boolean ckeckHotelGiaAcquistato(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM HotelsPacchPer h JOIN h.pacchPer p JOIN h.hotel o "
 				+ "WHERE p.idPacchPer = :idPacchPer AND o.idProdBase = :idProdBase");
@@ -368,6 +369,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			return true;
 	}
 
+	@Override
 	public boolean ckeckEscursioneGiaAcquistata(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM EscursioniPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.escursioni o "
@@ -380,7 +382,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			return true;
 	}
 
-	
+	@Override
 	public boolean ckeckTrasportoGiaAcquistato(int idPacchPer, int idProdBase) {
 		Query q = em.createQuery("SELECT h.dataAcquisto FROM TrasportoPacchPer h JOIN h.pacchPer p "
 				+ "JOIN h.trasporto o "
