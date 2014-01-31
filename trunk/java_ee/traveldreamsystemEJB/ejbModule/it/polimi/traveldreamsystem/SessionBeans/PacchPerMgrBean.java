@@ -1,17 +1,13 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
-import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
 import it.polimi.traveldreamsystem.Entities.Hotel;
-import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
-import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
@@ -25,7 +21,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TemporalType;
+
 
 import eccezioni.AcquistoProdDaPropriaLista;
 import eccezioni.ErroreException;
