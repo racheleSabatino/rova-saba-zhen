@@ -6,8 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.Entities.Escursione;
+import it.polimi.traveldreamsystem.Entities.EscursioniPacchPer;
 import it.polimi.traveldreamsystem.Entities.Hotel;
+import it.polimi.traveldreamsystem.Entities.HotelsPacchPer;
 import it.polimi.traveldreamsystem.Entities.PacchPer;
+import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
@@ -21,6 +24,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+
+
 
 
 import eccezioni.AcquistoProdDaPropriaLista;
@@ -291,25 +297,54 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			throw new PacchettoScadutoException("il pacchetto è scaduto");
 		}
 		PacchPer p = em.find(PacchPer.class, idPacchPer);
+		ComposizionePacchPerMgr comp = new ComposizionePacchPerMgr(em);
+		List<HotelDTO> hotelsPacch = comp.getHotelsPacchPer(idPacchPer);
+		List<EscursioneDTO> escursioniPacch = comp.getEscursioniPacchPer(idPacchPer);
+		List<TrasportoDTO> trasportiPacch = comp.getTrasportiPacchPer(idPacchPer);
+		for(HotelDTO h: hotelsPacch) {
+			Hotel h1 = new Hotel(h);
+			Query q1 = em.createQuery("SELECT h FROM HotelsPacchPer h WHERE h.pacchPer = :p AND h.hotel = :h1");
+			q1.setParameter("p", p);
+			q1.setParameter("h1", h1);
+			if(q1.getResultList().isEmpty()) {
+				return;
+			}
+			else {
+				HotelsPacchPer hotelDaAcquistare = (HotelsPacchPer) q1.getResultList().get(0);
+				hotelDaAcquistare.setDataAcquisto(data);
+				em.merge(hotelDaAcquistare);
+			}
+		}
+		for(TrasportoDTO h: trasportiPacch) {
+			Trasporto h1 = new Trasporto(h);
+			Query q1 = em.createQuery("SELECT h FROM TrasportiPacchPer h WHERE h.pacchPer = :p AND h.trasporto = :h1");
+			q1.setParameter("p", p);
+			q1.setParameter("h1", h1);
+			if(q1.getResultList().isEmpty()) {
+				return;
+			}
+			else {
+				TrasportiPacchPer trasportoDaAcquistare = (TrasportiPacchPer) q1.getResultList().get(0);
+				trasportoDaAcquistare.setDataAcquisto(data);
+				em.merge(trasportoDaAcquistare);
+			}
+		}
+		for(EscursioneDTO h: escursioniPacch) {
+			Escursione h1 = new Escursione(h);
+			Query q1 = em.createQuery("SELECT h FROM EscursioniPacchPer h WHERE h.pacchPer = :p AND h.escursioni = :h1");
+			q1.setParameter("p", p);
+			q1.setParameter("h1", h1);
+			if(q1.getResultList().isEmpty()) {
+				return;
+			}
+			else {
+				EscursioniPacchPer escursioneDaAcquistare = (EscursioniPacchPer) q1.getResultList().get(0);
+				escursioneDaAcquistare.setDataAcquisto(data);
+				em.merge(escursioneDaAcquistare);
+			}
+		}
 		
-		Query q = em
-				.createQuery("UPDATE HotelsPacchPer h SET h.dataAcquisto = :data "
-						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
-						.setParameter("null", null);
-		q.setParameter("data", data);
-		Query q1 = em
-				.createQuery("UPDATE EscursioniPacchPer h SET h.dataAcquisto = :data "
-						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
-						.setParameter("null", null);
-		q1.setParameter("data", data);
-		Query q2 = em
-				.createQuery("UPDATE TrasportiPacchPer h SET h.dataAcquisto = :data "
-						+ "WHERE h.idPacchPer = :idPacchPer AND h.dataAcquisto != :null")
-						.setParameter("null", null);
-		q2.setParameter("data", data);
-		q.executeUpdate();
-		q1.executeUpdate();
-		q2.executeUpdate();
+				
 	}
 
 	// crea la lista regali associata al pacchetto, si porta a true il valore
