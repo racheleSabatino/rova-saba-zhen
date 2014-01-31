@@ -113,27 +113,25 @@ public class PacchPerBean {
 	
 	public void inviaInvitoLista(int idPacchPer){
 		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = "http://localhost:8080/traveldreamsystemWeb/invitoPerListaRegali.xhtml";
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico"
-				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e hai bisogno del tuo aiuto. "
+				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e ha bisogno del tuo aiuto. "
 				+ "Il nostro sito gli ha offerto la possibilità di creare una lista regalo dal suo pacchetto, "
 				+ "se ne hai la possibilità, fagli un regalo! Acquista per lui un prodotto della lista e gli"
 				+ " mostrerai la tua amicizia."
-				+ "Cliccando sul link seguente, si aprirà una pagina del nostro sito in cui dovrai inserire l'e-mail"
-				+ "del tuo amico e il seguente numero " + idPacchPer + " nei campi indicati."
-				+ "\n" + link + 
+				+ "Clicca sul link seguente:" + link + 
 				"\n\n\n Ti aspettiamo sul nostro sito \n\n\nServizio Clienti TravelDreamSystem";
-		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
+		String emailSubject = "INVITO PER LISTA REGALO";
 		mailMgr.sendMessage(mailAmico, emailSubject, emailBody);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
-				+ "inviata con successo"));
+				+ " inviata con successo"));
 	}
 	
 	
 	public void inviaInvito(int idPacchPer){
 		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = "http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml";
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
 				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
 				+ "\n" + link;
@@ -142,7 +140,7 @@ public class PacchPerBean {
 		mailMgr.sendMessage(mailAmico, emailSubject, emailBody);
 		System.out.println("invio con successo3");
 		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata"
+		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata "
 				+ "inviata con successo"));
 		System.out.println("invio con successo1");
 	}
