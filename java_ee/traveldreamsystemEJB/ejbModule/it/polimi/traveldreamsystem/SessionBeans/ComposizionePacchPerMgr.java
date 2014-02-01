@@ -12,7 +12,9 @@ import it.polimi.traveldreamsystem.Entities.TrasportiPacchPer;
 import it.polimi.traveldreamsystem.Entities.Trasporto;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
+import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -235,7 +237,38 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		return trasportoRep;
 	}
 	
-	
+	@Override
+	public void addPacchAmico(PacchPerDTO p, List<EscursioneDTO> escursioni, List<HotelDTO> hotels,
+			List<TrasportoDTO> trasporti, UtenteDTO cliente) {
+		PacchPerDTO nuovoDTO = new PacchPerDTO();
+		nuovoDTO.setIdPacchPer(p.getIdPacchPer() + 10000);
+		nuovoDTO.setListaRegali(false);
+		nuovoDTO.setPacchPred(p.getPacchPred());
+		nuovoDTO.setCliente(cliente);
+		PacchPer nuovo = new PacchPer(nuovoDTO);
+		em.persist(nuovo);
+		for(EscursioneDTO e: escursioni) {
+			EscursioniPacchPer h = new EscursioniPacchPer();
+			h.setDataAcquisto(null);
+			h.setEscursioni(new Escursione(e));
+			h.setPacchPer(nuovo);
+			em.persist(h);
+		}
+		for(HotelDTO e: hotels) {
+			HotelsPacchPer h = new HotelsPacchPer();
+			h.setDataAcquisto(null);
+			h.setHotel(new Hotel(e));
+			h.setPacchPer(nuovo);
+			em.persist(h);
+		}
+		for(TrasportoDTO e: trasporti) {
+			TrasportiPacchPer h = new TrasportiPacchPer();
+			h.setDataAcquisto(null);
+			h.setTrasporto(new Trasporto(e));
+			h.setPacchPer(nuovo);
+			em.persist(h);
+		}
+	}
 	
 	
 	
