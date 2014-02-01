@@ -2,7 +2,9 @@ package it.polimi.traveldreamsystem.SessionBeans;
 
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
+import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 import java.util.List;
 
@@ -40,6 +42,10 @@ public interface ComposizPacchPerMgrLocal {
 	String convertToStringEscursione(int idPacchPer);
 	
 	String convertToStringTrasporto(int idPacchPer);
+
+	void addPacchAmico(PacchPerDTO p, List<EscursioneDTO> escursioni,
+			List<HotelDTO> hotels, List<TrasportoDTO> trasporti,
+			UtenteDTO cliente);
 
 	
 
