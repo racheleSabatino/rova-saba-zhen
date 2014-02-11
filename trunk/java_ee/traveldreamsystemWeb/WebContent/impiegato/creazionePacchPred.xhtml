@@ -55,7 +55,7 @@
 
 					<p:panelGrid columns="2">
 						<p:commandButton immediate="true" value="Salva" 
-							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid, messaggio">
+							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid, messages" action="#{hotelBean.messaggio}">
 							<f:ajax listener="#{hotelBean.save}" />
 							<f:ajax listener="#{escursioneBean.save}" />
 							<f:ajax listener="#{trasportoBean.save}" />
