@@ -125,7 +125,6 @@ public class EscursioneBean extends PacchPredBean{
 	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save escursioni");
 
-		pacchPredMgrBean.update(pacchPred);
 		for (EscursioneDTO aDTO : escursioni) {
 			escursioneMgrBean.update(aDTO);
 			if (aDTO.getSelected()

@@ -123,7 +123,6 @@ public class TrasportoBean extends PacchPredBean {
 	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save trasporti");
 
-		pacchPredMgrBean.update(pacchPred);
 		for (TrasportoDTO aDTO : trasporti) {
 			trasportoMgrBean.update(aDTO);
 			if (aDTO.getSelected()

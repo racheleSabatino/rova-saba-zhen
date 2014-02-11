@@ -54,14 +54,14 @@
 					</ui:insert>
 
 					<p:panelGrid columns="2">
-						<p:commandButton immediate="true" value="Salva" 
-							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid, messages" action="#{hotelBean.messaggio}">
+						<p:commandButton value="Salva" 
+							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid,messages" action="#{hotelBean.messaggio}">
 							<f:ajax listener="#{hotelBean.save}" />
 							<f:ajax listener="#{escursioneBean.save}" />
 							<f:ajax listener="#{trasportoBean.save}" />
 						</p:commandButton>
 
-						<p:commandButton immediate="true" value="Reset"
+						<p:commandButton value="Reset"
 							icon="ui-icon-refresh"
 							update="Hotel,Escursione,Trasporto,pacchGrid">
 							<f:ajax listener="#{escursioneBean.initajax}" />
