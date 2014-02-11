@@ -60,4 +60,9 @@ public class PacchPredBean {
 				;
 	}
 
+	public void removePacchPred(int id){
+		pacchPredMgrBean.removePacchPred(id);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "eliminato con avvenuto"));
+	}
+
 }

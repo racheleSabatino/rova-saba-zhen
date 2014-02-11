@@ -31,12 +31,19 @@
         </p:column>  
  
   
-        <p:column style="width:4%">  
+        <p:column style="width:1%">  
                 <p:commandButton id="selectButton" 
                 action = "#{pacchPredBean.pagPacchPred(pacchPred.idPacchPred)}"
                 icon="ui-icon-search" title="Mostra">  
             </p:commandButton>  
         </p:column>  
+        
+        <p:column style="width:1%">  
+                <p:commandButton id="removeButton" 
+                action = "#{pacchPredBean.removePacchPred(pacchPred.idPacchPred)}"
+                icon="ui-icon-closethick" title="elimina" update="pacchettiPred">  
+            </p:commandButton>  
+        </p:column>
   
     </p:dataTable>  
   
