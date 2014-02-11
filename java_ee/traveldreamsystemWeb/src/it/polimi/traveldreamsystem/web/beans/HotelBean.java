@@ -34,7 +34,7 @@ public class HotelBean extends PacchPredBean {
 	private HotelDTO hotel;
 
 	private int pacchId;
-
+	
 	public int getPacchId() {
 		return pacchId;
 	}
@@ -149,4 +149,8 @@ public class HotelBean extends PacchPredBean {
 	public void reset() {  
         RequestContext.getCurrentInstance().reset("form:panel");  
     }  
+	
+	public void messaggio() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "salvataggio avvenuto"));
+	}
 }
