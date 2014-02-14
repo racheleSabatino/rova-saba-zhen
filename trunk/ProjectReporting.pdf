@@ -1,0 +1,241 @@
+\documentclass[a4paper,15pt]{article}
+
+\usepackage{scrextend}
+\changefontsizes[14pt]{14pt}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage[italian]{babel}
+\usepackage[margin=2cm]{geometry}
+\usepackage{color}
+\definecolor{mygrey}{gray}{0.4}
+\definecolor{light-blue}{rgb}{0.4,0.5,1}
+\usepackage{booktabs}
+
+%Header and footer of pages
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\textcolor{mygrey}{Gabriele Rovaris, Rachele Sabatino, Chengyu Zheng}}
+\rhead{\textcolor{mygrey}{Project Reporting}}
+
+%Set paragraphs indentation to 0 points
+\setlength{\parindent}{0pt}
+
+%Sections and subsections' style
+\usepackage{titlesec} 
+\titleformat{\section} {\color{blue}\normalfont\sffamily\Large\bfseries} {\color{blue}\thesection}{20pt}{} 
+\usepackage{titlesec}
+\titleformat{\subsection} {\color{light-blue}\normalfont\sffamily\large\bfseries\itshape} {\color{light-blue}\thesubsection}{18pt}{} 
+
+%Document default font family
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand*\arraystretch{1.5}
+
+\pdfinfo{%
+  /Title    (Travel Dream - Documento di Testing)
+  /Author  (Gabriele Rovaris /and Rachele Sabatino / and Chengyu Zheng)
+  /Subject  (Project Reporting)
+  /Keywords ()
+
+}
+
+\begin{document}
+\vspace*{\fill}
+\begin{center}
+{\fontsize{28}{10} \selectfont \textcolor{mygrey}{Progetto di Ingegneria del Software 2} \\[2\baselineskip]} {\fontsize{42}{10} \selectfont {\bfseries Travel Dream }} \\[4\baselineskip]
+\includegraphics[scale=0.4]{polimi} \\[4\baselineskip]
+{\fontsize{28}{10} \selectfont {\bfseries \textcolor{blue}{Project Reporting}} \\[2\baselineskip] A.A. 2013/2014}
+\end{center}
+\begin{flushleft}
+{\fontsize{18}{10}
+{\bfseries Autori}: \\ Gabriele Rovaris (759043), Rachele Sabatino (819191), Chengyu Zheng
+(820324) \\[1\baselineskip]
+{\bfseries Docente}: \\ Prof.ssa Raffaela Mirandola
+}
+\end{flushleft}
+\vspace*{\fill}
+\begin{center}
+Versione 1.0 del 14/2/2014 \\
+\end{center}
+
+\clearpage
+
+	    \vspace*{\fill}
+	\tableofcontents
+	    \vspace*{\fill}
+
+\clearpage
+
+\section{Scopo del documento}
+Lo scopo del seguente documento e' quello di applicare l'approccio Functional Point (FP) per poter verificare che i risultati ottenuti siano simili rispetto la dimensione reale del progetto Travel Dream.
+Successivamente, la dimensione reale del progetto sara' utilizzata nelle formule dei COCOMO (COstructive COst Model) per analizzare come i risultati di tali formule siano in linea con le ore di lavoro spese.
+
+\section{Calcolo Functional Points}
+Per valutare gli FP si utilizzera' la seguente tabella che assegna ad ogni
+funzione un suo peso in base alla complessita'.
+
+\begin{tabularx}{\textwidth}{|c|>{\centering\arraybackslash}X|}
+\hline  \textbf{ Function types  } & \textbf{Weights}\\
+
+\end{tabularx}
+
+\begin{tabularx}{\textwidth}{|c|X|X|X|}
+\hline  \textbf{} & Simple & Medium & Complex \\
+\hline  \textbf{N. Input} & 3 & 4 & 6 \\ 
+\hline \textbf{N. Outputs} & 4 & 5 & 7 \\
+\hline  \textbf{N. Inquiries} & 3 & 4 & 6 \\
+\hline  \textbf{N. Internal Files} & 7 & 10 & 15 \\
+\hline  \textbf{N. External Files} & 5 & 7 & 10 \\
+\hline
+\end{tabularx} 
+
+\vspace{10 mm}
+Per il calcolo degli FP mostriamo l'analisi di ogni tipo di
+funzione per poi effettuare la somma totale e trovare cosi' un valore che rappresenta gli UFP(Unadjusted Function Points).
+
+\vspace{6 mm}
+\textbf{External Input}: L’applicazione interagisce con i tre tipi di utente fornendo funzionalita' diverse. 
+Le operazioni accessibili all'utente sono:
+\begin{enumerate}
+\item Login/logout: sono operazioni semplici e dunque gli attribuiamo un peso adeguato di 2 * 3 = 6 FP.
+\item 2. Registrazione: e' un'operazione semplice che agisce sulla sola entita' utente, corrisponde a 3 FP.
+\item Modifica password: si tratta di una funzione semplice poiché coinvolge il solo utente, dà un apporto di 3 FP.
+\item Recupera password: anch'essa e' semplice poiche' coinvolge solo l'utente, dà 3 FP.
+\item  Ricerca pacchetto predefinito: richiede di estrarre informazioni da 4 entita' cioe' il pacchetto predefinito e le tre tabelle della sua composizione con i prodotti base, pertando consideriamo la ricerca di media complessita' con 4 FP.
+\item Personalizza pacchetto: e' un'operazione complessa poiche' richiede di estrarre dati dalle tabelle utente, pacchetto predefinito con le sue tre tabelle composizione e creare un nuovo pacchetto personalizzato con le sue tre tabelle ponte. La consideriamo di alta complessita' con 6 FP. 
+\item Modifica pacchetto personalizzato: e' anch'essa un'operazione complessa poiche' richiede di estrarre dati dalle tabelle composizione del pacchetto predefinito associato a quello personalizzato e pacchetto personalizzato con le sue tre tabelle ponte per eventualmente inserire o eliminare un prodotto base. La consideriamo di alta complessita' con 6 FP. 
+\item Elimina pacchetto personalizzato: coinvolge le tabelle pacchetto personalizzato con le sue tre tabelle composizione, e' quindi un'operazione di media complessita' con 4 FP.
+\item Condividi con un amico: operazione semplice poiche' invia una mail, corrisponde a 3 FP.
+\item Crea lista regali: operazione semplice che coinvolge la sola entita' pacchetto personalizzato, corrisponde a 3 FP.
+\item Acquisto pacchetto personalizzato: coinvolgendo 3 entita', ossia le tabelle composizione del pacchetto personalizzato in cui si inserisce la data di acquisto di ogni prodotto, e' di media complessita', ha 4 FP.
+\item Acquisto prodotto da una lista regali: coinvolge le tabelle utente e la tabella composizione del pacchetto personalizzato che contiene il prodotto acquistato, si considera semplice con 3 FP. 
+\end{enumerate}
+
+Le operazioni accessibili all'impiegato sono:
+\begin{enumerate}
+\item Creazione prodotto base: questa operazione coinvolge solo i vari prodotti base quali hotel, escursione e trasporto, dunque pesa 3 * 3 = 9 FP.
+\item Modifica/Elimina prodotto base: la modifica o elimina richiede di controllare che un prodotto base non sia incluso ne' in pacchetto personalizzato che in uno predefinito coinvolgendo quindi 6 tabelle composizione piu' la tabella del prodotto base da eliminare/modificare.
+Si considera di alta' intensita' con 3 * 6 = 18 FP.
+\item Creazione pacchetto predefinito: coinvolge le tabelle pacchetto predefinito e le tabelle composizione pacchetto predefinito, viene considerata di media complessita' con 4FP.
+\item Modifica/Elimina pacchetto: simile alla creazione del pacchetto, di media complessità con peso 4 FP.
+\end{enumerate}
+
+Le operazioni accessibili all'amministratore sono:
+\begin{enumerate}
+\item Aggiungi/Elimina impiegato: queste operazioni coinvolgono la sola entita' utente, e' considerata semplice con peso 2 * 3 = 6 FP.
+\end{enumerate}
+In totale si ottengono 89 FP di External Input. 
+
+\vspace{6 mm}
+\textbf{External Output}: L’unica informazione calcolata all’interno dell’applicazione e mostrata all'utente è il prezzo del pacchetto personalizzato al momento dell'acquisto, coinvolge le 3 tabelle composizione del pacchetto, la consideriamo di media intensita' con 4 FP. 
+\newline
+
+\textbf{External Inquiries}: L'applicazione consente agli utenti di richiedere informazioni riguardo 
+\begin{enumerate}
+\item profilo
+\item prodotti base
+\item pacchetti predefiniti
+\item pacchetti personalizzati 
+\end{enumerate}
+Considerando queste operazioni di media complessita', ottendiamo 4 * 4 = 16 PF.
+
+\vspace{6 mm}
+\textbf{Internal Logic Files (ILFs)}: L’applicazione Travel Dream System contiene file interni necessari per conservare dati su:
+\begin{enumerate}
+\item utenti quali un amministratore, impiegati e clienti. Poiche' sono memorizzati solo pochi dati personali di un utente (quali nome, cognome, mail e password), li consideriamo di tipo semplice, FP = 3 * 7 = 21;
+\item prodotti base quali hotel, escursioni e trasporti, anche questi file contengono pochi campi, quindi li consideriamo di tipo semplice, percio' FP = 3 * 7 = 21;
+\item pacchetti vacanza predefiniti e personalizzati, che rappresentano entita' con pochi campi, per cui sono di tipo semplice, FP = 2 * 7 = 14;
+\item composizione dei pacchetti vacanza, per ogni pacchetto ci sono tre file distinti per memorizzare i tre tipi di prodotti base che compongono un pacchetto. I campi di tali entita' sono pero' di numero ridotto in quanto rappresentano esclusivamente tabelle ponte per le relazioni molti a molti tra pacchetti e prodotti base. Essendo di tipo semplice, FP = 6 tabelle ponte * 7 = 42;
+\end{enumerate}
+Si ottiene in totale una somma di 56 FP per gli ILFs.
+
+\vspace{6 mm}
+\textbf {External Logic Files (ELFs)}: In questa applicazione non si acquisiscono dati dall’esterno del sito e dunque non si hanno function point legati agli ELFs.
+
+\vspace{6 mm}
+In totale otteniamo \textbf{165 FP} per l'intera applicazione, utilizziamo il valore come base per calcolare la dimensione del progetto in KLOC(Kilos of Lines of Code) da utilizzare nell’approccio COCOMO.
+
+\section{Calcolo COCOMO}
+Utilizziamo la versione base del calcolo dei COCOMO, la stima viene effettuata considerando il KLOC come unica variabile indipendente, e' quindi necessario calcolare le righe di codice, prima stimate tramite i FP e poi quelle effettive. 
+
+Utilizziamo per la stima la tabella della figura seguente, disponibile alla pagina web
+\newline
+ http://www.qsm.com/resources/function-point-languages-table che riporta il numero di linee di codice che corrispondono ad un FP a seconda del linguaggio di programmazione utilizzato.
+ \newline
+Consideriamo un valore medio di Lines of Code (LOC e stimiamo che il numero di linee di codice dell'applicazione Travel Dream System (scritto con J2EE) sarebbe dovuto essere di 165 FP * 46 = 7590 loc.
+
+\vspace{5 mm}
+
+\begin{figure} [!h]
+\centering
+\includegraphics[scale=1.2]{j2ee} \\
+\caption{\label{A}Gestione contenuti impiegato}
+\end{figure}
+
+\vspace{6 mm}
+Utilizzando il programma eseguibile cloc scaricato gratuitamente dal link
+\newline
+ http://sourceforge.net/projects/cloc/, abbiamo calcolato le linee di codice effettive della nostra applicazione, cosi' come mostrato nella figura.
+
+\begin{figure} [!h]
+\centering
+\includegraphics[scale=0.8]{kloc} \\
+\caption{\label{A}Gestione contenuti impiegato}
+\end{figure}
+
+\vspace{6 mm}
+le linee di codice totali sono quindi 8026 che corrispondono alla dimensione reale del progetto. La stima e la dimensione reale differiscono di circa un 5\%, uno spostamento accettabile e realistico.
+
+\subsection{Stima dei parametri con COCOMO Basic}
+L'approccio COCOMO Basic fornisce una stima dei parametri considerando come unica variabile indipendente la dimensione (KLOC) del progetto.
+Si procede con la stima dei parametri di effort espresso in mesi persone (M) e calendar time espresso in mesi necessari allo sviluppo, indicato con T.
+Usando T e M, possiamo calcolare la quantita' di risorse umane necessarie.
+
+L'approccio COCOMO identifica tre classi di applicazioni: Organic mode, Semi-detached mode ed Embedded mode. 
+La stima di M e T viene effettuata utilizzando le seguenti formule, i cui parametri variano a seconda del tipo di applicazione considerata. 
+
+\vspace{5 mm}
+\textbf{   M = a * S\textsuperscript{b},            T = c * S\textsuperscript{d}}
+\newline
+con S che indica il numero di Kloc, nel nostro caso 8KLOC.
+
+\vspace{5 mm}
+\begin{tabularx}{\textwidth}{|c|X|X|X|X|X}
+\hline  Tipo dell'applicazione & a & b & c & d \\
+\hline  \textbf{Organic mode} & 2.4 & 1.05 & 1.25 & 0.38 \\ 
+\hline \textbf{Semi-detached Mode} & 3 & 1.12 & 2.5 & 0.35 \\
+\hline  \textbf{Embedded Mode} & 3.6 & 1.2 & 2.5 & 0.35\\
+\hline
+\end{tabularx} 
+
+\vspace{6 mm}
+Abbiamo scelto di considerare la nostra applicazione di tipo organic mode, in quando si tratta di un progetto semplice di livello scolastico realizzato da un team piccolo di tre studenti. 
+Abbiamo ottenuto quindi i seguenti valori:
+
+\vspace{5 mm}
+M(Effort) = 2.4 * 8\textsuperscript{1.05} = 21.3 mesi uomo con S reale
+\newline
+T(Time) = 1.25 * 8\textsuperscript{0.38} = 2,75 mesi con S reale reale
+
+\vspace{5 mm}
+M(Effort) = 2.4 * 7.5\textsuperscript{1.05} = 19,9 mesi uomo con S stimato
+\newline
+T(Time) = 1.25 * 7.5\textsuperscript{0.38} = 2,69 mesi con S stimato
+
+\section{Conclusioni}
+I risultati ottenuti sia per il calcolo dei FP che dei COCOMO non si discostano di molto tra i valori stimati e quelli reali.
+
+\section{Ore di lavoro}
+Riportiamo in questa sezione anche le ore di lavoro effettuate per il testing del gruppo assegnatoci, poiche' non sono state inserite nel precedente documento di testing per dimenticanza.
+
+Gabriele Rovaris per il testing 30 minuti, per il project reporting venti minuti
+Rachele Sabatino per il testing 1 ora e 30 minuti, per il project reporting 1 ora
+Chengyu Zheng per il testing 1 ora e 30 minuti, per il project reporting 1 ora
+
+\end{document}
