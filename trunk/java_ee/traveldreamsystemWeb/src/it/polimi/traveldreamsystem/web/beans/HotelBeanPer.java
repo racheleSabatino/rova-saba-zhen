@@ -1,9 +1,12 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,7 +16,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 @ManagedBean
 @SessionScoped
 public class HotelBeanPer extends PacchPerBean {
-
+	
+	@EJB
+	HotelMgrBeanLocal hotelMgr;
+	
 	private List<HotelDTO> hotels;
 
 	private List<HotelDTO> filteredHotels;
@@ -21,6 +27,8 @@ public class HotelBeanPer extends PacchPerBean {
 	private HotelDTO hotel;
 
 	private int pacchId;
+	
+	private List<String> cittaSelez;
 
 	public int getPacchId() {
 		return pacchId;
@@ -31,11 +39,20 @@ public class HotelBeanPer extends PacchPerBean {
 		init(pacchId);
 	}
 	
+	public List<String> getCittaSelez() {
+		return cittaSelez;
+	}
+
+	public void addCittaSelez(String citta) {
+		cittaSelez.add(citta);
+	}
+	
 	public HotelBeanPer() {
 		hotel = new HotelDTO();
 	}
 
 	public void init(int id) {
+		cittaSelez = new ArrayList<String>();
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
 		hotels = compPacchPredMgr.getHotelsPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (HotelDTO aDTO : hotels) {
@@ -85,6 +102,11 @@ public class HotelBeanPer extends PacchPerBean {
 		this.filteredHotels = filteredHotels;
 	}
 	
+	public void setValidHotel() {
+		filteredHotels = hotelMgr.getValidHotel(hotels, cittaSelez);
+		System.out.println("filtered hotel" + filteredHotels);
+	}
+	
 	public void selected() {
 		System.out.println("select");
 		if (hotel.getSelected()) {
@@ -111,4 +133,6 @@ public class HotelBeanPer extends PacchPerBean {
 		}
 		pacchPerMgrBean.update(pacchPer);
 	}
+
+	
 }

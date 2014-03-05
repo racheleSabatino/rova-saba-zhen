@@ -13,7 +13,7 @@ public interface PacchPredMgrLocal {
 
 	void addNewPacchPred(PacchPredDTO newPacchetto);
 	
-	void removePacchPred(int idPacchetto);
+	boolean removePacchPred(int idPacchetto);
 	
 	PacchPredDTO findPacchPredDTO(int idPacchPred);
 

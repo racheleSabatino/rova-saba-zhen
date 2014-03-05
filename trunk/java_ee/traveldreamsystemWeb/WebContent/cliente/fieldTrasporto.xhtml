@@ -24,8 +24,10 @@
 						action="#{trasportoBeanPer.selected}">
 						<f:setPropertyActionListener value="#{trasporto}"
 							target="#{trasportoBeanPer.trasporto}" />
+							<f:setPropertyActionListener value="#{trasporto.cittaRitorno}"
+							target="#{hotelBeanPer.addCittaSelez(trasporto)}" />
 					</p:commandButton>
-
+				
 					<p:commandButton update="Trasporto"
 						rendered="#{not trasporto.selected}" icon="ui-icon-radio-on"
 						action="#{trasportoBeanPer.selected}">

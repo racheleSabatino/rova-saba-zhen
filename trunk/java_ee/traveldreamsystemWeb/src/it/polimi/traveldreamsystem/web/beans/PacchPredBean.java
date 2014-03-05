@@ -61,8 +61,13 @@ public class PacchPredBean {
 	}
 
 	public void removePacchPred(int id){
-		pacchPredMgrBean.removePacchPred(id);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "eliminato"));
+		if(!pacchPredMgrBean.removePacchPred(id)) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Attenzione", "il pacchetto non puo' "
+					+ "essere eliminato perchè un pacchetto personalizzato di un cliente fa riferimento ad esso"));
+		}
+		else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "eliminato"));
+		}
 	}
 
 }

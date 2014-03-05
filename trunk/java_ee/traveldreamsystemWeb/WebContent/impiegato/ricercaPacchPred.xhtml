@@ -37,12 +37,20 @@
                 icon="ui-icon-search" title="Mostra">  
             </p:commandButton>  
         </p:column>  
-        
-        <p:column style="width:1%">  
-                <p:commandButton id="removeButton" 
-                action = "#{pacchPredBean.removePacchPred(pacchPred.idPacchPred)}"
-                icon="ui-icon-closethick" title="elimina" update="pacchettiPred">  
-            </p:commandButton>  
+         <p:column style="width:1%">  
+            
+            <p:commandButton id="elimina"
+						icon="ui-icon-closethick" onclick="PF('cd').show()" type="button"
+						update="pacchettiPred, mex" />
+				<p:confirmDialog message="Sei sicuro di voler eliminare il pacchetto?"
+				header="Eliminazione pacchetto" severity="alert" widgetVar="cd">
+						<p:commandButton value="Si" actionListener="#{pacchPredBean.removePacchPred(pacchPred.idPacchPred)}"
+						update="mex" oncomplete="PF('cd').hide()"/>
+						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
+						</p:confirmDialog>
+						
+						<p:growl id="mex" showDetail="true" />  
+						
         </p:column>
   
     </p:dataTable>  

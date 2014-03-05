@@ -47,9 +47,12 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 //bisogna aggiungere il controllo che non deve essere associato ad un pacchetto personalizzato che non 
 //ancora stato comprato
 	@Override
-	public void removePacchPred(int idPacchPred) {
+	public boolean removePacchPred(int idPacchPred) {
 		PacchPred pacchetto = findPacchPred(idPacchPred);
-		
+		Query q = em.createQuery("SELECT p FROM PacchPer p WHERE p.pacchPred = :pacchetto");
+		q.setParameter("pacchetto", pacchetto);
+		if(!q.getResultList().isEmpty()) 
+			return false;
 		List<HotelsPacchPred> hotels;
 		Query q1 = em.createQuery("SELECT h FROM HotelsPacchPred h JOIN h.pacchPred e WHERE e.idPacchPred= :idPacchPred");
 		q1.setParameter("idPacchPred", idPacchPred);
@@ -72,6 +75,7 @@ public class PacchPredMgr implements PacchPredMgrLocal {
 			em.remove(escursioni.get(i));
 		}
 		em.remove(pacchetto);
+		return true;
 	}
 
 	
