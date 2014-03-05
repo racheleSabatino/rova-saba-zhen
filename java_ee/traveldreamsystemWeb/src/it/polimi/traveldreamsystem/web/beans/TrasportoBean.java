@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
-import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
@@ -81,9 +80,11 @@ public class TrasportoBean extends PacchPredBean {
 			if(e != null) {
 				trasportoMgrBean.update(e);
 				context.addMessage(null, new FacesMessage("Modifica avvenuta con successo")); 
+			} 
+			else {
+				trasportoMgrBean.addNewTrasporto(trasporto);
+				context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 			}
-		trasportoMgrBean.addNewTrasporto(trasporto);
-        context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
 		}
 	}
 

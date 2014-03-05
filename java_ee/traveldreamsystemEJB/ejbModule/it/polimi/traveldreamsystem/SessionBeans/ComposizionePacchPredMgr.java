@@ -218,7 +218,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		}
 		for(int i = 1; i < date.size(); i++) {
 			String newstring = new SimpleDateFormat("yyyy-MM-dd").format(date.get(i));
-			datee = ", " + newstring;
+			datee = datee + ", " + newstring;
 		}
 		return datee;
 	}
@@ -236,7 +236,7 @@ public class ComposizionePacchPredMgr implements ComposizPacchPredMgrLocal {
 		if(!citta.isEmpty())
 			newCitta = citta.get(0);
 		for(int i = 1; i < citta.size(); i++) {
-			newCitta = ", " + citta.get(i);
+			newCitta = newCitta + ", " + citta.get(i);
 		}
 		return newCitta;
 	}

@@ -75,10 +75,12 @@
 						<h:outputText value="&#160;" />
 
 
-						<p:commandButton value="Submit" update="grid"
+						<p:commandButton value="Salva" update="grid, msg2"
 							action="#{trasportoBean.addTrasporto}" />
 							
-						<p:commandButton type="reset" value="Reset" update = "grid" />
+						<p:commandButton type="reset" value="Reset" update = "grid" process="@this">
+						</p:commandButton>
+						<p:growl id="msg2" showDetail="true" />	
 							
 					</h:panelGrid>
 						<p:messages id="msg"  sticky="true" />  

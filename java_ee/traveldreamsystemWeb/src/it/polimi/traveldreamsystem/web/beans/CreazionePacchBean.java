@@ -12,6 +12,7 @@ public class CreazionePacchBean {
 	
 	public void save(){
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("Pacchetto creato con successo"));
+		context.addMessage(null, new FacesMessage("Pacchetto creato con successo", "Vai alla pagina "
+				+ " pacchetti presonalizzati dal menu' cliente per vedere i tuoi pacchetti"));
 		}
 }

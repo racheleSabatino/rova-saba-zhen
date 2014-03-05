@@ -83,8 +83,8 @@ public class EscursioneBean extends PacchPredBean{
 				context.addMessage(null, new FacesMessage("Modifica avvenuta con successo")); 
 			}
 			else {
-			escursioneMgrBean.addNewEscursione(escursione);
-			context.addMessage(null, new FacesMessage("Creazione avvenuta con successo")); 
+				escursioneMgrBean.addNewEscursione(escursione);
+				context.addMessage(null, new FacesMessage("Creazione avvenuta con successo")); 
 			}
         }
 	}
