@@ -69,12 +69,10 @@
 						
 						<h:outputText value="&#160;" />
 
-						<p:commandButton value="Salva" update="grid"
+						<p:commandButton value="Salva" update="grid, msg"
 							action="#{hotelBean.addHotel}" />
 							
-						 <p:commandButton value="Reset Tag" update="grid" process="@this"  >  
-     				   <p:resetInput target="grid" />  
-   					 </p:commandButton>  
+						 <p:commandButton value="Reset" update="grid" process="@this"/>
 						
 						
 					</h:panelGrid>

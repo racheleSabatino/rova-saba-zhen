@@ -63,7 +63,7 @@ public class TablePacchPredBean implements Serializable {
            
          
         public List<PacchPredDTO> getPacchetti() {  
-	        	init();
+	        	//init();
                 return pacchetti;  
         }
        
@@ -114,10 +114,12 @@ public class TablePacchPredBean implements Serializable {
 			List<PacchPredDTO> pacchettiCercati = pacchPredMgr.getCittaHotelPacch(destinazioneCercata);
 			if(pacchettiCercati.isEmpty()){
 				FacesContext mex = FacesContext.getCurrentInstance();
-				mex.addMessage("null", new FacesMessage("Non ci sono pacchetti vacanza aventi la destinazione "
-						+ "digitata"));
+				mex.addMessage("null", new FacesMessage("Non ci sono pacchetti vacanza aventi la destinazione " +
+						"digitata"));
 			}
-			setPacchetti(pacchettiCercati);
+			else {
+				setPacchetti(pacchettiCercati);
+			}
 		}
 	
            

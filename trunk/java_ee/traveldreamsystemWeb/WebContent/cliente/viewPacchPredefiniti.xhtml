@@ -18,6 +18,9 @@
 				
 				
 		<h:form id="form">  
+		
+		
+				<p:remoteCommand autoRun="true" action="#{tablePacchPredBean.init}" />
   
     <p:dataGrid var="pacchPred" value="#{tablePacchPredBean.pacchetti}" columns="3"  
         rows="12" paginator="true" 
@@ -52,7 +55,7 @@
                 <h:outputText id="partenzeDa" value="#{tablePacchPredBean.cittaPacchSelezionato}" />  
                   
                 <h:outputLabel  value="Partenze il: " />  
-                <p:inputText id="partenza" value="#{tablePacchPredBean.datePacchSelezionato}" />  
+                <h:outputText id="partenza" value="#{tablePacchPredBean.datePacchSelezionato}" />  
                   
                 <p:commandButton id="submit" action="#{pacchPerBean.creazionePacchPer}" value="Seleziona il pacchetto">
                     <f:setPropertyActionListener value="#{tablePacchPredBean.selectedPacchetto}" target="#{pacchPerBean.pacchPred}"/>
@@ -73,6 +76,8 @@
 				
 				<p:commandButton value="Cerca" update="form, noPacchetti"
 							action="#{tablePacchPredBean.findPerDestinazione}" />
+				<p:commandButton value="Reset" update="form, noPacchetti"
+							action="#{tablePacchPredBean.init}" />
 			
 			</p:panel>
 			

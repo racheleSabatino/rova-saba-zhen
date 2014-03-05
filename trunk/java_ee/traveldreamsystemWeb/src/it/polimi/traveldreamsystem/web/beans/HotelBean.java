@@ -84,8 +84,10 @@ public class HotelBean extends PacchPredBean {
 				hotelMgrBean.update(hotel);
 				context.addMessage(null, new FacesMessage("Modifica avvenuta con successo")); 
 			}
-			hotelMgrBean.addNewHotel(hotel);
-			context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+			else {
+				hotelMgrBean.addNewHotel(hotel);
+				context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
+			}
 		}
 	}
 

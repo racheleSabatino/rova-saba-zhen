@@ -1,13 +1,11 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-
 import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -34,7 +32,6 @@ public class FindHotelBean {
 	private String removeOK;
 	
 	private boolean resultPanelVisible;
-	
 	
 	public boolean isResultPanelVisible() {
 		return resultPanelVisible;
@@ -70,7 +67,7 @@ public class FindHotelBean {
 	}
 
 	public void remove(ActionEvent actionEvent) {
-		 FacesContext context = FacesContext.getCurrentInstance();  
+		FacesContext context = FacesContext.getCurrentInstance();  
 		try {
 			hotelMgrBean.removeHotel(searchedId);
 			context.addMessage(null, new FacesMessage("Successo", "L'eliminazione dell'hotel è andata a buon fine"));
@@ -87,7 +84,6 @@ public class FindHotelBean {
 	public void setRemoveOK(String removeOK) {
 		this.removeOK = removeOK;
 	}
-	
 	
 	public void resetForm(){
 		searchedHotel = null; 

@@ -54,7 +54,7 @@
 				<p:confirmDialog message="Sei sicuro di voler eliminare l'escursione?"
 					header="Eliminazione escursione" severity="alert"
 					widgetVar="cd">
-					<p:commandButton value="Si" actionListener="#{findEscursionBean.remove}"
+					<p:commandButton value="Si" actionListener="#{findEscursioneBean.remove}"
 					update="growl" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>
@@ -65,7 +65,7 @@
                  target="#{escursioneBean.escursione}"/>                
            		 </p:commandButton>	
             
-                  		<p:commandButton id="reset" value="Reset" process="@this"
+                  		<p:commandButton id="reset" value="Reset" 
                   		 actionListener="#{findEscursioneBean.resetForm}"  rendered="#{findEscursioneBean.resultPanelVisible}"
                   		 update="id, regGrid, resultGrid, elimina, modifica, growl, reset"/>
 					</p:panel>

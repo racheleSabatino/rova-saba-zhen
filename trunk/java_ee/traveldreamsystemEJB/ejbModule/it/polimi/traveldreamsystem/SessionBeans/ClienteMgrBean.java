@@ -11,6 +11,8 @@ import javax.ejb.Stateless;
 @Stateless
 public class ClienteMgrBean extends UtenteMgrBean implements ClienteMgrBeanLocal {
 
+	
+	
 	@Override
 	public void addCliente(UtenteDTO utente) {
 		utente.setTipoUtente(Utente._CLIENTE);

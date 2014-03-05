@@ -1,16 +1,14 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import java.awt.event.ActionEvent;
-
 import it.polimi.traveldreamsystem.dto.*;
 import it.polimi.traveldreamsystem.SessionBeans.*;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean
 @SessionScoped
@@ -69,15 +67,14 @@ public class FindEscursioneBean {
 	}
 
 	public void remove(ActionEvent actionEvent) {
-		 FacesContext context = FacesContext.getCurrentInstance();  
-			try {
-				escursioneMgrBean.removeEscursione(searchedId);
-				context.addMessage(null, new FacesMessage("Successo", "L'eliminazione dell'escursione è andata a buon fine"));
-			} catch(Exception e) {
-				context.addMessage(null, new FacesMessage("Attenzione", "L'escursione non può essere eliminata perchè"
-					+ " fa parte di un pacchetto vacanza"));
-			}
-	
+		FacesContext context = FacesContext.getCurrentInstance();  
+		try {
+			escursioneMgrBean.removeEscursione(searchedId);
+			context.addMessage(null, new FacesMessage("Successo", "L'eliminazione dell'escursione è andata a buon fine"));
+		} catch(Exception e) {
+			context.addMessage(null, new FacesMessage("Attenzione", "L'escursione non può essere eliminata perchè"
+				+ " fa parte di un pacchetto vacanza"));
+		}
 	}
 
 	public String getRemoveOK() {
@@ -92,8 +89,5 @@ public class FindEscursioneBean {
 		searchedEscursione = null; 
 		searchedId = 0;
 	}
-
-	
-	
 
 }
