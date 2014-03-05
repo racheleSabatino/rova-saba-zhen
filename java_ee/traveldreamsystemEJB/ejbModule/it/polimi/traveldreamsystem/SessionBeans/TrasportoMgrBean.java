@@ -96,6 +96,31 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
 				+ "&amp;id=" + idTrasporto;
 	}
 
-
-
+/*
+ * Restituisce vero se in una lista di mezzo di trasporti, c'è un viaggio andata e ritorno, falso in caso contrario
+ * 
+ */
+	@Override
+	public boolean checkToFrom(List<TrasportoDTO> trasporti) {
+		List<String> cittaAndata = new ArrayList<String>();
+		List<String> cittaRitorno = new ArrayList<String>();
+	
+		int check = 0;
+		for(TrasportoDTO t: trasporti) {
+			cittaAndata.add(t.getCittaPartenza());
+			cittaRitorno.add(t.getCittaRitorno());
+		}
+		System.out.println(cittaAndata + " " + cittaRitorno);
+		for(String a: cittaAndata) {
+			for(String r: cittaRitorno) {
+				if(a.toLowerCase().equals(r.toLowerCase())) {
+					check = 1;
+				}
+			}
+			if(check != 1) 
+				return false;
+			check = 0;
+		}
+		return true;
+	}
 }

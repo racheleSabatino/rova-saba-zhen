@@ -21,4 +21,6 @@ public interface TrasportoMgrBeanLocal {
 
 	String pagRiepilogoPacchPer(int idTrasporto);
 
+	boolean checkToFrom(List<TrasportoDTO> list);
+
 }

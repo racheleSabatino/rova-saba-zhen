@@ -31,7 +31,9 @@
 					<p:panelGrid columns="4">
 					</p:panelGrid>
 					
-					
+					<ui:insert name="trasporto">
+						<ui:include src="fieldTrasporto.xhtml" />
+					</ui:insert>
 				
 					<ui:insert name="hotel">
 						<ui:include src="fieldHotel.xhtml" />
@@ -39,10 +41,6 @@
 
 					<ui:insert name="escursione">
 						<ui:include src="fieldEscursione.xhtml" />
-
-					</ui:insert>
-					<ui:insert name="trasporto">
-						<ui:include src="fieldTrasporto.xhtml" />
 					</ui:insert>
 
 					<p:panelGrid columns="2">

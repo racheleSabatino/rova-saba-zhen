@@ -19,5 +19,7 @@ public interface HotelMgrBeanLocal {
 
 	void update(HotelDTO hotel);
 
+	List<HotelDTO> getValidHotel(List<HotelDTO> hotels, List<String> citta);
+
 
 }

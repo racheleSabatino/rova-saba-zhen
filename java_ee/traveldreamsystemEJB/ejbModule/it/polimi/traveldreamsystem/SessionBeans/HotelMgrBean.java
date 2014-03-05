@@ -1,6 +1,7 @@
 package it.polimi.traveldreamsystem.SessionBeans;
 
 import it.polimi.traveldreamsystem.Entities.Hotel;
+import it.polimi.traveldreamsystem.Entities.PacchPred;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 
 /**
@@ -68,7 +70,6 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 		em.persist(hotel);
 	}
 
-	//bisogna aggiungere che se appartiene ad un pacchetto, nn puo' essere elimnato
 	@Override
 	public void removeHotel(int idHotel) {
 		Hotel hotel = findHotel(idHotel);
@@ -92,5 +93,19 @@ public class HotelMgrBean implements HotelMgrBeanLocal {
 		em.merge(new Hotel(hotel));
 	}
 
+	@Override
+	public List<HotelDTO> getValidHotel(List<HotelDTO> hotels, List<String> citta) {
+		if(hotels.isEmpty() || citta.isEmpty()) 
+			return null;
+		List<HotelDTO> hotelCercati = new ArrayList<HotelDTO>();
+		for(HotelDTO h: hotels) {
+			String hCitta = h.getCitta().toLowerCase();
+			for(String s: citta) {
+				if(hCitta.equals(s.toLowerCase()))
+					hotelCercati.add(h);
+				}
+		}
+		return hotelCercati;
+	}
 	
 }
