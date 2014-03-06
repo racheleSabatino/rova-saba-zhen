@@ -146,7 +146,8 @@ public class TrasportoBean extends PacchPredBean {
 					+ "di andata e ritorno"));
 		}
 		else {
-			mex.addMessage(null, new FacesMessage("Ok", "Gli elementi del pacchetto sono consistenti "));
+			mex.addMessage(null, new FacesMessage("Ok", "si può"
+					+ " procedere al salvataggio "));
 			setCorrect(true);
 		}
 	}
