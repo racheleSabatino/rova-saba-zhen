@@ -83,9 +83,9 @@ public class TrasportoBean extends PacchPredBean {
 	public void addTrasporto(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		if(!checkDateBean.checkDate(trasporto.getDataPartenza(), trasporto.getDataRitorno())){
-			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Controllare i valori inseriti, "
 					+ "la data di ritorno deve essere uguale o successiva alla data della partenza. "
-					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
+					+ "Inserire valori corretti e poi ripremere il pulsante Salva", null));
 		}
 		else {
 			TrasportoDTO e = trasportoMgrBean.findTrasportoDTO(trasporto.getIdProdBase());
