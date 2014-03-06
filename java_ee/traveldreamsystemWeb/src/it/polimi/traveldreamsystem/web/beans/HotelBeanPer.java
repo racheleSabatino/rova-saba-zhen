@@ -48,7 +48,7 @@ public class HotelBeanPer extends PacchPerBean {
 		return cittaSelez;
 	}
 
-	public void addCittaSelez(String citta) {
+	public void setAddCittaSelez(String citta) {
 		cittaSelez.add(citta);
 	}
 	
@@ -103,7 +103,29 @@ public class HotelBeanPer extends PacchPerBean {
 	}
 
 	public List<HotelDTO> getFilteredHotels() {
-		return filteredHotels;
+		//return filteredHotels; cittaSelez;
+
+		if(cittaSelez.isEmpty()) 
+			return filteredHotels;
+		List<HotelDTO> hotelCercati = new ArrayList<HotelDTO>();
+		if(filteredHotels != null) {
+			for (HotelDTO h : filteredHotels) {
+				String hCitta = h.getCitta().toLowerCase();
+				for (String s : cittaSelez) {
+					if (hCitta.equals(s.toLowerCase()))
+						hotelCercati.add(h);
+				}
+			}
+		} else {
+			for (HotelDTO h : hotels) {
+				String hCitta = h.getCitta().toLowerCase();
+				for (String s : cittaSelez) {
+					if (hCitta.equals(s.toLowerCase()))
+						hotelCercati.add(h);
+				}
+			}
+		}
+		return hotelCercati;
 	}
 
 	public void setFilteredHotels(List<HotelDTO> filteredHotels) {

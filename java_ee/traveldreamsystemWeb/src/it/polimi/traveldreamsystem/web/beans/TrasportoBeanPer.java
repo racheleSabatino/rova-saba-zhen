@@ -120,12 +120,11 @@ public class TrasportoBeanPer extends PacchPerBean {
 			//h.deleteCittaSelez(trasporto.getCittaRitorno();
 			trasporto.setSelected(false);
 		} else {
-			trasporto.setSelected(true);
+			trasporto.setSelected(true);/*
 			FacesContext contex = FacesContext.getCurrentInstance();
 			HotelBeanPer h = (HotelBeanPer)contex.getELContext().getELResolver().
 					getValue(contex.getELContext(), null, "hotelBeanPer");
-			h.addCittaSelez(trasporto.getCittaRitorno());
-			h.setValidHotel();
+			h.addCittaSelez(trasporto.getCittaRitorno());*/
 		}
 	}
 
