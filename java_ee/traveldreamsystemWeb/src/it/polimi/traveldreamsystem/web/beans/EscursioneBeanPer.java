@@ -1,14 +1,10 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.traveldreamsystem.SessionBeans.EscursioneMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
-import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,22 +24,6 @@ public class EscursioneBeanPer extends PacchPerBean{
 	private int pacchId;
 	
 	private int idPacchPred;
-	
-	public int getIdPacchPred() {
-		return idPacchPred;
-	}
-
-	public void setIdPacchPred(int idPacchPred) {
-		this.idPacchPred = idPacchPred;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 
 	private String mail;
 
@@ -125,6 +105,7 @@ public class EscursioneBeanPer extends PacchPerBean{
 	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save");
 
+		pacchPerMgrBean.update(pacchPer);
 		for (EscursioneDTO aDTO : escursioni) {
 			if (aDTO.getSelected()
 					&& !compPacchPerMgr.findEscursione(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
@@ -137,7 +118,21 @@ public class EscursioneBeanPer extends PacchPerBean{
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPerMgrBean.update(pacchPer);
+	}
+	
+	public int getIdPacchPred() {
+		return idPacchPred;
 	}
 
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 }
