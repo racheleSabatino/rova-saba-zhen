@@ -9,16 +9,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import eccezioni.PacchettoScadutoException;
+import it.polimi.traveldreamsystem.SessionBeans.ClienteMgrBeanLocal;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPerMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.ComposizPacchPredMgrLocal;
-import it.polimi.traveldreamsystem.SessionBeans.MailerBeanLocal;
 import it.polimi.traveldreamsystem.SessionBeans.PacchPerMgrLocal;
+import it.polimi.traveldreamsystem.SessionBeans.PacchPredMgrLocal;
 import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
-import it.polimi.traveldreamsystem.dto.EscursioneDTO;
-import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.PacchPredDTO;
-import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 @ManagedBean
@@ -27,6 +25,9 @@ public class PacchPerBean {
 	
 	@EJB
 	protected PacchPerMgrLocal pacchPerMgrBean;
+	
+	@EJB
+	protected PacchPredMgrLocal pacchPredMgrBean;
 
 	@EJB
 	protected ComposizPacchPerMgrLocal compPacchPerMgr;
@@ -67,19 +68,25 @@ public class PacchPerBean {
 	}
 
 	public String creazionePacchPer(){
-		PacchPerDTO pacchPer = new PacchPerDTO(0, false, pacchPred, cliente);
-		pacchPerMgrBean.addNewPacchPer(pacchPer);
 		List<PacchPerDTO> listDTO = pacchPerMgrBean.getAllPacchPer();
-		int id = listDTO.get(listDTO.size() -1).getIdPacchPer();
+		int id;
+		if(listDTO.isEmpty()) {
+			id = 1;
+		} else {
+			id = listDTO.get(listDTO.size() -1).getIdPacchPer() + 1;
+		}
 		return "/cliente/creazionePacchPer?faces-redirect=true"
-				+ "&amp;id=" + id
-				;
+				+ "&amp;id=" + id + "&amp;idPacchPred=" + pacchPred.getIdPacchPred() + "&amp;mail=" + cliente.getMail();
 	}
 	
-	
+
 
 	public PacchPredDTO getPacchPred() {
 		return pacchPred;
+	}
+
+	public PacchPredDTO getPacchPred(int id) {
+		return pacchPredMgrBean.findPacchPredDTO(id);
 	}
 
 	public void setPacchPred(PacchPredDTO pacchPred) {
@@ -88,6 +95,10 @@ public class PacchPerBean {
 
 	public UtenteDTO getCliente() {
 		return cliente;
+	}
+
+	public UtenteDTO getCliente(String mail) {
+		return utenteMgr.findUtenteDTO(mail);
 	}
 
 	public void setCliente(UtenteDTO cliente) {
@@ -99,7 +110,7 @@ public class PacchPerBean {
 		try {
 			pacchPerMgrBean.acquistaPacchPer(pacchPer.getIdPacchPer());
 			context.addMessage(null, new FacesMessage("Conferma pacchetto acquistato con successo"));
-			return "http://localhost:8080/traveldreamsystemWeb/cliente/accountCliente.xhtml";
+			return "/cliente/accountCliente?faces-redirect=true";
 			
 		} catch (PacchettoScadutoException e) {
 			 context.addMessage(null, new FacesMessage("Mi dispiace, il pacchetto non può più essere"

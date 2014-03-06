@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.EscursioneDTO;
+import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,26 @@ public class TrasportoBeanPer extends PacchPerBean {
 	private TrasportoDTO trasporto;
 
 	private int pacchId;
+	
+	private int idPacchPred;
+	
+	public int getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	private String mail;
 
 	public int getPacchId() {
 		return pacchId;
@@ -41,6 +62,9 @@ public class TrasportoBeanPer extends PacchPerBean {
 
 	public void init(int id) {
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
+		if(pacchPer == null) {
+			pacchPer = new PacchPerDTO(id, false, getPacchPred(idPacchPred), getCliente(mail));
+		}
 		trasporti = compPacchPredMgr.getTrasportiPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (TrasportoDTO aDTO : trasporti) {
 			if (compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {

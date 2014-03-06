@@ -14,8 +14,16 @@
 		<ui:define name="content">
 			<h:form id="form">
 				<f:metadata>
+					<f:viewParam name="idPacchPred" value="#{hotelBeanPer.idPacchPred}" />
+					<f:viewParam name="mail" value="#{hotelBeanPer.mail}" />
 					<f:viewParam name="id" value="#{hotelBeanPer.pacchId}" />
+					
+					<f:viewParam name="idPacchPred" value="#{escursioneBeanPer.idPacchPred}" />
+					<f:viewParam name="mail" value="#{escursioneBeanPer.mail}" />
 					<f:viewParam name="id" value="#{escursioneBeanPer.pacchId}" />
+					
+					<f:viewParam name="idPacchPred" value="#{trasportoBeanPer.idPacchPred}" />
+					<f:viewParam name="mail" value="#{trasportoBeanPer.mail}" />
 					<f:viewParam name="id" value="#{trasportoBeanPer.pacchId}" />
 				</f:metadata>
 
