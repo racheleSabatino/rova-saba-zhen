@@ -2,13 +2,9 @@ package it.polimi.traveldreamsystem.web.beans;
 
 import java.util.List;
 
-import it.polimi.traveldreamsystem.SessionBeans.TrasportoMgrBeanLocal;
-import it.polimi.traveldreamsystem.dto.EscursioneDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 import it.polimi.traveldreamsystem.dto.TrasportoDTO;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,22 +24,6 @@ public class TrasportoBeanPer extends PacchPerBean {
 	private int pacchId;
 	
 	private int idPacchPred;
-	
-	public int getIdPacchPred() {
-		return idPacchPred;
-	}
-
-	public void setIdPacchPred(int idPacchPred) {
-		this.idPacchPred = idPacchPred;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
 
 	private String mail;
 
@@ -87,7 +67,6 @@ public class TrasportoBeanPer extends PacchPerBean {
 		compPacchPerMgr.addTrasportoToPacchPer(pacchId, trasporto.getIdProdBase());
         FacesContext context = FacesContext.getCurrentInstance();  
         context.addMessage(null, new FacesMessage("Creazione avvenuta con successo"));  
-
 	}
 
 	public TrasportoDTO getTrasporto() {
@@ -117,20 +96,16 @@ public class TrasportoBeanPer extends PacchPerBean {
 	public void selected() {
 		System.out.println("select");
 		if (trasporto.getSelected()) {
-			//h.deleteCittaSelez(trasporto.getCittaRitorno();
 			trasporto.setSelected(false);
 		} else {
-			trasporto.setSelected(true);/*
-			FacesContext contex = FacesContext.getCurrentInstance();
-			HotelBeanPer h = (HotelBeanPer)contex.getELContext().getELResolver().
-					getValue(contex.getELContext(), null, "hotelBeanPer");
-			h.addCittaSelez(trasporto.getCittaRitorno());*/
+			trasporto.setSelected(true);
 		}
 	}
 
 	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save");
 
+		pacchPerMgrBean.update(pacchPer);
 		for (TrasportoDTO aDTO : trasporti) {
 			if (aDTO.getSelected()
 					&& !compPacchPerMgr.findTrasporto(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
@@ -143,7 +118,22 @@ public class TrasportoBeanPer extends PacchPerBean {
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPerMgrBean.update(pacchPer);
+	}
+	
+	public int getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 }
 

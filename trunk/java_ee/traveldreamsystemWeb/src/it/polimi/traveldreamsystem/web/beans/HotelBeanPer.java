@@ -1,13 +1,10 @@
 package it.polimi.traveldreamsystem.web.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
 import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,9 +14,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 @ManagedBean
 @SessionScoped
 public class HotelBeanPer extends PacchPerBean {
-	
-	@EJB
-	HotelMgrBeanLocal hotelMgr;
 	
 	private List<HotelDTO> hotels;
 
@@ -32,8 +26,6 @@ public class HotelBeanPer extends PacchPerBean {
 	private int idPacchPred;
 	
 	private String mail;
-	
-	private List<String> cittaSelez;
 
 	public int getPacchId() {
 		return pacchId;
@@ -44,20 +36,11 @@ public class HotelBeanPer extends PacchPerBean {
 		init(pacchId);
 	}
 	
-	public List<String> getCittaSelez() {
-		return cittaSelez;
-	}
-
-	public void setAddCittaSelez(String citta) {
-		cittaSelez.add(citta);
-	}
-	
 	public HotelBeanPer() {
 		hotel = new HotelDTO();
 	}
 
 	public void init(int id) {
-		cittaSelez = new ArrayList<String>();
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
 		if(pacchPer == null) {
 			pacchPer = new PacchPerDTO(id, false, getPacchPred(idPacchPred), getCliente(mail));
@@ -103,38 +86,11 @@ public class HotelBeanPer extends PacchPerBean {
 	}
 
 	public List<HotelDTO> getFilteredHotels() {
-		//return filteredHotels; cittaSelez;
-
-		if(cittaSelez.isEmpty()) 
-			return filteredHotels;
-		List<HotelDTO> hotelCercati = new ArrayList<HotelDTO>();
-		if(filteredHotels != null) {
-			for (HotelDTO h : filteredHotels) {
-				String hCitta = h.getCitta().toLowerCase();
-				for (String s : cittaSelez) {
-					if (hCitta.equals(s.toLowerCase()))
-						hotelCercati.add(h);
-				}
-			}
-		} else {
-			for (HotelDTO h : hotels) {
-				String hCitta = h.getCitta().toLowerCase();
-				for (String s : cittaSelez) {
-					if (hCitta.equals(s.toLowerCase()))
-						hotelCercati.add(h);
-				}
-			}
-		}
-		return hotelCercati;
+		return filteredHotels;
 	}
 
 	public void setFilteredHotels(List<HotelDTO> filteredHotels) {
 		this.filteredHotels = filteredHotels;
-	}
-	
-	public void setValidHotel() {
-		filteredHotels = hotelMgr.getValidHotel(hotels, cittaSelez);
-		System.out.println("filtered hotel" + filteredHotels);
 	}
 	
 	public void selected() {
@@ -149,6 +105,7 @@ public class HotelBeanPer extends PacchPerBean {
 	public void save(AjaxBehaviorEvent e) {
 		System.out.println("cell save");
 
+		pacchPerMgrBean.update(pacchPer);
 		for (HotelDTO aDTO : hotels) {
 			if (aDTO.getSelected()
 					&& !compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
@@ -161,7 +118,6 @@ public class HotelBeanPer extends PacchPerBean {
 						aDTO.getIdProdBase());
 			}
 		}
-		pacchPerMgrBean.update(pacchPer);
 	}
 
 	public int getIdPacchPred() {
@@ -179,6 +135,4 @@ public class HotelBeanPer extends PacchPerBean {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
-	
 }
