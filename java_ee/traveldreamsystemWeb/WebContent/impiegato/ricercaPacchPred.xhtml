@@ -45,7 +45,7 @@
 				<p:confirmDialog message="Sei sicuro di voler eliminare il pacchetto?"
 				header="Eliminazione pacchetto" severity="alert" widgetVar="cd">
 						<p:commandButton value="Si" actionListener="#{pacchPredBean.removePacchPred(pacchPred.idPacchPred)}"
-						update="mex" oncomplete="PF('cd').hide()"/>
+						update="mex, pacchettiPred" oncomplete="PF('cd').hide()"/>
 						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 						</p:confirmDialog>
 						

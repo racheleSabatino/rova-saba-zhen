@@ -5,8 +5,10 @@ import it.polimi.traveldreamsystem.SessionBeans.UtenteMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.UtenteDTO;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "recBean")
 @RequestScoped
@@ -50,7 +52,10 @@ public class RecuperaPasswordBean {
 				"\n\n\nGrazie e a presto, \nServizio Clienti Travel Dream" 
 				+ "\nQuesta mail viene inviata automaticamente, le risposte a questo indirizzo non verranno lette";
 			mailerBean.sendMessage(receiverEmailID, emailSubject, emailBody);
-			return "/homePage?faces-redirect=true";
+			FacesContext mex = FacesContext.getCurrentInstance();
+			mex.addMessage(null, new FacesMessage("Invio avvenuto", "Controlli la sua casella di posta e segua le "
+					+ "indicazioni contenute nella nostra mail."));
+			return null;
 		}
 		catch (Exception e) {
 			return "mailInesistente?faces-redirect=true";

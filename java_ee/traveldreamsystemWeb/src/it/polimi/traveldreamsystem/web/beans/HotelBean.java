@@ -49,6 +49,7 @@ public class HotelBean extends PacchPredBean {
 	}
 
 	public void init(int id) {
+		
 		hotels = hotelMgrBean.getAllHotel();
 		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
 		if(pacchPred == null) {
@@ -116,7 +117,7 @@ public class HotelBean extends PacchPredBean {
 	}
 	
 	public void selected() {
-		System.out.println("select");
+		System.out.println("select hotel");
 		if (hotel.getSelected()) {
 			hotel.setSelected(false);
 		} else {
@@ -153,6 +154,7 @@ public class HotelBean extends PacchPredBean {
     }  
 	
 	public void messaggio() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "salvataggio avvenuto"));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successo", "salvataggio avvenuto, vai alla"
+				+ " pagina Cerca Pacchetti dal menu' Impiegato per visualizzare i pacchetti creati"));
 	}
 }
