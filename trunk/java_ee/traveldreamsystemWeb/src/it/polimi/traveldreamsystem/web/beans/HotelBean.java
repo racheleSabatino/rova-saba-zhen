@@ -10,6 +10,7 @@ import it.polimi.traveldreamsystem.dto.PacchPredDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -75,9 +76,9 @@ public class HotelBean extends PacchPredBean {
 	public void addHotel(){
 		FacesContext context = FacesContext.getCurrentInstance();
 		if(!checkDateBean.checkDate(hotel.getDataPartenza(), hotel.getDataRitorno())){
-			context.addMessage(null, new FacesMessage("Controllare i valori inseriti, "
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Controllare i valori inseriti, "
 					+ "la data di fine deve essere successiva o perlomeno uguale alla data di inizio della prenotazione. "
-					+ "Inserire valori corretti e poi ripremere il pulsante Salva"));
+					+ "Inserire valori corretti e poi ripremere il pulsante Salva", null));
 		}
 		else {
 			HotelDTO e = hotelMgrBean.findHotelDTO(hotel.getIdProdBase());
