@@ -63,7 +63,7 @@ public class TablePacchPredBean implements Serializable {
            
          
         public List<PacchPredDTO> getPacchetti() {  
-	        	//init();
+	        	init();
                 return pacchetti;  
         }
        
