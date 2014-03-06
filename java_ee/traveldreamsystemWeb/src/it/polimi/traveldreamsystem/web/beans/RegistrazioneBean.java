@@ -33,11 +33,17 @@ public class RegistrazioneBean {
 	public void registrati() {
 		FacesContext mex = FacesContext.getCurrentInstance();
 		if(clienteMgrBean.findUtenteDTO(utente.getMail())!=null) {
-			mex.addMessage(null, new FacesMessage("Attenzione", "Mail già presente, inserirne una diversa"));
+			mex.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attenzione", "Mail già presente, inserirne una diversa"));
+			return;
 		}
-		else  {
+		
+		if(utente.getPassword().length() < 8){
+			mex.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Attenzione", "Password troppo corta, la lunghezza minima è 8 caratteri"));
+			return;
+
+		}
 			clienteMgrBean.addCliente(utente); 
 			mex.addMessage(null, new FacesMessage("Successo", "Registrazione avvenuta"));
-		}
+		
 	}
 }
