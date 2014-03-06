@@ -28,6 +28,7 @@ public class PacchPredBean {
 
 	protected PacchPredDTO pacchPred;
 
+	
 	public void addPacchPred(){
 			pacchPredMgrBean.addNewPacchPred(pacchPred);
 		
@@ -60,6 +61,7 @@ public class PacchPredBean {
 	}
 
 	public String removePacchPred(int id){
+		System.out.println("pacchetto "+ id);
 		if(!pacchPredMgrBean.removePacchPred(id)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Attenzione", "il pacchetto non puo' "
 					+ "essere eliminato perchè un pacchetto personalizzato di un cliente fa riferimento ad esso"));
@@ -67,8 +69,8 @@ public class PacchPredBean {
 		}
 		else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successo", "pacchetto Eliminato"));
-			
-			return "/impiegato/ricercaPacchPred?faces-redirect=true";
+			//return "/impiegato/ricercaPacchPred?faces-redirect=true";
+			return "homePage?faces-redirect=true";
 		}
 	}
 

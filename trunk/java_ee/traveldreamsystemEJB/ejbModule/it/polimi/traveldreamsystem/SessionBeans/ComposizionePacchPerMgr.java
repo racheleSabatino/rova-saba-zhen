@@ -108,7 +108,7 @@ public class ComposizionePacchPerMgr implements ComposizPacchPerMgrLocal {
 		PacchPer pacchPer = em.find(PacchPer.class, idPacchPer);
 		Trasporto trasporto = em.find(Trasporto.class, idTrasporto);
 		Query q = em.createQuery("SELECT h FROM TrasportiPacchPer h "
-				+ "WHERE p.pacchPer = :pacchPer AND h.trasporto= :trasporto");
+				+ "WHERE h.pacchPer = :pacchPer AND h.trasporto= :trasporto");
 		q.setParameter("pacchPer", pacchPer);
 		q.setParameter("trasporto", trasporto);
 		if(!q.getResultList().isEmpty()) {

@@ -91,7 +91,7 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			cmpPacchPer.removeEscursioneToPacchPer(idPacchPer, escursioni.get(i).getIdProdBase());
 		}
 		for(int i=0; i < trasporti.size(); i++) {
-			cmpPacchPer.removeHotelToPacchPer(idPacchPer, trasporti.get(i).getIdProdBase());
+			cmpPacchPer.removeTrasportoToPacchPer(idPacchPer, trasporti.get(i).getIdProdBase());
 		}
 		em.remove(pacchetto);
 	}
