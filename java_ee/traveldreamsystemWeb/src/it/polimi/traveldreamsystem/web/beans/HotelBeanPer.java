@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.HotelMgrBeanLocal;
 import it.polimi.traveldreamsystem.dto.HotelDTO;
+import it.polimi.traveldreamsystem.dto.PacchPerDTO;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -27,6 +28,10 @@ public class HotelBeanPer extends PacchPerBean {
 	private HotelDTO hotel;
 
 	private int pacchId;
+	
+	private int idPacchPred;
+	
+	private String mail;
 	
 	private List<String> cittaSelez;
 
@@ -54,6 +59,9 @@ public class HotelBeanPer extends PacchPerBean {
 	public void init(int id) {
 		cittaSelez = new ArrayList<String>();
 		pacchPer = pacchPerMgrBean.findPacchPerDTO(id);
+		if(pacchPer == null) {
+			pacchPer = new PacchPerDTO(id, false, getPacchPred(idPacchPred), getCliente(mail));
+		}
 		hotels = compPacchPredMgr.getHotelsPacchPred(pacchPer.getPacchPred().getIdPacchPred());
 		for (HotelDTO aDTO : hotels) {
 			if (compPacchPerMgr.findHotel(pacchPer.getIdPacchPer(), aDTO.getIdProdBase())) {
@@ -132,6 +140,22 @@ public class HotelBeanPer extends PacchPerBean {
 			}
 		}
 		pacchPerMgrBean.update(pacchPer);
+	}
+
+	public int getIdPacchPred() {
+		return idPacchPred;
+	}
+
+	public void setIdPacchPred(int idPacchPred) {
+		this.idPacchPred = idPacchPred;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	
