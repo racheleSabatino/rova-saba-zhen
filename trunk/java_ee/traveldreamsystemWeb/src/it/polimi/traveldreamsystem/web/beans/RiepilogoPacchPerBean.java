@@ -86,6 +86,7 @@ public class RiepilogoPacchPerBean {
         trasporto = comp.convertToStringTrasporto(idPacchPer);
         costoTotale = pacchPerMgr.viewCostoTotale(idPacchPer);
         regaloAmici = pacchPerMgr.viewTotaleAcquistatoDaAmici(idPacchPer);
+        System.out.println("tot acquistato da amici " + regaloAmici);
         totaleDaPagare = costoTotale - regaloAmici;
         hotels = comp.getHotelsPacchPer(idPacchPer);
         escursioni = comp.getEscursioniPacchPer(idPacchPer);
@@ -291,7 +292,7 @@ public class RiepilogoPacchPerBean {
 
 		String senderMailID = utenteMgr.getPrincipalEmail();
 		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/compraRegali.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
-		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico"
+		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico "
 				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e ha bisogno del tuo aiuto. "
 				+ "Il nostro sito gli ha offerto la possibilità di creare una lista regalo dal suo pacchetto, "
 				+ "se ne hai la possibilità, fagli un regalo! Acquista per lui un prodotto della lista e gli"

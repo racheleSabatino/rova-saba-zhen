@@ -216,7 +216,7 @@
 					<p:commandButton value="Si, certo" action = "#{riepilogoPacchPerBean.creaLRegali}"
 					update="messaggi2" oncomplete="PF('lista').hide()"/>
 				<p:commandButton value="Non ora" onclick="PF('lista').hide();" type="button"/>
-				<p:growl id="messaggi2"/>
+				<p:growl id="messaggi2" showDetail="true"/>
 				</p:confirmDialog>
 			</p:panel>	
 				
