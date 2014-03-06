@@ -46,7 +46,6 @@
 				header="Eliminazione pacchetto" severity="alert" widgetVar="cd">
 						<p:commandButton value="Si" 
 						actionListener="#{pacchPredBean.removePacchPred(pacchPred.idPacchPred)}"
-						action="#{tablePacchPredBean.init}"
 						update="mex" oncomplete="PF('cd').hide()"/>
 						<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 						</p:confirmDialog>

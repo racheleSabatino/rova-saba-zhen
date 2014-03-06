@@ -35,6 +35,7 @@ public class HotelBean extends PacchPredBean {
 	private HotelDTO hotel;
 
 	private int pacchId;
+
 	
 	public int getPacchId() {
 		return pacchId;
@@ -117,6 +118,7 @@ public class HotelBean extends PacchPredBean {
 		this.filteredHotels = filteredHotels;
 	}
 	
+	 
 	public void selected() {
 		System.out.println("select hotel");
 		if (hotel.getSelected()) {
