@@ -50,8 +50,7 @@ public class PacchPredBean {
 			id = listDTO.get(listDTO.size() -1).getIdPacchPred() + 1;
 		}
 		return "/impiegato/creazionePacchPred?faces-redirect=true"
-				+ "&amp;id=" + id
-				;
+				+ "&amp;id=" + id;
 	}
 
 	public String pagPacchPred(int id){
@@ -60,13 +59,16 @@ public class PacchPredBean {
 				;
 	}
 
-	public void removePacchPred(int id){
+	public String removePacchPred(int id){
 		if(!pacchPredMgrBean.removePacchPred(id)) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Attenzione", "il pacchetto non puo' "
 					+ "essere eliminato perchè un pacchetto personalizzato di un cliente fa riferimento ad esso"));
+		return null;
 		}
 		else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("successo", "eliminato"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Successo", "pacchetto Eliminato"));
+			
+			return "/impiegato/ricercaPacchPred?faces-redirect=true";
 		}
 	}
 

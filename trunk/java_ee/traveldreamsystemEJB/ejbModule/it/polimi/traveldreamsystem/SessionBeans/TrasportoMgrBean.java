@@ -113,12 +113,14 @@ public class TrasportoMgrBean implements TrasportoMgrBeanLocal{
 		System.out.println(cittaAndata + " " + cittaRitorno);
 		for(String a: cittaAndata) {
 			for(String r: cittaRitorno) {
+				System.out.println(check + "dentro for r");
 				if(a.toLowerCase().equals(r.toLowerCase())) {
 					check = 1;
 				}
 			}
-			if(check != 1) 
+			if(check == 0) 
 				return false;
+			System.out.println("dopo check == 0, check =  " + check);
 			check = 0;
 		}
 		return true;
