@@ -53,14 +53,14 @@
 						<ui:include src="fieldTrasporto.xhtml" />
 					</ui:insert>
 
-					<p:panelGrid columns="2">
+					<p:panelGrid id="grid" columns="2">
 						<p:commandButton value="Controlla dati" 
-							action = "{#trasportoBean.checkToFrom}"
-							update="toFromMex" >
+							action = "#{trasportoBean.chekToFrom}"
+							update="toFromMex, grid" >
 						</p:commandButton>
 						
 						
-						<p:commandButton value="Salva" rendered = "#{trasportoBean.correct}"
+						<p:commandButton value="Salva" rendered="#{trasportoBean.correct}"
 							icon="ui-icon-disk" update="Hotel,Escursione,Trasporto,pacchGrid,messages,toFromMex" 
 							action="#{hotelBean.messaggio}">
 							<f:ajax listener="#{hotelBean.save}" />

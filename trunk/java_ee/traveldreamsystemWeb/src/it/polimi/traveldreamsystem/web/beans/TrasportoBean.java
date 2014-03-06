@@ -1,5 +1,6 @@
 package it.polimi.traveldreamsystem.web.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.traveldreamsystem.SessionBeans.CheckDateLocal;
@@ -31,6 +32,16 @@ public class TrasportoBean extends PacchPredBean {
 	private TrasportoDTO trasporto;
 
 	private int pacchId;
+	
+	private boolean correct;
+	
+	public boolean getCorrect(){
+		return correct;
+	}
+	
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
 
 	public int getPacchId() {
 		return pacchId;
@@ -46,6 +57,7 @@ public class TrasportoBean extends PacchPredBean {
 	}
 
 	public void init(int id) {
+		setCorrect(false);
 		trasporti = trasportoMgrBean.getAllTrasporto();
 		pacchPred = pacchPredMgrBean.findPacchPredDTO(id);
 		if(pacchPred == null) {
@@ -113,30 +125,47 @@ public class TrasportoBean extends PacchPredBean {
 	}
 	
 	public void selected() {
-		System.out.println("select");
 		if (trasporto.getSelected()) {
+			System.out.println("select trasporto");
 			trasporto.setSelected(false);
 		} else {
 			trasporto.setSelected(true);
 		}
 	}
 
+	public void chekToFrom(){
+		List<TrasportoDTO> selected = new ArrayList<TrasportoDTO>();
+		FacesContext mex = FacesContext.getCurrentInstance();
+		for(TrasportoDTO s : trasporti) {
+			if (s.getSelected())
+				selected.add(s);
+		}
+		if(!trasportoMgrBean.checkToFrom(selected)) {
+			setCorrect(false);
+			mex.addMessage(null, new FacesMessage("Attenzione", "è necessario inserire nel pacchetto un viaggio "
+					+ "di andata e ritorno"));
+		}
+		else {
+			mex.addMessage(null, new FacesMessage("Ok", "Gli elementi del pacchetto sono consistenti "));
+			setCorrect(true);
+		}
+	}
+	
 	public void save(AjaxBehaviorEvent e) {
-		System.out.println("cell save trasporti");
-
-		for (TrasportoDTO aDTO : trasporti) {
+			for (TrasportoDTO aDTO : trasporti) {
 			trasportoMgrBean.update(aDTO);
 			if (aDTO.getSelected()
 					&& !compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				compPacchMgr.addTrasportoToPacch(pacchPred.getIdPacchPred(),
 						aDTO.getIdProdBase());
+				System.out.println("cell save trasporti");
 			}
 			if (!aDTO.getSelected()
 					&& compPacchMgr.findTrasporto(pacchPred.getIdPacchPred(), aDTO.getIdProdBase())) {
 				compPacchMgr.removeTrasportoToPacch(pacchPred.getIdPacchPred(),
 						aDTO.getIdProdBase());
 			}
-		}
+			}
 	}
 	
 	public String getPage(int idTrasporto){
@@ -148,4 +177,5 @@ public class TrasportoBean extends PacchPredBean {
 				+ "&amp;id=" + idTrasporto;
 	}
 
+	
 }
