@@ -24,8 +24,6 @@
 						action="#{trasportoBeanPer.selected}">
 						<f:setPropertyActionListener value="#{trasporto}"
 							target="#{trasportoBeanPer.trasporto}" />
-							<f:setPropertyActionListener value="#{trasporto.cittaRitorno}"
-							target="#{hotelBeanPer.addCittaSelez(trasporto)}" />
 					</p:commandButton>
 				
 					<p:commandButton update="Trasporto"
