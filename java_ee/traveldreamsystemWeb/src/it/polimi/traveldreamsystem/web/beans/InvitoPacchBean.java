@@ -234,15 +234,21 @@ public class InvitoPacchBean {
 	}
 	
 	public void compraEscursione() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		FacesContext mex = FacesContext.getCurrentInstance();
+		mex.addMessage(null, new FacesMessage("Successo", "acquisto avvenuto"));
 		pacchPerMgr.acquistaEscursioneListaRegali(selectedEscursione.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	
 	
 	public void compraHotel() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		FacesContext mex = FacesContext.getCurrentInstance();
+		mex.addMessage(null, new FacesMessage("Successo", "acquisto avvenuto"));
 		pacchPerMgr.acquistaHotelListaRegali(selectedHotel.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	
 	public void compraTrasporto() throws PacchettoScadutoException, AcquistoProdDaPropriaLista, ProdottoGiaAcquistato{
+		FacesContext mex = FacesContext.getCurrentInstance();
+		mex.addMessage(null, new FacesMessage("Successo", "acquisto avvenuto"));
 		pacchPerMgr.acquistaTrasportoListaRegali(selectedTrasporto.getIdProdBase(), searchedId, utenteMgr.getPrincipalEmail());
 	}
 	

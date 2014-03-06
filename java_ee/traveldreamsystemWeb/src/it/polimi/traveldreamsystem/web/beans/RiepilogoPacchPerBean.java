@@ -203,10 +203,18 @@ public class RiepilogoPacchPerBean {
 	}
 	
 
+	public void removePacchetto(int id){
+		pacchPerMgr.removePacchPer(id);
+		FacesContext messaggio = FacesContext.getCurrentInstance();
+		messaggio.addMessage(null, new FacesMessage("Successo", "Il pacchetto personalizzato è stato eliminato, "
+				+ "ricaricando la pagina il pacchetto eliminato non sarà più visualizzato"));
+	}
+	
 	public void removePacchetto(){
 		pacchPerMgr.removePacchPer(idPacchPer);
 		FacesContext messaggio = FacesContext.getCurrentInstance();
-		messaggio.addMessage(null, new FacesMessage("Successo", "Il pacchetto personalizzato è stato eliminato"));
+		messaggio.addMessage(null, new FacesMessage("Successo", "Il pacchetto personalizzato è stato eliminato, "
+				+ "ricaricando la pagina il pacchetto eliminato non sarà più visualizzato"));
 	}
 
 	public void setPacchetto(PacchPerDTO pacchetto) {
@@ -272,18 +280,17 @@ public class RiepilogoPacchPerBean {
 	
 	public void inviaInvito(){
 		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/invitoPacch.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/invitoPacch.xhtml?id=" + 
+		idPacchPer + "&mail=" + senderMailID);
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ti invita ad unirti a lui in" 
 				+ " un magnifico pacchetto vacanza, clicca sul link per visionarne tutti i dettagli"
 				+ "\n" + link;
 		String emailSubject = "INVITO AD UNIRTI AD UN PACCHETTO VACANZA";
-		System.out.println("invio con successo2");
 		mailerBean.sendMessage(mailAmicoInvito, emailSubject, emailBody);
 		System.out.println("invio con successo3");
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 		messaggio.addMessage(null, new FacesMessage("Successo", "la mail di invito al tuo amico è stata "
 				+ "inviata con successo"));
-		System.out.println("invio con successo1");
 	}
 	
 	public void inviaInvitoLista(){
@@ -291,7 +298,8 @@ public class RiepilogoPacchPerBean {
 		FacesContext messaggio = FacesContext.getCurrentInstance();
 
 		String senderMailID = utenteMgr.getPrincipalEmail();
-		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/compraRegali.xhtml?id=" + idPacchPer + "&mail=" + senderMailID);
+		String link = new String("http://localhost:8080/traveldreamsystemWeb/public/compraRegali.xhtml?id=" + 
+		idPacchPer + "&mail=" + senderMailID);
 		String emailBody = "Ciao, \n Il tuo amico " + senderMailID + " ha deciso di prenotare un magnifico "
 				+ "pacchetto vacanza dal nostro sito TravelDreamSystem e ha bisogno del tuo aiuto. "
 				+ "Il nostro sito gli ha offerto la possibilità di creare una lista regalo dal suo pacchetto, "

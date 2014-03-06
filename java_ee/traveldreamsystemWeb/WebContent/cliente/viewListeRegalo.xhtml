@@ -45,7 +45,7 @@
 				<p:confirmDialog message="Sei sicuro di voler eliminare il tuo pacchetto vacanza?"
 					header="Cancellazioni pacchetto vacanza" severity="alert"
 					widgetVar="cd">
-					<p:commandButton value="Si" actionListener="#{pacchPerClienteBean.removePacchetto}"
+					<p:commandButton value="Si" actionListener="#{riepilogoPacchPerBean.removePacchetto(pacchPer.idPacchPer)}"
 					update="messages" oncomplete="PF('cd').hide()"/>
 				<p:commandButton value="No" onclick="PF('cd').hide();" type="button" />
 				</p:confirmDialog>

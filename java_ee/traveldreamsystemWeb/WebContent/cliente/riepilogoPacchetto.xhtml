@@ -197,7 +197,7 @@
 					<p:commandButton value="Si" actionListener="#{riepilogoPacchPerBean.removePacchetto}"
 					update="messaggi" oncomplete="PF('elimina').hide()"/>
 				<p:commandButton value="No" onclick="PF('elimina').hide();" type="button" />
-								      			<p:growl id="messaggi"/>
+								      			<p:growl id="messaggi" showDetail="true"/>
 				
 				</p:confirmDialog>
 				
@@ -228,7 +228,7 @@
 						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoRegali}" />
 						<p:commandButton value = "Invia" action="#{riepilogoPacchPerBean.inviaInvitoLista}" 
 						update = "listaRegali"/>
-						<p:growl id="messaggi3"/>
+						<p:growl id="messaggi3" showDetail="true"/>
 						
 					</h:panelGrid>
 					</p:panel>
@@ -244,7 +244,7 @@
 						<p:inputText value = "#{riepilogoPacchPerBean.mailAmicoInvito}" />
 					<p:commandButton value = "Invia" action = "#{riepilogoPacchPerBean.inviaInvito}" 
 					update = "invitaAmico" />
-				<p:growl id="messaggi4"/>
+				<p:growl id="messaggi4" showDetail="true"/>
 					
 					</h:panelGrid>
 				</p:panel>
