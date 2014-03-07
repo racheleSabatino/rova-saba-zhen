@@ -226,29 +226,26 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 			Query q = em
 					.createQuery("SELECT SUM(h1.costo)"
 							+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN h.hotel h1 " 
-							+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto != :null "
+							+ "WHERE p.idPacchPer = :idPacchPer "
 							+ "AND p.listaRegali = :true "
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q.setParameter("true", true);
-			q.setParameter("null", null);
 			Query q2 = em
 					.createQuery("SELECT SUM(e1.costo) "
 							+ "FROM PacchPer p JOIN p.escursionePacchPer e "
 							+ "JOIN e.escursioni e1 "
-							+ "WHERE p.idPacchPer = :idPacchPer AND e.dataAcquisto != :null "
+							+ "WHERE p.idPacchPer = :idPacchPer  "
 							+ "AND p.listaRegali = :true " 
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q2.setParameter("true", true);
-			q2.setParameter("null", null);
 			Query q3 = em
 					.createQuery("SELECT SUM(t1.costo) "
 							+ "FROM PacchPer p JOIN p.trasportiPacchPer t "
 							+ "JOIN t.trasporto t1 "
-							+ "WHERE p.idPacchPer = :idPacchPer AND t.dataAcquisto != :null "
+							+ "WHERE p.idPacchPer = :idPacchPer  "
 							+ "AND p.listaRegali = :true " 
 							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
 			q3.setParameter("true", true);
-			q3.setParameter("null", null);
 			if(q.getResultList().isEmpty()) {
 				t1 = 0;
 			}
@@ -262,7 +259,52 @@ public class PacchPerMgrBean implements PacchPerMgrLocal {
 				t3 = 0;
 			else
 				t3 = ((Long) q3.getSingleResult()).intValue();
-			return t1 + t2 + t3;
+			
+			int a1, a2, a3;
+			Calendar calendar = Calendar.getInstance();
+			Date dataAcquisto = calendar.getTime();
+			Query q4 = em
+					.createQuery("SELECT SUM(h1.costo)"
+							+ "FROM PacchPer p JOIN p.hotelsPacchPer h JOIN h.hotel h1 " 
+							+ "WHERE p.idPacchPer = :idPacchPer AND h.dataAcquisto < :dataAcquisto"
+							+ " and p.listaRegali = :true "
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q4.setParameter("true", true);
+			q4.setParameter("dataAcquisto", dataAcquisto);
+			Query q5 = em
+					.createQuery("SELECT SUM(e1.costo) "
+							+ "FROM PacchPer p JOIN p.escursionePacchPer e "
+							+ "JOIN e.escursioni e1 "
+							+ "WHERE p.idPacchPer = :idPacchPer AND e.dataAcquisto < :dataAcquisto"
+							+ " and p.listaRegali = :true "
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q5.setParameter("true", true);
+			q5.setParameter("dataAcquisto", dataAcquisto);
+			
+			Query q6 = em
+					.createQuery("SELECT SUM(t1.costo) "
+							+ "FROM PacchPer p JOIN p.trasportiPacchPer t "
+							+ "JOIN t.trasporto t1 "
+							+ "WHERE p.idPacchPer = :idPacchPer AND t.dataAcquisto < :dataAcquisto "
+							+ " and p.listaRegali = :true "
+							+ "GROUP BY p.idPacchPer").setParameter("idPacchPer", idPacchPer);
+			q6.setParameter("true", true);
+			q6.setParameter("dataAcquisto", dataAcquisto);
+			if(q4.getResultList().isEmpty()) {
+				a1 = 0;
+			}
+			else 
+				a1 = ((Long) q4.getSingleResult()).intValue();
+			if(q5.getResultList().isEmpty())
+				a2 = 0;
+			else
+				a2 = ((Long) q5.getSingleResult()).intValue();
+			if(q6.getResultList().isEmpty())
+				a3 = 0;
+			else
+				a3 = ((Long) q6.getSingleResult()).intValue();
+			return  (a1 + a2 + a3);
+			
 		}
 	}
 
