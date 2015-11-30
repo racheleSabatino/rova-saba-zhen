@@ -1,0 +1,1 @@
+Sistema informatico progettato per soddisfare le esigenze del cliente.
